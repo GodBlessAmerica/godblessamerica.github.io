@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="纯浏览器本地运行的文本与链接二维码生成工具">
+  <title>二维码生成器</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --background: #f4f7fb;
+      --surface: #ffffff;
+      --text: #172033;
+      --muted: #667085;
+      --primary: #2563eb;
+      --primary-hover: #1d4ed8;
+      --success-button: #16834f;
+      --success-button-hover: #11683f;
+      --secondary: #667085;
+      --secondary-hover: #4b5563;
+      --border: #dce3ee;
+      --success: #087a3e;
+      --error: #c62828;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      margin: 0;
+      padding: 32px 20px;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, #e8f1ff 0, transparent 32%),
+        var(--background);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", sans-serif;
+    }
+
+    .container {
+      width: min(100%, 920px);
+      margin: 0 auto;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      margin-bottom: 18px;
+      color: var(--primary);
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .back-link:hover {
+      text-decoration: underline;
+    }
+
+    .box {
+      padding: 26px;
+      background: var(--surface);
+      border: 1px solid rgba(220, 227, 238, 0.9);
+      border-radius: 18px;
+      box-shadow: 0 16px 45px rgba(31, 41, 55, 0.09);
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(26px, 5vw, 34px);
+      text-align: center;
+      letter-spacing: -0.03em;
+    }
+
+    .tip {
+      margin: 10px 0 24px;
+      color: var(--muted);
+      text-align: center;
+      line-height: 1.6;
+    }
+
+    .label {
+      display: block;
+      margin: 15px 0 8px;
+      font-weight: 700;
+    }
+
+    textarea,
+    select {
+      width: 100%;
+      padding: 13px 14px;
+      color: var(--text);
+      background: #fbfcfe;
+      border: 1px solid var(--border);
+      border-radius: 11px;
+      outline: none;
+      font-size: 15px;
+      line-height: 1.6;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    textarea {
+      min-height: 145px;
+      resize: vertical;
+    }
+
+    textarea:focus,
+    select:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+    }
+
+    .options {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .buttons {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 11px;
+      margin: 19px 0;
+    }
+
+    button {
+      min-height: 44px;
+      padding: 11px 18px;
+      color: #ffffff;
+      background: var(--primary);
+      border: 0;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 15px;
+      font-weight: 650;
+      transition: background 0.2s ease, transform 0.1s ease;
+    }
+
+    button:hover {
+      background: var(--primary-hover);
+    }
+
+    button:active {
+      transform: translateY(1px);
+    }
+
+    button.download {
+      background: var(--success-button);
+    }
+
+    button.download:hover {
+      background: var(--success-button-hover);
+    }
+
+    button.secondary {
+      background: var(--secondary);
+    }
+
+    button.secondary:hover {
+      background: var(--secondary-hover);
+    }
+
+    .result {
+      display: flex;
+      min-height: 360px;
+      padding: 18px;
+      align-items: center;
+      justify-content: center;
+      overflow: auto;
+      background: #f8fafc;
+      border: 1px dashed #c9d4e4;
+      border-radius: 14px;
+    }
+
+    canvas {
+      display: block;
+      max-width: 100%;
+      height: auto;
+      background: #ffffff;
+      image-rendering: pixelated;
+    }
+
+    .help {
+      margin: 12px 0 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .message {
+      min-height: 22px;
+      margin-top: 12px;
+      color: var(--success);
+      font-size: 14px;
+      text-align: center;
+    }
+
+    @media (max-width: 720px) {
+      body {
+        padding: 22px 12px;
+      }
+
+      .box {
+        padding: 20px 15px;
+      }
+
+      .options {
+        grid-template-columns: 1fr;
+      }
+
+      button {
+        flex: 1 1 calc(50% - 11px);
+      }
+
+      .result {
+        min-height: 280px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <a class="back-link" href="../">← 返回工具箱</a>
+
+    <section class="box">
+      <h1>文本 / 链接转二维码</h1>
+      <p class="tip">纯浏览器本地生成，不会上传输入内容。支持中英文、链接和 Emoji。</p>
+
+      <label class="label" for="inputText">输入文本或链接</label>
+      <textarea id="inputText" spellcheck="false" placeholder="例如：https://example.com&#10;或输入一段文字，手机扫码即可读取"></textarea>
+
+      <div class="options">
+        <div>
+          <label class="label" for="sizeInput">图片尺寸</label>
+          <select id="sizeInput">
+            <option value="320">320 × 320</option>
+            <option value="480" selected>480 × 480</option>
+            <option value="640">640 × 640</option>
+            <option value="800">800 × 800</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="label" for="marginInput">二维码白边</label>
+          <select id="marginInput">
+            <option value="4" selected>标准</option>
+            <option value="6">大白边</option>
+            <option value="8">超大白边</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="label" for="levelInput">容错等级</label>
+          <select id="levelInput">
+            <option value="L">L：容量最大</option>
+            <option value="M" selected>M：推荐</option>
+            <option value="Q">Q：较高</option>
+            <option value="H">H：最高</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="buttons">
+        <button type="button" id="generateButton">生成二维码</button>
+        <button type="button" class="download" id="downloadButton">下载 PNG</button>
+        <button type="button" id="testButton">填入测试链接</button>
+        <button type="button" id="copyButton">复制输入</button>
+        <button type="button" class="secondary" id="clearButton">清空</button>
+      </div>
+
+      <label class="label">二维码预览</label>
+      <div class="result">
+        <canvas id="qrCanvas" width="480" height="480" aria-label="二维码预览"></canvas>
+      </div>
+
+      <p class="help">如果手机难以识别，请减少输入内容，并选择更大的图片尺寸和白边。网址建议包含 <strong>https://</strong>。</p>
+      <div class="message" id="message" role="status" aria-live="polite"></div>
+    </section>
+  </main>
+
+  <script src="./qrcode.js"></script>
+  <script>
+    qrcode.stringToBytes = qrcode.stringToBytesFuncs["UTF-8"];
+
+    const inputText = document.getElementById("inputText");
+    const sizeInput = document.getElementById("sizeInput");
+    const marginInput = document.getElementById("marginInput");
+    const levelInput = document.getElementById("levelInput");
+    const qrCanvas = document.getElementById("qrCanvas");
+    const message = document.getElementById("message");
+
+    function showMessage(text, isError = false) {
+      message.textContent = text;
+      message.style.color = isError ? "var(--error)" : "var(--success)";
+    }
+
+    function clearCanvas() {
+      const context = qrCanvas.getContext("2d");
+      context.fillStyle = "#ffffff";
+      context.fillRect(0, 0, qrCanvas.width, qrCanvas.height);
+    }
+
+    function drawQr(qr, targetSize, margin) {
+      const moduleCount = qr.getModuleCount();
+      const totalModules = moduleCount + margin * 2;
+      const moduleSize = Math.max(1, Math.floor(targetSize / totalModules));
+      const actualSize = totalModules * moduleSize;
+      const context = qrCanvas.getContext("2d");
+
+      qrCanvas.width = actualSize;
+      qrCanvas.height = actualSize;
+      context.imageSmoothingEnabled = false;
+      context.fillStyle = "#ffffff";
+      context.fillRect(0, 0, actualSize, actualSize);
+      context.fillStyle = "#000000";
+
+      for (let row = 0; row < moduleCount; row += 1) {
+        for (let column = 0; column < moduleCount; column += 1) {
+          if (qr.isDark(row, column)) {
+            context.fillRect(
+              (column + margin) * moduleSize,
+              (row + margin) * moduleSize,
+              moduleSize,
+              moduleSize
+            );
+          }
+        }
+      }
+    }
+
+    function makeQr() {
+      const text = inputText.value;
+
+      if (!text.trim()) {
+        showMessage("请输入文本或链接", true);
+        return false;
+      }
+
+      try {
+        const qr = qrcode(0, levelInput.value);
+        qr.addData(text, "Byte");
+        qr.make();
+        drawQr(qr, Number(sizeInput.value), Number(marginInput.value));
+        showMessage("二维码已生成，请用手机扫码确认");
+        return true;
+      } catch (error) {
+        showMessage(`生成失败：${error.message}`, true);
+        return false;
+      }
+    }
+
+    function downloadQr() {
+      if (!makeQr()) {
+        return;
+      }
+
+      qrCanvas.toBlob(blob => {
+        if (!blob) {
+          showMessage("PNG 生成失败，请重试", true);
+          return;
+        }
+
+        const link = document.createElement("a");
+        const objectUrl = URL.createObjectURL(blob);
+        link.href = objectUrl;
+        link.download = "qrcode.png";
+        link.click();
+        URL.revokeObjectURL(objectUrl);
+        showMessage("PNG 已下载");
+      }, "image/png");
+    }
+
+    async function copyInput() {
+      if (!inputText.value) {
+        showMessage("没有可复制的内容", true);
+        return;
+      }
+
+      try {
+        await navigator.clipboard.writeText(inputText.value);
+        showMessage("输入内容已复制");
+      } catch (error) {
+        inputText.select();
+        const copied = document.execCommand("copy");
+        showMessage(copied ? "输入内容已复制" : "复制失败，请手动复制", !copied);
+      }
+    }
+
+    function testQr() {
+      inputText.value = "https://godblessamerica.github.io/tools/";
+      makeQr();
+    }
+
+    function clearAll() {
+      inputText.value = "";
+      qrCanvas.width = 480;
+      qrCanvas.height = 480;
+      clearCanvas();
+      showMessage("已清空");
+      inputText.focus();
+    }
+
+    document.getElementById("generateButton").addEventListener("click", makeQr);
+    document.getElementById("downloadButton").addEventListener("click", downloadQr);
+    document.getElementById("testButton").addEventListener("click", testQr);
+    document.getElementById("copyButton").addEventListener("click", copyInput);
+    document.getElementById("clearButton").addEventListener("click", clearAll);
+
+    clearCanvas();
+  </script>
+</body>
+</html>
