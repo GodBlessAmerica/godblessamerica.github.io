@@ -328,6 +328,11 @@
       line-height: 1.2;
     }
 
+    .ip-value.is-ipv6 {
+      font-size: clamp(23px, 2.3vw, 30px);
+      letter-spacing: -0.035em;
+    }
+
     .ip-subtitle {
       margin: 0;
       color: var(--muted);
@@ -933,6 +938,7 @@
 
         currentIp = data.ip || currentIp;
         setText(elements.primaryIp, currentIp, '检测失败');
+        elements.primaryIp.classList.toggle('is-ipv6', currentIp.includes(':'));
         elements.copyButton.disabled = !currentIp;
 
         const connection = data.connection || {};
@@ -965,6 +971,7 @@
       const runCheck = async () => {
         setLoadingState(true);
         currentIp = '';
+        elements.primaryIp.classList.remove('is-ipv6');
         elements.copyButton.disabled = true;
         setText(elements.primaryIp, '检测中…');
         setText(elements.ipSubtitle, '正在查询 IP 归属信息…');
@@ -995,6 +1002,7 @@
 
         if (!details) {
           setText(elements.primaryIp, currentIp, '检测失败');
+          elements.primaryIp.classList.toggle('is-ipv6', currentIp.includes(':'));
           elements.copyButton.disabled = !currentIp;
         }
 
