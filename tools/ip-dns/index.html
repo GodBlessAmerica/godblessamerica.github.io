@@ -1,0 +1,1049 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="在线检测公网 IPv4、IPv6、IP 归属及实际递归 DNS 服务器">
+  <meta name="referrer" content="no-referrer">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src https://api.ipify.org https://api6.ipify.org https://api64.ipify.org https://ipwho.is; frame-src https://nstool.netease.com https://*.nstool.netease.com; style-src 'unsafe-inline'; script-src 'unsafe-inline'; img-src data: https:; base-uri 'none'; form-action 'none'">
+  <meta name="theme-color" content="#f4f7fb">
+  <title>IP 与 DNS 检测</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --background: #f4f7fb;
+      --surface: rgba(255, 255, 255, 0.94);
+      --surface-strong: #ffffff;
+      --text: #172033;
+      --muted: #667085;
+      --subtle: #98a2b3;
+      --primary: #2563eb;
+      --primary-strong: #1d4ed8;
+      --primary-soft: #eff6ff;
+      --teal: #0f9f8f;
+      --teal-soft: #ecfdf8;
+      --success: #15803d;
+      --success-soft: #ecfdf3;
+      --warning: #b45309;
+      --warning-soft: #fff7ed;
+      --border: #e4e9f2;
+      --shadow: 0 18px 55px rgba(31, 41, 55, 0.09);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      min-width: 320px;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      margin: 0;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 8% 0%, rgba(37, 99, 235, 0.15), transparent 30%),
+        radial-gradient(circle at 92% 8%, rgba(15, 159, 143, 0.12), transparent 27%),
+        var(--background);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    button,
+    a {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    .container {
+      width: min(calc(100% - 40px), 1080px);
+      margin: 0 auto;
+    }
+
+    .site-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 24px 0 10px;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .back-link:hover,
+    .back-link:focus-visible {
+      color: var(--primary);
+      outline: none;
+    }
+
+    .back-link svg {
+      width: 17px;
+      height: 17px;
+    }
+
+    .privacy-mark {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .privacy-mark svg {
+      width: 16px;
+      height: 16px;
+      color: var(--teal);
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 32px;
+      align-items: end;
+      padding: 54px 0 34px;
+    }
+
+    .eyebrow {
+      margin: 0 0 13px;
+      color: var(--primary);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(36px, 6vw, 62px);
+      letter-spacing: -0.055em;
+      line-height: 1.08;
+    }
+
+    .hero-description {
+      max-width: 680px;
+      margin: 18px 0 0;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.8;
+    }
+
+    .refresh-button,
+    .copy-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      border: 0;
+      border-radius: 13px;
+      cursor: pointer;
+      font-weight: 700;
+      transition: transform 0.18s ease, background 0.18s ease, box-shadow 0.18s ease;
+    }
+
+    .refresh-button {
+      min-height: 48px;
+      padding: 0 19px;
+      color: #ffffff;
+      background: var(--primary);
+      box-shadow: 0 12px 28px rgba(37, 99, 235, 0.24);
+    }
+
+    .refresh-button:hover,
+    .refresh-button:focus-visible {
+      background: var(--primary-strong);
+      transform: translateY(-2px);
+      outline: none;
+    }
+
+    .refresh-button:disabled {
+      cursor: wait;
+      opacity: 0.78;
+      transform: none;
+    }
+
+    .refresh-button svg,
+    .copy-button svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .refresh-button.is-loading svg {
+      animation: spin 0.9s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .status-line {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 18px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .status-message {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--subtle);
+      border-radius: 50%;
+    }
+
+    .status-dot.loading {
+      background: var(--primary);
+      box-shadow: 0 0 0 5px rgba(37, 99, 235, 0.1);
+      animation: pulse 1.2s ease-in-out infinite;
+    }
+
+    .status-dot.success {
+      background: var(--success);
+    }
+
+    .status-dot.warning {
+      background: var(--warning);
+    }
+
+    @keyframes pulse {
+      50% { opacity: 0.45; }
+    }
+
+    .dashboard {
+      display: grid;
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      padding: 25px;
+      background: var(--surface);
+      border: 1px solid rgba(228, 233, 242, 0.92);
+      border-radius: 20px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(16px);
+    }
+
+    .ip-card {
+      grid-column: span 7;
+      min-height: 270px;
+      background:
+        linear-gradient(135deg, rgba(239, 246, 255, 0.94), rgba(255, 255, 255, 0.96) 58%),
+        var(--surface-strong);
+    }
+
+    .protocol-card {
+      grid-column: span 5;
+    }
+
+    .details-card {
+      grid-column: span 7;
+    }
+
+    .device-card {
+      grid-column: span 5;
+    }
+
+    .dns-card {
+      grid-column: 1 / -1;
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 22px;
+    }
+
+    .card-title-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .card-icon {
+      display: grid;
+      flex: 0 0 auto;
+      width: 42px;
+      height: 42px;
+      place-items: center;
+      color: var(--primary);
+      background: var(--primary-soft);
+      border-radius: 12px;
+    }
+
+    .card-icon.teal {
+      color: var(--teal);
+      background: var(--teal-soft);
+    }
+
+    .card-icon svg {
+      width: 21px;
+      height: 21px;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: 17px;
+      letter-spacing: -0.015em;
+    }
+
+    .card-kicker {
+      margin: 3px 0 0;
+      color: var(--subtle);
+      font-size: 12px;
+    }
+
+    .ip-value {
+      min-height: 50px;
+      margin: 6px 0 13px;
+      overflow-wrap: anywhere;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: clamp(27px, 4vw, 42px);
+      font-weight: 760;
+      letter-spacing: -0.045em;
+      line-height: 1.2;
+    }
+
+    .ip-subtitle {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.65;
+    }
+
+    .copy-button {
+      min-height: 38px;
+      padding: 0 13px;
+      color: var(--primary);
+      background: var(--primary-soft);
+    }
+
+    .copy-button:hover,
+    .copy-button:focus-visible {
+      background: #dbeafe;
+      outline: none;
+    }
+
+    .copy-button:disabled {
+      cursor: not-allowed;
+      opacity: 0.5;
+    }
+
+    .protocol-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .protocol-row {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr) auto;
+      gap: 11px;
+      align-items: center;
+      min-height: 63px;
+      padding: 13px 14px;
+      background: #f8fafc;
+      border: 1px solid #edf0f5;
+      border-radius: 14px;
+    }
+
+    .protocol-badge {
+      display: grid;
+      width: 39px;
+      height: 31px;
+      place-items: center;
+      color: var(--primary);
+      background: var(--primary-soft);
+      border-radius: 9px;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .protocol-value {
+      min-width: 0;
+      overflow: hidden;
+      color: var(--text);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 13px;
+      font-weight: 650;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .reachability {
+      color: var(--subtle);
+      font-size: 12px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .reachability.ok {
+      color: var(--success);
+    }
+
+    .reachability.off {
+      color: var(--warning);
+    }
+
+    .detail-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0 24px;
+      margin: 0;
+    }
+
+    .detail-item {
+      display: grid;
+      grid-template-columns: 86px minmax(0, 1fr);
+      gap: 12px;
+      align-items: start;
+      padding: 13px 0;
+      border-bottom: 1px solid #edf0f5;
+    }
+
+    .detail-item:nth-last-child(-n + 2) {
+      border-bottom: 0;
+    }
+
+    dt {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    dd {
+      min-width: 0;
+      margin: 0;
+      overflow-wrap: anywhere;
+      font-size: 13px;
+      font-weight: 650;
+      text-align: right;
+    }
+
+    .device-list {
+      display: grid;
+      gap: 14px;
+    }
+
+    .device-item {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 20px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid #edf0f5;
+    }
+
+    .device-item:last-child {
+      padding-bottom: 0;
+      border-bottom: 0;
+    }
+
+    .device-label {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .device-value {
+      max-width: 65%;
+      overflow-wrap: anywhere;
+      font-size: 13px;
+      font-weight: 650;
+      text-align: right;
+    }
+
+    .dns-intro {
+      margin: -6px 0 17px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .dns-frame-wrap {
+      position: relative;
+      min-height: 132px;
+      overflow: hidden;
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+    }
+
+    .dns-frame {
+      display: block;
+      width: 100%;
+      height: 132px;
+      background: #ffffff;
+      border: 0;
+    }
+
+    .dns-loading {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      color: var(--muted);
+      background: #f8fafc;
+      font-size: 13px;
+      pointer-events: none;
+      transition: opacity 0.2s ease;
+    }
+
+    .dns-loading.is-hidden {
+      opacity: 0;
+    }
+
+    .mini-spinner {
+      width: 17px;
+      height: 17px;
+      border: 2px solid #dbe5f5;
+      border-top-color: var(--primary);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    .dns-notes {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 15px;
+    }
+
+    .note {
+      margin: 0;
+      padding: 13px 14px;
+      color: var(--muted);
+      background: #f8fafc;
+      border-radius: 12px;
+      font-size: 12px;
+      line-height: 1.65;
+    }
+
+    .note strong {
+      color: var(--text);
+    }
+
+    .source-link {
+      color: var(--primary);
+      font-size: 12px;
+      font-weight: 700;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .source-link:hover,
+    .source-link:focus-visible {
+      text-decoration: underline;
+      outline: none;
+    }
+
+    .page-footer {
+      padding: 26px 0 40px;
+      color: var(--subtle);
+      font-size: 12px;
+      line-height: 1.7;
+      text-align: center;
+    }
+
+    .skeleton {
+      display: inline-block;
+      width: 68%;
+      max-width: 310px;
+      height: 0.82em;
+      vertical-align: middle;
+      background: linear-gradient(90deg, #e9edf4 25%, #f6f8fb 50%, #e9edf4 75%);
+      background-size: 200% 100%;
+      border-radius: 6px;
+      animation: shimmer 1.4s infinite;
+    }
+
+    @keyframes shimmer {
+      to { background-position: -200% 0; }
+    }
+
+    @media (max-width: 820px) {
+      .hero {
+        grid-template-columns: 1fr;
+        gap: 22px;
+        align-items: start;
+        padding-top: 42px;
+      }
+
+      .refresh-button {
+        width: fit-content;
+      }
+
+      .ip-card,
+      .protocol-card,
+      .details-card,
+      .device-card {
+        grid-column: 1 / -1;
+      }
+    }
+
+    @media (max-width: 580px) {
+      .container {
+        width: min(calc(100% - 28px), 1080px);
+      }
+
+      .site-header {
+        padding-top: 18px;
+      }
+
+      .privacy-mark span {
+        display: none;
+      }
+
+      .hero {
+        padding: 34px 0 26px;
+      }
+
+      .hero-description {
+        font-size: 15px;
+      }
+
+      .dashboard {
+        gap: 14px;
+      }
+
+      .card {
+        padding: 20px;
+        border-radius: 17px;
+      }
+
+      .ip-card {
+        min-height: 245px;
+      }
+
+      .ip-value {
+        font-size: clamp(25px, 8vw, 34px);
+      }
+
+      .detail-list,
+      .dns-notes {
+        grid-template-columns: 1fr;
+      }
+
+      .detail-item:nth-last-child(2) {
+        border-bottom: 1px solid #edf0f5;
+      }
+
+      .dns-frame-wrap,
+      .dns-frame {
+        min-height: 164px;
+        height: 164px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header container">
+    <a class="back-link" href="../">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m15 18-6-6 6-6"/><path d="M9 12h10"/></svg>
+      返回工具箱
+    </a>
+    <span class="privacy-mark">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><path d="m9 12 2 2 4-4"/></svg>
+      <span>只读取本次网络出口信息</span>
+    </span>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <div>
+        <p class="eyebrow">Network Check</p>
+        <h1>IP 与 DNS 检测</h1>
+        <p class="hero-description">快速查看当前公网出口、IPv4 / IPv6 连通性、IP 归属以及浏览器实际使用的递归 DNS 服务器。</p>
+      </div>
+      <button class="refresh-button is-loading" id="refreshButton" type="button" disabled>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.34-5.66L20 8"/><path d="M20 3v5h-5"/></svg>
+        <span>检测中</span>
+      </button>
+    </section>
+
+    <div class="status-line" aria-live="polite">
+      <span class="status-message"><span class="status-dot loading" id="statusDot"></span><span id="statusText">正在检测当前网络…</span></span>
+      <span id="checkedAt">尚未完成</span>
+    </div>
+
+    <section class="dashboard" aria-label="网络检测结果">
+      <article class="card ip-card">
+        <div class="card-header">
+          <div class="card-title-wrap">
+            <span class="card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.4 2.5 3.6 5.5 3.6 9s-1.2 6.5-3.6 9c-2.4-2.5-3.6-5.5-3.6-9S9.6 5.5 12 3Z"/></svg>
+            </span>
+            <div>
+              <h2>当前公网出口</h2>
+              <p class="card-kicker">浏览器访问互联网时对外显示的地址</p>
+            </div>
+          </div>
+          <button class="copy-button" id="copyButton" type="button" disabled aria-label="复制当前公网 IP">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M15 9V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h3"/></svg>
+            <span>复制</span>
+          </button>
+        </div>
+        <div class="ip-value" id="primaryIp"><span class="skeleton"></span></div>
+        <p class="ip-subtitle" id="ipSubtitle">正在查询 IP 归属信息…</p>
+      </article>
+
+      <article class="card protocol-card">
+        <div class="card-header">
+          <div class="card-title-wrap">
+            <span class="card-icon teal" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </span>
+            <div>
+              <h2>协议连通性</h2>
+              <p class="card-kicker">分别测试 IPv4 与 IPv6 出口</p>
+            </div>
+          </div>
+        </div>
+        <div class="protocol-list">
+          <div class="protocol-row">
+            <span class="protocol-badge">IPv4</span>
+            <span class="protocol-value" id="ipv4Value">检测中…</span>
+            <span class="reachability" id="ipv4Status">等待</span>
+          </div>
+          <div class="protocol-row">
+            <span class="protocol-badge">IPv6</span>
+            <span class="protocol-value" id="ipv6Value">检测中…</span>
+            <span class="reachability" id="ipv6Status">等待</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="card details-card">
+        <div class="card-header">
+          <div class="card-title-wrap">
+            <span class="card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg>
+            </span>
+            <div>
+              <h2>IP 归属信息</h2>
+              <p class="card-kicker">结果为 IP 数据库估算，并非精确定位</p>
+            </div>
+          </div>
+        </div>
+        <dl class="detail-list">
+          <div class="detail-item"><dt>国家 / 地区</dt><dd id="countryValue">—</dd></div>
+          <div class="detail-item"><dt>城市</dt><dd id="cityValue">—</dd></div>
+          <div class="detail-item"><dt>运营商</dt><dd id="ispValue">—</dd></div>
+          <div class="detail-item"><dt>ASN</dt><dd id="asnValue">—</dd></div>
+          <div class="detail-item"><dt>时区</dt><dd id="timezoneValue">—</dd></div>
+          <div class="detail-item"><dt>坐标估算</dt><dd id="coordinatesValue">—</dd></div>
+        </dl>
+      </article>
+
+      <article class="card device-card">
+        <div class="card-header">
+          <div class="card-title-wrap">
+            <span class="card-icon teal" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="12" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+            </span>
+            <div>
+              <h2>浏览器网络</h2>
+              <p class="card-kicker">由当前浏览器直接报告</p>
+            </div>
+          </div>
+        </div>
+        <div class="device-list">
+          <div class="device-item"><span class="device-label">系统</span><span class="device-value" id="systemValue">—</span></div>
+          <div class="device-item"><span class="device-label">浏览器</span><span class="device-value" id="browserValue">—</span></div>
+          <div class="device-item"><span class="device-label">连接质量</span><span class="device-value" id="connectionValue">浏览器未提供</span></div>
+          <div class="device-item"><span class="device-label">在线状态</span><span class="device-value" id="onlineValue">—</span></div>
+        </div>
+      </article>
+
+      <article class="card dns-card">
+        <div class="card-header">
+          <div class="card-title-wrap">
+            <span class="card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="6" rx="2"/><rect x="3" y="14" width="18" height="6" rx="2"/><path d="M7 7h.01M7 17h.01M11 7h6M11 17h6"/></svg>
+            </span>
+            <div>
+              <h2>实际递归 DNS</h2>
+              <p class="card-kicker">通过权威 DNS 查询识别，而不是读取浏览器设置</p>
+            </div>
+          </div>
+          <a class="source-link" href="https://nstool.netease.com/" target="_blank" rel="noopener noreferrer">单独打开检测源</a>
+        </div>
+        <p class="dns-intro">下方结果由网易 DNS 检测服务实时返回，可看到当前出口 IP 与处理域名解析请求的 DNS 服务器。</p>
+        <div class="dns-frame-wrap">
+          <iframe class="dns-frame" id="dnsFrame" title="网易 DNS 与 IP 检测结果" src="https://nstool.netease.com/"></iframe>
+          <div class="dns-loading" id="dnsLoading"><span class="mini-spinner" aria-hidden="true"></span>正在等待 DNS 查询结果…</div>
+        </div>
+        <div class="dns-notes">
+          <p class="note"><strong>如何判断：</strong>使用 VPN 时，DNS 运营商若仍显示本地宽带或手机运营商，可能存在 DNS 泄漏；若显示 VPN、代理或可信 DNS 服务商，通常符合预期。</p>
+          <p class="note"><strong>注意：</strong>DNS 与出口 IP 所在地不同不一定有问题。公共 DNS、加密 DNS、Anycast 和移动网络都可能让两者显示在不同城市。</p>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <footer class="page-footer container">检测会向 ipify、IPWhois 和网易 DNS 服务发送必要的网络请求；页面不保存检测结果。</footer>
+
+  <script>
+    (() => {
+      'use strict';
+
+      const endpoints = {
+        ipv4: 'https://api.ipify.org?format=json',
+        ipv6: 'https://api6.ipify.org?format=json',
+        universal: 'https://api64.ipify.org?format=json',
+        details: 'https://ipwho.is/?lang=zh'
+      };
+
+      const elements = Object.fromEntries([
+        'refreshButton', 'copyButton', 'primaryIp', 'ipSubtitle', 'ipv4Value',
+        'ipv4Status', 'ipv6Value', 'ipv6Status', 'countryValue', 'cityValue',
+        'ispValue', 'asnValue', 'timezoneValue', 'coordinatesValue', 'systemValue',
+        'browserValue', 'connectionValue', 'onlineValue', 'statusDot', 'statusText',
+        'checkedAt', 'dnsFrame', 'dnsLoading'
+      ].map((id) => [id, document.getElementById(id)]));
+
+      let currentIp = '';
+
+      const setText = (element, value, fallback = '—') => {
+        element.textContent = value === null || value === undefined || value === '' ? fallback : String(value);
+      };
+
+      const fetchJson = async (url, timeout = 9000) => {
+        const controller = new AbortController();
+        const timer = window.setTimeout(() => controller.abort(), timeout);
+        try {
+          const response = await fetch(url, {
+            cache: 'no-store',
+            headers: { Accept: 'application/json' },
+            signal: controller.signal
+          });
+          if (!response.ok) throw new Error(`HTTP ${response.status}`);
+          return await response.json();
+        } finally {
+          window.clearTimeout(timer);
+        }
+      };
+
+      const settledValue = (result) => result.status === 'fulfilled' ? result.value : null;
+
+      const detectSystem = () => {
+        const ua = navigator.userAgent;
+        if (/Android/i.test(ua)) {
+          const version = ua.match(/Android\s([\d.]+)/i);
+          return `Android${version ? ` ${version[1]}` : ''}`;
+        }
+        if (/iPhone|iPad|iPod/i.test(ua)) {
+          const version = ua.match(/OS\s([\d_]+)/i);
+          return `${/iPad/i.test(ua) ? 'iPadOS' : 'iOS'}${version ? ` ${version[1].replaceAll('_', '.')}` : ''}`;
+        }
+        if (/Windows NT 10\.0/i.test(ua)) return 'Windows 10 / 11';
+        if (/Mac OS X/i.test(ua)) return 'macOS';
+        if (/CrOS/i.test(ua)) return 'ChromeOS';
+        if (/Linux/i.test(ua)) return 'Linux';
+        return navigator.platform || '未知系统';
+      };
+
+      const detectBrowser = () => {
+        const ua = navigator.userAgent;
+        const matchers = [
+          ['Edge', /Edg\/([\d.]+)/],
+          ['Firefox', /Firefox\/([\d.]+)/],
+          ['Chrome', /(?:Chrome|CriOS)\/([\d.]+)/],
+          ['Safari', /Version\/([\d.]+).*Safari/]
+        ];
+        for (const [name, pattern] of matchers) {
+          const match = ua.match(pattern);
+          if (match) return `${name} ${match[1].split('.')[0]}`;
+        }
+        return '未知浏览器';
+      };
+
+      const updateBrowserInfo = () => {
+        setText(elements.systemValue, detectSystem());
+        setText(elements.browserValue, detectBrowser());
+        setText(elements.onlineValue, navigator.onLine ? '在线' : '离线');
+
+        const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+        if (!connection) return;
+        const parts = [];
+        if (connection.effectiveType) parts.push(connection.effectiveType.toUpperCase());
+        if (Number.isFinite(connection.downlink)) parts.push(`约 ${connection.downlink} Mbps`);
+        if (Number.isFinite(connection.rtt)) parts.push(`RTT ${connection.rtt} ms`);
+        if (connection.saveData) parts.push('省流模式');
+        setText(elements.connectionValue, parts.join(' · '), '浏览器未提供');
+      };
+
+      const setProtocolResult = (family, data) => {
+        const valueElement = elements[`${family}Value`];
+        const statusElement = elements[`${family}Status`];
+        if (data && data.ip) {
+          setText(valueElement, data.ip);
+          setText(statusElement, '可用');
+          statusElement.className = 'reachability ok';
+        } else {
+          setText(valueElement, '未检测到');
+          setText(statusElement, '不可用');
+          statusElement.className = 'reachability off';
+        }
+      };
+
+      const formatLocation = (data) => {
+        return [data.region, data.city].filter(Boolean).join(' · ') || data.country || '归属地未知';
+      };
+
+      const renderDetails = (data) => {
+        if (!data || data.success === false) {
+          elements.ipSubtitle.textContent = '暂时无法取得 IP 归属信息';
+          return;
+        }
+
+        currentIp = data.ip || currentIp;
+        setText(elements.primaryIp, currentIp, '检测失败');
+        elements.copyButton.disabled = !currentIp;
+
+        const connection = data.connection || {};
+        const timezone = data.timezone || {};
+        const flag = data.flag && data.flag.emoji ? `${data.flag.emoji} ` : '';
+        setText(elements.ipSubtitle, `${flag}${formatLocation(data)} · ${connection.isp || connection.org || '运营商未知'}`);
+        setText(elements.countryValue, `${flag}${data.country || '—'}`);
+        setText(elements.cityValue, [data.region, data.city].filter(Boolean).join(' / '));
+        setText(elements.ispValue, connection.isp || connection.org);
+        setText(elements.asnValue, connection.asn ? `AS${String(connection.asn).replace(/^AS/i, '')}` : '—');
+        setText(elements.timezoneValue, [timezone.id, timezone.utc].filter(Boolean).join(' · '));
+
+        const hasCoordinates = Number.isFinite(data.latitude) && Number.isFinite(data.longitude);
+        setText(elements.coordinatesValue, hasCoordinates ? `${data.latitude.toFixed(3)}, ${data.longitude.toFixed(3)}` : '—');
+      };
+
+      const reloadDnsTest = () => {
+        elements.dnsLoading.classList.remove('is-hidden');
+        elements.dnsFrame.src = `https://nstool.netease.com/?refresh=${Date.now()}`;
+      };
+
+      const setLoadingState = (loading) => {
+        elements.refreshButton.disabled = loading;
+        elements.refreshButton.classList.toggle('is-loading', loading);
+        elements.refreshButton.querySelector('span').textContent = loading ? '检测中' : '重新检测';
+        elements.statusDot.className = `status-dot ${loading ? 'loading' : 'success'}`;
+        elements.statusText.textContent = loading ? '正在检测当前网络…' : 'IP 检测完成，DNS 结果见下方';
+      };
+
+      const runCheck = async () => {
+        setLoadingState(true);
+        currentIp = '';
+        elements.copyButton.disabled = true;
+        setText(elements.primaryIp, '检测中…');
+        setText(elements.ipSubtitle, '正在查询 IP 归属信息…');
+        ['ipv4', 'ipv6'].forEach((family) => {
+          setText(elements[`${family}Value`], '检测中…');
+          setText(elements[`${family}Status`], '等待');
+          elements[`${family}Status`].className = 'reachability';
+        });
+        reloadDnsTest();
+
+        const [detailsResult, ipv4Result, ipv6Result, universalResult] = await Promise.allSettled([
+          fetchJson(endpoints.details),
+          fetchJson(endpoints.ipv4, 8000),
+          fetchJson(endpoints.ipv6, 8000),
+          fetchJson(endpoints.universal, 8000)
+        ]);
+
+        const detailsResponse = settledValue(detailsResult);
+        const details = detailsResponse && detailsResponse.success !== false ? detailsResponse : null;
+        const ipv4 = settledValue(ipv4Result);
+        const ipv6 = settledValue(ipv6Result);
+        const universal = settledValue(universalResult);
+
+        setProtocolResult('ipv4', ipv4);
+        setProtocolResult('ipv6', ipv6);
+        currentIp = (details && details.ip) || (universal && universal.ip) || (ipv4 && ipv4.ip) || (ipv6 && ipv6.ip) || '';
+        renderDetails(details);
+
+        if (!details) {
+          setText(elements.primaryIp, currentIp, '检测失败');
+          elements.copyButton.disabled = !currentIp;
+        }
+
+        const successCount = [details, ipv4, ipv6, universal].filter(Boolean).length;
+        setLoadingState(false);
+        if (successCount === 0) {
+          elements.statusDot.className = 'status-dot warning';
+          elements.statusText.textContent = 'IP 检测服务暂时无法访问，请稍后重试';
+        } else if (!details) {
+          elements.statusDot.className = 'status-dot warning';
+          elements.statusText.textContent = '已取得公网 IP，归属信息暂不可用';
+        }
+
+        elements.checkedAt.textContent = `完成于 ${new Intl.DateTimeFormat('zh-CN', {
+          hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false
+        }).format(new Date())}`;
+      };
+
+      const copyIp = async () => {
+        if (!currentIp) return;
+        const label = elements.copyButton.querySelector('span');
+        try {
+          await navigator.clipboard.writeText(currentIp);
+        } catch (_) {
+          const input = document.createElement('textarea');
+          input.value = currentIp;
+          input.setAttribute('readonly', '');
+          input.style.position = 'fixed';
+          input.style.opacity = '0';
+          document.body.appendChild(input);
+          input.select();
+          document.execCommand('copy');
+          input.remove();
+        }
+        label.textContent = '已复制';
+        window.setTimeout(() => { label.textContent = '复制'; }, 1500);
+      };
+
+      elements.refreshButton.addEventListener('click', runCheck);
+      elements.copyButton.addEventListener('click', copyIp);
+      elements.dnsFrame.addEventListener('load', () => {
+        window.setTimeout(() => elements.dnsLoading.classList.add('is-hidden'), 350);
+      });
+      window.addEventListener('online', updateBrowserInfo);
+      window.addEventListener('offline', updateBrowserInfo);
+
+      updateBrowserInfo();
+      runCheck();
+    })();
+  </script>
+</body>
+</html>
