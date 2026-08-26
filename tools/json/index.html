@@ -40,9 +40,7 @@
     function updateCounts(){inputSize.textContent=input.value.length.toLocaleString()+" characters";outputSize.textContent=output.value.length.toLocaleString()+" characters"}
     function setMessage(text,error=false){message.textContent=text;message.style.color=error?"var(--error)":"var(--success)"}
     function parse(){if(!input.value.trim())throw new Error("Input is empty.");return JSON.parse(input.value)}
-    function errorLocation(error){const match=String(error.message).match(/positions+(d+)/i);if(!match)return error.message;const pos=Number(match[1]),before=input.value.slice(0,pos),line=before.split("
-").length,column=pos-before.lastIndexOf("
-");return error.message+" (line "+line+", column "+column+")"}
+    function errorLocation(error){const match=String(error.message).match(/position[ ]+([0-9]+)/i);if(!match)return error.message;const pos=Number(match[1]),before=input.value.slice(0,pos),nl=String.fromCharCode(10),line=before.split(nl).length,column=pos-before.lastIndexOf(nl);return error.message+" (line "+line+", column "+column+")"}
     function format(){try{const space=indent.value==="tab"?"	":Number(indent.value);output.value=JSON.stringify(parse(),null,space);setMessage("Valid JSON — formatted successfully.");updateCounts()}catch(e){setMessage(errorLocation(e),true)}}
     function minify(){try{output.value=JSON.stringify(parse());setMessage("Valid JSON — minified successfully.");updateCounts()}catch(e){setMessage(errorLocation(e),true)}}
     function validate(){try{parse();setMessage("Valid JSON.");}catch(e){setMessage(errorLocation(e),true)}}
