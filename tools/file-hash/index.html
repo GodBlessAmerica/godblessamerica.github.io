@@ -1,7 +1,66 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Local File Hash Checker</title>
-<style>
-:root{color-scheme:dark;--bg:#07110f;--panel:#0d1b18;--line:#25433b;--text:#eef8f4;--muted:#98aaa4;--mint:#79f2c0;--red:#ff8c8c}*{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(circle at 75% 5%,#153c30 0,transparent 38%),linear-gradient(145deg,#07110f,#091713 60%,#06100e);font:15px/1.55 system-ui,sans-serif;color:var(--text)}main{width:min(920px,calc(100% - 32px));margin:auto;padding:42px 0 60px}.top{display:flex;align-items:center;gap:12px;margin-bottom:25px}.mark{display:grid;place-items:center;width:42px;height:42px;border:1px solid #39705f;border-radius:13px;background:#112820;color:var(--mint);font-weight:900;font-size:21px}.eyebrow{color:var(--mint);font-size:12px;letter-spacing:.18em;text-transform:uppercase;font-weight:700}h1{margin:2px 0 0;font-size:clamp(24px,5vw,38px);letter-spacing:-.035em}.card{background:#0d1b18dd;border:1px solid var(--line);border-radius:22px;box-shadow:0 22px 70px #0005;overflow:hidden}.drop{margin:18px;border:1px dashed #457665;border-radius:16px;padding:48px 22px;text-align:center;cursor:pointer;transition:.2s;background:#10211d}.drop:hover,.drop.over{border-color:var(--mint);background:#122a23}.drop strong{display:block;font-size:18px;margin-bottom:7px}.drop span,.privacy,.meta{color:var(--muted)}button{font:inherit}.choose{display:inline-block;margin-top:18px;padding:10px 17px;border-radius:10px;background:var(--mint);color:#052117!important;font-weight:800}.status{display:none;padding:0 20px 20px}.fileline,.progressline,.label{display:flex;justify-content:space-between;gap:16px}.filename{font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.bar{height:7px;border-radius:9px;background:#1d342d;overflow:hidden}.fill{height:100%;width:0;background:linear-gradient(90deg,#2dd998,var(--mint));transition:width .12s}.progressline{color:var(--muted);font-size:13px;margin-top:7px}.results{border-top:1px solid var(--line);padding:20px;display:none}.hashrow{margin-bottom:18px}.label{align-items:center;margin-bottom:7px;color:var(--muted);font-size:12px;font-weight:800;letter-spacing:.08em}.copy{border:0;background:transparent;color:var(--mint);cursor:pointer}.hash{display:block;padding:12px;border:1px solid var(--line);border-radius:10px;background:#08120f;font:13px/1.4 ui-monospace,monospace;word-break:break-all}.verify{border-top:1px solid var(--line);padding:20px}.verify label{display:block;font-weight:700;margin-bottom:8px}.verifybox{display:flex;gap:9px}.verify input{min-width:0;flex:1;padding:12px;border:1px solid var(--line);border-radius:10px;background:#08120f;color:var(--text);font:13px ui-monospace,monospace;outline:none}.match{margin-top:8px;min-height:22px;font-weight:700}.privacy{display:flex;gap:10px;margin:17px 5px 0;font-size:13px}.privacy b{color:var(--mint)}footer{text-align:center;color:#63766f;font-size:12px;margin-top:22px}@media(max-width:600px){main{padding-top:24px}.drop{padding:38px 14px}.fileline{display:block}.hash{font-size:11px}}
-</style></head><body><main><div class="top"><div class="mark">#</div><div><div class="eyebrow">Privacy-first utility</div><h1>Local File Hash Checker</h1></div></div><section class="card"><div id="drop" class="drop" role="button" tabindex="0"><strong>Drop a file here</strong><span>or choose one from your device</span><br><span class="choose">Choose local file</span><input id="file" type="file" hidden></div><div id="status" class="status"><div class="fileline"><span id="name" class="filename"></span><span id="size" class="meta"></span></div><div class="bar"><div id="fill" class="fill"></div></div><div class="progressline"><span id="state">Preparing…</span><span id="percent">0%</span></div></div><div id="results" class="results"><div class="hashrow"><div class="label"><span>MD5</span><button class="copy" data-copy="md5">COPY</button></div><output id="md5" class="hash"></output></div><div><div class="label"><span>SHA-256</span><button class="copy" data-copy="sha256">COPY</button></div><output id="sha256" class="hash"></output></div></div><div class="verify"><label for="expected">Verify against a known hash</label><div class="verifybox"><input id="expected" spellcheck="false" placeholder="Paste an MD5 or SHA-256 value"><span id="detected" class="choose" style="margin:0;background:#19372e;color:#9db3ab!important">Auto-detect</span></div><div id="match" class="match"></div></div></section><p class="privacy"><b>●</b><span>Files stay on your device. Processing happens locally in your browser—nothing is uploaded or stored.</span></p><footer>MD5 is useful for file identification; use SHA-256 for security-sensitive verification.</footer></main>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Calculate file MD5 and SHA-256 locally in your browser">
+  <title>Local File Hash Checker</title>
+  <style>
+    :root { color-scheme:light; --background:#f4f7fb; --surface:#fff; --text:#172033; --muted:#667085; --primary:#2563eb; --primary-hover:#1d4ed8; --secondary:#667085; --border:#dce3ee; --success:#087a3e; --error:#c62828; }
+    * { box-sizing:border-box; }
+    body { min-height:100vh; margin:0; padding:32px 20px; color:var(--text); background:radial-gradient(circle at top left,#e8f1ff 0,transparent 32%),var(--background); font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft YaHei",sans-serif; }
+    .container { width:min(100%,920px); margin:0 auto; }
+    .back-link { display:inline-flex; align-items:center; margin-bottom:18px; color:var(--primary); font-weight:600; text-decoration:none; }
+    .back-link:hover { text-decoration:underline; }
+    .box { padding:26px; background:var(--surface); border:1px solid rgba(220,227,238,.9); border-radius:18px; box-shadow:0 16px 45px rgba(31,41,55,.09); }
+    h1 { margin:0; font-size:clamp(26px,5vw,34px); text-align:center; letter-spacing:-.03em; }
+    .tip { margin:10px 0 24px; color:var(--muted); text-align:center; line-height:1.6; }
+    .drop { border:1px dashed #9eb8e8; border-radius:13px; padding:44px 20px; text-align:center; cursor:pointer; background:#f8faff; transition:border-color .2s,background .2s; }
+    .drop:hover,.drop.over { border-color:var(--primary); background:var(--primary-soft,#eff6ff); }
+    .drop strong { display:block; margin-bottom:7px; font-size:18px; }
+    .drop span { color:var(--muted); }
+    .choose { display:inline-block; margin-top:18px; padding:11px 18px; color:#fff!important; background:var(--primary); border-radius:10px; font-weight:650; }
+    .status { display:none; margin-top:22px; }
+    .fileline,.progressline,.label { display:flex; justify-content:space-between; gap:16px; }
+    .filename { font-weight:700; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+    .meta,.progressline { color:var(--muted); }
+    .bar { height:8px; margin-top:11px; overflow:hidden; background:#e9eef7; border-radius:9px; }
+    .fill { width:0; height:100%; background:var(--primary); transition:width .12s; }
+    .progressline { margin-top:7px; font-size:13px; }
+    .results { display:none; margin-top:22px; padding-top:21px; border-top:1px solid var(--border); }
+    .hashrow { margin-bottom:18px; }
+    .label { align-items:center; margin-bottom:8px; font-size:13px; font-weight:700; }
+    .copy { min-height:36px; padding:7px 13px; color:#fff; background:var(--primary); border:0; border-radius:8px; cursor:pointer; font-weight:650; }
+    .copy:hover { background:var(--primary-hover); }
+    .hash { display:block; width:100%; padding:13px; color:var(--text); background:#fbfcfe; border:1px solid var(--border); border-radius:10px; font:13px/1.5 ui-monospace,SFMono-Regular,Consolas,monospace; word-break:break-all; }
+    .verify { margin-top:22px; padding-top:21px; border-top:1px solid var(--border); }
+    .verify>label { display:block; margin-bottom:8px; font-weight:700; }
+    .verifybox { display:flex; gap:9px; }
+    .verify input { min-width:0; flex:1; padding:12px 13px; color:var(--text); background:#fbfcfe; border:1px solid var(--border); border-radius:10px; outline:none; font:13px ui-monospace,monospace; }
+    .verify input:focus { border-color:var(--primary); box-shadow:0 0 0 3px rgba(37,99,235,.12); }
+    .detected { display:grid; min-width:98px; place-items:center; padding:0 12px; color:var(--muted); background:#eef2f7; border-radius:10px; font-size:13px; }
+    .match { min-height:22px; margin-top:9px; font-weight:700; }
+    .privacy,.note { color:var(--muted); font-size:13px; line-height:1.6; text-align:center; }
+    .privacy { margin:20px 0 0; }
+    .privacy b { color:var(--success); }
+    .note { margin:8px 0 0; }
+    @media(max-width:600px) { body{padding:22px 12px}.box{padding:20px 15px}.drop{padding:36px 12px}.fileline{display:block}.verifybox{display:block}.detected{min-height:40px;margin-top:8px}.hash{font-size:11px} }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <a class="back-link" href="../">← Back to toolbox</a>
+    <section class="box">
+      <h1>Local File Hash Checker</h1>
+      <p class="tip">Files are processed in chunks locally in your browser. Nothing is uploaded or stored.</p>
+      <div id="drop" class="drop" role="button" tabindex="0"><strong>Drop a file here</strong><span>or choose one from your device</span><br><span class="choose">Choose local file</span><input id="file" type="file" hidden></div>
+      <div id="status" class="status"><div class="fileline"><span id="name" class="filename"></span><span id="size" class="meta"></span></div><div class="bar"><div id="fill" class="fill"></div></div><div class="progressline"><span id="state">Preparing…</span><span id="percent">0%</span></div></div>
+      <div id="results" class="results"><div class="hashrow"><div class="label"><span>MD5</span><button class="copy" data-copy="md5">COPY</button></div><output id="md5" class="hash"></output></div><div><div class="label"><span>SHA-256</span><button class="copy" data-copy="sha256">COPY</button></div><output id="sha256" class="hash"></output></div></div>
+      <div class="verify"><label for="expected">Verify against a known hash</label><div class="verifybox"><input id="expected" spellcheck="false" placeholder="Paste an MD5 or SHA-256 value"><span id="detected" class="detected">Auto-detect</span></div><div id="match" class="match"></div></div>
+      <p class="privacy"><b>●</b> Files stay on your device. This page never uploads them.</p>
+      <p class="note">MD5 is useful for file identification; use SHA-256 for security-sensitive verification.</p>
+    </section>
+  </main>
 <script>
 const workerCode=`function hex(a){return Array.from(a,x=>x.toString(16).padStart(2,'0')).join('')}
 class SHA256{constructor(){this.h=new Uint32Array([1779033703,3144134277,1013904242,2773480762,1359893119,2600822924,528734635,1541459225]);this.b=new Uint8Array(64);this.n=0;this.bytes=0}block(p){const k=[1116352408,1899447441,3049323471,3921009573,961987163,1508970993,2453635748,2870763221,3624381080,310598401,607225278,1426881987,1925078388,2162078206,2614888103,3248222580,3835390401,4022224774,264347078,604807628,770255983,1249150122,1555081692,1996064986,2554220882,2821834349,2952996808,3210313671,3336571891,3584528711,113926993,338241895,666307205,773529912,1294757372,1396182291,1695183700,1986661051,2177026350,2456956037,2730485921,2820302411,3259730800,3345764771,3516065817,3600352804,4094571909,275423344,430227734,506948616,659060556,883997877,958139571,1322822218,1537002063,1747873779,1955562222,2024104815,2227730452,2361852424,2428436474,2756734187,3204031479,3329325298];let w=new Uint32Array(64);for(let i=0;i<16;i++)w[i]=(p[i*4]<<24)|(p[i*4+1]<<16)|(p[i*4+2]<<8)|p[i*4+3];for(let i=16;i<64;i++){let x=w[i-15],y=w[i-2];w[i]=(((x>>>7|x<<25)^(x>>>18|x<<14)^(x>>>3))+w[i-16]+((y>>>17|y<<15)^(y>>>19|y<<13)^(y>>>10))+w[i-7])>>>0}let[a,b,c,d,e,f,g,h]=this.h;for(let i=0;i<64;i++){let s1=(e>>>6|e<<26)^(e>>>11|e<<21)^(e>>>25|e<<7),ch=(e&f)^(~e&g),t1=(h+s1+ch+k[i]+w[i])>>>0,s0=(a>>>2|a<<30)^(a>>>13|a<<19)^(a>>>22|a<<10),maj=(a&b)^(a&c)^(b&c),t2=(s0+maj)>>>0;h=g;g=f;f=e;e=(d+t1)>>>0;d=c;c=b;b=a;a=(t1+t2)>>>0}let q=[a,b,c,d,e,f,g,h];for(let i=0;i<8;i++)this.h[i]=(this.h[i]+q[i])>>>0}update(x){this.bytes+=x.length;for(let i=0;i<x.length;){let q=Math.min(64-this.n,x.length-i);this.b.set(x.subarray(i,i+q),this.n);this.n+=q;i+=q;if(this.n===64){this.block(this.b);this.n=0}}}digest(){let z=BigInt(this.bytes)*8n;this.b[this.n++]=128;if(this.n>56){this.b.fill(0,this.n);this.block(this.b);this.n=0}this.b.fill(0,this.n,56);for(let i=0;i<8;i++)this.b[63-i]=Number((z>>BigInt(i*8))&255n);this.block(this.b);let o=new Uint8Array(32);for(let i=0;i<8;i++){o[i*4]=this.h[i]>>>24;o[i*4+1]=this.h[i]>>>16;o[i*4+2]=this.h[i]>>>8;o[i*4+3]=this.h[i]}return hex(o)}}
