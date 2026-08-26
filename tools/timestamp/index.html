@@ -157,9 +157,9 @@
 
       <div class="section">
         <h2>日期时间 → 时间戳</h2>
-        <p class="section-desc">选择本地日期和时间，转换为 Unix 时间戳。</p>
+        <p class="section-desc">输入或粘贴本地日期时间，支持 YYYY-MM-DD HH:mm:ss 和毫秒格式。</p>
         <div class="form-grid date-grid">
-          <input id="dateInput" type="datetime-local" step="1">
+          <input id="dateInput" type="text" autocomplete="off" placeholder="例如：2026-08-26 13:06:42.395">
           <button class="btn-primary" id="toTimestampBtn" type="button">转换</button>
         </div>
         <div class="result">
@@ -205,14 +205,38 @@
 
     const pad = n => String(n).padStart(2, '0');
 
-    function formatLocal(date) {
+    function formatLocal(date, includeTimezone = true) {
       if (!(date instanceof Date) || Number.isNaN(date.getTime())) return '无效日期';
+      const ms = String(date.getMilliseconds()).padStart(3, '0');
+      const base = `${date.getFullYear()}-${pad(date.getMonth()+1)}-${pad(date.getDate())} ${pad(date.getHours())}:${pad(date.getMinutes())}:${pad(date.getSeconds())}.${ms}`;
+      if (!includeTimezone) return base;
       const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || 'Local';
-      return `${date.getFullYear()}-${pad(date.getMonth()+1)}-${pad(date.getDate())} ${pad(date.getHours())}:${pad(date.getMinutes())}:${pad(date.getSeconds())} (${tz})`;
+      return `${base} (${tz})`;
     }
 
-    function toDateTimeLocalValue(date) {
-      return `${date.getFullYear()}-${pad(date.getMonth()+1)}-${pad(date.getDate())}T${pad(date.getHours())}:${pad(date.getMinutes())}:${pad(date.getSeconds())}`;
+    function toEditableLocalValue(date) {
+      return formatLocal(date, false);
+    }
+
+    function parseLocalDateTime(value) {
+      const text = value.trim();
+      const m = text.match(/^(\d{4})-(\d{2})-(\d{2})[ T](\d{2}):(\d{2})(?::(\d{2}))?(?:\.(\d{1,3}))?$/);
+      if (!m) return null;
+      const [, y, mo, d, h, mi, s = '0', ms = '0'] = m;
+      const date = new Date(
+        Number(y), Number(mo) - 1, Number(d),
+        Number(h), Number(mi), Number(s),
+        Number(ms.padEnd(3, '0'))
+      );
+      if (
+        date.getFullYear() !== Number(y) ||
+        date.getMonth() !== Number(mo) - 1 ||
+        date.getDate() !== Number(d) ||
+        date.getHours() !== Number(h) ||
+        date.getMinutes() !== Number(mi) ||
+        date.getSeconds() !== Number(s)
+      ) return null;
+      return date;
     }
 
     function updateCurrent() {
@@ -268,12 +292,16 @@
     }
 
     document.getElementById('copyCurrentBtn').addEventListener('click', () => copyText(currentTimestamp.textContent));
-    document.getElementById('copyDateBtn').addEventListener('click', () => copyText(dateResult.textContent));
+    document.getElementById('copyDateBtn').addEventListener('click', () => {
+      const raw = dateResult.dataset.copyValue || dateResult.textContent;
+      copyText(raw);
+    });
 
     document.getElementById('toDateBtn').addEventListener('click', () => {
       const raw = timestampInput.value.trim();
       if (!/^-?\d+(\.\d+)?$/.test(raw)) {
         dateResult.textContent = '请输入有效的数字时间戳';
+        dateResult.dataset.copyValue = '';
         dateResult.className = 'result-value error';
         return;
       }
@@ -282,10 +310,12 @@
       const date = new Date(ms);
       if (Number.isNaN(date.getTime())) {
         dateResult.textContent = '时间戳超出可转换范围';
+        dateResult.dataset.copyValue = '';
         dateResult.className = 'result-value error';
         return;
       }
-      dateResult.textContent = formatLocal(date);
+      dateResult.textContent = formatLocal(date, true);
+      dateResult.dataset.copyValue = formatLocal(date, false);
       dateResult.className = 'result-value ok';
     });
 
@@ -297,14 +327,15 @@
         millisecondsResult.className = 'result-value';
         return;
       }
-      const date = new Date(dateInput.value);
-      const ms = date.getTime();
-      if (Number.isNaN(ms)) {
-        secondsResult.textContent = '无效日期';
+      const date = parseLocalDateTime(dateInput.value);
+      if (!date) {
+        secondsResult.textContent = '无效日期格式';
         millisecondsResult.textContent = '—';
         secondsResult.className = 'result-value error';
+        millisecondsResult.className = 'result-value';
         return;
       }
+      const ms = date.getTime();
       secondsResult.textContent = Math.floor(ms / 1000);
       millisecondsResult.textContent = ms;
       secondsResult.className = 'result-value ok';
@@ -321,8 +352,16 @@
       else if (len > 0 && len <= 10) timestampUnit.value = 's';
     });
 
+    timestampInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') document.getElementById('toDateBtn').click();
+    });
+
+    dateInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') document.getElementById('toTimestampBtn').click();
+    });
+
     const now = new Date();
-    dateInput.value = toDateTimeLocalValue(now);
+    dateInput.value = toEditableLocalValue(now);
     timestampInput.value = Math.floor(Date.now() / 1000);
     document.getElementById('toDateBtn').click();
     document.getElementById('toTimestampBtn').click();
