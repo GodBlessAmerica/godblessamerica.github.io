@@ -148,10 +148,17 @@
         </div>
         <div class="result">
           <div>
-            <div class="result-label">转换结果</div>
+            <div class="result-label">毫秒精度</div>
             <div class="result-value" id="dateResult">—</div>
           </div>
           <button class="btn-secondary" id="copyDateBtn" type="button">复制</button>
+        </div>
+        <div class="result">
+          <div>
+            <div class="result-label">秒精度</div>
+            <div class="result-value" id="dateResultSeconds">—</div>
+          </div>
+          <button class="btn-secondary" id="copyDateSecondsBtn" type="button">复制</button>
         </div>
       </div>
 
@@ -195,6 +202,7 @@
     const timestampInput = document.getElementById('timestampInput');
     const timestampUnit = document.getElementById('timestampUnit');
     const dateResult = document.getElementById('dateResult');
+    const dateResultSeconds = document.getElementById('dateResultSeconds');
     const dateInput = document.getElementById('dateInput');
     const secondsResult = document.getElementById('secondsResult');
     const millisecondsResult = document.getElementById('millisecondsResult');
@@ -209,6 +217,14 @@
       if (!(date instanceof Date) || Number.isNaN(date.getTime())) return '无效日期';
       const ms = String(date.getMilliseconds()).padStart(3, '0');
       const base = `${date.getFullYear()}-${pad(date.getMonth()+1)}-${pad(date.getDate())} ${pad(date.getHours())}:${pad(date.getMinutes())}:${pad(date.getSeconds())}.${ms}`;
+      if (!includeTimezone) return base;
+      const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || 'Local';
+      return `${base} (${tz})`;
+    }
+
+    function formatLocalSeconds(date, includeTimezone = true) {
+      if (!(date instanceof Date) || Number.isNaN(date.getTime())) return '无效日期';
+      const base = `${date.getFullYear()}-${pad(date.getMonth()+1)}-${pad(date.getDate())} ${pad(date.getHours())}:${pad(date.getMinutes())}:${pad(date.getSeconds())}`;
       if (!includeTimezone) return base;
       const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || 'Local';
       return `${base} (${tz})`;
@@ -296,6 +312,10 @@
       const raw = dateResult.dataset.copyValue || dateResult.textContent;
       copyText(raw);
     });
+    document.getElementById('copyDateSecondsBtn').addEventListener('click', () => {
+      const raw = dateResultSeconds.dataset.copyValue || dateResultSeconds.textContent;
+      copyText(raw);
+    });
 
     document.getElementById('toDateBtn').addEventListener('click', () => {
       const raw = timestampInput.value.trim();
@@ -303,6 +323,9 @@
         dateResult.textContent = '请输入有效的数字时间戳';
         dateResult.dataset.copyValue = '';
         dateResult.className = 'result-value error';
+        dateResultSeconds.textContent = '—';
+        dateResultSeconds.dataset.copyValue = '';
+        dateResultSeconds.className = 'result-value';
         return;
       }
       const value = Number(raw);
@@ -312,11 +335,18 @@
         dateResult.textContent = '时间戳超出可转换范围';
         dateResult.dataset.copyValue = '';
         dateResult.className = 'result-value error';
+        dateResultSeconds.textContent = '—';
+        dateResultSeconds.dataset.copyValue = '';
+        dateResultSeconds.className = 'result-value';
         return;
       }
       dateResult.textContent = formatLocal(date, true);
       dateResult.dataset.copyValue = formatLocal(date, false);
       dateResult.className = 'result-value ok';
+
+      dateResultSeconds.textContent = formatLocalSeconds(date, true);
+      dateResultSeconds.dataset.copyValue = formatLocalSeconds(date, false);
+      dateResultSeconds.className = 'result-value ok';
     });
 
     document.getElementById('toTimestampBtn').addEventListener('click', () => {
