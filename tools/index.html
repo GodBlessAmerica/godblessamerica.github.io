@@ -6,151 +6,35 @@
   <meta name="description" content="God Bless America 在线工具箱">
   <title>在线工具箱</title>
   <style>
-    :root {
-      color-scheme: light;
-      --background: #f4f7fb;
-      --surface: #ffffff;
-      --text: #172033;
-      --muted: #667085;
-      --primary: #2563eb;
-      --primary-soft: #eff6ff;
-      --border: #e4e9f2;
-      --shadow: 0 16px 45px rgba(31, 41, 55, 0.08);
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      min-height: 100vh;
-      margin: 0;
-      padding: 56px 22px;
-      color: var(--text);
-      background:
-        radial-gradient(circle at top left, #e8f1ff 0, transparent 32%),
-        var(--background);
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", sans-serif;
-    }
-
-    .container {
-      width: min(100%, 1040px);
-      margin: 0 auto;
-    }
-
-    header {
-      margin-bottom: 32px;
-    }
-
-    h1 {
-      margin: 0 0 12px;
-      font-size: clamp(30px, 5vw, 44px);
-      letter-spacing: -0.04em;
-    }
-
-    .intro {
-      max-width: 680px;
-      margin: 0;
-      color: var(--muted);
-      font-size: 16px;
-      line-height: 1.8;
-    }
-
-    .tool-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 20px;
-    }
-
-    .tool-card {
-      display: block;
-      min-height: 190px;
-      padding: 24px;
-      color: inherit;
-      text-decoration: none;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      box-shadow: var(--shadow);
-      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    .tool-card:hover,
-    .tool-card:focus-visible {
-      transform: translateY(-4px);
-      border-color: #b9cdf8;
-      box-shadow: 0 20px 50px rgba(37, 99, 235, 0.13);
-      outline: none;
-    }
-
-    .tool-icon {
-      display: grid;
-      width: 48px;
-      height: 48px;
-      margin-bottom: 24px;
-      place-items: center;
-      color: var(--primary);
-      background: var(--primary-soft);
-      border-radius: 14px;
-      font-size: 21px;
-      font-weight: 700;
-    }
-
-    h2 {
-      margin: 0 0 9px;
-      font-size: 20px;
-    }
-
-    .tool-description {
-      margin: 0;
-      color: var(--muted);
-      line-height: 1.7;
-    }
-
-    footer {
-      margin-top: 34px;
-      color: var(--muted);
-      font-size: 13px;
-    }
-
-    @media (max-width: 600px) {
-      body {
-        padding: 36px 16px;
-      }
-
-      .tool-card {
-        min-height: auto;
-      }
-    }
+    :root { color-scheme: light; --background:#f4f7fb; --surface:#fff; --text:#172033; --muted:#667085; --primary:#2563eb; --primary-soft:#eff6ff; --border:#e4e9f2; --shadow:0 16px 45px rgba(31,41,55,.08); }
+    * { box-sizing:border-box; }
+    body { min-height:100vh; margin:0; padding:56px 22px; color:var(--text); background:radial-gradient(circle at top left,#e8f1ff 0,transparent 32%),var(--background); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft YaHei",sans-serif; }
+    .container { width:min(100%,1040px); margin:0 auto; }
+    header { margin-bottom:32px; }
+    h1 { margin:0 0 12px; font-size:clamp(30px,5vw,44px); letter-spacing:-.04em; }
+    .intro { max-width:680px; margin:0; color:var(--muted); font-size:16px; line-height:1.8; }
+    .tool-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:20px; }
+    .tool-card { display:block; min-height:190px; padding:24px; color:inherit; text-decoration:none; background:var(--surface); border:1px solid var(--border); border-radius:18px; box-shadow:var(--shadow); transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease; }
+    .tool-card:hover,.tool-card:focus-visible { transform:translateY(-4px); border-color:#b9cdf8; box-shadow:0 20px 50px rgba(37,99,235,.13); outline:none; }
+    .tool-icon { display:grid; width:48px; height:48px; margin-bottom:24px; place-items:center; color:var(--primary); background:var(--primary-soft); border-radius:14px; font-size:21px; font-weight:700; }
+    h2 { margin:0 0 9px; font-size:20px; }
+    .tool-description { margin:0; color:var(--muted); line-height:1.7; }
+    footer { margin-top:34px; color:var(--muted); font-size:13px; }
+    @media (max-width:600px) { body { padding:36px 16px; } .tool-card { min-height:auto; } }
   </style>
 </head>
 <body>
   <main class="container">
     <header>
       <h1>在线工具箱</h1>
-      <p class="intro">简单、实用的网页工具，无需安装，即开即用。文本类工具在本地浏览器中处理；网络检测工具会连接所标明的检测服务。</p>
+      <p class="intro">简单、实用的网页工具，无需安装，即开即用。文本与文件类工具在本地浏览器中处理；网络检测工具会连接所标明的检测服务。</p>
     </header>
-
     <section class="tool-grid" aria-label="工具列表">
-      <a class="tool-card" href="./base64/">
-        <span class="tool-icon" aria-hidden="true">64</span>
-        <h2>Base64 编码 / 解码</h2>
-        <p class="tool-description">快速转换中英文文本，支持一键复制结果。</p>
-      </a>
-
-      <a class="tool-card" href="./qrcode/">
-        <span class="tool-icon" aria-hidden="true">QR</span>
-        <h2>二维码生成器</h2>
-        <p class="tool-description">将文本或链接生成二维码，支持尺寸、白边和容错等级设置。</p>
-      </a>
-
-      <a class="tool-card" href="./ip-dns/">
-        <span class="tool-icon" aria-hidden="true">IP</span>
-        <h2>IP 与 DNS 检测</h2>
-        <p class="tool-description">查看公网 IPv4 / IPv6、地区、运营商及当前递归 DNS 服务器。</p>
-      </a>
+      <a class="tool-card" href="./base64/"><span class="tool-icon" aria-hidden="true">64</span><h2>Base64 编码 / 解码</h2><p class="tool-description">快速转换中英文文本，支持一键复制结果。</p></a>
+      <a class="tool-card" href="./qrcode/"><span class="tool-icon" aria-hidden="true">QR</span><h2>二维码生成器</h2><p class="tool-description">将文本或链接生成二维码，支持尺寸、白边和容错等级设置。</p></a>
+      <a class="tool-card" href="./ip-dns/"><span class="tool-icon" aria-hidden="true">IP</span><h2>IP 与 DNS 检测</h2><p class="tool-description">查看公网 IPv4 / IPv6、地区、运营商及当前递归 DNS 服务器。</p></a>
+      <a class="tool-card" href="./file-hash/"><span class="tool-icon" aria-hidden="true">#</span><h2>文件哈希校验</h2><p class="tool-description">在浏览器本地计算 MD5 与 SHA-256，支持大文件分块处理和哈希比对。</p></a>
     </section>
-
     <footer>更多工具将陆续加入。</footer>
   </main>
 </body>
