@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="在浏览器本地联合搜索清华、刘毅、百词斩、麦考林、考研考频和词根词缀等词库。">
+  <title>词汇联合搜索</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --background: #f4f7fb;
+      --surface: #ffffff;
+      --surface-soft: #f8faff;
+      --text: #172033;
+      --muted: #667085;
+      --primary: #2563eb;
+      --primary-dark: #1d4ed8;
+      --primary-soft: #eff6ff;
+      --border: #e4e9f2;
+      --border-strong: #cbd7ea;
+      --success: #067647;
+      --danger: #b42318;
+      --shadow: 0 16px 45px rgba(31, 41, 55, .08);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      min-height: 100vh;
+      margin: 0;
+      padding: 34px 20px 64px;
+      color: var(--text);
+      background: radial-gradient(circle at top left, #e8f1ff 0, transparent 30%), var(--background);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", sans-serif;
+    }
+
+    button, input { font: inherit; }
+    button { -webkit-tap-highlight-color: transparent; }
+
+    .container { width: min(100%, 1160px); margin: 0 auto; }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 42px;
+    }
+
+    .back-link {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 650;
+    }
+
+    .back-link:hover { text-decoration: underline; }
+
+    .privacy-badge {
+      padding: 7px 11px;
+      color: var(--success);
+      background: #ecfdf3;
+      border: 1px solid #abefc6;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 650;
+    }
+
+    .hero { max-width: 820px; margin-bottom: 26px; }
+
+    h1 {
+      margin: 0 0 13px;
+      font-size: clamp(32px, 5vw, 48px);
+      letter-spacing: -.045em;
+      line-height: 1.08;
+    }
+
+    .intro {
+      margin: 0;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.8;
+    }
+
+    .search-panel {
+      padding: 22px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      box-shadow: var(--shadow);
+    }
+
+    .search-form { display: flex; gap: 12px; }
+
+    .search-input {
+      width: 100%;
+      min-width: 0;
+      padding: 14px 16px;
+      color: var(--text);
+      background: var(--surface);
+      border: 1px solid var(--border-strong);
+      border-radius: 12px;
+      outline: none;
+      transition: border-color .2s ease, box-shadow .2s ease;
+    }
+
+    .search-input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 4px rgba(37, 99, 235, .12);
+    }
+
+    .search-button {
+      flex: 0 0 auto;
+      min-width: 112px;
+      padding: 14px 20px;
+      color: #fff;
+      background: var(--primary);
+      border: 0;
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: 700;
+      transition: background .2s ease, transform .2s ease;
+    }
+
+    .search-button:hover:not(:disabled) { background: var(--primary-dark); transform: translateY(-1px); }
+    .search-button:disabled { cursor: wait; opacity: .58; }
+
+    .load-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: 13px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .load-status { display: flex; align-items: center; gap: 8px; }
+
+    .spinner {
+      width: 14px;
+      height: 14px;
+      border: 2px solid #c9d5eb;
+      border-top-color: var(--primary);
+      border-radius: 50%;
+      animation: spin .8s linear infinite;
+    }
+
+    .spinner.is-hidden { display: none; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .recent {
+      display: none;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 16px;
+    }
+
+    .recent.is-visible { display: flex; }
+    .recent-label { margin-right: 2px; color: var(--muted); font-size: 13px; }
+
+    .history-chip {
+      padding: 6px 10px;
+      color: #344054;
+      background: var(--surface-soft);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      cursor: pointer;
+      font-size: 13px;
+    }
+
+    .history-chip:hover { color: var(--primary); border-color: #b9cdf8; }
+
+    .result-summary {
+      min-height: 24px;
+      margin: 26px 2px 14px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .results { display: grid; gap: 18px; }
+
+    .source-card {
+      overflow: hidden;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      box-shadow: 0 10px 30px rgba(31, 41, 55, .055);
+    }
+
+    .source-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 17px 20px;
+      background: linear-gradient(90deg, var(--primary-soft), #fff);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .source-header h2 { margin: 0; font-size: 17px; }
+
+    .source-count {
+      flex: 0 0 auto;
+      color: var(--primary);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .table-scroll { overflow-x: auto; }
+
+    table {
+      width: 100%;
+      min-width: 680px;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+
+    th, td {
+      padding: 11px 14px;
+      text-align: left;
+      vertical-align: top;
+      border-bottom: 1px solid #edf0f5;
+      line-height: 1.55;
+    }
+
+    th {
+      color: #475467;
+      background: #fbfcfe;
+      font-size: 12px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    tbody tr:nth-child(even) { background: #fcfdff; }
+    tbody tr:hover { background: #f5f9ff; }
+    tbody tr:last-child td { border-bottom: 0; }
+
+    .word-button, .page-button {
+      padding: 0;
+      color: var(--primary);
+      background: transparent;
+      border: 0;
+      cursor: pointer;
+      font-weight: 700;
+      text-align: left;
+    }
+
+    .word-button:hover, .page-button:hover { text-decoration: underline; }
+
+    .word-token {
+      padding: 0;
+      color: inherit;
+      background: transparent;
+      border: 0;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+
+    .word-token:hover { color: var(--primary); background: var(--primary-soft); }
+
+    .details { max-width: 660px; color: #344054; }
+    .details div + div { margin-top: 5px; }
+    .muted-cell { color: var(--muted); }
+
+    .empty-state, .error-state {
+      padding: 42px 24px;
+      text-align: center;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+    }
+
+    .empty-state h2, .error-state h2 { margin: 0 0 8px; font-size: 19px; }
+    .empty-state p, .error-state p { margin: 0; color: var(--muted); line-height: 1.7; }
+    .error-state h2 { color: var(--danger); }
+
+    .word-popover {
+      position: fixed;
+      z-index: 50;
+      display: none;
+      width: min(340px, calc(100vw - 24px));
+      padding: 13px 14px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 13px;
+      box-shadow: 0 18px 45px rgba(16, 24, 40, .2);
+    }
+
+    .word-popover.is-visible { display: block; }
+    .popover-main { display: flex; align-items: center; gap: 10px; }
+    .popover-word { font-weight: 750; }
+    .popover-phonetic { color: var(--muted); font-size: 13px; }
+    .popover-actions { display: flex; gap: 6px; margin-left: auto; }
+
+    .popover-button {
+      display: grid;
+      width: 32px;
+      height: 32px;
+      place-items: center;
+      color: var(--primary);
+      background: var(--primary-soft);
+      border: 0;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .image-dialog {
+      width: min(980px, calc(100vw - 24px));
+      max-width: none;
+      padding: 0;
+      background: var(--surface);
+      border: 0;
+      border-radius: 18px;
+      box-shadow: 0 24px 70px rgba(0, 0, 0, .35);
+    }
+
+    .image-dialog::backdrop { background: rgba(11, 18, 32, .72); }
+
+    .dialog-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .dialog-title { font-weight: 700; }
+    .dialog-actions { display: flex; gap: 8px; }
+
+    .dialog-button {
+      min-width: 38px;
+      padding: 8px 10px;
+      color: #344054;
+      background: var(--surface-soft);
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      cursor: pointer;
+    }
+
+    .dialog-button:hover { color: var(--primary); border-color: #b9cdf8; }
+
+    .page-image-wrap {
+      max-height: calc(100vh - 105px);
+      overflow: auto;
+      padding: 14px;
+      text-align: center;
+      background: #e9edf3;
+    }
+
+    .page-viewport {
+      width: min(100%, 820px);
+      aspect-ratio: 800 / 1134;
+      margin: 0 auto;
+      overflow: hidden;
+      background: #fff;
+      box-shadow: 0 6px 24px rgba(16, 24, 40, .12);
+    }
+
+    .page-image {
+      display: block;
+      width: 200%;
+      max-width: none;
+      height: auto;
+      transform-origin: top left;
+      background: #fff;
+    }
+
+    footer { margin-top: 28px; color: var(--muted); font-size: 13px; text-align: center; }
+
+    @media (max-width: 680px) {
+      body { padding: 24px 14px 48px; }
+      .topbar { margin-bottom: 32px; }
+      .privacy-badge { display: none; }
+      .search-panel { padding: 15px; }
+      .search-form { flex-direction: column; }
+      .search-button { width: 100%; }
+      .load-row { align-items: flex-start; flex-direction: column; }
+      .source-header { align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <nav class="topbar" aria-label="页面导航">
+      <a class="back-link" href="../">← 返回工具箱</a>
+      <span class="privacy-badge">浏览器本地查询</span>
+    </nav>
+
+    <header class="hero">
+      <h1>词汇联合搜索</h1>
+      <p class="intro">一次搜索清华、刘毅、百词斩、麦考林、考研考频、雅思句子与词根词缀资料。词库下载后直接在你的浏览器中查询，不会上传搜索内容。</p>
+    </header>
+
+    <section class="search-panel" aria-label="词汇搜索">
+      <form class="search-form" id="searchForm" role="search">
+        <input class="search-input" id="query" type="search" autocomplete="off" spellcheck="false" placeholder="输入英文单词、片段或中文句子，例如 phy" aria-label="搜索关键词">
+        <button class="search-button" id="searchButton" type="submit" disabled>搜索</button>
+      </form>
+      <div class="load-row">
+        <div class="load-status" aria-live="polite"><span class="spinner" id="spinner"></span><span id="loadStatus">正在准备词库…</span></div>
+        <span id="datasetInfo">数据仅保存在当前页面</span>
+      </div>
+      <div class="recent" id="recentSearches" aria-label="最近搜索"></div>
+    </section>
+
+    <div class="result-summary" id="resultSummary" aria-live="polite"></div>
+    <section class="results" id="results" aria-label="搜索结果"></section>
+
+    <footer>发音和音标功能会连接第三方词典服务；核心词库查询完全在本地完成。</footer>
+  </main>
+
+  <div class="word-popover" id="wordPopover" role="dialog" aria-hidden="true">
+    <div class="popover-main">
+      <div><div class="popover-word" id="popoverWord"></div><div class="popover-phonetic" id="popoverPhonetic">正在查询音标…</div></div>
+      <div class="popover-actions">
+        <button class="popover-button" id="speakAgain" type="button" aria-label="再次发音">🔊</button>
+        <button class="popover-button" id="closePopover" type="button" aria-label="关闭">✕</button>
+      </div>
+    </div>
+  </div>
+
+  <dialog class="image-dialog" id="imageDialog">
+    <div class="dialog-header">
+      <span class="dialog-title" id="dialogTitle">清华词书</span>
+      <div class="dialog-actions">
+        <button class="dialog-button" id="previousPage" type="button" aria-label="上一页">←</button>
+        <button class="dialog-button" id="nextPage" type="button" aria-label="下一页">→</button>
+        <button class="dialog-button" id="closeDialog" type="button" aria-label="关闭">✕</button>
+      </div>
+    </div>
+    <div class="page-image-wrap"><div class="page-viewport"><img class="page-image" id="pageImage" alt="清华词书页面"></div></div>
+  </dialog>
+
+  <script src="./app.js" defer></script>
+</body>
+</html>
