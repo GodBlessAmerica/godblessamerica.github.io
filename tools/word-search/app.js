@@ -38,7 +38,7 @@ let phoneticRequestId = 0;
 const phoneticCache = new Map();
 const pendingPhoneticRequests = new Map();
 
-const worker = new Worker("./worker.js");
+const worker = new Worker("./worker.js?v=20260827-2");
 
 worker.addEventListener("message", (event) => {
   const message = event.data || {};
@@ -342,7 +342,7 @@ async function fetchJson(url, timeout = 6000) {
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), timeout);
   try {
-    const response = await fetch(url, { signal: controller.signal, cache: "force-cache" });
+    const response = await fetch(url, { signal: controller.signal, cache: "no-store" });
     if (!response.ok) throw new Error(String(response.status));
     return await response.json();
   } finally {
@@ -406,7 +406,13 @@ async function showWord(word, anchor) {
     return;
   }
 
-  const remotePhonetic = await getRemotePhonetic(word);
+  let remotePhonetic = "";
+  try {
+    remotePhonetic = await getRemotePhonetic(word);
+  } catch {
+    // Third-party dictionary services are optional; local search must keep working.
+    remotePhonetic = "";
+  }
   if (currentWord !== word) return;
   phoneticCache.set(cacheKey, remotePhonetic);
   popoverPhonetic.textContent = remotePhonetic || "暂未收录音标";
