@@ -34,11 +34,23 @@ let requestId = 0;
 let currentWord = "";
 let currentPage = 1;
 let audio = null;
+let phoneticRequestId = 0;
+const phoneticCache = new Map();
+const pendingPhoneticRequests = new Map();
 
 const worker = new Worker("./worker.js");
 
 worker.addEventListener("message", (event) => {
   const message = event.data || {};
+  if (message.type === "phonetic-result") {
+    const pending = pendingPhoneticRequests.get(message.id);
+    if (pending) {
+      clearTimeout(pending.timer);
+      pendingPhoneticRequests.delete(message.id);
+      pending.resolve(message.phonetic || "");
+    }
+    return;
+  }
   if (message.type === "progress") {
     loadStatus.textContent = `正在加载词库 ${message.loaded}/${message.total}…`;
     return;
@@ -313,6 +325,66 @@ function positionPopover(anchor) {
   });
 }
 
+function getLocalPhonetic(word) {
+  return new Promise((resolve) => {
+    phoneticRequestId += 1;
+    const id = phoneticRequestId;
+    const timer = setTimeout(() => {
+      pendingPhoneticRequests.delete(id);
+      resolve("");
+    }, 1200);
+    pendingPhoneticRequests.set(id, { resolve, timer });
+    worker.postMessage({ type: "phonetic", id, word });
+  });
+}
+
+async function fetchJson(url, timeout = 6000) {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), timeout);
+  try {
+    const response = await fetch(url, { signal: controller.signal, cache: "force-cache" });
+    if (!response.ok) throw new Error(String(response.status));
+    return await response.json();
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
+function firstResolvedPhonetic(lookups) {
+  return new Promise((resolve) => {
+    let remaining = lookups.length;
+    let resolved = false;
+    const finishEmpty = () => {
+      remaining -= 1;
+      if (!resolved && remaining === 0) resolve("");
+    };
+    for (const lookup of lookups) {
+      Promise.resolve(lookup).then((phonetic) => {
+        if (phonetic && !resolved) {
+          resolved = true;
+          resolve(phonetic);
+        } else {
+          finishEmpty();
+        }
+      }).catch(finishEmpty);
+    }
+  });
+}
+
+function getRemotePhonetic(word) {
+  const encodedWord = encodeURIComponent(word);
+  const dictionaryApiDev = fetchJson(`https://api.dictionaryapi.dev/api/v2/entries/en/${encodedWord}`)
+    .then((data) => data?.[0]?.phonetic || data?.[0]?.phonetics?.find((item) => item.text)?.text || "");
+  const freeDictionaryApi = fetchJson(`https://freedictionaryapi.com/api/v1/entries/en/${encodedWord}`)
+    .then((data) => {
+      const pronunciations = (data?.entries || []).flatMap((entry) => entry.pronunciations || []);
+      return pronunciations.find((item) => item.type === "ipa" && item.text)?.text
+        || pronunciations.find((item) => item.text)?.text
+        || "";
+    });
+  return firstResolvedPhonetic([dictionaryApiDev, freeDictionaryApi]);
+}
+
 async function showWord(word, anchor) {
   currentWord = word;
   popoverWord.textContent = word;
@@ -320,16 +392,24 @@ async function showWord(word, anchor) {
   positionPopover(anchor);
   speakWord(word);
 
-  try {
-    const response = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${encodeURIComponent(word)}`);
-    if (!response.ok) throw new Error(String(response.status));
-    const data = await response.json();
-    if (currentWord !== word) return;
-    const phonetic = data?.[0]?.phonetic || data?.[0]?.phonetics?.find((item) => item.text)?.text || "";
-    popoverPhonetic.textContent = phonetic || "暂未查到音标";
-  } catch {
-    if (currentWord === word) popoverPhonetic.textContent = "音标服务暂不可用";
+  const cacheKey = String(word).normalize("NFKC").toLocaleLowerCase();
+  if (phoneticCache.has(cacheKey)) {
+    popoverPhonetic.textContent = phoneticCache.get(cacheKey) || "暂未收录音标";
+    return;
   }
+
+  const localPhonetic = await getLocalPhonetic(word);
+  if (currentWord !== word) return;
+  if (localPhonetic) {
+    phoneticCache.set(cacheKey, localPhonetic);
+    popoverPhonetic.textContent = localPhonetic;
+    return;
+  }
+
+  const remotePhonetic = await getRemotePhonetic(word);
+  if (currentWord !== word) return;
+  phoneticCache.set(cacheKey, remotePhonetic);
+  popoverPhonetic.textContent = remotePhonetic || "暂未收录音标";
 }
 
 function hidePopover() {

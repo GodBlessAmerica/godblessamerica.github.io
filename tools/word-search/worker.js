@@ -3,9 +3,16 @@
 const SOURCE_ORDER = ["i", "t", "ly", "bk", "bc", "m", "n", "od"];
 const WORD_INDEX = { t: 1, m: 1, n: 1, i: 1, ly: 0, bk: 0, bc: 0, od: 0 };
 const datasets = Object.fromEntries(SOURCE_ORDER.map((source) => [source, []]));
+const phonetics = new Map();
 
 function normalize(value) {
   return String(value ?? "").normalize("NFKC").toLocaleLowerCase();
+}
+
+function addPhonetic(word, phonetic) {
+  const key = normalize(word).trim();
+  const value = String(phonetic ?? "").trim();
+  if (key && value && value !== "—" && !phonetics.has(key)) phonetics.set(key, value);
 }
 
 async function loadData() {
@@ -30,7 +37,11 @@ async function loadData() {
 
     for (const shard of shards) {
       for (const source of SOURCE_ORDER) {
-        if (Array.isArray(shard[source])) datasets[source].push(...shard[source]);
+        if (!Array.isArray(shard[source])) continue;
+        datasets[source].push(...shard[source]);
+        if (source === "bk" || source === "bc") {
+          for (const row of shard[source]) addPhonetic(row[0], row[1]);
+        }
       }
     }
 
@@ -76,13 +87,19 @@ function searchSource(source, query) {
 }
 
 self.addEventListener("message", (event) => {
-  if (!event.data || event.data.type !== "search") return;
-  const query = normalize(event.data.query).trim();
+  const message = event.data || {};
+  if (message.type === "phonetic") {
+    const word = normalize(message.word).trim();
+    postMessage({ type: "phonetic-result", id: message.id, word: message.word, phonetic: phonetics.get(word) || "" });
+    return;
+  }
+  if (message.type !== "search") return;
+  const query = normalize(message.query).trim();
   if (!query) return;
 
   const results = {};
   for (const source of SOURCE_ORDER) results[source] = searchSource(source, query);
-  postMessage({ type: "results", id: event.data.id, query: event.data.query, results });
+  postMessage({ type: "results", id: message.id, query: message.query, results });
 });
 
 loadData();
