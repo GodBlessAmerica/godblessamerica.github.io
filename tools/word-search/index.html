@@ -23,6 +23,23 @@
       --shadow: 0 16px 45px rgba(31, 41, 55, .08);
     }
 
+    html[data-theme="dark"] {
+      color-scheme: dark;
+      --background: #0d1117;
+      --surface: #151b23;
+      --surface-soft: #1b2330;
+      --text: #e6edf3;
+      --muted: #9aa7b6;
+      --primary: #7aa2f7;
+      --primary-dark: #9bb8ff;
+      --primary-soft: #1b2a45;
+      --border: #2a3441;
+      --border-strong: #3a4656;
+      --success: #56d39b;
+      --danger: #ff8a80;
+      --shadow: 0 16px 45px rgba(0, 0, 0, .3);
+    }
+
     * { box-sizing: border-box; }
 
     body {
@@ -64,6 +81,26 @@
       font-size: 13px;
       font-weight: 650;
     }
+
+    .topbar-actions { display: flex; align-items: center; gap: 10px; }
+
+    .theme-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 7px 11px;
+      color: var(--text);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 650;
+      box-shadow: 0 3px 12px rgba(16, 24, 40, .06);
+    }
+
+    .theme-toggle:hover { border-color: var(--border-strong); }
+    .theme-icon { width: 1.2em; text-align: center; }
 
     .hero { max-width: 820px; margin-bottom: 26px; }
 
@@ -370,6 +407,23 @@
     footer { margin-top: 28px; color: var(--muted); font-size: 13px; text-align: center; }
     footer a { color: var(--primary); }
 
+    html[data-theme="dark"] body {
+      background: radial-gradient(circle at top left, #17243b 0, transparent 30%), var(--background);
+    }
+    html[data-theme="dark"] .privacy-badge { background: #123326; border-color: #245b43; }
+    html[data-theme="dark"] .source-header { background: linear-gradient(90deg, #1b2a45, var(--surface)); }
+    html[data-theme="dark"] th { color: #b9c4d0; background: #111720; }
+    html[data-theme="dark"] th,
+    html[data-theme="dark"] td { border-bottom-color: #252f3b; }
+    html[data-theme="dark"] tbody tr:nth-child(even) { background: #121922; }
+    html[data-theme="dark"] tbody tr:hover { background: #1a2638; }
+    html[data-theme="dark"] .history-chip,
+    html[data-theme="dark"] .dialog-button { color: #c5cfda; }
+    html[data-theme="dark"] .details { color: #c5cfda; }
+    html[data-theme="dark"] .page-image-wrap { background: #0a0e13; }
+    html[data-theme="dark"] .page-viewport { background: #fff; }
+    html[data-theme="dark"] .theme-toggle { box-shadow: 0 3px 12px rgba(0, 0, 0, .18); }
+
     @media (max-width: 680px) {
       body { padding: 24px 14px 48px; }
       .topbar { margin-bottom: 32px; }
@@ -386,7 +440,12 @@
   <main class="container">
     <nav class="topbar" aria-label="页面导航">
       <a class="back-link" href="../">← 返回工具箱</a>
-      <span class="privacy-badge">浏览器本地查询</span>
+      <div class="topbar-actions">
+        <button class="theme-toggle" id="themeToggle" type="button" aria-label="切换夜间模式" aria-pressed="false">
+          <span class="theme-icon" id="themeIcon" aria-hidden="true">☾</span><span id="themeLabel">夜间模式</span>
+        </button>
+        <span class="privacy-badge">浏览器本地查询</span>
+      </div>
     </nav>
 
     <header class="hero">
@@ -434,6 +493,34 @@
     <div class="page-image-wrap"><div class="page-viewport"><img class="page-image" id="pageImage" alt="清华词书页面"></div></div>
   </dialog>
 
-  <script src="./app.js?v=20260827-2" defer></script>
+  <script>
+    (() => {
+      const key = "word-search-theme-v1";
+      const root = document.documentElement;
+      const toggle = document.getElementById("themeToggle");
+      const icon = document.getElementById("themeIcon");
+      const label = document.getElementById("themeLabel");
+
+      const applyTheme = (theme) => {
+        const dark = theme === "dark";
+        root.dataset.theme = dark ? "dark" : "light";
+        toggle.setAttribute("aria-pressed", String(dark));
+        toggle.setAttribute("aria-label", dark ? "切换日间模式" : "切换夜间模式");
+        icon.textContent = dark ? "☀" : "☾";
+        label.textContent = dark ? "日间模式" : "夜间模式";
+      };
+
+      let savedTheme = "";
+      try { savedTheme = localStorage.getItem(key) || ""; } catch { /* ignore */ }
+      applyTheme(savedTheme === "dark" ? "dark" : "light");
+
+      toggle.addEventListener("click", () => {
+        const next = root.dataset.theme === "dark" ? "light" : "dark";
+        applyTheme(next);
+        try { localStorage.setItem(key, next); } catch { /* ignore */ }
+      });
+    })();
+  </script>
+  <script src="./app.js?v=20260827-3" defer></script>
 </body>
 </html>
