@@ -1,0 +1,1302 @@
+{
+  "article": 15,
+  "duration": 64.78,
+  "source": "faster-whisper word timestamps + text alignment",
+  "tokens": [
+    {
+      "text": "After",
+      "start": 0.0,
+      "end": 0.42,
+      "sentence": 0,
+      "confidence": 1.0
+    },
+    {
+      "text": "a",
+      "start": 0.42,
+      "end": 0.64,
+      "sentence": 0,
+      "confidence": 1.0
+    },
+    {
+      "text": "quiz",
+      "start": 0.64,
+      "end": 0.98,
+      "sentence": 0,
+      "confidence": 1.0
+    },
+    {
+      "text": "last",
+      "start": 0.98,
+      "end": 1.42,
+      "sentence": 0,
+      "confidence": 1.0
+    },
+    {
+      "text": "autumn",
+      "start": 1.42,
+      "end": 1.88,
+      "sentence": 0,
+      "confidence": 1.0
+    },
+    {
+      "text": "Kuang",
+      "start": 2.42,
+      "end": 2.52,
+      "sentence": 0,
+      "confidence": 0.8
+    },
+    {
+      "text": "crossed",
+      "start": 2.52,
+      "end": 3.0,
+      "sentence": 0,
+      "confidence": 1.0
+    },
+    {
+      "text": "the",
+      "start": 3.0,
+      "end": 3.22,
+      "sentence": 0,
+      "confidence": 1.0
+    },
+    {
+      "text": "continent",
+      "start": 3.22,
+      "end": 3.56,
+      "sentence": 0,
+      "confidence": 1.0
+    },
+    {
+      "text": "eastward",
+      "start": 3.56,
+      "end": 4.14,
+      "sentence": 0,
+      "confidence": 1.0
+    },
+    {
+      "text": "to",
+      "start": 4.14,
+      "end": 4.32,
+      "sentence": 0,
+      "confidence": 1.0
+    },
+    {
+      "text": "Toronto",
+      "start": 4.32,
+      "end": 4.68,
+      "sentence": 0,
+      "confidence": 1.0
+    },
+    {
+      "text": "to",
+      "start": 4.68,
+      "end": 5.36,
+      "sentence": 0,
+      "confidence": 1.0
+    },
+    {
+      "text": "visit",
+      "start": 5.36,
+      "end": 5.58,
+      "sentence": 0,
+      "confidence": 1.0
+    },
+    {
+      "text": "his",
+      "start": 5.58,
+      "end": 5.8,
+      "sentence": 0,
+      "confidence": 1.0
+    },
+    {
+      "text": "schoolmate",
+      "start": 5.8,
+      "end": 6.24,
+      "sentence": 0,
+      "confidence": 1.0
+    },
+    {
+      "text": "the",
+      "start": 6.6,
+      "end": 6.7,
+      "sentence": 0,
+      "confidence": 1.0
+    },
+    {
+      "text": "distance",
+      "start": 6.7,
+      "end": 7.08,
+      "sentence": 0,
+      "confidence": 1.0
+    },
+    {
+      "text": "measuring",
+      "start": 7.08,
+      "end": 7.5,
+      "sentence": 0,
+      "confidence": 1.0
+    },
+    {
+      "text": "approximately",
+      "start": 7.5,
+      "end": 8.2,
+      "sentence": 0,
+      "confidence": 1.0
+    },
+    {
+      "text": "5",
+      "start": 8.2,
+      "end": 8.68,
+      "sentence": 0,
+      "confidence": 1.0
+    },
+    {
+      "text": "000",
+      "start": 8.68,
+      "end": 9.18,
+      "sentence": 0,
+      "confidence": 1.0
+    },
+    {
+      "text": "kilometers",
+      "start": 9.18,
+      "end": 9.56,
+      "sentence": 0,
+      "confidence": 1.0
+    },
+    {
+      "text": "His",
+      "start": 10.82,
+      "end": 11.06,
+      "sentence": 1,
+      "confidence": 1.0
+    },
+    {
+      "text": "train",
+      "start": 11.06,
+      "end": 11.32,
+      "sentence": 1,
+      "confidence": 1.0
+    },
+    {
+      "text": "started",
+      "start": 11.32,
+      "end": 11.66,
+      "sentence": 1,
+      "confidence": 1.0
+    },
+    {
+      "text": "from",
+      "start": 11.66,
+      "end": 11.92,
+      "sentence": 1,
+      "confidence": 1.0
+    },
+    {
+      "text": "Vancouver",
+      "start": 11.92,
+      "end": 12.36,
+      "sentence": 1,
+      "confidence": 1.0
+    },
+    {
+      "text": "a",
+      "start": 12.86,
+      "end": 13.04,
+      "sentence": 1,
+      "confidence": 1.0
+    },
+    {
+      "text": "city",
+      "start": 13.04,
+      "end": 13.2,
+      "sentence": 1,
+      "confidence": 1.0
+    },
+    {
+      "text": "surround",
+      "start": 13.2,
+      "end": 13.68,
+      "sentence": 1,
+      "confidence": 0.89
+    },
+    {
+      "text": "ed",
+      "start": 13.68,
+      "end": 13.76,
+      "sentence": 1,
+      "confidence": 0.0
+    },
+    {
+      "text": "by",
+      "start": 13.68,
+      "end": 13.94,
+      "sentence": 1,
+      "confidence": 1.0
+    },
+    {
+      "text": "mountains",
+      "start": 13.94,
+      "end": 14.3,
+      "sentence": 1,
+      "confidence": 1.0
+    },
+    {
+      "text": "After",
+      "start": 15.02,
+      "end": 15.3,
+      "sentence": 2,
+      "confidence": 1.0
+    },
+    {
+      "text": "confirm",
+      "start": 15.3,
+      "end": 15.7,
+      "sentence": 2,
+      "confidence": 0.82
+    },
+    {
+      "text": "ing",
+      "start": 15.7,
+      "end": 15.78,
+      "sentence": 2,
+      "confidence": 0.0
+    },
+    {
+      "text": "his",
+      "start": 15.7,
+      "end": 15.94,
+      "sentence": 2,
+      "confidence": 1.0
+    },
+    {
+      "text": "baggage",
+      "start": 15.94,
+      "end": 16.3,
+      "sentence": 2,
+      "confidence": 1.0
+    },
+    {
+      "text": "was",
+      "start": 16.3,
+      "end": 16.52,
+      "sentence": 2,
+      "confidence": 1.0
+    },
+    {
+      "text": "aboard",
+      "start": 16.52,
+      "end": 16.78,
+      "sentence": 2,
+      "confidence": 1.0
+    },
+    {
+      "text": "the",
+      "start": 16.78,
+      "end": 16.94,
+      "sentence": 2,
+      "confidence": 1.0
+    },
+    {
+      "text": "train",
+      "start": 16.94,
+      "end": 17.26,
+      "sentence": 2,
+      "confidence": 1.0
+    },
+    {
+      "text": "Kuang",
+      "start": 17.9,
+      "end": 18.0,
+      "sentence": 2,
+      "confidence": 0.8
+    },
+    {
+      "text": "settled",
+      "start": 18.0,
+      "end": 18.3,
+      "sentence": 2,
+      "confidence": 1.0
+    },
+    {
+      "text": "down",
+      "start": 18.3,
+      "end": 18.64,
+      "sentence": 2,
+      "confidence": 1.0
+    },
+    {
+      "text": "in",
+      "start": 18.64,
+      "end": 18.8,
+      "sentence": 2,
+      "confidence": 1.0
+    },
+    {
+      "text": "his",
+      "start": 18.8,
+      "end": 18.94,
+      "sentence": 2,
+      "confidence": 1.0
+    },
+    {
+      "text": "seat",
+      "start": 18.94,
+      "end": 19.22,
+      "sentence": 2,
+      "confidence": 1.0
+    },
+    {
+      "text": "Having",
+      "start": 19.76,
+      "end": 20.06,
+      "sentence": 3,
+      "confidence": 1.0
+    },
+    {
+      "text": "a",
+      "start": 20.06,
+      "end": 20.24,
+      "sentence": 3,
+      "confidence": 1.0
+    },
+    {
+      "text": "gift",
+      "start": 20.24,
+      "end": 20.4,
+      "sentence": 3,
+      "confidence": 1.0
+    },
+    {
+      "text": "for",
+      "start": 20.4,
+      "end": 20.66,
+      "sentence": 3,
+      "confidence": 1.0
+    },
+    {
+      "text": "communication",
+      "start": 20.66,
+      "end": 21.14,
+      "sentence": 3,
+      "confidence": 1.0
+    },
+    {
+      "text": "he",
+      "start": 21.56,
+      "end": 21.78,
+      "sentence": 3,
+      "confidence": 1.0
+    },
+    {
+      "text": "started",
+      "start": 21.78,
+      "end": 22.1,
+      "sentence": 3,
+      "confidence": 1.0
+    },
+    {
+      "text": "chat",
+      "start": 22.1,
+      "end": 22.38,
+      "sentence": 3,
+      "confidence": 0.67
+    },
+    {
+      "text": "ting",
+      "start": 23.34,
+      "end": 23.68,
+      "sentence": 3,
+      "confidence": 0.6
+    },
+    {
+      "text": "with",
+      "start": 26.24,
+      "end": 26.46,
+      "sentence": 3,
+      "confidence": 0.57
+    },
+    {
+      "text": "another",
+      "start": 27.94,
+      "end": 28.0,
+      "sentence": 3,
+      "confidence": 0.6
+    },
+    {
+      "text": "passenger",
+      "start": 28.0,
+      "end": 28.08,
+      "sentence": 3,
+      "confidence": 0.0
+    },
+    {
+      "text": "within",
+      "start": 28.08,
+      "end": 28.16,
+      "sentence": 3,
+      "confidence": 0.0
+    },
+    {
+      "text": "5",
+      "start": 28.16,
+      "end": 28.24,
+      "sentence": 3,
+      "confidence": 0.0
+    },
+    {
+      "text": "minutes",
+      "start": 28.18,
+      "end": 28.56,
+      "sentence": 3,
+      "confidence": 0.67
+    },
+    {
+      "text": "Their",
+      "start": 28.98,
+      "end": 29.08,
+      "sentence": 4,
+      "confidence": 0.75
+    },
+    {
+      "text": "topic",
+      "start": 29.08,
+      "end": 29.16,
+      "sentence": 4,
+      "confidence": 0.0
+    },
+    {
+      "text": "s",
+      "start": 29.16,
+      "end": 29.24,
+      "sentence": 4,
+      "confidence": 0.0
+    },
+    {
+      "text": "included",
+      "start": 29.24,
+      "end": 29.32,
+      "sentence": 4,
+      "confidence": 0.0
+    },
+    {
+      "text": "the",
+      "start": 30.48,
+      "end": 30.58,
+      "sentence": 4,
+      "confidence": 1.0
+    },
+    {
+      "text": "Canadian",
+      "start": 30.58,
+      "end": 30.66,
+      "sentence": 4,
+      "confidence": 0.0
+    },
+    {
+      "text": "tradition",
+      "start": 30.66,
+      "end": 30.74,
+      "sentence": 4,
+      "confidence": 0.0
+    },
+    {
+      "text": "s",
+      "start": 30.74,
+      "end": 30.82,
+      "sentence": 4,
+      "confidence": 0.0
+    },
+    {
+      "text": "the",
+      "start": 30.82,
+      "end": 30.9,
+      "sentence": 4,
+      "confidence": 0.0
+    },
+    {
+      "text": "Prime",
+      "start": 30.9,
+      "end": 30.98,
+      "sentence": 4,
+      "confidence": 0.0
+    },
+    {
+      "text": "Minister",
+      "start": 30.98,
+      "end": 31.06,
+      "sentence": 4,
+      "confidence": 0.0
+    },
+    {
+      "text": "the",
+      "start": 31.06,
+      "end": 31.14,
+      "sentence": 4,
+      "confidence": 0.0
+    },
+    {
+      "text": "mixture",
+      "start": 31.14,
+      "end": 31.22,
+      "sentence": 4,
+      "confidence": 0.0
+    },
+    {
+      "text": "of",
+      "start": 31.22,
+      "end": 31.3,
+      "sentence": 4,
+      "confidence": 0.0
+    },
+    {
+      "text": "races",
+      "start": 31.3,
+      "end": 31.38,
+      "sentence": 4,
+      "confidence": 0.0
+    },
+    {
+      "text": "and",
+      "start": 31.38,
+      "end": 31.46,
+      "sentence": 4,
+      "confidence": 0.0
+    },
+    {
+      "text": "the",
+      "start": 31.46,
+      "end": 31.54,
+      "sentence": 4,
+      "confidence": 0.0
+    },
+    {
+      "text": "terrifying",
+      "start": 30.58,
+      "end": 31.08,
+      "sentence": 4,
+      "confidence": 1.0
+    },
+    {
+      "text": "Great",
+      "start": 31.08,
+      "end": 31.42,
+      "sentence": 4,
+      "confidence": 1.0
+    },
+    {
+      "text": "Fall",
+      "start": 31.42,
+      "end": 31.74,
+      "sentence": 4,
+      "confidence": 1.0
+    },
+    {
+      "text": "After",
+      "start": 32.64,
+      "end": 32.86,
+      "sentence": 5,
+      "confidence": 1.0
+    },
+    {
+      "text": "a",
+      "start": 32.86,
+      "end": 33.06,
+      "sentence": 5,
+      "confidence": 1.0
+    },
+    {
+      "text": "nice",
+      "start": 33.06,
+      "end": 33.24,
+      "sentence": 5,
+      "confidence": 1.0
+    },
+    {
+      "text": "buffet",
+      "start": 33.24,
+      "end": 33.48,
+      "sentence": 5,
+      "confidence": 1.0
+    },
+    {
+      "text": "at",
+      "start": 33.48,
+      "end": 33.68,
+      "sentence": 5,
+      "confidence": 1.0
+    },
+    {
+      "text": "noon",
+      "start": 33.68,
+      "end": 33.86,
+      "sentence": 5,
+      "confidence": 1.0
+    },
+    {
+      "text": "he",
+      "start": 34.34,
+      "end": 34.46,
+      "sentence": 5,
+      "confidence": 1.0
+    },
+    {
+      "text": "was",
+      "start": 34.46,
+      "end": 34.62,
+      "sentence": 5,
+      "confidence": 1.0
+    },
+    {
+      "text": "pleased",
+      "start": 34.62,
+      "end": 34.88,
+      "sentence": 5,
+      "confidence": 1.0
+    },
+    {
+      "text": "to",
+      "start": 34.88,
+      "end": 35.14,
+      "sentence": 5,
+      "confidence": 1.0
+    },
+    {
+      "text": "find",
+      "start": 35.14,
+      "end": 35.34,
+      "sentence": 5,
+      "confidence": 1.0
+    },
+    {
+      "text": "that",
+      "start": 35.34,
+      "end": 35.5,
+      "sentence": 5,
+      "confidence": 1.0
+    },
+    {
+      "text": "the",
+      "start": 35.5,
+      "end": 35.62,
+      "sentence": 5,
+      "confidence": 1.0
+    },
+    {
+      "text": "scenery",
+      "start": 35.62,
+      "end": 35.9,
+      "sentence": 5,
+      "confidence": 1.0
+    },
+    {
+      "text": "was",
+      "start": 35.9,
+      "end": 36.22,
+      "sentence": 5,
+      "confidence": 1.0
+    },
+    {
+      "text": "impressive",
+      "start": 36.22,
+      "end": 36.74,
+      "sentence": 5,
+      "confidence": 1.0
+    },
+    {
+      "text": "He",
+      "start": 37.36,
+      "end": 37.54,
+      "sentence": 6,
+      "confidence": 1.0
+    },
+    {
+      "text": "saw",
+      "start": 37.54,
+      "end": 37.74,
+      "sentence": 6,
+      "confidence": 1.0
+    },
+    {
+      "text": "beautiful",
+      "start": 37.74,
+      "end": 38.22,
+      "sentence": 6,
+      "confidence": 1.0
+    },
+    {
+      "text": "harbour",
+      "start": 38.22,
+      "end": 38.6,
+      "sentence": 6,
+      "confidence": 0.86
+    },
+    {
+      "text": "s",
+      "start": 38.6,
+      "end": 38.68,
+      "sentence": 6,
+      "confidence": 0.0
+    },
+    {
+      "text": "in",
+      "start": 38.6,
+      "end": 38.78,
+      "sentence": 6,
+      "confidence": 1.0
+    },
+    {
+      "text": "the",
+      "start": 38.78,
+      "end": 38.88,
+      "sentence": 6,
+      "confidence": 1.0
+    },
+    {
+      "text": "distance",
+      "start": 38.88,
+      "end": 39.22,
+      "sentence": 6,
+      "confidence": 1.0
+    },
+    {
+      "text": "wealthy",
+      "start": 39.74,
+      "end": 39.98,
+      "sentence": 6,
+      "confidence": 1.0
+    },
+    {
+      "text": "urban",
+      "start": 39.98,
+      "end": 40.3,
+      "sentence": 6,
+      "confidence": 1.0
+    },
+    {
+      "text": "areas",
+      "start": 40.3,
+      "end": 40.76,
+      "sentence": 6,
+      "confidence": 1.0
+    },
+    {
+      "text": "and",
+      "start": 41.12,
+      "end": 41.26,
+      "sentence": 6,
+      "confidence": 1.0
+    },
+    {
+      "text": "maple",
+      "start": 41.26,
+      "end": 41.56,
+      "sentence": 6,
+      "confidence": 1.0
+    },
+    {
+      "text": "forest",
+      "start": 41.56,
+      "end": 41.92,
+      "sentence": 6,
+      "confidence": 0.92
+    },
+    {
+      "text": "that",
+      "start": 41.92,
+      "end": 42.2,
+      "sentence": 6,
+      "confidence": 1.0
+    },
+    {
+      "text": "covered",
+      "start": 42.2,
+      "end": 42.5,
+      "sentence": 6,
+      "confidence": 1.0
+    },
+    {
+      "text": "thousands",
+      "start": 42.5,
+      "end": 42.92,
+      "sentence": 6,
+      "confidence": 1.0
+    },
+    {
+      "text": "of",
+      "start": 42.92,
+      "end": 43.24,
+      "sentence": 6,
+      "confidence": 1.0
+    },
+    {
+      "text": "acre",
+      "start": 43.24,
+      "end": 43.54,
+      "sentence": 6,
+      "confidence": 0.89
+    },
+    {
+      "text": "s",
+      "start": 43.54,
+      "end": 44.3,
+      "sentence": 6,
+      "confidence": 0.0
+    },
+    {
+      "text": "He",
+      "start": 44.32,
+      "end": 44.46,
+      "sentence": 7,
+      "confidence": 1.0
+    },
+    {
+      "text": "even",
+      "start": 44.46,
+      "end": 44.72,
+      "sentence": 7,
+      "confidence": 1.0
+    },
+    {
+      "text": "managed",
+      "start": 44.72,
+      "end": 45.02,
+      "sentence": 7,
+      "confidence": 1.0
+    },
+    {
+      "text": "to",
+      "start": 45.02,
+      "end": 45.2,
+      "sentence": 7,
+      "confidence": 1.0
+    },
+    {
+      "text": "catch",
+      "start": 45.2,
+      "end": 45.36,
+      "sentence": 7,
+      "confidence": 1.0
+    },
+    {
+      "text": "sight",
+      "start": 45.36,
+      "end": 45.62,
+      "sentence": 7,
+      "confidence": 1.0
+    },
+    {
+      "text": "of",
+      "start": 45.62,
+      "end": 45.74,
+      "sentence": 7,
+      "confidence": 1.0
+    },
+    {
+      "text": "an",
+      "start": 45.74,
+      "end": 45.9,
+      "sentence": 7,
+      "confidence": 1.0
+    },
+    {
+      "text": "eagle",
+      "start": 45.9,
+      "end": 46.16,
+      "sentence": 7,
+      "confidence": 1.0
+    },
+    {
+      "text": "flying",
+      "start": 46.16,
+      "end": 46.52,
+      "sentence": 7,
+      "confidence": 1.0
+    },
+    {
+      "text": "upward",
+      "start": 46.52,
+      "end": 46.9,
+      "sentence": 7,
+      "confidence": 1.0
+    },
+    {
+      "text": "over",
+      "start": 46.9,
+      "end": 47.22,
+      "sentence": 7,
+      "confidence": 1.0
+    },
+    {
+      "text": "bush",
+      "start": 47.22,
+      "end": 47.54,
+      "sentence": 7,
+      "confidence": 0.8
+    },
+    {
+      "text": "es",
+      "start": 50.12,
+      "end": 50.36,
+      "sentence": 7,
+      "confidence": 0.67
+    },
+    {
+      "text": "Kuang",
+      "start": 50.36,
+      "end": 50.44,
+      "sentence": 8,
+      "confidence": 0.0
+    },
+    {
+      "text": "reached",
+      "start": 50.44,
+      "end": 50.52,
+      "sentence": 8,
+      "confidence": 0.0
+    },
+    {
+      "text": "Toronto",
+      "start": 50.52,
+      "end": 50.6,
+      "sentence": 8,
+      "confidence": 0.0
+    },
+    {
+      "text": "which",
+      "start": 50.6,
+      "end": 50.68,
+      "sentence": 8,
+      "confidence": 0.0
+    },
+    {
+      "text": "lies",
+      "start": 50.68,
+      "end": 50.76,
+      "sentence": 8,
+      "confidence": 0.0
+    },
+    {
+      "text": "slightly",
+      "start": 50.36,
+      "end": 50.72,
+      "sentence": 8,
+      "confidence": 1.0
+    },
+    {
+      "text": "near",
+      "start": 50.72,
+      "end": 50.96,
+      "sentence": 8,
+      "confidence": 1.0
+    },
+    {
+      "text": "the",
+      "start": 50.96,
+      "end": 51.12,
+      "sentence": 8,
+      "confidence": 1.0
+    },
+    {
+      "text": "border",
+      "start": 51.12,
+      "end": 51.4,
+      "sentence": 8,
+      "confidence": 1.0
+    },
+    {
+      "text": "at",
+      "start": 51.76,
+      "end": 51.88,
+      "sentence": 8,
+      "confidence": 1.0
+    },
+    {
+      "text": "a",
+      "start": 51.88,
+      "end": 52.0,
+      "sentence": 8,
+      "confidence": 1.0
+    },
+    {
+      "text": "misty",
+      "start": 52.0,
+      "end": 52.38,
+      "sentence": 8,
+      "confidence": 1.0
+    },
+    {
+      "text": "dawn",
+      "start": 52.38,
+      "end": 52.54,
+      "sentence": 8,
+      "confidence": 1.0
+    },
+    {
+      "text": "There",
+      "start": 53.1,
+      "end": 53.34,
+      "sentence": 9,
+      "confidence": 1.0
+    },
+    {
+      "text": "was",
+      "start": 53.34,
+      "end": 53.5,
+      "sentence": 9,
+      "confidence": 1.0
+    },
+    {
+      "text": "frost",
+      "start": 53.5,
+      "end": 53.86,
+      "sentence": 9,
+      "confidence": 1.0
+    },
+    {
+      "text": "and",
+      "start": 54.34,
+      "end": 54.42,
+      "sentence": 9,
+      "confidence": 1.0
+    },
+    {
+      "text": "the",
+      "start": 54.42,
+      "end": 54.54,
+      "sentence": 9,
+      "confidence": 1.0
+    },
+    {
+      "text": "broad",
+      "start": 54.54,
+      "end": 54.78,
+      "sentence": 9,
+      "confidence": 1.0
+    },
+    {
+      "text": "downtown",
+      "start": 54.78,
+      "end": 55.2,
+      "sentence": 9,
+      "confidence": 1.0
+    },
+    {
+      "text": "streets",
+      "start": 55.2,
+      "end": 55.58,
+      "sentence": 9,
+      "confidence": 1.0
+    },
+    {
+      "text": "were",
+      "start": 55.58,
+      "end": 55.8,
+      "sentence": 9,
+      "confidence": 1.0
+    },
+    {
+      "text": "very",
+      "start": 55.8,
+      "end": 56.12,
+      "sentence": 9,
+      "confidence": 1.0
+    },
+    {
+      "text": "quiet",
+      "start": 56.12,
+      "end": 56.46,
+      "sentence": 9,
+      "confidence": 1.0
+    },
+    {
+      "text": "Though",
+      "start": 56.96,
+      "end": 57.2,
+      "sentence": 10,
+      "confidence": 1.0
+    },
+    {
+      "text": "it",
+      "start": 57.2,
+      "end": 57.3,
+      "sentence": 10,
+      "confidence": 1.0
+    },
+    {
+      "text": "was",
+      "start": 57.3,
+      "end": 57.42,
+      "sentence": 10,
+      "confidence": 1.0
+    },
+    {
+      "text": "early",
+      "start": 57.42,
+      "end": 57.76,
+      "sentence": 10,
+      "confidence": 1.0
+    },
+    {
+      "text": "Kuang",
+      "start": 58.32,
+      "end": 58.42,
+      "sentence": 10,
+      "confidence": 0.8
+    },
+    {
+      "text": "phoned",
+      "start": 58.42,
+      "end": 58.78,
+      "sentence": 10,
+      "confidence": 1.0
+    },
+    {
+      "text": "his",
+      "start": 58.78,
+      "end": 58.94,
+      "sentence": 10,
+      "confidence": 1.0
+    },
+    {
+      "text": "schoolmate",
+      "start": 58.94,
+      "end": 59.34,
+      "sentence": 10,
+      "confidence": 1.0
+    },
+    {
+      "text": "in",
+      "start": 59.34,
+      "end": 59.52,
+      "sentence": 10,
+      "confidence": 1.0
+    },
+    {
+      "text": "a",
+      "start": 59.52,
+      "end": 59.64,
+      "sentence": 10,
+      "confidence": 1.0
+    },
+    {
+      "text": "booth",
+      "start": 59.64,
+      "end": 59.84,
+      "sentence": 10,
+      "confidence": 1.0
+    },
+    {
+      "text": "nearby",
+      "start": 59.84,
+      "end": 60.22,
+      "sentence": 10,
+      "confidence": 1.0
+    },
+    {
+      "text": "at",
+      "start": 60.64,
+      "end": 60.74,
+      "sentence": 10,
+      "confidence": 1.0
+    },
+    {
+      "text": "once",
+      "start": 60.74,
+      "end": 61.14,
+      "sentence": 10,
+      "confidence": 1.0
+    },
+    {
+      "text": "rather",
+      "start": 61.5,
+      "end": 61.62,
+      "sentence": 10,
+      "confidence": 1.0
+    },
+    {
+      "text": "than",
+      "start": 61.62,
+      "end": 61.86,
+      "sentence": 10,
+      "confidence": 1.0
+    },
+    {
+      "text": "waiting",
+      "start": 61.86,
+      "end": 62.04,
+      "sentence": 10,
+      "confidence": 1.0
+    },
+    {
+      "text": "for",
+      "start": 62.04,
+      "end": 62.32,
+      "sentence": 10,
+      "confidence": 1.0
+    },
+    {
+      "text": "him",
+      "start": 62.32,
+      "end": 62.44,
+      "sentence": 10,
+      "confidence": 1.0
+    },
+    {
+      "text": "to",
+      "start": 62.44,
+      "end": 62.6,
+      "sentence": 10,
+      "confidence": 1.0
+    },
+    {
+      "text": "come",
+      "start": 62.6,
+      "end": 62.8,
+      "sentence": 10,
+      "confidence": 1.0
+    },
+    {
+      "text": "They",
+      "start": 62.8,
+      "end": 63.13,
+      "sentence": 11,
+      "confidence": 0.0
+    },
+    {
+      "text": "had",
+      "start": 63.13,
+      "end": 63.46,
+      "sentence": 11,
+      "confidence": 0.0
+    },
+    {
+      "text": "a",
+      "start": 63.46,
+      "end": 63.79,
+      "sentence": 11,
+      "confidence": 0.0
+    },
+    {
+      "text": "good",
+      "start": 63.79,
+      "end": 64.12,
+      "sentence": 11,
+      "confidence": 0.0
+    },
+    {
+      "text": "time",
+      "start": 64.12,
+      "end": 64.45,
+      "sentence": 11,
+      "confidence": 0.0
+    },
+    {
+      "text": "together",
+      "start": 64.45,
+      "end": 64.78,
+      "sentence": 11,
+      "confidence": 0.0
+    }
+  ]
+}

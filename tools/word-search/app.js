@@ -61,7 +61,13 @@ worker.addEventListener("message", (event) => {
     loadStatus.textContent = "词库已就绪";
     datasetInfo.textContent = `${Number(message.total).toLocaleString("zh-CN")} 条记录`;
     searchButton.disabled = false;
-    queryInput.focus();
+    const linkedQuery = new URLSearchParams(window.location.search).get("q");
+    if (linkedQuery) {
+      queryInput.value = linkedQuery;
+      runSearch(linkedQuery);
+    } else {
+      queryInput.focus();
+    }
     return;
   }
   if (message.type === "error") {

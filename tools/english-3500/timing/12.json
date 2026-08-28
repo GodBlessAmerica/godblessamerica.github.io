@@ -1,0 +1,1330 @@
+{
+  "article": 12,
+  "duration": 65.74,
+  "source": "faster-whisper word timestamps + text alignment",
+  "tokens": [
+    {
+      "text": "Wang",
+      "start": 0.3,
+      "end": 0.94,
+      "sentence": 0,
+      "confidence": 1.0
+    },
+    {
+      "text": "Peng",
+      "start": 0.94,
+      "end": 1.28,
+      "sentence": 0,
+      "confidence": 0.57
+    },
+    {
+      "text": "earned",
+      "start": 1.28,
+      "end": 1.86,
+      "sentence": 0,
+      "confidence": 1.0
+    },
+    {
+      "text": "his",
+      "start": 1.86,
+      "end": 2.12,
+      "sentence": 0,
+      "confidence": 1.0
+    },
+    {
+      "text": "living",
+      "start": 2.12,
+      "end": 2.44,
+      "sentence": 0,
+      "confidence": 1.0
+    },
+    {
+      "text": "by",
+      "start": 2.44,
+      "end": 2.64,
+      "sentence": 0,
+      "confidence": 1.0
+    },
+    {
+      "text": "running",
+      "start": 2.64,
+      "end": 2.88,
+      "sentence": 0,
+      "confidence": 1.0
+    },
+    {
+      "text": "a",
+      "start": 2.88,
+      "end": 3.08,
+      "sentence": 0,
+      "confidence": 1.0
+    },
+    {
+      "text": "barbecue",
+      "start": 3.08,
+      "end": 3.4,
+      "sentence": 0,
+      "confidence": 1.0
+    },
+    {
+      "text": "restaurant",
+      "start": 3.4,
+      "end": 3.96,
+      "sentence": 0,
+      "confidence": 1.0
+    },
+    {
+      "text": "which",
+      "start": 4.42,
+      "end": 4.5,
+      "sentence": 0,
+      "confidence": 1.0
+    },
+    {
+      "text": "served",
+      "start": 4.5,
+      "end": 4.82,
+      "sentence": 0,
+      "confidence": 1.0
+    },
+    {
+      "text": "delicious",
+      "start": 4.82,
+      "end": 5.26,
+      "sentence": 0,
+      "confidence": 1.0
+    },
+    {
+      "text": "bacon",
+      "start": 5.26,
+      "end": 5.72,
+      "sentence": 0,
+      "confidence": 1.0
+    },
+    {
+      "text": "fried",
+      "start": 6.16,
+      "end": 6.32,
+      "sentence": 0,
+      "confidence": 1.0
+    },
+    {
+      "text": "chicken",
+      "start": 6.32,
+      "end": 6.62,
+      "sentence": 0,
+      "confidence": 1.0
+    },
+    {
+      "text": "breast",
+      "start": 6.62,
+      "end": 6.9,
+      "sentence": 0,
+      "confidence": 1.0
+    },
+    {
+      "text": "and",
+      "start": 7.28,
+      "end": 7.44,
+      "sentence": 0,
+      "confidence": 1.0
+    },
+    {
+      "text": "mutton",
+      "start": 7.44,
+      "end": 7.78,
+      "sentence": 0,
+      "confidence": 1.0
+    },
+    {
+      "text": "roast",
+      "start": 7.78,
+      "end": 8.08,
+      "sentence": 0,
+      "confidence": 0.83
+    },
+    {
+      "text": "ed",
+      "start": 8.08,
+      "end": 8.16,
+      "sentence": 0,
+      "confidence": 0.0
+    },
+    {
+      "text": "with",
+      "start": 8.08,
+      "end": 8.32,
+      "sentence": 0,
+      "confidence": 1.0
+    },
+    {
+      "text": "pepper",
+      "start": 8.32,
+      "end": 8.58,
+      "sentence": 0,
+      "confidence": 1.0
+    },
+    {
+      "text": "and",
+      "start": 8.58,
+      "end": 8.84,
+      "sentence": 0,
+      "confidence": 1.0
+    },
+    {
+      "text": "garlic",
+      "start": 8.84,
+      "end": 9.14,
+      "sentence": 0,
+      "confidence": 1.0
+    },
+    {
+      "text": "But",
+      "start": 9.94,
+      "end": 10.04,
+      "sentence": 1,
+      "confidence": 1.0
+    },
+    {
+      "text": "his",
+      "start": 10.04,
+      "end": 10.2,
+      "sentence": 1,
+      "confidence": 1.0
+    },
+    {
+      "text": "food",
+      "start": 10.2,
+      "end": 10.52,
+      "sentence": 1,
+      "confidence": 1.0
+    },
+    {
+      "text": "and",
+      "start": 10.52,
+      "end": 10.74,
+      "sentence": 1,
+      "confidence": 1.0
+    },
+    {
+      "text": "discount",
+      "start": 10.74,
+      "end": 11.14,
+      "sentence": 1,
+      "confidence": 1.0
+    },
+    {
+      "text": "attracted",
+      "start": 11.14,
+      "end": 11.68,
+      "sentence": 1,
+      "confidence": 1.0
+    },
+    {
+      "text": "fewer",
+      "start": 11.68,
+      "end": 12.04,
+      "sentence": 1,
+      "confidence": 1.0
+    },
+    {
+      "text": "and",
+      "start": 12.04,
+      "end": 12.3,
+      "sentence": 1,
+      "confidence": 1.0
+    },
+    {
+      "text": "fewer",
+      "start": 12.3,
+      "end": 12.5,
+      "sentence": 1,
+      "confidence": 1.0
+    },
+    {
+      "text": "customer",
+      "start": 12.5,
+      "end": 12.98,
+      "sentence": 1,
+      "confidence": 0.94
+    },
+    {
+      "text": "s",
+      "start": 12.98,
+      "end": 13.76,
+      "sentence": 1,
+      "confidence": 0.0
+    },
+    {
+      "text": "Finally",
+      "start": 13.78,
+      "end": 14.02,
+      "sentence": 2,
+      "confidence": 1.0
+    },
+    {
+      "text": "he",
+      "start": 14.64,
+      "end": 14.66,
+      "sentence": 2,
+      "confidence": 1.0
+    },
+    {
+      "text": "was",
+      "start": 14.66,
+      "end": 14.8,
+      "sentence": 2,
+      "confidence": 1.0
+    },
+    {
+      "text": "in",
+      "start": 14.8,
+      "end": 14.94,
+      "sentence": 2,
+      "confidence": 1.0
+    },
+    {
+      "text": "debt",
+      "start": 14.94,
+      "end": 15.2,
+      "sentence": 2,
+      "confidence": 1.0
+    },
+    {
+      "text": "Yong",
+      "start": 16.24,
+      "end": 16.34,
+      "sentence": 3,
+      "confidence": 0.75
+    },
+    {
+      "text": "Hui’s",
+      "start": 16.34,
+      "end": 16.66,
+      "sentence": 3,
+      "confidence": 1.0
+    },
+    {
+      "text": "slim",
+      "start": 16.66,
+      "end": 17.02,
+      "sentence": 3,
+      "confidence": 0.67
+    },
+    {
+      "text": "ming",
+      "start": 17.02,
+      "end": 17.1,
+      "sentence": 3,
+      "confidence": 0.0
+    },
+    {
+      "text": "restaurant",
+      "start": 17.02,
+      "end": 17.34,
+      "sentence": 3,
+      "confidence": 1.0
+    },
+    {
+      "text": "served",
+      "start": 17.34,
+      "end": 17.74,
+      "sentence": 3,
+      "confidence": 1.0
+    },
+    {
+      "text": "fresh",
+      "start": 17.74,
+      "end": 18.04,
+      "sentence": 3,
+      "confidence": 1.0
+    },
+    {
+      "text": "pea",
+      "start": 18.04,
+      "end": 18.4,
+      "sentence": 3,
+      "confidence": 0.86
+    },
+    {
+      "text": "s",
+      "start": 22.46,
+      "end": 22.68,
+      "sentence": 3,
+      "confidence": 0.67
+    },
+    {
+      "text": "carrot",
+      "start": 22.68,
+      "end": 22.76,
+      "sentence": 3,
+      "confidence": 0.0
+    },
+    {
+      "text": "s",
+      "start": 22.76,
+      "end": 22.84,
+      "sentence": 3,
+      "confidence": 0.0
+    },
+    {
+      "text": "eggplant",
+      "start": 22.84,
+      "end": 22.92,
+      "sentence": 3,
+      "confidence": 0.0
+    },
+    {
+      "text": "s",
+      "start": 22.92,
+      "end": 23.0,
+      "sentence": 3,
+      "confidence": 0.0
+    },
+    {
+      "text": "and",
+      "start": 23.68,
+      "end": 23.9,
+      "sentence": 3,
+      "confidence": 0.57
+    },
+    {
+      "text": "raw",
+      "start": 23.9,
+      "end": 23.98,
+      "sentence": 3,
+      "confidence": 0.0
+    },
+    {
+      "text": "cucumber",
+      "start": 24.76,
+      "end": 25.26,
+      "sentence": 3,
+      "confidence": 0.56
+    },
+    {
+      "text": "s",
+      "start": 25.26,
+      "end": 25.44,
+      "sentence": 3,
+      "confidence": 0.0
+    },
+    {
+      "text": "with",
+      "start": 25.84,
+      "end": 26.04,
+      "sentence": 3,
+      "confidence": 0.57
+    },
+    {
+      "text": "vinegar",
+      "start": 26.04,
+      "end": 26.12,
+      "sentence": 3,
+      "confidence": 0.0
+    },
+    {
+      "text": "As",
+      "start": 26.12,
+      "end": 26.2,
+      "sentence": 4,
+      "confidence": 0.0
+    },
+    {
+      "text": "the",
+      "start": 26.2,
+      "end": 26.28,
+      "sentence": 4,
+      "confidence": 0.0
+    },
+    {
+      "text": "hostess",
+      "start": 26.28,
+      "end": 26.36,
+      "sentence": 4,
+      "confidence": 0.0
+    },
+    {
+      "text": "she",
+      "start": 26.36,
+      "end": 26.44,
+      "sentence": 4,
+      "confidence": 0.0
+    },
+    {
+      "text": "said",
+      "start": 26.44,
+      "end": 26.52,
+      "sentence": 4,
+      "confidence": 0.0
+    },
+    {
+      "text": "fibre",
+      "start": 26.52,
+      "end": 26.6,
+      "sentence": 4,
+      "confidence": 0.0
+    },
+    {
+      "text": "s",
+      "start": 26.6,
+      "end": 26.68,
+      "sentence": 4,
+      "confidence": 0.0
+    },
+    {
+      "text": "benefit",
+      "start": 26.68,
+      "end": 26.76,
+      "sentence": 4,
+      "confidence": 0.0
+    },
+    {
+      "text": "ed",
+      "start": 26.76,
+      "end": 26.84,
+      "sentence": 4,
+      "confidence": 0.0
+    },
+    {
+      "text": "customers",
+      "start": 26.84,
+      "end": 26.92,
+      "sentence": 4,
+      "confidence": 0.0
+    },
+    {
+      "text": "digestion",
+      "start": 26.92,
+      "end": 27.0,
+      "sentence": 4,
+      "confidence": 0.0
+    },
+    {
+      "text": "the",
+      "start": 27.0,
+      "end": 27.08,
+      "sentence": 4,
+      "confidence": 0.0
+    },
+    {
+      "text": "most",
+      "start": 26.04,
+      "end": 26.3,
+      "sentence": 4,
+      "confidence": 1.0
+    },
+    {
+      "text": "In",
+      "start": 26.3,
+      "end": 27.1,
+      "sentence": 5,
+      "confidence": 1.0
+    },
+    {
+      "text": "order",
+      "start": 27.1,
+      "end": 27.24,
+      "sentence": 5,
+      "confidence": 1.0
+    },
+    {
+      "text": "not",
+      "start": 27.24,
+      "end": 27.48,
+      "sentence": 5,
+      "confidence": 1.0
+    },
+    {
+      "text": "to",
+      "start": 27.48,
+      "end": 27.64,
+      "sentence": 5,
+      "confidence": 1.0
+    },
+    {
+      "text": "let",
+      "start": 27.64,
+      "end": 27.78,
+      "sentence": 5,
+      "confidence": 1.0
+    },
+    {
+      "text": "Yong",
+      "start": 27.78,
+      "end": 28.02,
+      "sentence": 5,
+      "confidence": 0.75
+    },
+    {
+      "text": "Hui",
+      "start": 28.02,
+      "end": 28.24,
+      "sentence": 5,
+      "confidence": 1.0
+    },
+    {
+      "text": "get",
+      "start": 28.24,
+      "end": 28.44,
+      "sentence": 5,
+      "confidence": 1.0
+    },
+    {
+      "text": "away",
+      "start": 28.44,
+      "end": 28.62,
+      "sentence": 5,
+      "confidence": 1.0
+    },
+    {
+      "text": "with",
+      "start": 28.62,
+      "end": 28.82,
+      "sentence": 5,
+      "confidence": 1.0
+    },
+    {
+      "text": "telling",
+      "start": 28.82,
+      "end": 29.02,
+      "sentence": 5,
+      "confidence": 1.0
+    },
+    {
+      "text": "lies",
+      "start": 29.02,
+      "end": 29.46,
+      "sentence": 5,
+      "confidence": 1.0
+    },
+    {
+      "text": "Wang",
+      "start": 30.18,
+      "end": 30.18,
+      "sentence": 5,
+      "confidence": 1.0
+    },
+    {
+      "text": "Peng",
+      "start": 30.18,
+      "end": 30.42,
+      "sentence": 5,
+      "confidence": 0.57
+    },
+    {
+      "text": "spied",
+      "start": 30.42,
+      "end": 30.88,
+      "sentence": 5,
+      "confidence": 1.0
+    },
+    {
+      "text": "on",
+      "start": 30.88,
+      "end": 31.06,
+      "sentence": 5,
+      "confidence": 1.0
+    },
+    {
+      "text": "Yong",
+      "start": 31.06,
+      "end": 31.24,
+      "sentence": 5,
+      "confidence": 0.75
+    },
+    {
+      "text": "Hui",
+      "start": 31.24,
+      "end": 31.62,
+      "sentence": 5,
+      "confidence": 1.0
+    },
+    {
+      "text": "despite",
+      "start": 31.62,
+      "end": 32.3,
+      "sentence": 5,
+      "confidence": 1.0
+    },
+    {
+      "text": "her",
+      "start": 32.3,
+      "end": 32.54,
+      "sentence": 5,
+      "confidence": 1.0
+    },
+    {
+      "text": "glare",
+      "start": 32.54,
+      "end": 32.78,
+      "sentence": 5,
+      "confidence": 1.0
+    },
+    {
+      "text": "But",
+      "start": 33.48,
+      "end": 33.62,
+      "sentence": 6,
+      "confidence": 1.0
+    },
+    {
+      "text": "he",
+      "start": 33.62,
+      "end": 33.74,
+      "sentence": 6,
+      "confidence": 1.0
+    },
+    {
+      "text": "was",
+      "start": 33.74,
+      "end": 33.9,
+      "sentence": 6,
+      "confidence": 1.0
+    },
+    {
+      "text": "surprised",
+      "start": 33.9,
+      "end": 34.34,
+      "sentence": 6,
+      "confidence": 1.0
+    },
+    {
+      "text": "that",
+      "start": 34.34,
+      "end": 34.86,
+      "sentence": 6,
+      "confidence": 1.0
+    },
+    {
+      "text": "she",
+      "start": 34.86,
+      "end": 35.0,
+      "sentence": 6,
+      "confidence": 1.0
+    },
+    {
+      "text": "was",
+      "start": 35.0,
+      "end": 35.14,
+      "sentence": 6,
+      "confidence": 1.0
+    },
+    {
+      "text": "losing",
+      "start": 35.14,
+      "end": 35.42,
+      "sentence": 6,
+      "confidence": 1.0
+    },
+    {
+      "text": "her",
+      "start": 35.42,
+      "end": 35.64,
+      "sentence": 6,
+      "confidence": 1.0
+    },
+    {
+      "text": "customers",
+      "start": 35.64,
+      "end": 36.02,
+      "sentence": 6,
+      "confidence": 1.0
+    },
+    {
+      "text": "too",
+      "start": 36.02,
+      "end": 36.38,
+      "sentence": 6,
+      "confidence": 1.0
+    },
+    {
+      "text": "Curiosity",
+      "start": 37.56,
+      "end": 37.56,
+      "sentence": 7,
+      "confidence": 1.0
+    },
+    {
+      "text": "drove",
+      "start": 37.56,
+      "end": 38.06,
+      "sentence": 7,
+      "confidence": 1.0
+    },
+    {
+      "text": "Wang",
+      "start": 38.06,
+      "end": 38.38,
+      "sentence": 7,
+      "confidence": 1.0
+    },
+    {
+      "text": "Peng",
+      "start": 38.38,
+      "end": 38.62,
+      "sentence": 7,
+      "confidence": 0.57
+    },
+    {
+      "text": "to",
+      "start": 38.62,
+      "end": 38.84,
+      "sentence": 7,
+      "confidence": 1.0
+    },
+    {
+      "text": "consult",
+      "start": 38.84,
+      "end": 39.12,
+      "sentence": 7,
+      "confidence": 1.0
+    },
+    {
+      "text": "an",
+      "start": 39.12,
+      "end": 39.34,
+      "sentence": 7,
+      "confidence": 1.0
+    },
+    {
+      "text": "expert",
+      "start": 39.34,
+      "end": 39.64,
+      "sentence": 7,
+      "confidence": 1.0
+    },
+    {
+      "text": "The",
+      "start": 40.3,
+      "end": 40.46,
+      "sentence": 8,
+      "confidence": 1.0
+    },
+    {
+      "text": "expert",
+      "start": 40.46,
+      "end": 40.82,
+      "sentence": 8,
+      "confidence": 1.0
+    },
+    {
+      "text": "sigh",
+      "start": 40.82,
+      "end": 41.26,
+      "sentence": 8,
+      "confidence": 0.8
+    },
+    {
+      "text": "ed",
+      "start": 41.26,
+      "end": 41.34,
+      "sentence": 8,
+      "confidence": 0.0
+    },
+    {
+      "text": "and",
+      "start": 41.26,
+      "end": 41.9,
+      "sentence": 8,
+      "confidence": 1.0
+    },
+    {
+      "text": "said",
+      "start": 41.9,
+      "end": 42.16,
+      "sentence": 8,
+      "confidence": 1.0
+    },
+    {
+      "text": "Both",
+      "start": 42.84,
+      "end": 42.84,
+      "sentence": 8,
+      "confidence": 1.0
+    },
+    {
+      "text": "of",
+      "start": 42.84,
+      "end": 43.04,
+      "sentence": 8,
+      "confidence": 1.0
+    },
+    {
+      "text": "your",
+      "start": 43.04,
+      "end": 43.16,
+      "sentence": 8,
+      "confidence": 1.0
+    },
+    {
+      "text": "menus",
+      "start": 43.16,
+      "end": 43.46,
+      "sentence": 8,
+      "confidence": 1.0
+    },
+    {
+      "text": "have",
+      "start": 43.46,
+      "end": 43.7,
+      "sentence": 8,
+      "confidence": 1.0
+    },
+    {
+      "text": "weakness",
+      "start": 43.7,
+      "end": 44.08,
+      "sentence": 8,
+      "confidence": 1.0
+    },
+    {
+      "text": "and",
+      "start": 44.08,
+      "end": 44.4,
+      "sentence": 8,
+      "confidence": 1.0
+    },
+    {
+      "text": "limited",
+      "start": 44.4,
+      "end": 44.72,
+      "sentence": 8,
+      "confidence": 1.0
+    },
+    {
+      "text": "strength",
+      "start": 44.72,
+      "end": 45.2,
+      "sentence": 8,
+      "confidence": 1.0
+    },
+    {
+      "text": "Your",
+      "start": 45.92,
+      "end": 46.04,
+      "sentence": 9,
+      "confidence": 1.0
+    },
+    {
+      "text": "customers",
+      "start": 46.04,
+      "end": 46.44,
+      "sentence": 9,
+      "confidence": 1.0
+    },
+    {
+      "text": "put",
+      "start": 46.44,
+      "end": 46.7,
+      "sentence": 9,
+      "confidence": 1.0
+    },
+    {
+      "text": "on",
+      "start": 46.7,
+      "end": 46.86,
+      "sentence": 9,
+      "confidence": 1.0
+    },
+    {
+      "text": "weight",
+      "start": 46.86,
+      "end": 47.06,
+      "sentence": 9,
+      "confidence": 1.0
+    },
+    {
+      "text": "too",
+      "start": 47.06,
+      "end": 47.3,
+      "sentence": 9,
+      "confidence": 1.0
+    },
+    {
+      "text": "easily",
+      "start": 47.3,
+      "end": 47.7,
+      "sentence": 9,
+      "confidence": 1.0
+    },
+    {
+      "text": "while",
+      "start": 48.1,
+      "end": 48.28,
+      "sentence": 9,
+      "confidence": 1.0
+    },
+    {
+      "text": "Yong",
+      "start": 48.28,
+      "end": 48.52,
+      "sentence": 9,
+      "confidence": 0.75
+    },
+    {
+      "text": "Hui’s",
+      "start": 48.52,
+      "end": 49.08,
+      "sentence": 9,
+      "confidence": 1.0
+    },
+    {
+      "text": "lose",
+      "start": 49.08,
+      "end": 49.34,
+      "sentence": 9,
+      "confidence": 1.0
+    },
+    {
+      "text": "weight",
+      "start": 49.34,
+      "end": 49.6,
+      "sentence": 9,
+      "confidence": 1.0
+    },
+    {
+      "text": "too",
+      "start": 49.6,
+      "end": 49.8,
+      "sentence": 9,
+      "confidence": 1.0
+    },
+    {
+      "text": "quickly",
+      "start": 49.8,
+      "end": 50.16,
+      "sentence": 9,
+      "confidence": 1.0
+    },
+    {
+      "text": "So",
+      "start": 50.68,
+      "end": 51.04,
+      "sentence": 10,
+      "confidence": 1.0
+    },
+    {
+      "text": "Wang",
+      "start": 51.48,
+      "end": 51.52,
+      "sentence": 10,
+      "confidence": 1.0
+    },
+    {
+      "text": "Peng",
+      "start": 51.52,
+      "end": 51.78,
+      "sentence": 10,
+      "confidence": 0.57
+    },
+    {
+      "text": "cut",
+      "start": 52.16,
+      "end": 52.48,
+      "sentence": 10,
+      "confidence": 1.0
+    },
+    {
+      "text": "down",
+      "start": 52.48,
+      "end": 52.68,
+      "sentence": 10,
+      "confidence": 1.0
+    },
+    {
+      "text": "the",
+      "start": 52.68,
+      "end": 52.84,
+      "sentence": 10,
+      "confidence": 1.0
+    },
+    {
+      "text": "fat",
+      "start": 52.84,
+      "end": 53.02,
+      "sentence": 10,
+      "confidence": 1.0
+    },
+    {
+      "text": "of",
+      "start": 53.02,
+      "end": 53.16,
+      "sentence": 10,
+      "confidence": 1.0
+    },
+    {
+      "text": "your",
+      "start": 53.16,
+      "end": 53.28,
+      "sentence": 10,
+      "confidence": 1.0
+    },
+    {
+      "text": "food",
+      "start": 53.28,
+      "end": 53.6,
+      "sentence": 10,
+      "confidence": 1.0
+    },
+    {
+      "text": "and",
+      "start": 53.6,
+      "end": 53.96,
+      "sentence": 10,
+      "confidence": 1.0
+    },
+    {
+      "text": "increase",
+      "start": 53.96,
+      "end": 54.32,
+      "sentence": 10,
+      "confidence": 1.0
+    },
+    {
+      "text": "vegetables",
+      "start": 54.32,
+      "end": 54.86,
+      "sentence": 10,
+      "confidence": 1.0
+    },
+    {
+      "text": "and",
+      "start": 54.86,
+      "end": 55.12,
+      "sentence": 10,
+      "confidence": 1.0
+    },
+    {
+      "text": "fruits",
+      "start": 55.12,
+      "end": 55.4,
+      "sentence": 10,
+      "confidence": 1.0
+    },
+    {
+      "text": "like",
+      "start": 55.86,
+      "end": 56.02,
+      "sentence": 10,
+      "confidence": 1.0
+    },
+    {
+      "text": "nut",
+      "start": 56.02,
+      "end": 56.3,
+      "sentence": 10,
+      "confidence": 0.86
+    },
+    {
+      "text": "s",
+      "start": 56.3,
+      "end": 56.68,
+      "sentence": 10,
+      "confidence": 0.0
+    },
+    {
+      "text": "bean",
+      "start": 56.7,
+      "end": 56.98,
+      "sentence": 10,
+      "confidence": 0.89
+    },
+    {
+      "text": "s",
+      "start": 56.98,
+      "end": 57.4,
+      "sentence": 10,
+      "confidence": 0.0
+    },
+    {
+      "text": "mushroom",
+      "start": 57.42,
+      "end": 57.72,
+      "sentence": 10,
+      "confidence": 0.94
+    },
+    {
+      "text": "s",
+      "start": 57.72,
+      "end": 58.0,
+      "sentence": 10,
+      "confidence": 0.0
+    },
+    {
+      "text": "peach",
+      "start": 58.02,
+      "end": 58.3,
+      "sentence": 10,
+      "confidence": 0.83
+    },
+    {
+      "text": "es",
+      "start": 58.3,
+      "end": 58.38,
+      "sentence": 10,
+      "confidence": 0.0
+    },
+    {
+      "text": "and",
+      "start": 58.3,
+      "end": 58.52,
+      "sentence": 10,
+      "confidence": 1.0
+    },
+    {
+      "text": "lemon",
+      "start": 58.52,
+      "end": 58.84,
+      "sentence": 10,
+      "confidence": 0.91
+    },
+    {
+      "text": "s",
+      "start": 58.84,
+      "end": 59.36,
+      "sentence": 10,
+      "confidence": 0.0
+    },
+    {
+      "text": "You",
+      "start": 59.38,
+      "end": 59.56,
+      "sentence": 11,
+      "confidence": 1.0
+    },
+    {
+      "text": "ought",
+      "start": 59.56,
+      "end": 59.7,
+      "sentence": 11,
+      "confidence": 1.0
+    },
+    {
+      "text": "to",
+      "start": 59.7,
+      "end": 59.88,
+      "sentence": 11,
+      "confidence": 1.0
+    },
+    {
+      "text": "combine",
+      "start": 59.88,
+      "end": 60.18,
+      "sentence": 11,
+      "confidence": 1.0
+    },
+    {
+      "text": "the",
+      "start": 60.18,
+      "end": 60.4,
+      "sentence": 11,
+      "confidence": 1.0
+    },
+    {
+      "text": "two",
+      "start": 60.4,
+      "end": 60.54,
+      "sentence": 11,
+      "confidence": 1.0
+    },
+    {
+      "text": "menus",
+      "start": 60.54,
+      "end": 60.84,
+      "sentence": 11,
+      "confidence": 1.0
+    },
+    {
+      "text": "and",
+      "start": 60.84,
+      "end": 61.08,
+      "sentence": 11,
+      "confidence": 1.0
+    },
+    {
+      "text": "provide",
+      "start": 61.08,
+      "end": 61.36,
+      "sentence": 11,
+      "confidence": 1.0
+    },
+    {
+      "text": "a",
+      "start": 61.36,
+      "end": 61.54,
+      "sentence": 11,
+      "confidence": 1.0
+    },
+    {
+      "text": "balanced",
+      "start": 61.54,
+      "end": 61.86,
+      "sentence": 11,
+      "confidence": 1.0
+    },
+    {
+      "text": "diet",
+      "start": 61.86,
+      "end": 62.2,
+      "sentence": 11,
+      "confidence": 1.0
+    },
+    {
+      "text": "Before",
+      "start": 62.94,
+      "end": 63.24,
+      "sentence": 12,
+      "confidence": 1.0
+    },
+    {
+      "text": "long",
+      "start": 63.24,
+      "end": 63.56,
+      "sentence": 12,
+      "confidence": 1.0
+    },
+    {
+      "text": "Wang",
+      "start": 64.12,
+      "end": 64.24,
+      "sentence": 12,
+      "confidence": 1.0
+    },
+    {
+      "text": "Peng",
+      "start": 64.24,
+      "end": 64.5,
+      "sentence": 12,
+      "confidence": 0.57
+    },
+    {
+      "text": "won",
+      "start": 64.5,
+      "end": 64.78,
+      "sentence": 12,
+      "confidence": 1.0
+    },
+    {
+      "text": "his",
+      "start": 64.78,
+      "end": 65.0,
+      "sentence": 12,
+      "confidence": 1.0
+    },
+    {
+      "text": "customers",
+      "start": 65.0,
+      "end": 65.38,
+      "sentence": 12,
+      "confidence": 1.0
+    },
+    {
+      "text": "back",
+      "start": 65.38,
+      "end": 65.74,
+      "sentence": 12,
+      "confidence": 1.0
+    }
+  ]
+}

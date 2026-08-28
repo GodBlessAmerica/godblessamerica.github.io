@@ -1,0 +1,1351 @@
+{
+  "article": 17,
+  "duration": 62.98,
+  "source": "faster-whisper word timestamps + text alignment",
+  "tokens": [
+    {
+      "text": "Tuan",
+      "start": 0.0,
+      "end": 0.38,
+      "sentence": 0,
+      "confidence": 1.0
+    },
+    {
+      "text": "was",
+      "start": 0.38,
+      "end": 0.64,
+      "sentence": 0,
+      "confidence": 1.0
+    },
+    {
+      "text": "a",
+      "start": 0.64,
+      "end": 0.8,
+      "sentence": 0,
+      "confidence": 1.0
+    },
+    {
+      "text": "farmer",
+      "start": 0.8,
+      "end": 1.06,
+      "sentence": 0,
+      "confidence": 1.0
+    },
+    {
+      "text": "in",
+      "start": 1.06,
+      "end": 1.36,
+      "sentence": 0,
+      "confidence": 1.0
+    },
+    {
+      "text": "Vietnam",
+      "start": 1.36,
+      "end": 1.78,
+      "sentence": 0,
+      "confidence": 1.0
+    },
+    {
+      "text": "For",
+      "start": 2.34,
+      "end": 2.44,
+      "sentence": 1,
+      "confidence": 1.0
+    },
+    {
+      "text": "decade",
+      "start": 2.44,
+      "end": 2.8,
+      "sentence": 1,
+      "confidence": 0.92
+    },
+    {
+      "text": "s",
+      "start": 2.8,
+      "end": 2.88,
+      "sentence": 1,
+      "confidence": 0.0
+    },
+    {
+      "text": "he",
+      "start": 2.8,
+      "end": 3.14,
+      "sentence": 1,
+      "confidence": 1.0
+    },
+    {
+      "text": "had",
+      "start": 3.14,
+      "end": 3.24,
+      "sentence": 1,
+      "confidence": 1.0
+    },
+    {
+      "text": "been",
+      "start": 3.24,
+      "end": 3.38,
+      "sentence": 1,
+      "confidence": 1.0
+    },
+    {
+      "text": "struggling",
+      "start": 3.38,
+      "end": 3.84,
+      "sentence": 1,
+      "confidence": 1.0
+    },
+    {
+      "text": "to",
+      "start": 3.84,
+      "end": 4.14,
+      "sentence": 1,
+      "confidence": 1.0
+    },
+    {
+      "text": "rid",
+      "start": 4.14,
+      "end": 4.34,
+      "sentence": 1,
+      "confidence": 1.0
+    },
+    {
+      "text": "his",
+      "start": 4.34,
+      "end": 4.56,
+      "sentence": 1,
+      "confidence": 1.0
+    },
+    {
+      "text": "family",
+      "start": 4.56,
+      "end": 4.9,
+      "sentence": 1,
+      "confidence": 1.0
+    },
+    {
+      "text": "of",
+      "start": 4.9,
+      "end": 5.12,
+      "sentence": 1,
+      "confidence": 1.0
+    },
+    {
+      "text": "hunger",
+      "start": 5.12,
+      "end": 5.46,
+      "sentence": 1,
+      "confidence": 1.0
+    },
+    {
+      "text": "However",
+      "start": 6.28,
+      "end": 6.5,
+      "sentence": 2,
+      "confidence": 1.0
+    },
+    {
+      "text": "it",
+      "start": 6.94,
+      "end": 7.16,
+      "sentence": 2,
+      "confidence": 1.0
+    },
+    {
+      "text": "always",
+      "start": 7.16,
+      "end": 7.44,
+      "sentence": 2,
+      "confidence": 1.0
+    },
+    {
+      "text": "confuse",
+      "start": 7.44,
+      "end": 7.9,
+      "sentence": 2,
+      "confidence": 0.93
+    },
+    {
+      "text": "d",
+      "start": 7.9,
+      "end": 7.98,
+      "sentence": 2,
+      "confidence": 0.0
+    },
+    {
+      "text": "him",
+      "start": 7.9,
+      "end": 8.16,
+      "sentence": 2,
+      "confidence": 1.0
+    },
+    {
+      "text": "how",
+      "start": 8.16,
+      "end": 8.36,
+      "sentence": 2,
+      "confidence": 1.0
+    },
+    {
+      "text": "to",
+      "start": 8.36,
+      "end": 8.48,
+      "sentence": 2,
+      "confidence": 1.0
+    },
+    {
+      "text": "expand",
+      "start": 8.48,
+      "end": 8.88,
+      "sentence": 2,
+      "confidence": 1.0
+    },
+    {
+      "text": "the",
+      "start": 8.88,
+      "end": 9.06,
+      "sentence": 2,
+      "confidence": 1.0
+    },
+    {
+      "text": "output",
+      "start": 9.06,
+      "end": 9.36,
+      "sentence": 2,
+      "confidence": 1.0
+    },
+    {
+      "text": "of",
+      "start": 9.36,
+      "end": 9.54,
+      "sentence": 2,
+      "confidence": 1.0
+    },
+    {
+      "text": "his",
+      "start": 9.54,
+      "end": 9.68,
+      "sentence": 2,
+      "confidence": 1.0
+    },
+    {
+      "text": "crop",
+      "start": 9.68,
+      "end": 9.92,
+      "sentence": 2,
+      "confidence": 0.89
+    },
+    {
+      "text": "s",
+      "start": 9.92,
+      "end": 10.68,
+      "sentence": 2,
+      "confidence": 0.0
+    },
+    {
+      "text": "This",
+      "start": 10.7,
+      "end": 10.92,
+      "sentence": 3,
+      "confidence": 1.0
+    },
+    {
+      "text": "disturbing",
+      "start": 10.92,
+      "end": 11.46,
+      "sentence": 3,
+      "confidence": 1.0
+    },
+    {
+      "text": "problem",
+      "start": 11.46,
+      "end": 11.94,
+      "sentence": 3,
+      "confidence": 1.0
+    },
+    {
+      "text": "led",
+      "start": 11.94,
+      "end": 12.48,
+      "sentence": 3,
+      "confidence": 1.0
+    },
+    {
+      "text": "to",
+      "start": 12.48,
+      "end": 12.64,
+      "sentence": 3,
+      "confidence": 1.0
+    },
+    {
+      "text": "his",
+      "start": 12.64,
+      "end": 12.8,
+      "sentence": 3,
+      "confidence": 1.0
+    },
+    {
+      "text": "regret",
+      "start": 12.8,
+      "end": 13.34,
+      "sentence": 3,
+      "confidence": 0.75
+    },
+    {
+      "text": "ting",
+      "start": 13.34,
+      "end": 13.54,
+      "sentence": 3,
+      "confidence": 0.67
+    },
+    {
+      "text": "being",
+      "start": 13.54,
+      "end": 13.62,
+      "sentence": 3,
+      "confidence": 0.0
+    },
+    {
+      "text": "a",
+      "start": 13.54,
+      "end": 13.74,
+      "sentence": 3,
+      "confidence": 1.0
+    },
+    {
+      "text": "farmer",
+      "start": 13.74,
+      "end": 13.94,
+      "sentence": 3,
+      "confidence": 1.0
+    },
+    {
+      "text": "He",
+      "start": 14.7,
+      "end": 14.82,
+      "sentence": 4,
+      "confidence": 1.0
+    },
+    {
+      "text": "would",
+      "start": 14.82,
+      "end": 14.96,
+      "sentence": 4,
+      "confidence": 1.0
+    },
+    {
+      "text": "rather",
+      "start": 14.96,
+      "end": 15.22,
+      "sentence": 4,
+      "confidence": 1.0
+    },
+    {
+      "text": "have",
+      "start": 15.22,
+      "end": 15.46,
+      "sentence": 4,
+      "confidence": 1.0
+    },
+    {
+      "text": "chosen",
+      "start": 15.46,
+      "end": 15.74,
+      "sentence": 4,
+      "confidence": 1.0
+    },
+    {
+      "text": "another",
+      "start": 15.74,
+      "end": 16.12,
+      "sentence": 4,
+      "confidence": 1.0
+    },
+    {
+      "text": "job",
+      "start": 16.12,
+      "end": 16.44,
+      "sentence": 4,
+      "confidence": 1.0
+    },
+    {
+      "text": "One",
+      "start": 17.32,
+      "end": 17.54,
+      "sentence": 5,
+      "confidence": 1.0
+    },
+    {
+      "text": "day",
+      "start": 17.54,
+      "end": 17.8,
+      "sentence": 5,
+      "confidence": 1.0
+    },
+    {
+      "text": "when",
+      "start": 18.02,
+      "end": 18.24,
+      "sentence": 5,
+      "confidence": 1.0
+    },
+    {
+      "text": "skim",
+      "start": 18.24,
+      "end": 18.58,
+      "sentence": 5,
+      "confidence": 0.67
+    },
+    {
+      "text": "ming",
+      "start": 18.58,
+      "end": 18.66,
+      "sentence": 5,
+      "confidence": 0.0
+    },
+    {
+      "text": "through",
+      "start": 18.58,
+      "end": 18.84,
+      "sentence": 5,
+      "confidence": 1.0
+    },
+    {
+      "text": "a",
+      "start": 18.84,
+      "end": 18.98,
+      "sentence": 5,
+      "confidence": 1.0
+    },
+    {
+      "text": "newspaper",
+      "start": 18.98,
+      "end": 19.32,
+      "sentence": 5,
+      "confidence": 1.0
+    },
+    {
+      "text": "Tuan",
+      "start": 19.96,
+      "end": 20.08,
+      "sentence": 5,
+      "confidence": 1.0
+    },
+    {
+      "text": "read",
+      "start": 20.08,
+      "end": 20.3,
+      "sentence": 5,
+      "confidence": 1.0
+    },
+    {
+      "text": "a",
+      "start": 20.3,
+      "end": 20.46,
+      "sentence": 5,
+      "confidence": 1.0
+    },
+    {
+      "text": "comment",
+      "start": 20.46,
+      "end": 20.74,
+      "sentence": 5,
+      "confidence": 1.0
+    },
+    {
+      "text": "on",
+      "start": 20.74,
+      "end": 21.34,
+      "sentence": 5,
+      "confidence": 1.0
+    },
+    {
+      "text": "Yuan",
+      "start": 21.34,
+      "end": 21.62,
+      "sentence": 5,
+      "confidence": 1.0
+    },
+    {
+      "text": "Longpin",
+      "start": 21.62,
+      "end": 22.08,
+      "sentence": 5,
+      "confidence": 1.0
+    },
+    {
+      "text": "He",
+      "start": 22.68,
+      "end": 22.82,
+      "sentence": 6,
+      "confidence": 1.0
+    },
+    {
+      "text": "underline",
+      "start": 22.82,
+      "end": 23.4,
+      "sentence": 6,
+      "confidence": 0.95
+    },
+    {
+      "text": "d",
+      "start": 23.4,
+      "end": 23.48,
+      "sentence": 6,
+      "confidence": 0.0
+    },
+    {
+      "text": "Yuan’s",
+      "start": 23.4,
+      "end": 23.84,
+      "sentence": 6,
+      "confidence": 1.0
+    },
+    {
+      "text": "nationality",
+      "start": 23.84,
+      "end": 24.38,
+      "sentence": 6,
+      "confidence": 1.0
+    },
+    {
+      "text": "and",
+      "start": 24.38,
+      "end": 25.02,
+      "sentence": 6,
+      "confidence": 1.0
+    },
+    {
+      "text": "occupation",
+      "start": 25.02,
+      "end": 25.52,
+      "sentence": 6,
+      "confidence": 1.0
+    },
+    {
+      "text": "and",
+      "start": 25.82,
+      "end": 26.2,
+      "sentence": 6,
+      "confidence": 1.0
+    },
+    {
+      "text": "then",
+      "start": 26.2,
+      "end": 26.32,
+      "sentence": 6,
+      "confidence": 1.0
+    },
+    {
+      "text": "focused",
+      "start": 26.32,
+      "end": 26.6,
+      "sentence": 6,
+      "confidence": 1.0
+    },
+    {
+      "text": "on",
+      "start": 26.6,
+      "end": 26.9,
+      "sentence": 6,
+      "confidence": 1.0
+    },
+    {
+      "text": "his",
+      "start": 26.9,
+      "end": 27.04,
+      "sentence": 6,
+      "confidence": 1.0
+    },
+    {
+      "text": "discovery",
+      "start": 27.04,
+      "end": 27.54,
+      "sentence": 6,
+      "confidence": 1.0
+    },
+    {
+      "text": "and",
+      "start": 27.54,
+      "end": 28.04,
+      "sentence": 6,
+      "confidence": 1.0
+    },
+    {
+      "text": "the",
+      "start": 28.04,
+      "end": 28.16,
+      "sentence": 6,
+      "confidence": 1.0
+    },
+    {
+      "text": "statistic",
+      "start": 28.16,
+      "end": 28.6,
+      "sentence": 6,
+      "confidence": 0.95
+    },
+    {
+      "text": "s",
+      "start": 28.6,
+      "end": 28.68,
+      "sentence": 6,
+      "confidence": 0.0
+    },
+    {
+      "text": "of",
+      "start": 28.6,
+      "end": 28.9,
+      "sentence": 6,
+      "confidence": 1.0
+    },
+    {
+      "text": "his",
+      "start": 28.9,
+      "end": 29.0,
+      "sentence": 6,
+      "confidence": 1.0
+    },
+    {
+      "text": "research",
+      "start": 29.0,
+      "end": 29.38,
+      "sentence": 6,
+      "confidence": 1.0
+    },
+    {
+      "text": "He",
+      "start": 30.7,
+      "end": 30.76,
+      "sentence": 7,
+      "confidence": 1.0
+    },
+    {
+      "text": "found",
+      "start": 30.76,
+      "end": 31.02,
+      "sentence": 7,
+      "confidence": 1.0
+    },
+    {
+      "text": "the",
+      "start": 31.02,
+      "end": 31.18,
+      "sentence": 7,
+      "confidence": 1.0
+    },
+    {
+      "text": "knowledge",
+      "start": 31.18,
+      "end": 31.48,
+      "sentence": 7,
+      "confidence": 1.0
+    },
+    {
+      "text": "Yuan",
+      "start": 31.48,
+      "end": 31.74,
+      "sentence": 7,
+      "confidence": 1.0
+    },
+    {
+      "text": "circulate",
+      "start": 31.74,
+      "end": 32.34,
+      "sentence": 7,
+      "confidence": 0.95
+    },
+    {
+      "text": "d",
+      "start": 32.34,
+      "end": 32.42,
+      "sentence": 7,
+      "confidence": 0.0
+    },
+    {
+      "text": "very",
+      "start": 32.34,
+      "end": 32.76,
+      "sentence": 7,
+      "confidence": 1.0
+    },
+    {
+      "text": "practical",
+      "start": 32.76,
+      "end": 33.24,
+      "sentence": 7,
+      "confidence": 1.0
+    },
+    {
+      "text": "Therefore",
+      "start": 33.92,
+      "end": 34.2,
+      "sentence": 8,
+      "confidence": 1.0
+    },
+    {
+      "text": "he",
+      "start": 34.68,
+      "end": 34.7,
+      "sentence": 8,
+      "confidence": 1.0
+    },
+    {
+      "text": "made",
+      "start": 34.7,
+      "end": 34.84,
+      "sentence": 8,
+      "confidence": 1.0
+    },
+    {
+      "text": "a",
+      "start": 34.84,
+      "end": 35.02,
+      "sentence": 8,
+      "confidence": 1.0
+    },
+    {
+      "text": "summary",
+      "start": 35.02,
+      "end": 35.3,
+      "sentence": 8,
+      "confidence": 1.0
+    },
+    {
+      "text": "and",
+      "start": 35.3,
+      "end": 35.54,
+      "sentence": 8,
+      "confidence": 1.0
+    },
+    {
+      "text": "began",
+      "start": 35.54,
+      "end": 35.76,
+      "sentence": 8,
+      "confidence": 1.0
+    },
+    {
+      "text": "to",
+      "start": 35.76,
+      "end": 35.96,
+      "sentence": 8,
+      "confidence": 1.0
+    },
+    {
+      "text": "build",
+      "start": 35.96,
+      "end": 36.12,
+      "sentence": 8,
+      "confidence": 1.0
+    },
+    {
+      "text": "up",
+      "start": 36.12,
+      "end": 36.28,
+      "sentence": 8,
+      "confidence": 1.0
+    },
+    {
+      "text": "a",
+      "start": 36.28,
+      "end": 36.44,
+      "sentence": 8,
+      "confidence": 1.0
+    },
+    {
+      "text": "new",
+      "start": 36.44,
+      "end": 36.62,
+      "sentence": 8,
+      "confidence": 1.0
+    },
+    {
+      "text": "farming",
+      "start": 36.62,
+      "end": 36.92,
+      "sentence": 8,
+      "confidence": 1.0
+    },
+    {
+      "text": "method",
+      "start": 36.92,
+      "end": 37.24,
+      "sentence": 8,
+      "confidence": 1.0
+    },
+    {
+      "text": "He",
+      "start": 37.94,
+      "end": 38.08,
+      "sentence": 9,
+      "confidence": 1.0
+    },
+    {
+      "text": "planted",
+      "start": 38.08,
+      "end": 38.34,
+      "sentence": 9,
+      "confidence": 1.0
+    },
+    {
+      "text": "super",
+      "start": 38.34,
+      "end": 38.76,
+      "sentence": 9,
+      "confidence": 1.0
+    },
+    {
+      "text": "grain",
+      "start": 38.76,
+      "end": 39.02,
+      "sentence": 9,
+      "confidence": 1.0
+    },
+    {
+      "text": "of",
+      "start": 39.02,
+      "end": 39.2,
+      "sentence": 9,
+      "confidence": 1.0
+    },
+    {
+      "text": "rich",
+      "start": 39.2,
+      "end": 39.38,
+      "sentence": 9,
+      "confidence": 1.0
+    },
+    {
+      "text": "nutrition",
+      "start": 39.38,
+      "end": 39.9,
+      "sentence": 9,
+      "confidence": 1.0
+    },
+    {
+      "text": "and",
+      "start": 39.9,
+      "end": 40.44,
+      "sentence": 9,
+      "confidence": 1.0
+    },
+    {
+      "text": "equip",
+      "start": 40.44,
+      "end": 40.7,
+      "sentence": 9,
+      "confidence": 0.77
+    },
+    {
+      "text": "ped",
+      "start": 40.7,
+      "end": 40.78,
+      "sentence": 9,
+      "confidence": 0.0
+    },
+    {
+      "text": "himself",
+      "start": 40.7,
+      "end": 41.06,
+      "sentence": 9,
+      "confidence": 1.0
+    },
+    {
+      "text": "to",
+      "start": 41.06,
+      "end": 41.3,
+      "sentence": 9,
+      "confidence": 1.0
+    },
+    {
+      "text": "keep",
+      "start": 41.3,
+      "end": 41.48,
+      "sentence": 9,
+      "confidence": 1.0
+    },
+    {
+      "text": "his",
+      "start": 41.48,
+      "end": 41.7,
+      "sentence": 9,
+      "confidence": 1.0
+    },
+    {
+      "text": "crops",
+      "start": 41.7,
+      "end": 41.96,
+      "sentence": 9,
+      "confidence": 1.0
+    },
+    {
+      "text": "root",
+      "start": 41.96,
+      "end": 42.26,
+      "sentence": 9,
+      "confidence": 0.89
+    },
+    {
+      "text": "s",
+      "start": 42.26,
+      "end": 42.34,
+      "sentence": 9,
+      "confidence": 0.0
+    },
+    {
+      "text": "free",
+      "start": 42.26,
+      "end": 42.6,
+      "sentence": 9,
+      "confidence": 1.0
+    },
+    {
+      "text": "from",
+      "start": 42.6,
+      "end": 42.8,
+      "sentence": 9,
+      "confidence": 1.0
+    },
+    {
+      "text": "bacteria",
+      "start": 42.8,
+      "end": 43.22,
+      "sentence": 9,
+      "confidence": 1.0
+    },
+    {
+      "text": "and",
+      "start": 43.22,
+      "end": 43.56,
+      "sentence": 9,
+      "confidence": 1.0
+    },
+    {
+      "text": "pest",
+      "start": 43.56,
+      "end": 43.92,
+      "sentence": 9,
+      "confidence": 0.89
+    },
+    {
+      "text": "s",
+      "start": 43.92,
+      "end": 44.68,
+      "sentence": 9,
+      "confidence": 0.0
+    },
+    {
+      "text": "He",
+      "start": 44.7,
+      "end": 44.98,
+      "sentence": 10,
+      "confidence": 1.0
+    },
+    {
+      "text": "also",
+      "start": 44.98,
+      "end": 45.22,
+      "sentence": 10,
+      "confidence": 1.0
+    },
+    {
+      "text": "enriched",
+      "start": 45.22,
+      "end": 45.62,
+      "sentence": 10,
+      "confidence": 1.0
+    },
+    {
+      "text": "mineral",
+      "start": 45.62,
+      "end": 46.04,
+      "sentence": 10,
+      "confidence": 0.93
+    },
+    {
+      "text": "s",
+      "start": 46.04,
+      "end": 46.12,
+      "sentence": 10,
+      "confidence": 0.0
+    },
+    {
+      "text": "in",
+      "start": 46.04,
+      "end": 46.24,
+      "sentence": 10,
+      "confidence": 1.0
+    },
+    {
+      "text": "the",
+      "start": 46.24,
+      "end": 46.38,
+      "sentence": 10,
+      "confidence": 1.0
+    },
+    {
+      "text": "soil",
+      "start": 46.38,
+      "end": 46.66,
+      "sentence": 10,
+      "confidence": 1.0
+    },
+    {
+      "text": "while",
+      "start": 46.66,
+      "end": 47.14,
+      "sentence": 10,
+      "confidence": 1.0
+    },
+    {
+      "text": "reducing",
+      "start": 47.14,
+      "end": 47.54,
+      "sentence": 10,
+      "confidence": 1.0
+    },
+    {
+      "text": "chemical",
+      "start": 47.54,
+      "end": 47.98,
+      "sentence": 10,
+      "confidence": 1.0
+    },
+    {
+      "text": "fertilizer",
+      "start": 47.98,
+      "end": 48.6,
+      "sentence": 10,
+      "confidence": 0.95
+    },
+    {
+      "text": "s",
+      "start": 48.6,
+      "end": 49.14,
+      "sentence": 10,
+      "confidence": 0.0
+    },
+    {
+      "text": "Though",
+      "start": 49.16,
+      "end": 49.34,
+      "sentence": 11,
+      "confidence": 1.0
+    },
+    {
+      "text": "it",
+      "start": 49.34,
+      "end": 49.46,
+      "sentence": 11,
+      "confidence": 1.0
+    },
+    {
+      "text": "cost",
+      "start": 49.46,
+      "end": 49.66,
+      "sentence": 11,
+      "confidence": 1.0
+    },
+    {
+      "text": "him",
+      "start": 49.66,
+      "end": 49.86,
+      "sentence": 11,
+      "confidence": 1.0
+    },
+    {
+      "text": "more",
+      "start": 49.86,
+      "end": 50.04,
+      "sentence": 11,
+      "confidence": 1.0
+    },
+    {
+      "text": "time",
+      "start": 50.04,
+      "end": 50.34,
+      "sentence": 11,
+      "confidence": 1.0
+    },
+    {
+      "text": "and",
+      "start": 50.34,
+      "end": 50.52,
+      "sentence": 11,
+      "confidence": 1.0
+    },
+    {
+      "text": "freedom",
+      "start": 50.52,
+      "end": 50.78,
+      "sentence": 11,
+      "confidence": 1.0
+    },
+    {
+      "text": "he",
+      "start": 51.22,
+      "end": 51.34,
+      "sentence": 11,
+      "confidence": 1.0
+    },
+    {
+      "text": "was",
+      "start": 51.34,
+      "end": 51.48,
+      "sentence": 11,
+      "confidence": 1.0
+    },
+    {
+      "text": "full",
+      "start": 51.48,
+      "end": 51.72,
+      "sentence": 11,
+      "confidence": 1.0
+    },
+    {
+      "text": "of",
+      "start": 51.72,
+      "end": 51.88,
+      "sentence": 11,
+      "confidence": 1.0
+    },
+    {
+      "text": "hope",
+      "start": 51.88,
+      "end": 52.08,
+      "sentence": 11,
+      "confidence": 1.0
+    },
+    {
+      "text": "The",
+      "start": 52.74,
+      "end": 52.88,
+      "sentence": 12,
+      "confidence": 1.0
+    },
+    {
+      "text": "next",
+      "start": 52.88,
+      "end": 53.12,
+      "sentence": 12,
+      "confidence": 1.0
+    },
+    {
+      "text": "year",
+      "start": 53.12,
+      "end": 53.38,
+      "sentence": 12,
+      "confidence": 1.0
+    },
+    {
+      "text": "Tuan",
+      "start": 53.84,
+      "end": 53.92,
+      "sentence": 12,
+      "confidence": 1.0
+    },
+    {
+      "text": "was",
+      "start": 53.92,
+      "end": 54.14,
+      "sentence": 12,
+      "confidence": 1.0
+    },
+    {
+      "text": "sunburnt",
+      "start": 54.14,
+      "end": 54.66,
+      "sentence": 12,
+      "confidence": 1.0
+    },
+    {
+      "text": "but",
+      "start": 54.66,
+      "end": 54.88,
+      "sentence": 12,
+      "confidence": 1.0
+    },
+    {
+      "text": "satisfied",
+      "start": 54.88,
+      "end": 55.36,
+      "sentence": 12,
+      "confidence": 1.0
+    },
+    {
+      "text": "with",
+      "start": 55.36,
+      "end": 55.58,
+      "sentence": 12,
+      "confidence": 1.0
+    },
+    {
+      "text": "his",
+      "start": 55.58,
+      "end": 55.74,
+      "sentence": 12,
+      "confidence": 1.0
+    },
+    {
+      "text": "production",
+      "start": 55.74,
+      "end": 56.12,
+      "sentence": 12,
+      "confidence": 1.0
+    },
+    {
+      "text": "very",
+      "start": 56.12,
+      "end": 56.44,
+      "sentence": 12,
+      "confidence": 1.0
+    },
+    {
+      "text": "much",
+      "start": 56.44,
+      "end": 56.74,
+      "sentence": 12,
+      "confidence": 1.0
+    },
+    {
+      "text": "Thanks",
+      "start": 57.44,
+      "end": 57.66,
+      "sentence": 13,
+      "confidence": 1.0
+    },
+    {
+      "text": "to",
+      "start": 57.66,
+      "end": 57.88,
+      "sentence": 13,
+      "confidence": 1.0
+    },
+    {
+      "text": "Yuan",
+      "start": 57.88,
+      "end": 58.1,
+      "sentence": 13,
+      "confidence": 1.0
+    },
+    {
+      "text": "Longpin",
+      "start": 58.1,
+      "end": 58.54,
+      "sentence": 13,
+      "confidence": 1.0
+    },
+    {
+      "text": "he",
+      "start": 58.9,
+      "end": 59.04,
+      "sentence": 13,
+      "confidence": 1.0
+    },
+    {
+      "text": "not",
+      "start": 59.04,
+      "end": 59.2,
+      "sentence": 13,
+      "confidence": 1.0
+    },
+    {
+      "text": "only",
+      "start": 59.2,
+      "end": 59.44,
+      "sentence": 13,
+      "confidence": 1.0
+    },
+    {
+      "text": "won",
+      "start": 59.44,
+      "end": 59.64,
+      "sentence": 13,
+      "confidence": 1.0
+    },
+    {
+      "text": "the",
+      "start": 59.64,
+      "end": 59.8,
+      "sentence": 13,
+      "confidence": 1.0
+    },
+    {
+      "text": "battle",
+      "start": 59.8,
+      "end": 60.02,
+      "sentence": 13,
+      "confidence": 1.0
+    },
+    {
+      "text": "against",
+      "start": 60.02,
+      "end": 60.32,
+      "sentence": 13,
+      "confidence": 1.0
+    },
+    {
+      "text": "hunger",
+      "start": 60.32,
+      "end": 60.64,
+      "sentence": 13,
+      "confidence": 1.0
+    },
+    {
+      "text": "but",
+      "start": 61.02,
+      "end": 61.16,
+      "sentence": 13,
+      "confidence": 1.0
+    },
+    {
+      "text": "he",
+      "start": 61.16,
+      "end": 61.28,
+      "sentence": 13,
+      "confidence": 1.0
+    },
+    {
+      "text": "could",
+      "start": 61.28,
+      "end": 61.4,
+      "sentence": 13,
+      "confidence": 1.0
+    },
+    {
+      "text": "also",
+      "start": 61.4,
+      "end": 61.72,
+      "sentence": 13,
+      "confidence": 1.0
+    },
+    {
+      "text": "export",
+      "start": 61.72,
+      "end": 62.18,
+      "sentence": 13,
+      "confidence": 1.0
+    },
+    {
+      "text": "his",
+      "start": 62.18,
+      "end": 62.4,
+      "sentence": 13,
+      "confidence": 1.0
+    },
+    {
+      "text": "crops",
+      "start": 62.4,
+      "end": 62.64,
+      "sentence": 13,
+      "confidence": 1.0
+    },
+    {
+      "text": "abroad",
+      "start": 62.64,
+      "end": 62.98,
+      "sentence": 13,
+      "confidence": 1.0
+    }
+  ]
+}

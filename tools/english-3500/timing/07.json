@@ -1,0 +1,1211 @@
+{
+  "article": 7,
+  "duration": 58.82,
+  "source": "faster-whisper word timestamps + text alignment",
+  "tokens": [
+    {
+      "text": "Swift",
+      "start": 0.0,
+      "end": 0.48,
+      "sentence": 0,
+      "confidence": 1.0
+    },
+    {
+      "text": "er",
+      "start": 0.48,
+      "end": 0.56,
+      "sentence": 0,
+      "confidence": 0.0
+    },
+    {
+      "text": "Higher",
+      "start": 1.14,
+      "end": 1.38,
+      "sentence": 0,
+      "confidence": 1.0
+    },
+    {
+      "text": "and",
+      "start": 1.38,
+      "end": 1.72,
+      "sentence": 0,
+      "confidence": 1.0
+    },
+    {
+      "text": "Stronger",
+      "start": 1.72,
+      "end": 2.08,
+      "sentence": 0,
+      "confidence": 1.0
+    },
+    {
+      "text": "stands",
+      "start": 2.46,
+      "end": 2.84,
+      "sentence": 0,
+      "confidence": 1.0
+    },
+    {
+      "text": "for",
+      "start": 2.84,
+      "end": 3.1,
+      "sentence": 0,
+      "confidence": 1.0
+    },
+    {
+      "text": "the",
+      "start": 3.1,
+      "end": 3.24,
+      "sentence": 0,
+      "confidence": 1.0
+    },
+    {
+      "text": "spirit",
+      "start": 3.24,
+      "end": 3.54,
+      "sentence": 0,
+      "confidence": 1.0
+    },
+    {
+      "text": "of",
+      "start": 3.54,
+      "end": 3.8,
+      "sentence": 0,
+      "confidence": 1.0
+    },
+    {
+      "text": "the",
+      "start": 3.8,
+      "end": 3.98,
+      "sentence": 0,
+      "confidence": 1.0
+    },
+    {
+      "text": "Olympics",
+      "start": 3.98,
+      "end": 4.22,
+      "sentence": 0,
+      "confidence": 1.0
+    },
+    {
+      "text": "But",
+      "start": 4.78,
+      "end": 5.0,
+      "sentence": 1,
+      "confidence": 1.0
+    },
+    {
+      "text": "fairness",
+      "start": 5.0,
+      "end": 5.38,
+      "sentence": 1,
+      "confidence": 1.0
+    },
+    {
+      "text": "is",
+      "start": 5.38,
+      "end": 5.78,
+      "sentence": 1,
+      "confidence": 1.0
+    },
+    {
+      "text": "the",
+      "start": 5.78,
+      "end": 5.96,
+      "sentence": 1,
+      "confidence": 1.0
+    },
+    {
+      "text": "basis",
+      "start": 5.96,
+      "end": 6.22,
+      "sentence": 1,
+      "confidence": 1.0
+    },
+    {
+      "text": "of",
+      "start": 6.22,
+      "end": 6.54,
+      "sentence": 1,
+      "confidence": 1.0
+    },
+    {
+      "text": "this",
+      "start": 6.54,
+      "end": 6.76,
+      "sentence": 1,
+      "confidence": 1.0
+    },
+    {
+      "text": "motto",
+      "start": 6.76,
+      "end": 7.04,
+      "sentence": 1,
+      "confidence": 1.0
+    },
+    {
+      "text": "Only",
+      "start": 7.78,
+      "end": 8.0,
+      "sentence": 2,
+      "confidence": 1.0
+    },
+    {
+      "text": "when",
+      "start": 8.0,
+      "end": 8.2,
+      "sentence": 2,
+      "confidence": 1.0
+    },
+    {
+      "text": "you",
+      "start": 8.2,
+      "end": 8.36,
+      "sentence": 2,
+      "confidence": 1.0
+    },
+    {
+      "text": "win",
+      "start": 8.36,
+      "end": 8.52,
+      "sentence": 2,
+      "confidence": 1.0
+    },
+    {
+      "text": "fairly",
+      "start": 8.52,
+      "end": 8.98,
+      "sentence": 2,
+      "confidence": 1.0
+    },
+    {
+      "text": "will",
+      "start": 8.98,
+      "end": 9.48,
+      "sentence": 2,
+      "confidence": 1.0
+    },
+    {
+      "text": "you",
+      "start": 9.48,
+      "end": 9.76,
+      "sentence": 2,
+      "confidence": 1.0
+    },
+    {
+      "text": "and",
+      "start": 9.76,
+      "end": 9.98,
+      "sentence": 2,
+      "confidence": 1.0
+    },
+    {
+      "text": "your",
+      "start": 9.98,
+      "end": 10.14,
+      "sentence": 2,
+      "confidence": 1.0
+    },
+    {
+      "text": "homeland",
+      "start": 10.14,
+      "end": 10.56,
+      "sentence": 2,
+      "confidence": 1.0
+    },
+    {
+      "text": "deserve",
+      "start": 10.56,
+      "end": 11.1,
+      "sentence": 2,
+      "confidence": 1.0
+    },
+    {
+      "text": "the",
+      "start": 11.1,
+      "end": 11.4,
+      "sentence": 2,
+      "confidence": 1.0
+    },
+    {
+      "text": "great",
+      "start": 11.4,
+      "end": 11.68,
+      "sentence": 2,
+      "confidence": 1.0
+    },
+    {
+      "text": "glory",
+      "start": 11.68,
+      "end": 12.0,
+      "sentence": 2,
+      "confidence": 1.0
+    },
+    {
+      "text": "But",
+      "start": 12.64,
+      "end": 12.8,
+      "sentence": 3,
+      "confidence": 1.0
+    },
+    {
+      "text": "nowadays",
+      "start": 12.8,
+      "end": 13.22,
+      "sentence": 3,
+      "confidence": 1.0
+    },
+    {
+      "text": "unlike",
+      "start": 13.86,
+      "end": 14.1,
+      "sentence": 3,
+      "confidence": 1.0
+    },
+    {
+      "text": "the",
+      "start": 14.1,
+      "end": 14.36,
+      "sentence": 3,
+      "confidence": 1.0
+    },
+    {
+      "text": "ancient",
+      "start": 14.36,
+      "end": 14.72,
+      "sentence": 3,
+      "confidence": 1.0
+    },
+    {
+      "text": "honest",
+      "start": 14.72,
+      "end": 15.12,
+      "sentence": 3,
+      "confidence": 1.0
+    },
+    {
+      "text": "slave",
+      "start": 15.12,
+      "end": 15.42,
+      "sentence": 3,
+      "confidence": 1.0
+    },
+    {
+      "text": "competitor",
+      "start": 15.42,
+      "end": 15.94,
+      "sentence": 3,
+      "confidence": 0.95
+    },
+    {
+      "text": "s",
+      "start": 15.94,
+      "end": 16.56,
+      "sentence": 3,
+      "confidence": 0.0
+    },
+    {
+      "text": "some",
+      "start": 16.58,
+      "end": 16.72,
+      "sentence": 3,
+      "confidence": 1.0
+    },
+    {
+      "text": "hopeless",
+      "start": 16.72,
+      "end": 17.16,
+      "sentence": 3,
+      "confidence": 1.0
+    },
+    {
+      "text": "athlete",
+      "start": 17.16,
+      "end": 17.72,
+      "sentence": 3,
+      "confidence": 0.93
+    },
+    {
+      "text": "s",
+      "start": 17.72,
+      "end": 17.8,
+      "sentence": 3,
+      "confidence": 0.0
+    },
+    {
+      "text": "who",
+      "start": 17.72,
+      "end": 18.18,
+      "sentence": 3,
+      "confidence": 1.0
+    },
+    {
+      "text": "can’t",
+      "start": 18.18,
+      "end": 18.54,
+      "sentence": 3,
+      "confidence": 1.0
+    },
+    {
+      "text": "bear",
+      "start": 18.54,
+      "end": 18.66,
+      "sentence": 3,
+      "confidence": 1.0
+    },
+    {
+      "text": "the",
+      "start": 18.66,
+      "end": 18.84,
+      "sentence": 3,
+      "confidence": 1.0
+    },
+    {
+      "text": "pain",
+      "start": 18.84,
+      "end": 19.08,
+      "sentence": 3,
+      "confidence": 1.0
+    },
+    {
+      "text": "of",
+      "start": 19.08,
+      "end": 19.24,
+      "sentence": 3,
+      "confidence": 1.0
+    },
+    {
+      "text": "training",
+      "start": 19.24,
+      "end": 19.66,
+      "sentence": 3,
+      "confidence": 1.0
+    },
+    {
+      "text": "cheat",
+      "start": 19.66,
+      "end": 20.3,
+      "sentence": 3,
+      "confidence": 1.0
+    },
+    {
+      "text": "when",
+      "start": 20.3,
+      "end": 20.82,
+      "sentence": 3,
+      "confidence": 1.0
+    },
+    {
+      "text": "taking",
+      "start": 20.82,
+      "end": 21.1,
+      "sentence": 3,
+      "confidence": 1.0
+    },
+    {
+      "text": "part",
+      "start": 21.1,
+      "end": 21.34,
+      "sentence": 3,
+      "confidence": 1.0
+    },
+    {
+      "text": "in",
+      "start": 21.34,
+      "end": 21.54,
+      "sentence": 3,
+      "confidence": 1.0
+    },
+    {
+      "text": "games",
+      "start": 21.54,
+      "end": 21.86,
+      "sentence": 3,
+      "confidence": 1.0
+    },
+    {
+      "text": "Medal",
+      "start": 22.88,
+      "end": 23.1,
+      "sentence": 4,
+      "confidence": 0.73
+    },
+    {
+      "text": "s",
+      "start": 23.1,
+      "end": 23.18,
+      "sentence": 4,
+      "confidence": 0.0
+    },
+    {
+      "text": "seem",
+      "start": 23.1,
+      "end": 23.34,
+      "sentence": 4,
+      "confidence": 1.0
+    },
+    {
+      "text": "to",
+      "start": 23.34,
+      "end": 23.48,
+      "sentence": 4,
+      "confidence": 1.0
+    },
+    {
+      "text": "have",
+      "start": 23.48,
+      "end": 23.66,
+      "sentence": 4,
+      "confidence": 1.0
+    },
+    {
+      "text": "magical",
+      "start": 23.66,
+      "end": 24.14,
+      "sentence": 4,
+      "confidence": 1.0
+    },
+    {
+      "text": "power",
+      "start": 24.14,
+      "end": 24.6,
+      "sentence": 4,
+      "confidence": 1.0
+    },
+    {
+      "text": "causing",
+      "start": 24.6,
+      "end": 24.94,
+      "sentence": 4,
+      "confidence": 1.0
+    },
+    {
+      "text": "them",
+      "start": 24.94,
+      "end": 25.2,
+      "sentence": 4,
+      "confidence": 1.0
+    },
+    {
+      "text": "to",
+      "start": 25.2,
+      "end": 25.34,
+      "sentence": 4,
+      "confidence": 1.0
+    },
+    {
+      "text": "cheat",
+      "start": 25.34,
+      "end": 25.58,
+      "sentence": 4,
+      "confidence": 1.0
+    },
+    {
+      "text": "and",
+      "start": 25.94,
+      "end": 26.2,
+      "sentence": 4,
+      "confidence": 1.0
+    },
+    {
+      "text": "the",
+      "start": 26.2,
+      "end": 26.32,
+      "sentence": 4,
+      "confidence": 1.0
+    },
+    {
+      "text": "prize",
+      "start": 26.32,
+      "end": 26.56,
+      "sentence": 4,
+      "confidence": 1.0
+    },
+    {
+      "text": "money",
+      "start": 26.56,
+      "end": 26.86,
+      "sentence": 4,
+      "confidence": 1.0
+    },
+    {
+      "text": "has",
+      "start": 26.86,
+      "end": 27.1,
+      "sentence": 4,
+      "confidence": 1.0
+    },
+    {
+      "text": "replace",
+      "start": 27.1,
+      "end": 27.44,
+      "sentence": 4,
+      "confidence": 0.93
+    },
+    {
+      "text": "d",
+      "start": 27.44,
+      "end": 27.52,
+      "sentence": 4,
+      "confidence": 0.0
+    },
+    {
+      "text": "the",
+      "start": 27.44,
+      "end": 27.7,
+      "sentence": 4,
+      "confidence": 1.0
+    },
+    {
+      "text": "motto",
+      "start": 27.7,
+      "end": 27.96,
+      "sentence": 4,
+      "confidence": 1.0
+    },
+    {
+      "text": "as",
+      "start": 27.96,
+      "end": 28.22,
+      "sentence": 4,
+      "confidence": 1.0
+    },
+    {
+      "text": "their",
+      "start": 28.22,
+      "end": 28.36,
+      "sentence": 4,
+      "confidence": 1.0
+    },
+    {
+      "text": "only",
+      "start": 28.36,
+      "end": 28.66,
+      "sentence": 4,
+      "confidence": 1.0
+    },
+    {
+      "text": "goal",
+      "start": 28.66,
+      "end": 28.96,
+      "sentence": 4,
+      "confidence": 1.0
+    },
+    {
+      "text": "So",
+      "start": 29.6,
+      "end": 29.92,
+      "sentence": 5,
+      "confidence": 1.0
+    },
+    {
+      "text": "in",
+      "start": 30.3,
+      "end": 30.5,
+      "sentence": 5,
+      "confidence": 1.0
+    },
+    {
+      "text": "the",
+      "start": 30.5,
+      "end": 30.62,
+      "sentence": 5,
+      "confidence": 1.0
+    },
+    {
+      "text": "gymnastics",
+      "start": 30.62,
+      "end": 31.1,
+      "sentence": 5,
+      "confidence": 1.0
+    },
+    {
+      "text": "event",
+      "start": 31.1,
+      "end": 31.42,
+      "sentence": 5,
+      "confidence": 1.0
+    },
+    {
+      "text": "to",
+      "start": 31.42,
+      "end": 31.62,
+      "sentence": 5,
+      "confidence": 1.0
+    },
+    {
+      "text": "be",
+      "start": 31.62,
+      "end": 31.76,
+      "sentence": 5,
+      "confidence": 1.0
+    },
+    {
+      "text": "held",
+      "start": 31.76,
+      "end": 31.92,
+      "sentence": 5,
+      "confidence": 1.0
+    },
+    {
+      "text": "in",
+      "start": 31.92,
+      "end": 32.1,
+      "sentence": 5,
+      "confidence": 1.0
+    },
+    {
+      "text": "our",
+      "start": 32.1,
+      "end": 32.32,
+      "sentence": 5,
+      "confidence": 1.0
+    },
+    {
+      "text": "city",
+      "start": 32.32,
+      "end": 32.56,
+      "sentence": 5,
+      "confidence": 1.0
+    },
+    {
+      "text": "next",
+      "start": 32.56,
+      "end": 32.84,
+      "sentence": 5,
+      "confidence": 1.0
+    },
+    {
+      "text": "month",
+      "start": 32.84,
+      "end": 33.12,
+      "sentence": 5,
+      "confidence": 1.0
+    },
+    {
+      "text": "one",
+      "start": 33.62,
+      "end": 33.78,
+      "sentence": 5,
+      "confidence": 1.0
+    },
+    {
+      "text": "of",
+      "start": 33.78,
+      "end": 33.9,
+      "sentence": 5,
+      "confidence": 1.0
+    },
+    {
+      "text": "the",
+      "start": 33.9,
+      "end": 34.0,
+      "sentence": 5,
+      "confidence": 1.0
+    },
+    {
+      "text": "host",
+      "start": 34.0,
+      "end": 34.36,
+      "sentence": 5,
+      "confidence": 0.8
+    },
+    {
+      "text": "s",
+      "start": 34.88,
+      "end": 35.52,
+      "sentence": 5,
+      "confidence": 0.67
+    },
+    {
+      "text": "responsibilities",
+      "start": 35.52,
+      "end": 35.6,
+      "sentence": 5,
+      "confidence": 0.0
+    },
+    {
+      "text": "is",
+      "start": 35.6,
+      "end": 35.68,
+      "sentence": 5,
+      "confidence": 0.0
+    },
+    {
+      "text": "to",
+      "start": 35.52,
+      "end": 35.7,
+      "sentence": 5,
+      "confidence": 1.0
+    },
+    {
+      "text": "keep",
+      "start": 35.7,
+      "end": 35.88,
+      "sentence": 5,
+      "confidence": 1.0
+    },
+    {
+      "text": "competitions",
+      "start": 35.88,
+      "end": 36.48,
+      "sentence": 5,
+      "confidence": 1.0
+    },
+    {
+      "text": "fair",
+      "start": 36.48,
+      "end": 36.9,
+      "sentence": 5,
+      "confidence": 1.0
+    },
+    {
+      "text": "They",
+      "start": 37.9,
+      "end": 38.1,
+      "sentence": 6,
+      "confidence": 1.0
+    },
+    {
+      "text": "advertise",
+      "start": 38.1,
+      "end": 38.6,
+      "sentence": 6,
+      "confidence": 0.95
+    },
+    {
+      "text": "d",
+      "start": 38.6,
+      "end": 38.68,
+      "sentence": 6,
+      "confidence": 0.0
+    },
+    {
+      "text": "on",
+      "start": 38.6,
+      "end": 38.9,
+      "sentence": 6,
+      "confidence": 1.0
+    },
+    {
+      "text": "poster",
+      "start": 38.9,
+      "end": 39.28,
+      "sentence": 6,
+      "confidence": 0.92
+    },
+    {
+      "text": "s",
+      "start": 39.28,
+      "end": 39.36,
+      "sentence": 6,
+      "confidence": 0.0
+    },
+    {
+      "text": "outside",
+      "start": 39.28,
+      "end": 39.66,
+      "sentence": 6,
+      "confidence": 1.0
+    },
+    {
+      "text": "the",
+      "start": 39.66,
+      "end": 39.92,
+      "sentence": 6,
+      "confidence": 1.0
+    },
+    {
+      "text": "stadium",
+      "start": 39.92,
+      "end": 40.28,
+      "sentence": 6,
+      "confidence": 1.0
+    },
+    {
+      "text": "to",
+      "start": 40.28,
+      "end": 40.76,
+      "sentence": 6,
+      "confidence": 1.0
+    },
+    {
+      "text": "promise",
+      "start": 40.76,
+      "end": 41.02,
+      "sentence": 6,
+      "confidence": 1.0
+    },
+    {
+      "text": "that",
+      "start": 41.02,
+      "end": 41.3,
+      "sentence": 6,
+      "confidence": 1.0
+    },
+    {
+      "text": "every",
+      "start": 41.3,
+      "end": 41.64,
+      "sentence": 6,
+      "confidence": 1.0
+    },
+    {
+      "text": "competitor",
+      "start": 41.64,
+      "end": 42.06,
+      "sentence": 6,
+      "confidence": 1.0
+    },
+    {
+      "text": "is",
+      "start": 42.06,
+      "end": 42.34,
+      "sentence": 6,
+      "confidence": 1.0
+    },
+    {
+      "text": "to",
+      "start": 42.34,
+      "end": 42.46,
+      "sentence": 6,
+      "confidence": 1.0
+    },
+    {
+      "text": "have",
+      "start": 42.46,
+      "end": 42.62,
+      "sentence": 6,
+      "confidence": 1.0
+    },
+    {
+      "text": "a",
+      "start": 42.62,
+      "end": 42.78,
+      "sentence": 6,
+      "confidence": 1.0
+    },
+    {
+      "text": "regular",
+      "start": 42.78,
+      "end": 43.06,
+      "sentence": 6,
+      "confidence": 1.0
+    },
+    {
+      "text": "physical",
+      "start": 43.06,
+      "end": 43.48,
+      "sentence": 6,
+      "confidence": 1.0
+    },
+    {
+      "text": "examination",
+      "start": 43.48,
+      "end": 44.1,
+      "sentence": 6,
+      "confidence": 1.0
+    },
+    {
+      "text": "in",
+      "start": 44.1,
+      "end": 44.78,
+      "sentence": 6,
+      "confidence": 1.0
+    },
+    {
+      "text": "a",
+      "start": 44.78,
+      "end": 44.9,
+      "sentence": 6,
+      "confidence": 1.0
+    },
+    {
+      "text": "gymnasium",
+      "start": 44.9,
+      "end": 45.48,
+      "sentence": 6,
+      "confidence": 1.0
+    },
+    {
+      "text": "one",
+      "start": 45.7,
+      "end": 45.9,
+      "sentence": 6,
+      "confidence": 1.0
+    },
+    {
+      "text": "after",
+      "start": 45.9,
+      "end": 46.16,
+      "sentence": 6,
+      "confidence": 1.0
+    },
+    {
+      "text": "another",
+      "start": 46.16,
+      "end": 46.5,
+      "sentence": 6,
+      "confidence": 1.0
+    },
+    {
+      "text": "No",
+      "start": 47.18,
+      "end": 47.42,
+      "sentence": 7,
+      "confidence": 1.0
+    },
+    {
+      "text": "one",
+      "start": 47.42,
+      "end": 47.58,
+      "sentence": 7,
+      "confidence": 1.0
+    },
+    {
+      "text": "can",
+      "start": 47.58,
+      "end": 47.78,
+      "sentence": 7,
+      "confidence": 1.0
+    },
+    {
+      "text": "bargain",
+      "start": 47.78,
+      "end": 48.02,
+      "sentence": 7,
+      "confidence": 1.0
+    },
+    {
+      "text": "on",
+      "start": 48.02,
+      "end": 48.26,
+      "sentence": 7,
+      "confidence": 1.0
+    },
+    {
+      "text": "this",
+      "start": 48.26,
+      "end": 48.5,
+      "sentence": 7,
+      "confidence": 1.0
+    },
+    {
+      "text": "The",
+      "start": 49.02,
+      "end": 49.2,
+      "sentence": 8,
+      "confidence": 1.0
+    },
+    {
+      "text": "volunteer",
+      "start": 49.2,
+      "end": 49.58,
+      "sentence": 8,
+      "confidence": 0.95
+    },
+    {
+      "text": "s",
+      "start": 52.18,
+      "end": 52.3,
+      "sentence": 8,
+      "confidence": 0.67
+    },
+    {
+      "text": "in",
+      "start": 52.3,
+      "end": 52.38,
+      "sentence": 8,
+      "confidence": 0.0
+    },
+    {
+      "text": "charge",
+      "start": 52.38,
+      "end": 52.46,
+      "sentence": 8,
+      "confidence": 0.0
+    },
+    {
+      "text": "will",
+      "start": 53.86,
+      "end": 53.96,
+      "sentence": 8,
+      "confidence": 1.0
+    },
+    {
+      "text": "be",
+      "start": 54.2,
+      "end": 54.36,
+      "sentence": 8,
+      "confidence": 1.0
+    },
+    {
+      "text": "very",
+      "start": 54.36,
+      "end": 54.44,
+      "sentence": 8,
+      "confidence": 0.0
+    },
+    {
+      "text": "strict",
+      "start": 54.44,
+      "end": 54.52,
+      "sentence": 8,
+      "confidence": 0.0
+    },
+    {
+      "text": "It",
+      "start": 54.52,
+      "end": 54.6,
+      "sentence": 9,
+      "confidence": 0.0
+    },
+    {
+      "text": "is",
+      "start": 54.6,
+      "end": 54.68,
+      "sentence": 9,
+      "confidence": 0.0
+    },
+    {
+      "text": "foolish",
+      "start": 54.68,
+      "end": 54.76,
+      "sentence": 9,
+      "confidence": 0.0
+    },
+    {
+      "text": "to",
+      "start": 54.62,
+      "end": 54.82,
+      "sentence": 9,
+      "confidence": 1.0
+    },
+    {
+      "text": "cheat",
+      "start": 54.82,
+      "end": 54.9,
+      "sentence": 9,
+      "confidence": 0.0
+    },
+    {
+      "text": "because",
+      "start": 54.9,
+      "end": 54.98,
+      "sentence": 9,
+      "confidence": 0.0
+    },
+    {
+      "text": "they",
+      "start": 54.98,
+      "end": 55.06,
+      "sentence": 9,
+      "confidence": 0.0
+    },
+    {
+      "text": "will",
+      "start": 55.64,
+      "end": 55.74,
+      "sentence": 9,
+      "confidence": 1.0
+    },
+    {
+      "text": "not",
+      "start": 55.74,
+      "end": 55.82,
+      "sentence": 9,
+      "confidence": 0.0
+    },
+    {
+      "text": "be",
+      "start": 56.0,
+      "end": 56.2,
+      "sentence": 9,
+      "confidence": 1.0
+    },
+    {
+      "text": "admit",
+      "start": 56.2,
+      "end": 56.28,
+      "sentence": 9,
+      "confidence": 0.0
+    },
+    {
+      "text": "ted",
+      "start": 56.28,
+      "end": 56.36,
+      "sentence": 9,
+      "confidence": 0.0
+    },
+    {
+      "text": "to",
+      "start": 56.36,
+      "end": 56.44,
+      "sentence": 9,
+      "confidence": 0.0
+    },
+    {
+      "text": "compete",
+      "start": 56.44,
+      "end": 56.52,
+      "sentence": 9,
+      "confidence": 0.0
+    },
+    {
+      "text": "and",
+      "start": 56.52,
+      "end": 56.6,
+      "sentence": 9,
+      "confidence": 0.0
+    },
+    {
+      "text": "will",
+      "start": 56.6,
+      "end": 56.84,
+      "sentence": 9,
+      "confidence": 0.75
+    },
+    {
+      "text": "even",
+      "start": 56.84,
+      "end": 57.17,
+      "sentence": 9,
+      "confidence": 0.0
+    },
+    {
+      "text": "be",
+      "start": 57.17,
+      "end": 57.5,
+      "sentence": 9,
+      "confidence": 0.0
+    },
+    {
+      "text": "fine",
+      "start": 57.5,
+      "end": 57.83,
+      "sentence": 9,
+      "confidence": 0.0
+    },
+    {
+      "text": "d",
+      "start": 57.83,
+      "end": 58.16,
+      "sentence": 9,
+      "confidence": 0.0
+    },
+    {
+      "text": "as",
+      "start": 58.16,
+      "end": 58.49,
+      "sentence": 9,
+      "confidence": 0.0
+    },
+    {
+      "text": "well",
+      "start": 58.49,
+      "end": 58.82,
+      "sentence": 9,
+      "confidence": 0.0
+    }
+  ]
+}

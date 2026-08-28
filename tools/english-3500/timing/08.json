@@ -1,0 +1,1134 @@
+{
+  "article": 8,
+  "duration": 54.76,
+  "source": "faster-whisper word timestamps + text alignment",
+  "tokens": [
+    {
+      "text": "The",
+      "start": 0.27,
+      "end": 0.75,
+      "sentence": 0,
+      "confidence": 1.0
+    },
+    {
+      "text": "goal",
+      "start": 0.75,
+      "end": 1.01,
+      "sentence": 0,
+      "confidence": 1.0
+    },
+    {
+      "text": "of",
+      "start": 1.01,
+      "end": 1.23,
+      "sentence": 0,
+      "confidence": 1.0
+    },
+    {
+      "text": "early",
+      "start": 1.23,
+      "end": 1.57,
+      "sentence": 0,
+      "confidence": 1.0
+    },
+    {
+      "text": "calculating",
+      "start": 1.57,
+      "end": 2.13,
+      "sentence": 0,
+      "confidence": 1.0
+    },
+    {
+      "text": "machines",
+      "start": 2.13,
+      "end": 2.53,
+      "sentence": 0,
+      "confidence": 1.0
+    },
+    {
+      "text": "was",
+      "start": 2.53,
+      "end": 2.85,
+      "sentence": 0,
+      "confidence": 1.0
+    },
+    {
+      "text": "to",
+      "start": 2.85,
+      "end": 3.03,
+      "sentence": 0,
+      "confidence": 1.0
+    },
+    {
+      "text": "simplify",
+      "start": 3.03,
+      "end": 3.59,
+      "sentence": 0,
+      "confidence": 1.0
+    },
+    {
+      "text": "difficult",
+      "start": 3.59,
+      "end": 4.13,
+      "sentence": 0,
+      "confidence": 1.0
+    },
+    {
+      "text": "sum",
+      "start": 4.13,
+      "end": 4.53,
+      "sentence": 0,
+      "confidence": 0.86
+    },
+    {
+      "text": "s",
+      "start": 4.53,
+      "end": 5.19,
+      "sentence": 0,
+      "confidence": 0.0
+    },
+    {
+      "text": "But",
+      "start": 5.21,
+      "end": 5.29,
+      "sentence": 1,
+      "confidence": 1.0
+    },
+    {
+      "text": "with",
+      "start": 5.29,
+      "end": 5.43,
+      "sentence": 1,
+      "confidence": 1.0
+    },
+    {
+      "text": "the",
+      "start": 5.43,
+      "end": 5.57,
+      "sentence": 1,
+      "confidence": 1.0
+    },
+    {
+      "text": "help",
+      "start": 5.57,
+      "end": 5.75,
+      "sentence": 1,
+      "confidence": 1.0
+    },
+    {
+      "text": "of",
+      "start": 5.75,
+      "end": 5.93,
+      "sentence": 1,
+      "confidence": 1.0
+    },
+    {
+      "text": "new",
+      "start": 5.93,
+      "end": 6.09,
+      "sentence": 1,
+      "confidence": 1.0
+    },
+    {
+      "text": "technology",
+      "start": 6.09,
+      "end": 6.69,
+      "sentence": 1,
+      "confidence": 1.0
+    },
+    {
+      "text": "electronic",
+      "start": 7.27,
+      "end": 7.59,
+      "sentence": 1,
+      "confidence": 1.0
+    },
+    {
+      "text": "chip",
+      "start": 7.59,
+      "end": 8.07,
+      "sentence": 1,
+      "confidence": 0.89
+    },
+    {
+      "text": "s",
+      "start": 8.07,
+      "end": 8.15,
+      "sentence": 1,
+      "confidence": 0.0
+    },
+    {
+      "text": "replaced",
+      "start": 8.07,
+      "end": 8.51,
+      "sentence": 1,
+      "confidence": 1.0
+    },
+    {
+      "text": "tube",
+      "start": 8.51,
+      "end": 9.03,
+      "sentence": 1,
+      "confidence": 0.89
+    },
+    {
+      "text": "s",
+      "start": 9.03,
+      "end": 9.53,
+      "sentence": 1,
+      "confidence": 0.0
+    },
+    {
+      "text": "and",
+      "start": 9.55,
+      "end": 9.69,
+      "sentence": 1,
+      "confidence": 1.0
+    },
+    {
+      "text": "a",
+      "start": 9.69,
+      "end": 9.79,
+      "sentence": 1,
+      "confidence": 1.0
+    },
+    {
+      "text": "revolution",
+      "start": 9.79,
+      "end": 10.17,
+      "sentence": 1,
+      "confidence": 1.0
+    },
+    {
+      "text": "of",
+      "start": 10.17,
+      "end": 10.47,
+      "sentence": 1,
+      "confidence": 1.0
+    },
+    {
+      "text": "artificial",
+      "start": 10.47,
+      "end": 10.81,
+      "sentence": 1,
+      "confidence": 1.0
+    },
+    {
+      "text": "intelligence",
+      "start": 10.81,
+      "end": 11.41,
+      "sentence": 1,
+      "confidence": 1.0
+    },
+    {
+      "text": "has",
+      "start": 11.41,
+      "end": 11.63,
+      "sentence": 1,
+      "confidence": 1.0
+    },
+    {
+      "text": "arise",
+      "start": 11.63,
+      "end": 11.95,
+      "sentence": 1,
+      "confidence": 0.91
+    },
+    {
+      "text": "n",
+      "start": 13.05,
+      "end": 13.37,
+      "sentence": 1,
+      "confidence": 0.67
+    },
+    {
+      "text": "From",
+      "start": 13.37,
+      "end": 13.67,
+      "sentence": 2,
+      "confidence": 0.0
+    },
+    {
+      "text": "then",
+      "start": 13.69,
+      "end": 13.75,
+      "sentence": 2,
+      "confidence": 0.86
+    },
+    {
+      "text": "on",
+      "start": 13.75,
+      "end": 13.83,
+      "sentence": 2,
+      "confidence": 0.0
+    },
+    {
+      "text": "the",
+      "start": 16.95,
+      "end": 17.05,
+      "sentence": 2,
+      "confidence": 0.86
+    },
+    {
+      "text": "appearance",
+      "start": 17.05,
+      "end": 17.13,
+      "sentence": 2,
+      "confidence": 0.0
+    },
+    {
+      "text": "of",
+      "start": 17.13,
+      "end": 17.21,
+      "sentence": 2,
+      "confidence": 0.0
+    },
+    {
+      "text": "computers",
+      "start": 17.21,
+      "end": 17.29,
+      "sentence": 2,
+      "confidence": 0.0
+    },
+    {
+      "text": "totally",
+      "start": 17.29,
+      "end": 17.37,
+      "sentence": 2,
+      "confidence": 0.0
+    },
+    {
+      "text": "changed",
+      "start": 17.05,
+      "end": 17.23,
+      "sentence": 2,
+      "confidence": 0.6
+    },
+    {
+      "text": "our",
+      "start": 17.23,
+      "end": 17.31,
+      "sentence": 2,
+      "confidence": 0.0
+    },
+    {
+      "text": "lives",
+      "start": 17.31,
+      "end": 17.39,
+      "sentence": 2,
+      "confidence": 0.0
+    },
+    {
+      "text": "They",
+      "start": 18.89,
+      "end": 19.07,
+      "sentence": 3,
+      "confidence": 0.86
+    },
+    {
+      "text": "can",
+      "start": 19.07,
+      "end": 19.15,
+      "sentence": 3,
+      "confidence": 0.0
+    },
+    {
+      "text": "not",
+      "start": 19.15,
+      "end": 19.23,
+      "sentence": 3,
+      "confidence": 0.0
+    },
+    {
+      "text": "only",
+      "start": 19.23,
+      "end": 19.31,
+      "sentence": 3,
+      "confidence": 0.0
+    },
+    {
+      "text": "download",
+      "start": 19.31,
+      "end": 19.39,
+      "sentence": 3,
+      "confidence": 0.0
+    },
+    {
+      "text": "information",
+      "start": 19.39,
+      "end": 19.47,
+      "sentence": 3,
+      "confidence": 0.0
+    },
+    {
+      "text": "from",
+      "start": 19.47,
+      "end": 19.55,
+      "sentence": 3,
+      "confidence": 0.0
+    },
+    {
+      "text": "the",
+      "start": 20.05,
+      "end": 20.17,
+      "sentence": 3,
+      "confidence": 1.0
+    },
+    {
+      "text": "wet",
+      "start": 20.17,
+      "end": 20.25,
+      "sentence": 3,
+      "confidence": 0.0
+    },
+    {
+      "text": "when",
+      "start": 20.25,
+      "end": 20.33,
+      "sentence": 3,
+      "confidence": 0.0
+    },
+    {
+      "text": "connected",
+      "start": 20.33,
+      "end": 20.41,
+      "sentence": 3,
+      "confidence": 0.0
+    },
+    {
+      "text": "by",
+      "start": 20.41,
+      "end": 20.49,
+      "sentence": 3,
+      "confidence": 0.0
+    },
+    {
+      "text": "the",
+      "start": 20.49,
+      "end": 20.57,
+      "sentence": 3,
+      "confidence": 0.0
+    },
+    {
+      "text": "network",
+      "start": 20.17,
+      "end": 20.47,
+      "sentence": 3,
+      "confidence": 1.0
+    },
+    {
+      "text": "or",
+      "start": 20.47,
+      "end": 20.71,
+      "sentence": 3,
+      "confidence": 1.0
+    },
+    {
+      "text": "mobile",
+      "start": 20.71,
+      "end": 20.99,
+      "sentence": 3,
+      "confidence": 1.0
+    },
+    {
+      "text": "phone",
+      "start": 20.99,
+      "end": 21.25,
+      "sentence": 3,
+      "confidence": 1.0
+    },
+    {
+      "text": "signal",
+      "start": 21.25,
+      "end": 21.65,
+      "sentence": 3,
+      "confidence": 0.92
+    },
+    {
+      "text": "s",
+      "start": 21.65,
+      "end": 22.03,
+      "sentence": 3,
+      "confidence": 0.0
+    },
+    {
+      "text": "but",
+      "start": 22.05,
+      "end": 22.25,
+      "sentence": 3,
+      "confidence": 1.0
+    },
+    {
+      "text": "also",
+      "start": 22.25,
+      "end": 22.61,
+      "sentence": 3,
+      "confidence": 1.0
+    },
+    {
+      "text": "solve",
+      "start": 22.61,
+      "end": 22.91,
+      "sentence": 3,
+      "confidence": 1.0
+    },
+    {
+      "text": "different",
+      "start": 22.91,
+      "end": 23.27,
+      "sentence": 3,
+      "confidence": 1.0
+    },
+    {
+      "text": "type",
+      "start": 23.27,
+      "end": 23.49,
+      "sentence": 3,
+      "confidence": 0.89
+    },
+    {
+      "text": "s",
+      "start": 25.79,
+      "end": 26.05,
+      "sentence": 3,
+      "confidence": 0.67
+    },
+    {
+      "text": "of",
+      "start": 26.05,
+      "end": 26.13,
+      "sentence": 3,
+      "confidence": 0.0
+    },
+    {
+      "text": "logical",
+      "start": 26.13,
+      "end": 26.21,
+      "sentence": 3,
+      "confidence": 0.0
+    },
+    {
+      "text": "problems",
+      "start": 26.21,
+      "end": 26.29,
+      "sentence": 3,
+      "confidence": 0.0
+    },
+    {
+      "text": "With",
+      "start": 26.29,
+      "end": 26.37,
+      "sentence": 4,
+      "confidence": 0.0
+    },
+    {
+      "text": "operator",
+      "start": 26.37,
+      "end": 26.45,
+      "sentence": 4,
+      "confidence": 0.0
+    },
+    {
+      "text": "s",
+      "start": 26.45,
+      "end": 26.53,
+      "sentence": 4,
+      "confidence": 0.0
+    },
+    {
+      "text": "as",
+      "start": 26.53,
+      "end": 26.61,
+      "sentence": 4,
+      "confidence": 0.0
+    },
+    {
+      "text": "their",
+      "start": 26.05,
+      "end": 26.21,
+      "sentence": 4,
+      "confidence": 1.0
+    },
+    {
+      "text": "coach",
+      "start": 26.21,
+      "end": 26.55,
+      "sentence": 4,
+      "confidence": 0.83
+    },
+    {
+      "text": "es",
+      "start": 26.55,
+      "end": 27.01,
+      "sentence": 4,
+      "confidence": 0.0
+    },
+    {
+      "text": "they",
+      "start": 27.03,
+      "end": 27.19,
+      "sentence": 4,
+      "confidence": 1.0
+    },
+    {
+      "text": "can",
+      "start": 27.19,
+      "end": 27.33,
+      "sentence": 4,
+      "confidence": 1.0
+    },
+    {
+      "text": "even",
+      "start": 27.33,
+      "end": 27.59,
+      "sentence": 4,
+      "confidence": 1.0
+    },
+    {
+      "text": "control",
+      "start": 27.59,
+      "end": 28.01,
+      "sentence": 4,
+      "confidence": 1.0
+    },
+    {
+      "text": "rocket",
+      "start": 28.01,
+      "end": 28.39,
+      "sentence": 4,
+      "confidence": 0.92
+    },
+    {
+      "text": "s",
+      "start": 28.39,
+      "end": 28.47,
+      "sentence": 4,
+      "confidence": 0.0
+    },
+    {
+      "text": "to",
+      "start": 28.39,
+      "end": 28.69,
+      "sentence": 4,
+      "confidence": 1.0
+    },
+    {
+      "text": "explore",
+      "start": 28.69,
+      "end": 29.07,
+      "sentence": 4,
+      "confidence": 1.0
+    },
+    {
+      "text": "the",
+      "start": 29.07,
+      "end": 29.29,
+      "sentence": 4,
+      "confidence": 1.0
+    },
+    {
+      "text": "moon",
+      "start": 29.29,
+      "end": 29.49,
+      "sentence": 4,
+      "confidence": 1.0
+    },
+    {
+      "text": "and",
+      "start": 29.49,
+      "end": 30.11,
+      "sentence": 4,
+      "confidence": 1.0
+    },
+    {
+      "text": "instruct",
+      "start": 30.11,
+      "end": 30.49,
+      "sentence": 4,
+      "confidence": 1.0
+    },
+    {
+      "text": "android",
+      "start": 30.49,
+      "end": 31.13,
+      "sentence": 4,
+      "confidence": 0.93
+    },
+    {
+      "text": "s",
+      "start": 31.13,
+      "end": 31.21,
+      "sentence": 4,
+      "confidence": 0.0
+    },
+    {
+      "text": "with",
+      "start": 31.13,
+      "end": 31.27,
+      "sentence": 4,
+      "confidence": 1.0
+    },
+    {
+      "text": "the",
+      "start": 31.27,
+      "end": 31.39,
+      "sentence": 4,
+      "confidence": 1.0
+    },
+    {
+      "text": "human",
+      "start": 31.39,
+      "end": 31.63,
+      "sentence": 4,
+      "confidence": 1.0
+    },
+    {
+      "text": "race",
+      "start": 31.63,
+      "end": 32.01,
+      "sentence": 4,
+      "confidence": 0.8
+    },
+    {
+      "text": "s",
+      "start": 32.01,
+      "end": 32.09,
+      "sentence": 4,
+      "confidence": 0.0
+    },
+    {
+      "text": "character",
+      "start": 32.01,
+      "end": 32.43,
+      "sentence": 4,
+      "confidence": 0.95
+    },
+    {
+      "text": "s",
+      "start": 32.43,
+      "end": 32.51,
+      "sentence": 4,
+      "confidence": 0.0
+    },
+    {
+      "text": "to",
+      "start": 32.43,
+      "end": 32.99,
+      "sentence": 4,
+      "confidence": 1.0
+    },
+    {
+      "text": "mop",
+      "start": 32.99,
+      "end": 33.21,
+      "sentence": 4,
+      "confidence": 1.0
+    },
+    {
+      "text": "floors",
+      "start": 33.21,
+      "end": 33.55,
+      "sentence": 4,
+      "confidence": 1.0
+    },
+    {
+      "text": "and",
+      "start": 33.55,
+      "end": 34.11,
+      "sentence": 4,
+      "confidence": 1.0
+    },
+    {
+      "text": "watch",
+      "start": 34.11,
+      "end": 34.37,
+      "sentence": 4,
+      "confidence": 1.0
+    },
+    {
+      "text": "over",
+      "start": 34.37,
+      "end": 34.61,
+      "sentence": 4,
+      "confidence": 1.0
+    },
+    {
+      "text": "your",
+      "start": 34.61,
+      "end": 34.81,
+      "sentence": 4,
+      "confidence": 1.0
+    },
+    {
+      "text": "naughty",
+      "start": 34.81,
+      "end": 35.05,
+      "sentence": 4,
+      "confidence": 1.0
+    },
+    {
+      "text": "niece",
+      "start": 35.05,
+      "end": 35.35,
+      "sentence": 4,
+      "confidence": 1.0
+    },
+    {
+      "text": "Anyhow",
+      "start": 36.15,
+      "end": 36.51,
+      "sentence": 5,
+      "confidence": 1.0
+    },
+    {
+      "text": "computers",
+      "start": 36.97,
+      "end": 37.21,
+      "sentence": 5,
+      "confidence": 1.0
+    },
+    {
+      "text": "are",
+      "start": 37.21,
+      "end": 37.49,
+      "sentence": 5,
+      "confidence": 1.0
+    },
+    {
+      "text": "so",
+      "start": 37.49,
+      "end": 37.73,
+      "sentence": 5,
+      "confidence": 1.0
+    },
+    {
+      "text": "helpful",
+      "start": 37.73,
+      "end": 38.13,
+      "sentence": 5,
+      "confidence": 1.0
+    },
+    {
+      "text": "that",
+      "start": 38.13,
+      "end": 38.57,
+      "sentence": 5,
+      "confidence": 1.0
+    },
+    {
+      "text": "they",
+      "start": 38.57,
+      "end": 38.73,
+      "sentence": 5,
+      "confidence": 1.0
+    },
+    {
+      "text": "do",
+      "start": 38.73,
+      "end": 38.89,
+      "sentence": 5,
+      "confidence": 1.0
+    },
+    {
+      "text": "bring",
+      "start": 38.89,
+      "end": 39.13,
+      "sentence": 5,
+      "confidence": 1.0
+    },
+    {
+      "text": "happiness",
+      "start": 39.13,
+      "end": 39.57,
+      "sentence": 5,
+      "confidence": 1.0
+    },
+    {
+      "text": "However",
+      "start": 40.33,
+      "end": 40.61,
+      "sentence": 6,
+      "confidence": 1.0
+    },
+    {
+      "text": "computers",
+      "start": 41.29,
+      "end": 41.41,
+      "sentence": 6,
+      "confidence": 1.0
+    },
+    {
+      "text": "are",
+      "start": 41.41,
+      "end": 41.69,
+      "sentence": 6,
+      "confidence": 1.0
+    },
+    {
+      "text": "easily",
+      "start": 41.69,
+      "end": 42.03,
+      "sentence": 6,
+      "confidence": 1.0
+    },
+    {
+      "text": "attacked",
+      "start": 42.03,
+      "end": 42.43,
+      "sentence": 6,
+      "confidence": 1.0
+    },
+    {
+      "text": "by",
+      "start": 42.43,
+      "end": 42.65,
+      "sentence": 6,
+      "confidence": 1.0
+    },
+    {
+      "text": "virus",
+      "start": 42.65,
+      "end": 42.97,
+      "sentence": 6,
+      "confidence": 0.83
+    },
+    {
+      "text": "es",
+      "start": 42.97,
+      "end": 43.85,
+      "sentence": 6,
+      "confidence": 0.0
+    },
+    {
+      "text": "This",
+      "start": 43.87,
+      "end": 44.01,
+      "sentence": 7,
+      "confidence": 1.0
+    },
+    {
+      "text": "reality",
+      "start": 44.01,
+      "end": 44.35,
+      "sentence": 7,
+      "confidence": 1.0
+    },
+    {
+      "text": "has",
+      "start": 44.35,
+      "end": 44.65,
+      "sentence": 7,
+      "confidence": 1.0
+    },
+    {
+      "text": "become",
+      "start": 44.65,
+      "end": 44.91,
+      "sentence": 7,
+      "confidence": 1.0
+    },
+    {
+      "text": "a",
+      "start": 44.91,
+      "end": 45.07,
+      "sentence": 7,
+      "confidence": 1.0
+    },
+    {
+      "text": "hard-to",
+      "start": 45.07,
+      "end": 45.29,
+      "sentence": 7,
+      "confidence": 0.8
+    },
+    {
+      "text": "deal",
+      "start": 45.47,
+      "end": 45.61,
+      "sentence": 7,
+      "confidence": 1.0
+    },
+    {
+      "text": "with",
+      "start": 45.61,
+      "end": 45.79,
+      "sentence": 7,
+      "confidence": 1.0
+    },
+    {
+      "text": "problem",
+      "start": 45.79,
+      "end": 46.17,
+      "sentence": 7,
+      "confidence": 1.0
+    },
+    {
+      "text": "As",
+      "start": 46.85,
+      "end": 47.01,
+      "sentence": 8,
+      "confidence": 1.0
+    },
+    {
+      "text": "a",
+      "start": 47.01,
+      "end": 47.11,
+      "sentence": 8,
+      "confidence": 1.0
+    },
+    {
+      "text": "result",
+      "start": 47.11,
+      "end": 47.41,
+      "sentence": 8,
+      "confidence": 1.0
+    },
+    {
+      "text": "computers",
+      "start": 47.99,
+      "end": 48.13,
+      "sentence": 8,
+      "confidence": 1.0
+    },
+    {
+      "text": "are",
+      "start": 48.13,
+      "end": 48.45,
+      "sentence": 8,
+      "confidence": 1.0
+    },
+    {
+      "text": "dangerous",
+      "start": 48.45,
+      "end": 48.81,
+      "sentence": 8,
+      "confidence": 1.0
+    },
+    {
+      "text": "in",
+      "start": 48.81,
+      "end": 49.03,
+      "sentence": 8,
+      "confidence": 1.0
+    },
+    {
+      "text": "a",
+      "start": 49.03,
+      "end": 49.13,
+      "sentence": 8,
+      "confidence": 1.0
+    },
+    {
+      "text": "way",
+      "start": 49.13,
+      "end": 49.35,
+      "sentence": 8,
+      "confidence": 1.0
+    },
+    {
+      "text": "So",
+      "start": 49.91,
+      "end": 50.13,
+      "sentence": 9,
+      "confidence": 1.0
+    },
+    {
+      "text": "personally",
+      "start": 50.13,
+      "end": 50.59,
+      "sentence": 9,
+      "confidence": 1.0
+    },
+    {
+      "text": "I",
+      "start": 51.03,
+      "end": 51.27,
+      "sentence": 9,
+      "confidence": 1.0
+    },
+    {
+      "text": "worry",
+      "start": 51.27,
+      "end": 51.51,
+      "sentence": 9,
+      "confidence": 1.0
+    },
+    {
+      "text": "about",
+      "start": 51.51,
+      "end": 51.79,
+      "sentence": 9,
+      "confidence": 1.0
+    },
+    {
+      "text": "their",
+      "start": 51.79,
+      "end": 51.95,
+      "sentence": 9,
+      "confidence": 1.0
+    },
+    {
+      "text": "universal",
+      "start": 51.95,
+      "end": 52.35,
+      "sentence": 9,
+      "confidence": 1.0
+    },
+    {
+      "text": "application",
+      "start": 52.35,
+      "end": 52.97,
+      "sentence": 9,
+      "confidence": 0.96
+    },
+    {
+      "text": "s",
+      "start": 52.97,
+      "end": 53.05,
+      "sentence": 9,
+      "confidence": 0.0
+    },
+    {
+      "text": "in",
+      "start": 52.97,
+      "end": 53.25,
+      "sentence": 9,
+      "confidence": 1.0
+    },
+    {
+      "text": "some",
+      "start": 53.25,
+      "end": 53.43,
+      "sentence": 9,
+      "confidence": 1.0
+    },
+    {
+      "text": "fields",
+      "start": 53.43,
+      "end": 53.77,
+      "sentence": 9,
+      "confidence": 1.0
+    },
+    {
+      "text": "such",
+      "start": 53.77,
+      "end": 54.1,
+      "sentence": 9,
+      "confidence": 0.0
+    },
+    {
+      "text": "as",
+      "start": 54.1,
+      "end": 54.43,
+      "sentence": 9,
+      "confidence": 0.0
+    },
+    {
+      "text": "finance",
+      "start": 54.43,
+      "end": 54.76,
+      "sentence": 9,
+      "confidence": 0.0
+    }
+  ]
+}

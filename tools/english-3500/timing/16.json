@@ -1,0 +1,1246 @@
+{
+  "article": 16,
+  "duration": 63.24,
+  "source": "faster-whisper word timestamps + text alignment",
+  "tokens": [
+    {
+      "text": "Born",
+      "start": 0.0,
+      "end": 0.36,
+      "sentence": 0,
+      "confidence": 1.0
+    },
+    {
+      "text": "in",
+      "start": 0.36,
+      "end": 0.64,
+      "sentence": 0,
+      "confidence": 1.0
+    },
+    {
+      "text": "a",
+      "start": 0.64,
+      "end": 0.76,
+      "sentence": 0,
+      "confidence": 1.0
+    },
+    {
+      "text": "pigs",
+      "start": 0.76,
+      "end": 1.12,
+      "sentence": 0,
+      "confidence": 0.89
+    },
+    {
+      "text": "nest",
+      "start": 1.12,
+      "end": 1.48,
+      "sentence": 0,
+      "confidence": 1.0
+    },
+    {
+      "text": "Lina",
+      "start": 2.08,
+      "end": 2.08,
+      "sentence": 0,
+      "confidence": 0.75
+    },
+    {
+      "text": "led",
+      "start": 2.08,
+      "end": 2.4,
+      "sentence": 0,
+      "confidence": 1.0
+    },
+    {
+      "text": "a",
+      "start": 2.4,
+      "end": 2.58,
+      "sentence": 0,
+      "confidence": 1.0
+    },
+    {
+      "text": "poor",
+      "start": 2.58,
+      "end": 2.84,
+      "sentence": 0,
+      "confidence": 1.0
+    },
+    {
+      "text": "life",
+      "start": 2.84,
+      "end": 3.16,
+      "sentence": 0,
+      "confidence": 1.0
+    },
+    {
+      "text": "in",
+      "start": 3.16,
+      "end": 3.36,
+      "sentence": 0,
+      "confidence": 1.0
+    },
+    {
+      "text": "her",
+      "start": 3.36,
+      "end": 3.5,
+      "sentence": 0,
+      "confidence": 1.0
+    },
+    {
+      "text": "childhood",
+      "start": 3.5,
+      "end": 3.96,
+      "sentence": 0,
+      "confidence": 1.0
+    },
+    {
+      "text": "She",
+      "start": 4.88,
+      "end": 5.0,
+      "sentence": 1,
+      "confidence": 1.0
+    },
+    {
+      "text": "was",
+      "start": 5.0,
+      "end": 5.12,
+      "sentence": 1,
+      "confidence": 1.0
+    },
+    {
+      "text": "looked",
+      "start": 5.12,
+      "end": 5.34,
+      "sentence": 1,
+      "confidence": 1.0
+    },
+    {
+      "text": "down",
+      "start": 5.34,
+      "end": 5.62,
+      "sentence": 1,
+      "confidence": 1.0
+    },
+    {
+      "text": "upon",
+      "start": 5.62,
+      "end": 5.92,
+      "sentence": 1,
+      "confidence": 1.0
+    },
+    {
+      "text": "by",
+      "start": 5.92,
+      "end": 6.14,
+      "sentence": 1,
+      "confidence": 1.0
+    },
+    {
+      "text": "the",
+      "start": 6.14,
+      "end": 6.28,
+      "sentence": 1,
+      "confidence": 1.0
+    },
+    {
+      "text": "children",
+      "start": 6.28,
+      "end": 6.52,
+      "sentence": 1,
+      "confidence": 1.0
+    },
+    {
+      "text": "of",
+      "start": 6.52,
+      "end": 6.8,
+      "sentence": 1,
+      "confidence": 1.0
+    },
+    {
+      "text": "her",
+      "start": 6.8,
+      "end": 6.92,
+      "sentence": 1,
+      "confidence": 1.0
+    },
+    {
+      "text": "generation",
+      "start": 6.92,
+      "end": 7.42,
+      "sentence": 1,
+      "confidence": 1.0
+    },
+    {
+      "text": "But",
+      "start": 7.84,
+      "end": 8.28,
+      "sentence": 2,
+      "confidence": 1.0
+    },
+    {
+      "text": "she",
+      "start": 8.28,
+      "end": 8.46,
+      "sentence": 2,
+      "confidence": 1.0
+    },
+    {
+      "text": "intend",
+      "start": 8.46,
+      "end": 8.82,
+      "sentence": 2,
+      "confidence": 0.86
+    },
+    {
+      "text": "ed",
+      "start": 8.82,
+      "end": 8.9,
+      "sentence": 2,
+      "confidence": 0.0
+    },
+    {
+      "text": "to",
+      "start": 8.82,
+      "end": 9.1,
+      "sentence": 2,
+      "confidence": 1.0
+    },
+    {
+      "text": "become",
+      "start": 9.1,
+      "end": 9.32,
+      "sentence": 2,
+      "confidence": 1.0
+    },
+    {
+      "text": "a",
+      "start": 9.32,
+      "end": 9.84,
+      "sentence": 2,
+      "confidence": 1.0
+    },
+    {
+      "text": "doctor",
+      "start": 9.84,
+      "end": 9.84,
+      "sentence": 2,
+      "confidence": 1.0
+    },
+    {
+      "text": "after",
+      "start": 9.84,
+      "end": 10.42,
+      "sentence": 2,
+      "confidence": 1.0
+    },
+    {
+      "text": "she",
+      "start": 10.42,
+      "end": 10.64,
+      "sentence": 2,
+      "confidence": 1.0
+    },
+    {
+      "text": "came",
+      "start": 10.64,
+      "end": 10.84,
+      "sentence": 2,
+      "confidence": 1.0
+    },
+    {
+      "text": "across",
+      "start": 10.84,
+      "end": 11.18,
+      "sentence": 2,
+      "confidence": 1.0
+    },
+    {
+      "text": "Lin",
+      "start": 11.18,
+      "end": 11.5,
+      "sentence": 2,
+      "confidence": 0.57
+    },
+    {
+      "text": "Qiaozhi",
+      "start": 11.5,
+      "end": 11.58,
+      "sentence": 2,
+      "confidence": 0.0
+    },
+    {
+      "text": "by",
+      "start": 12.02,
+      "end": 12.22,
+      "sentence": 2,
+      "confidence": 1.0
+    },
+    {
+      "text": "chance",
+      "start": 12.22,
+      "end": 12.6,
+      "sentence": 2,
+      "confidence": 1.0
+    },
+    {
+      "text": "who",
+      "start": 13.02,
+      "end": 13.16,
+      "sentence": 2,
+      "confidence": 1.0
+    },
+    {
+      "text": "was",
+      "start": 13.16,
+      "end": 13.28,
+      "sentence": 2,
+      "confidence": 1.0
+    },
+    {
+      "text": "deliver",
+      "start": 13.28,
+      "end": 13.72,
+      "sentence": 2,
+      "confidence": 0.82
+    },
+    {
+      "text": "ing",
+      "start": 13.72,
+      "end": 13.8,
+      "sentence": 2,
+      "confidence": 0.0
+    },
+    {
+      "text": "medical",
+      "start": 13.72,
+      "end": 14.06,
+      "sentence": 2,
+      "confidence": 1.0
+    },
+    {
+      "text": "courses",
+      "start": 14.06,
+      "end": 14.52,
+      "sentence": 2,
+      "confidence": 1.0
+    },
+    {
+      "text": "to",
+      "start": 14.52,
+      "end": 15.0,
+      "sentence": 2,
+      "confidence": 1.0
+    },
+    {
+      "text": "an",
+      "start": 15.0,
+      "end": 15.14,
+      "sentence": 2,
+      "confidence": 1.0
+    },
+    {
+      "text": "audience",
+      "start": 15.14,
+      "end": 15.52,
+      "sentence": 2,
+      "confidence": 1.0
+    },
+    {
+      "text": "crowd",
+      "start": 15.52,
+      "end": 16.0,
+      "sentence": 2,
+      "confidence": 0.77
+    },
+    {
+      "text": "ing",
+      "start": 17.52,
+      "end": 17.78,
+      "sentence": 2,
+      "confidence": 0.67
+    },
+    {
+      "text": "around",
+      "start": 17.78,
+      "end": 17.86,
+      "sentence": 2,
+      "confidence": 0.0
+    },
+    {
+      "text": "her",
+      "start": 19.2,
+      "end": 19.48,
+      "sentence": 2,
+      "confidence": 1.0
+    },
+    {
+      "text": "Before",
+      "start": 19.48,
+      "end": 19.56,
+      "sentence": 3,
+      "confidence": 0.0
+    },
+    {
+      "text": "moving",
+      "start": 19.56,
+      "end": 19.64,
+      "sentence": 3,
+      "confidence": 0.0
+    },
+    {
+      "text": "off",
+      "start": 19.64,
+      "end": 19.72,
+      "sentence": 3,
+      "confidence": 0.0
+    },
+    {
+      "text": "Lin",
+      "start": 19.72,
+      "end": 19.8,
+      "sentence": 3,
+      "confidence": 0.0
+    },
+    {
+      "text": "inspire",
+      "start": 19.8,
+      "end": 19.88,
+      "sentence": 3,
+      "confidence": 0.0
+    },
+    {
+      "text": "d",
+      "start": 19.88,
+      "end": 19.96,
+      "sentence": 3,
+      "confidence": 0.0
+    },
+    {
+      "text": "her",
+      "start": 20.12,
+      "end": 20.26,
+      "sentence": 3,
+      "confidence": 1.0
+    },
+    {
+      "text": "to",
+      "start": 20.26,
+      "end": 20.34,
+      "sentence": 3,
+      "confidence": 0.0
+    },
+    {
+      "text": "carry",
+      "start": 20.34,
+      "end": 20.42,
+      "sentence": 3,
+      "confidence": 0.0
+    },
+    {
+      "text": "on",
+      "start": 20.42,
+      "end": 20.5,
+      "sentence": 3,
+      "confidence": 0.0
+    },
+    {
+      "text": "her",
+      "start": 20.5,
+      "end": 20.58,
+      "sentence": 3,
+      "confidence": 0.0
+    },
+    {
+      "text": "study",
+      "start": 20.26,
+      "end": 20.58,
+      "sentence": 3,
+      "confidence": 1.0
+    },
+    {
+      "text": "With",
+      "start": 21.36,
+      "end": 21.56,
+      "sentence": 4,
+      "confidence": 1.0
+    },
+    {
+      "text": "Lin’s",
+      "start": 21.56,
+      "end": 21.88,
+      "sentence": 4,
+      "confidence": 0.73
+    },
+    {
+      "text": "support",
+      "start": 21.88,
+      "end": 22.26,
+      "sentence": 4,
+      "confidence": 1.0
+    },
+    {
+      "text": "Lina",
+      "start": 22.84,
+      "end": 22.94,
+      "sentence": 4,
+      "confidence": 0.75
+    },
+    {
+      "text": "entered",
+      "start": 22.94,
+      "end": 23.32,
+      "sentence": 4,
+      "confidence": 1.0
+    },
+    {
+      "text": "an",
+      "start": 23.32,
+      "end": 23.46,
+      "sentence": 4,
+      "confidence": 1.0
+    },
+    {
+      "text": "institute",
+      "start": 23.46,
+      "end": 23.88,
+      "sentence": 4,
+      "confidence": 1.0
+    },
+    {
+      "text": "and",
+      "start": 23.88,
+      "end": 24.16,
+      "sentence": 4,
+      "confidence": 1.0
+    },
+    {
+      "text": "studied",
+      "start": 24.16,
+      "end": 24.48,
+      "sentence": 4,
+      "confidence": 1.0
+    },
+    {
+      "text": "hard",
+      "start": 24.48,
+      "end": 24.86,
+      "sentence": 4,
+      "confidence": 1.0
+    },
+    {
+      "text": "sparing",
+      "start": 25.28,
+      "end": 25.52,
+      "sentence": 4,
+      "confidence": 1.0
+    },
+    {
+      "text": "no",
+      "start": 25.52,
+      "end": 25.88,
+      "sentence": 4,
+      "confidence": 1.0
+    },
+    {
+      "text": "time",
+      "start": 25.88,
+      "end": 26.16,
+      "sentence": 4,
+      "confidence": 1.0
+    },
+    {
+      "text": "for",
+      "start": 26.16,
+      "end": 26.4,
+      "sentence": 4,
+      "confidence": 1.0
+    },
+    {
+      "text": "entertainment",
+      "start": 26.4,
+      "end": 26.84,
+      "sentence": 4,
+      "confidence": 1.0
+    },
+    {
+      "text": "Her",
+      "start": 27.69,
+      "end": 28.0,
+      "sentence": 5,
+      "confidence": 1.0
+    },
+    {
+      "text": "being",
+      "start": 28.0,
+      "end": 28.22,
+      "sentence": 5,
+      "confidence": 1.0
+    },
+    {
+      "text": "outspoken",
+      "start": 28.22,
+      "end": 28.74,
+      "sentence": 5,
+      "confidence": 1.0
+    },
+    {
+      "text": "and",
+      "start": 28.74,
+      "end": 29.16,
+      "sentence": 5,
+      "confidence": 1.0
+    },
+    {
+      "text": "modest",
+      "start": 29.16,
+      "end": 29.56,
+      "sentence": 5,
+      "confidence": 1.0
+    },
+    {
+      "text": "won",
+      "start": 30.02,
+      "end": 30.12,
+      "sentence": 5,
+      "confidence": 0.67
+    },
+    {
+      "text": "respect",
+      "start": 30.12,
+      "end": 30.54,
+      "sentence": 5,
+      "confidence": 1.0
+    },
+    {
+      "text": "for",
+      "start": 30.54,
+      "end": 30.78,
+      "sentence": 5,
+      "confidence": 1.0
+    },
+    {
+      "text": "her",
+      "start": 30.78,
+      "end": 31.16,
+      "sentence": 5,
+      "confidence": 1.0
+    },
+    {
+      "text": "Her",
+      "start": 31.8,
+      "end": 31.84,
+      "sentence": 6,
+      "confidence": 1.0
+    },
+    {
+      "text": "excellent",
+      "start": 31.84,
+      "end": 32.32,
+      "sentence": 6,
+      "confidence": 1.0
+    },
+    {
+      "text": "arguing",
+      "start": 32.32,
+      "end": 32.74,
+      "sentence": 6,
+      "confidence": 1.0
+    },
+    {
+      "text": "skills",
+      "start": 32.74,
+      "end": 33.1,
+      "sentence": 6,
+      "confidence": 1.0
+    },
+    {
+      "text": "and",
+      "start": 33.1,
+      "end": 33.34,
+      "sentence": 6,
+      "confidence": 1.0
+    },
+    {
+      "text": "observation",
+      "start": 33.34,
+      "end": 33.8,
+      "sentence": 6,
+      "confidence": 1.0
+    },
+    {
+      "text": "ability",
+      "start": 33.8,
+      "end": 34.34,
+      "sentence": 6,
+      "confidence": 1.0
+    },
+    {
+      "text": "put",
+      "start": 34.34,
+      "end": 34.88,
+      "sentence": 6,
+      "confidence": 1.0
+    },
+    {
+      "text": "others",
+      "start": 34.88,
+      "end": 35.16,
+      "sentence": 6,
+      "confidence": 1.0
+    },
+    {
+      "text": "into",
+      "start": 35.16,
+      "end": 35.44,
+      "sentence": 6,
+      "confidence": 1.0
+    },
+    {
+      "text": "the",
+      "start": 35.44,
+      "end": 35.6,
+      "sentence": 6,
+      "confidence": 1.0
+    },
+    {
+      "text": "shade",
+      "start": 35.6,
+      "end": 35.84,
+      "sentence": 6,
+      "confidence": 1.0
+    },
+    {
+      "text": "Now",
+      "start": 36.96,
+      "end": 37.16,
+      "sentence": 7,
+      "confidence": 1.0
+    },
+    {
+      "text": "Lina",
+      "start": 37.68,
+      "end": 37.72,
+      "sentence": 7,
+      "confidence": 0.75
+    },
+    {
+      "text": "has",
+      "start": 37.72,
+      "end": 37.96,
+      "sentence": 7,
+      "confidence": 1.0
+    },
+    {
+      "text": "become",
+      "start": 37.96,
+      "end": 38.22,
+      "sentence": 7,
+      "confidence": 1.0
+    },
+    {
+      "text": "a",
+      "start": 38.22,
+      "end": 38.42,
+      "sentence": 7,
+      "confidence": 1.0
+    },
+    {
+      "text": "specialist",
+      "start": 38.42,
+      "end": 38.74,
+      "sentence": 7,
+      "confidence": 1.0
+    },
+    {
+      "text": "in",
+      "start": 38.74,
+      "end": 39.32,
+      "sentence": 7,
+      "confidence": 1.0
+    },
+    {
+      "text": "human",
+      "start": 39.32,
+      "end": 39.62,
+      "sentence": 7,
+      "confidence": 1.0
+    },
+    {
+      "text": "being",
+      "start": 39.62,
+      "end": 39.94,
+      "sentence": 7,
+      "confidence": 0.83
+    },
+    {
+      "text": "s",
+      "start": 39.94,
+      "end": 40.04,
+      "sentence": 7,
+      "confidence": 0.0
+    },
+    {
+      "text": "emergency",
+      "start": 40.06,
+      "end": 40.38,
+      "sentence": 7,
+      "confidence": 1.0
+    },
+    {
+      "text": "sickness",
+      "start": 40.38,
+      "end": 40.88,
+      "sentence": 7,
+      "confidence": 1.0
+    },
+    {
+      "text": "Her",
+      "start": 41.74,
+      "end": 41.86,
+      "sentence": 8,
+      "confidence": 1.0
+    },
+    {
+      "text": "kindness",
+      "start": 41.86,
+      "end": 42.22,
+      "sentence": 8,
+      "confidence": 1.0
+    },
+    {
+      "text": "and",
+      "start": 42.22,
+      "end": 42.54,
+      "sentence": 8,
+      "confidence": 1.0
+    },
+    {
+      "text": "considerate",
+      "start": 42.54,
+      "end": 43.06,
+      "sentence": 8,
+      "confidence": 1.0
+    },
+    {
+      "text": "behavior",
+      "start": 43.06,
+      "end": 43.3,
+      "sentence": 8,
+      "confidence": 1.0
+    },
+    {
+      "text": "to",
+      "start": 43.3,
+      "end": 43.58,
+      "sentence": 8,
+      "confidence": 1.0
+    },
+    {
+      "text": "the",
+      "start": 43.58,
+      "end": 43.72,
+      "sentence": 8,
+      "confidence": 1.0
+    },
+    {
+      "text": "poor",
+      "start": 43.72,
+      "end": 43.98,
+      "sentence": 8,
+      "confidence": 1.0
+    },
+    {
+      "text": "were",
+      "start": 43.98,
+      "end": 44.42,
+      "sentence": 8,
+      "confidence": 1.0
+    },
+    {
+      "text": "well",
+      "start": 44.42,
+      "end": 44.68,
+      "sentence": 8,
+      "confidence": 1.0
+    },
+    {
+      "text": "known",
+      "start": 44.68,
+      "end": 44.94,
+      "sentence": 8,
+      "confidence": 1.0
+    },
+    {
+      "text": "The",
+      "start": 45.68,
+      "end": 45.9,
+      "sentence": 9,
+      "confidence": 1.0
+    },
+    {
+      "text": "organization",
+      "start": 45.9,
+      "end": 46.38,
+      "sentence": 9,
+      "confidence": 1.0
+    },
+    {
+      "text": "she",
+      "start": 46.38,
+      "end": 46.72,
+      "sentence": 9,
+      "confidence": 1.0
+    },
+    {
+      "text": "founded",
+      "start": 46.72,
+      "end": 47.1,
+      "sentence": 9,
+      "confidence": 1.0
+    },
+    {
+      "text": "carried",
+      "start": 47.1,
+      "end": 47.66,
+      "sentence": 9,
+      "confidence": 1.0
+    },
+    {
+      "text": "out",
+      "start": 47.66,
+      "end": 47.88,
+      "sentence": 9,
+      "confidence": 1.0
+    },
+    {
+      "text": "campaign",
+      "start": 47.88,
+      "end": 48.38,
+      "sentence": 9,
+      "confidence": 0.94
+    },
+    {
+      "text": "s",
+      "start": 48.38,
+      "end": 48.46,
+      "sentence": 9,
+      "confidence": 0.0
+    },
+    {
+      "text": "and",
+      "start": 48.38,
+      "end": 48.66,
+      "sentence": 9,
+      "confidence": 1.0
+    },
+    {
+      "text": "welfare",
+      "start": 48.66,
+      "end": 48.96,
+      "sentence": 9,
+      "confidence": 1.0
+    },
+    {
+      "text": "project",
+      "start": 48.96,
+      "end": 49.46,
+      "sentence": 9,
+      "confidence": 0.93
+    },
+    {
+      "text": "s",
+      "start": 49.46,
+      "end": 49.54,
+      "sentence": 9,
+      "confidence": 0.0
+    },
+    {
+      "text": "to",
+      "start": 49.46,
+      "end": 49.94,
+      "sentence": 9,
+      "confidence": 1.0
+    },
+    {
+      "text": "help",
+      "start": 49.94,
+      "end": 50.14,
+      "sentence": 9,
+      "confidence": 1.0
+    },
+    {
+      "text": "cut",
+      "start": 50.14,
+      "end": 50.38,
+      "sentence": 9,
+      "confidence": 1.0
+    },
+    {
+      "text": "the",
+      "start": 50.38,
+      "end": 50.54,
+      "sentence": 9,
+      "confidence": 1.0
+    },
+    {
+      "text": "death",
+      "start": 50.54,
+      "end": 50.72,
+      "sentence": 9,
+      "confidence": 1.0
+    },
+    {
+      "text": "rate",
+      "start": 50.72,
+      "end": 50.92,
+      "sentence": 9,
+      "confidence": 1.0
+    },
+    {
+      "text": "for",
+      "start": 50.92,
+      "end": 51.1,
+      "sentence": 9,
+      "confidence": 1.0
+    },
+    {
+      "text": "the",
+      "start": 51.1,
+      "end": 51.2,
+      "sentence": 9,
+      "confidence": 1.0
+    },
+    {
+      "text": "poor",
+      "start": 51.2,
+      "end": 51.44,
+      "sentence": 9,
+      "confidence": 1.0
+    },
+    {
+      "text": "Her",
+      "start": 52.2,
+      "end": 52.52,
+      "sentence": 10,
+      "confidence": 1.0
+    },
+    {
+      "text": "job",
+      "start": 52.52,
+      "end": 52.8,
+      "sentence": 10,
+      "confidence": 1.0
+    },
+    {
+      "text": "was",
+      "start": 52.8,
+      "end": 52.98,
+      "sentence": 10,
+      "confidence": 1.0
+    },
+    {
+      "text": "hard",
+      "start": 52.98,
+      "end": 53.36,
+      "sentence": 10,
+      "confidence": 1.0
+    },
+    {
+      "text": "but",
+      "start": 53.36,
+      "end": 53.78,
+      "sentence": 10,
+      "confidence": 1.0
+    },
+    {
+      "text": "worthwhile",
+      "start": 53.78,
+      "end": 54.2,
+      "sentence": 10,
+      "confidence": 1.0
+    },
+    {
+      "text": "She",
+      "start": 55.24,
+      "end": 55.34,
+      "sentence": 11,
+      "confidence": 1.0
+    },
+    {
+      "text": "often",
+      "start": 55.34,
+      "end": 55.58,
+      "sentence": 11,
+      "confidence": 1.0
+    },
+    {
+      "text": "refers",
+      "start": 55.58,
+      "end": 55.92,
+      "sentence": 11,
+      "confidence": 1.0
+    },
+    {
+      "text": "to",
+      "start": 55.92,
+      "end": 56.14,
+      "sentence": 11,
+      "confidence": 1.0
+    },
+    {
+      "text": "the",
+      "start": 56.14,
+      "end": 56.26,
+      "sentence": 11,
+      "confidence": 1.0
+    },
+    {
+      "text": "connection",
+      "start": 56.26,
+      "end": 56.58,
+      "sentence": 11,
+      "confidence": 1.0
+    },
+    {
+      "text": "between",
+      "start": 56.58,
+      "end": 56.96,
+      "sentence": 11,
+      "confidence": 1.0
+    },
+    {
+      "text": "her",
+      "start": 56.96,
+      "end": 57.14,
+      "sentence": 11,
+      "confidence": 1.0
+    },
+    {
+      "text": "achievement",
+      "start": 57.14,
+      "end": 57.5,
+      "sentence": 11,
+      "confidence": 1.0
+    },
+    {
+      "text": "and",
+      "start": 57.5,
+      "end": 58.1,
+      "sentence": 11,
+      "confidence": 1.0
+    },
+    {
+      "text": "Lin",
+      "start": 58.1,
+      "end": 58.34,
+      "sentence": 11,
+      "confidence": 0.57
+    },
+    {
+      "text": "Qiaozhi",
+      "start": 58.34,
+      "end": 58.42,
+      "sentence": 11,
+      "confidence": 0.0
+    },
+    {
+      "text": "and",
+      "start": 59.32,
+      "end": 59.56,
+      "sentence": 11,
+      "confidence": 1.0
+    },
+    {
+      "text": "says",
+      "start": 59.56,
+      "end": 59.78,
+      "sentence": 11,
+      "confidence": 1.0
+    },
+    {
+      "text": "that",
+      "start": 59.78,
+      "end": 60.02,
+      "sentence": 11,
+      "confidence": 1.0
+    },
+    {
+      "text": "her",
+      "start": 60.02,
+      "end": 60.14,
+      "sentence": 11,
+      "confidence": 1.0
+    },
+    {
+      "text": "poor",
+      "start": 60.14,
+      "end": 60.4,
+      "sentence": 11,
+      "confidence": 1.0
+    },
+    {
+      "text": "childhood",
+      "start": 60.4,
+      "end": 60.9,
+      "sentence": 11,
+      "confidence": 1.0
+    },
+    {
+      "text": "is",
+      "start": 60.9,
+      "end": 61.38,
+      "sentence": 11,
+      "confidence": 1.0
+    },
+    {
+      "text": "the",
+      "start": 61.38,
+      "end": 61.54,
+      "sentence": 11,
+      "confidence": 1.0
+    },
+    {
+      "text": "bond",
+      "start": 61.54,
+      "end": 61.86,
+      "sentence": 11,
+      "confidence": 1.0
+    },
+    {
+      "text": "between",
+      "start": 61.86,
+      "end": 62.22,
+      "sentence": 11,
+      "confidence": 1.0
+    },
+    {
+      "text": "her",
+      "start": 62.22,
+      "end": 62.56,
+      "sentence": 11,
+      "confidence": 1.0
+    },
+    {
+      "text": "and",
+      "start": 62.56,
+      "end": 63.04,
+      "sentence": 11,
+      "confidence": 1.0
+    },
+    {
+      "text": "the",
+      "start": 63.04,
+      "end": 63.16,
+      "sentence": 11,
+      "confidence": 1.0
+    },
+    {
+      "text": "poor",
+      "start": 63.16,
+      "end": 63.24,
+      "sentence": 11,
+      "confidence": 0.0
+    }
+  ]
+}
