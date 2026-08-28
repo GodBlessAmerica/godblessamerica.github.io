@@ -1,50 +1,64 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>test</title>
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#05070a" />
+  <title>For Freedom. For Dreams.</title>
   <style>
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      width: 100%;
+      min-height: 100%;
+    }
+
     body {
-      max-width: 800px;
-      margin: 60px auto;
-      padding: 0 20px;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
-                   "Microsoft YaHei", sans-serif;
-      line-height: 1.8;
-      color: #333;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(65, 105, 225, 0.16), transparent 34%),
+        radial-gradient(circle at 80% 70%, rgba(32, 178, 170, 0.10), transparent 32%),
+        linear-gradient(145deg, #030507 0%, #080c12 48%, #05070a 100%);
+      color: #fff;
+      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
+      background-size: 52px 52px;
+      mask-image: radial-gradient(circle at center, black, transparent 80%);
     }
 
     h1 {
-      color: #222;
-    }
-
-    article {
-      margin-top: 40px;
-      padding-top: 20px;
-      border-top: 1px solid #ddd;
-    }
-
-    a {
-      color: #0969da;
-      text-decoration: none;
+      position: relative;
+      z-index: 1;
+      margin: 0;
+      padding: 32px;
+      text-align: center;
+      font-size: clamp(46px, 8vw, 120px);
+      line-height: 1.05;
+      letter-spacing: -0.05em;
+      font-weight: 700;
+      background: linear-gradient(110deg, #ffffff 12%, #dfe8f5 52%, #91a8c7 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: 0 18px 60px rgba(0,0,0,0.35);
     }
   </style>
 </head>
-
 <body>
-  <!-- <header>
-    <h1>test</h1>
-    <p>test</p>
-  </header>
-
-  <main>
-    <article>
-      <h2>test</h2>
-      <p>time：2026 7 28 </p>
-      <p>test</p>
-    </article>
-  </main> -->
+  <h1>For Freedom. For Dreams.</h1>
 </body>
 </html>
