@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="浏览器本地 PGP 加密、解密、签名、验签、密钥生成与 ASC 文件识别工具">
+  <title>PGP 加密工具</title>
+  <style>
+    :root{color-scheme:light;--background:#f4f7fb;--surface:#fff;--text:#172033;--muted:#667085;--primary:#2563eb;--primary-hover:#1d4ed8;--border:#dce3ee;--success:#087a3e;--error:#c62828;--warning:#9a6700;--soft:#eff6ff;--shadow:0 16px 45px rgba(31,41,55,.09)}
+    *{box-sizing:border-box} body{min-height:100vh;margin:0;padding:32px 20px;color:var(--text);background:radial-gradient(circle at top left,#e8f1ff 0,transparent 32%),var(--background);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft YaHei",sans-serif}.container{width:min(100%,1100px);margin:0 auto}.back-link{display:inline-flex;align-items:center;margin-bottom:18px;color:var(--primary);font-weight:600;text-decoration:none}.back-link:hover{text-decoration:underline}.box{padding:26px;background:var(--surface);border:1px solid rgba(220,227,238,.9);border-radius:18px;box-shadow:var(--shadow)}h1{margin:0;font-size:clamp(27px,5vw,36px);text-align:center;letter-spacing:-.03em}.tip{margin:10px auto 20px;max-width:820px;color:var(--muted);text-align:center;line-height:1.7}.privacy{margin:0 0 22px;padding:13px 15px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:12px;color:#166534;font-size:14px;line-height:1.65}.tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px;padding:6px;background:#f6f8fb;border:1px solid var(--border);border-radius:13px}.tab{flex:1 1 125px;min-height:42px;padding:9px 13px;color:var(--text);background:transparent;border:0;border-radius:9px;cursor:pointer;font-size:14px;font-weight:700}.tab.active{color:#fff;background:var(--primary)}.panel{display:none}.panel.active{display:block}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.full{grid-column:1/-1}.label{display:block;margin:4px 0 8px;font-weight:700}.small{margin:6px 0 0;color:var(--muted);font-size:12px;line-height:1.55}textarea,input[type=text],input[type=email],input[type=password]{width:100%;padding:12px 13px;color:var(--text);background:#fbfcfe;border:1px solid var(--border);border-radius:10px;outline:none;font:14px/1.6 ui-monospace,SFMono-Regular,Consolas,"Liberation Mono",monospace}input[type=text],input[type=email],input[type=password]{font-family:inherit}textarea{min-height:160px;resize:vertical}textarea.tall{min-height:230px}textarea:focus,input:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(37,99,235,.12)}.buttons{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0}.buttons.center{justify-content:center}button.action{min-height:42px;padding:10px 17px;color:#fff;background:var(--primary);border:0;border-radius:10px;cursor:pointer;font-size:14px;font-weight:700}button.action:hover{background:var(--primary-hover)}button.secondary{background:#667085}button.secondary:hover{background:#4b5563}.status{min-height:22px;margin:12px 0 0;font-size:14px;line-height:1.6}.status.success{color:var(--success)}.status.error{color:var(--error)}.status.warning{color:var(--warning)}.dropzone{padding:28px 18px;border:2px dashed #b8c4d8;border-radius:13px;background:#fbfcfe;text-align:center;cursor:pointer}.dropzone.drag{border-color:var(--primary);background:var(--soft)}.dropzone input{display:none}.result-card{margin-top:16px;padding:16px;background:#f8fafc;border:1px solid var(--border);border-radius:12px;line-height:1.7;word-break:break-word}.result-card strong{display:inline-block;min-width:110px}.danger{color:var(--error)}.keypair{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}.note{margin:22px 0 0;color:var(--muted);font-size:13px;line-height:1.7}.loading{opacity:.65;pointer-events:none}@media(max-width:760px){body{padding:22px 12px}.box{padding:20px 15px}.grid,.keypair{grid-template-columns:1fr}.full{grid-column:auto}.tab{flex-basis:30%}textarea{min-height:145px}}
+  </style>
+</head>
+<body>
+<main class="container">
+  <a class="back-link" href="../">← 返回工具箱</a>
+  <section class="box" id="app">
+    <h1>PGP 加密工具</h1>
+    <p class="tip">生成密钥、识别 ASC、加密 / 解密文本、签名 / 验签。适合处理 Proton Mail、GnuPG、OpenPGP 等兼容数据。</p>
+    <div class="privacy">🔒 <strong>隐私说明：</strong>文本、密钥和口令在当前浏览器内处理，本页面不会主动上传这些内容。私钥默认不会写入 localStorage。使用真实私钥前，请确认浏览器与设备可信。</div>
+
+    <nav class="tabs" aria-label="PGP 功能">
+      <button class="tab active" data-panel="identify">ASC 识别</button>
+      <button class="tab" data-panel="encrypt">加密</button>
+      <button class="tab" data-panel="decrypt">解密</button>
+      <button class="tab" data-panel="sign">签名</button>
+      <button class="tab" data-panel="verify">验签</button>
+      <button class="tab" data-panel="generate">生成密钥</button>
+    </nav>
+
+    <section class="panel active" id="identify">
+      <label class="label">粘贴 ASC 内容或拖入 .asc / .pgp / .gpg 文件</label>
+      <div class="dropzone" id="dropzone"><input id="ascFile" type="file" accept=".asc,.pgp,.gpg,.txt"><div><strong>点击选择文件</strong> 或拖到这里</div><div class="small">也可以直接粘贴到下方文本框</div></div>
+      <textarea class="tall" id="identifyInput" spellcheck="false" placeholder="-----BEGIN PGP PUBLIC KEY BLOCK-----\n...\n或 -----BEGIN PGP SIGNATURE-----"></textarea>
+      <div class="buttons"><button class="action" id="identifyBtn">识别内容</button><button class="action secondary" data-clear="identifyInput">清空</button></div>
+      <div class="status" id="identifyStatus"></div><div id="identifyResult"></div>
+    </section>
+
+    <section class="panel" id="encrypt">
+      <div class="grid"><div class="full"><label class="label">对方公钥</label><textarea id="encryptPublicKey" spellcheck="false" placeholder="-----BEGIN PGP PUBLIC KEY BLOCK-----"></textarea></div><div class="full"><label class="label">要发送的明文</label><textarea id="encryptText" spellcheck="false" placeholder="输入要加密给对方的内容……"></textarea></div><div><label class="label">你的私钥（可选，用于同时签名）</label><textarea id="encryptPrivateKey" spellcheck="false" placeholder="不需要签名可留空"></textarea></div><div><label class="label">私钥口令（可选）</label><input type="password" id="encryptPassphrase" autocomplete="off" placeholder="私钥有密码时填写"><p class="small">仅用于本次操作，不保存。</p></div></div>
+      <div class="buttons"><button class="action" id="encryptBtn">加密</button><button class="action secondary" data-copy="encryptOutput">复制结果</button><button class="action secondary" data-download="encryptOutput" data-filename="encrypted-message.asc">下载 .asc</button></div>
+      <label class="label">加密结果</label><textarea class="tall" id="encryptOutput" readonly spellcheck="false" placeholder="-----BEGIN PGP MESSAGE-----"></textarea><div class="status" id="encryptStatus"></div>
+    </section>
+
+    <section class="panel" id="decrypt">
+      <div class="grid"><div class="full"><label class="label">PGP 加密消息</label><textarea class="tall" id="decryptMessage" spellcheck="false" placeholder="-----BEGIN PGP MESSAGE-----"></textarea></div><div><label class="label">你的私钥</label><textarea id="decryptPrivateKey" spellcheck="false" placeholder="-----BEGIN PGP PRIVATE KEY BLOCK-----"></textarea></div><div><label class="label">私钥口令</label><input type="password" id="decryptPassphrase" autocomplete="off" placeholder="没有口令可留空"><label class="label" style="margin-top:14px">发送方公钥（可选，用于验证签名）</label><textarea id="decryptVerifyKey" spellcheck="false" placeholder="对方公钥，可留空"></textarea></div></div>
+      <div class="buttons"><button class="action" id="decryptBtn">解密</button><button class="action secondary" data-copy="decryptOutput">复制明文</button></div><label class="label">解密结果</label><textarea id="decryptOutput" readonly spellcheck="false"></textarea><div class="status" id="decryptStatus"></div>
+    </section>
+
+    <section class="panel" id="sign">
+      <div class="grid"><div class="full"><label class="label">要签名的原文</label><textarea id="signText" spellcheck="false"></textarea></div><div><label class="label">你的私钥</label><textarea id="signPrivateKey" spellcheck="false" placeholder="-----BEGIN PGP PRIVATE KEY BLOCK-----"></textarea></div><div><label class="label">私钥口令</label><input type="password" id="signPassphrase" autocomplete="off" placeholder="没有口令可留空"><p class="small">生成 detached signature（分离签名），适合单独作为 .asc 附件发送。</p></div></div>
+      <div class="buttons"><button class="action" id="signBtn">生成签名</button><button class="action secondary" data-copy="signOutput">复制签名</button><button class="action secondary" data-download="signOutput" data-filename="signature.asc">下载 signature.asc</button></div><label class="label">签名结果</label><textarea class="tall" id="signOutput" readonly spellcheck="false" placeholder="-----BEGIN PGP SIGNATURE-----"></textarea><div class="status" id="signStatus"></div>
+    </section>
+
+    <section class="panel" id="verify">
+      <div class="grid"><div class="full"><label class="label">被签名的原文</label><textarea id="verifyText" spellcheck="false"></textarea></div><div><label class="label">发送方公钥</label><textarea id="verifyPublicKey" spellcheck="false" placeholder="-----BEGIN PGP PUBLIC KEY BLOCK-----"></textarea></div><div><label class="label">分离签名</label><textarea id="verifySignature" spellcheck="false" placeholder="-----BEGIN PGP SIGNATURE-----"></textarea></div></div>
+      <div class="buttons"><button class="action" id="verifyBtn">验证签名</button></div><div class="status" id="verifyStatus"></div>
+    </section>
+
+    <section class="panel" id="generate">
+      <div class="grid"><div><label class="label">姓名 / 标识</label><input type="text" id="genName" placeholder="例如 Frank"></div><div><label class="label">邮箱</label><input type="email" id="genEmail" placeholder="name@example.com"></div><div class="full"><label class="label">私钥保护口令</label><input type="password" id="genPassphrase" autocomplete="new-password" placeholder="建议使用较长且唯一的口令"><p class="small">生成 Curve25519 密钥。请把私钥和口令分别安全备份；私钥丢失后无法恢复已加密数据。</p></div></div>
+      <div class="buttons"><button class="action" id="generateBtn">生成 PGP 密钥对</button></div><div class="status" id="generateStatus"></div>
+      <div class="keypair"><div><label class="label">公钥（可公开给别人）</label><textarea class="tall" id="generatedPublic" readonly></textarea><div class="buttons"><button class="action secondary" data-copy="generatedPublic">复制公钥</button><button class="action secondary" data-download="generatedPublic" data-filename="public-key.asc">下载公钥</button></div></div><div><label class="label danger">私钥（绝对不要发给别人）</label><textarea class="tall" id="generatedPrivate" readonly></textarea><div class="buttons"><button class="action secondary" data-copy="generatedPrivate">复制私钥</button><button class="action secondary" data-download="generatedPrivate" data-filename="private-key.asc">下载私钥</button></div></div></div>
+    </section>
+
+    <p class="note">PGP 的关键规则：给别人加密时使用<strong>对方公钥</strong>；解密别人发给你的内容使用<strong>你的私钥</strong>；签名使用<strong>你的私钥</strong>；验签使用<strong>发送方公钥</strong>。收到公钥后应通过可信渠道核对 Fingerprint。</p>
+  </section>
+</main>
+<script type="module">
+import * as openpgp from 'https://cdn.jsdelivr.net/npm/openpgp@6.3.1/dist/openpgp.min.mjs';
+
+const $=id=>document.getElementById(id), app=$('app');
+function status(id,text,type='success'){const el=$(id);el.textContent=text;el.className='status '+type}
+function busy(on){app.classList.toggle('loading',on)}
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+async function copy(id){const v=$(id).value;if(!v)return;try{await navigator.clipboard.writeText(v)}catch{const el=$(id);el.removeAttribute('readonly');el.select();document.execCommand('copy');el.setAttribute('readonly','')}}
+function download(id,name){const v=$(id).value;if(!v)return;const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([v],{type:'text/plain;charset=utf-8'}));a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)}
+async function unlockedPrivate(armored,passphrase){let key=await openpgp.readPrivateKey({armoredKey:armored.trim()});if(!key.isDecrypted()){if(!passphrase)throw new Error('该私钥已加密，请输入私钥口令');key=await openpgp.decryptKey({privateKey:key,passphrase})}return key}
+function fingerprint(key){return key.getFingerprint().toUpperCase().match(/.{1,4}/g).join(' ')}
+function userText(key){const u=key.getUserIDs();return u.length?u.join(' / '):'未包含 User ID'}
+
+for(const tab of document.querySelectorAll('.tab'))tab.addEventListener('click',()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));document.querySelectorAll('.panel').forEach(x=>x.classList.remove('active'));tab.classList.add('active');$(tab.dataset.panel).classList.add('active')});
+document.querySelectorAll('[data-copy]').forEach(b=>b.addEventListener('click',()=>copy(b.dataset.copy)));
+document.querySelectorAll('[data-download]').forEach(b=>b.addEventListener('click',()=>download(b.dataset.download,b.dataset.filename)));
+document.querySelectorAll('[data-clear]').forEach(b=>b.addEventListener('click',()=>{$(b.dataset.clear).value='';$('identifyResult').innerHTML='';status('identifyStatus','')}));
+
+async function identify(){const raw=$('identifyInput').value.trim();if(!raw){status('identifyStatus','请先粘贴或选择文件','error');return}busy(true);$('identifyResult').innerHTML='';try{let type='未知 OpenPGP 内容',detail='';if(raw.includes('-----BEGIN PGP PUBLIC KEY BLOCK-----')){const k=await openpgp.readKey({armoredKey:raw});type='PGP 公钥（Public Key）';detail=`<strong>User ID：</strong>${escapeHtml(userText(k))}<br><strong>Fingerprint：</strong><code>${escapeHtml(fingerprint(k))}</code><br><strong>用途：</strong>可以给你加密消息、验证你的签名。公钥可以公开。`}else if(raw.includes('-----BEGIN PGP PRIVATE KEY BLOCK-----')){const k=await openpgp.readPrivateKey({armoredKey:raw});type='PGP 私钥（Private Key）';detail=`<strong>User ID：</strong>${escapeHtml(userText(k))}<br><strong>Fingerprint：</strong><code>${escapeHtml(fingerprint(k))}</code><br><strong>状态：</strong>${k.isDecrypted()?'当前未加口令锁定或已处于解锁格式':'受口令保护'}<br><strong class="danger">用途：</strong>解密和签名。不要发送给任何人。`}else if(raw.includes('-----BEGIN PGP SIGNATURE-----')){await openpgp.readSignature({armoredSignature:raw});type='PGP 数字签名（Signature）';detail='<strong>用途：</strong>用于验证某段原文是否由对应私钥持有人签署、内容是否被修改。<br><strong>注意：</strong>它不是公钥，不能用来给对方加密。'}else if(raw.includes('-----BEGIN PGP MESSAGE-----')){await openpgp.readMessage({armoredMessage:raw});type='PGP 加密消息（Message）';detail='<strong>用途：</strong>需要匹配的私钥才能解密。'}else if(raw.includes('-----BEGIN PGP SIGNED MESSAGE-----')){type='PGP Cleartext Signed Message';detail='<strong>用途：</strong>明文签名消息，可使用发送方公钥验签。'}else{throw new Error('未找到常见 ASCII Armor 头，可能是二进制 PGP 数据或不是 PGP 内容')} $('identifyResult').innerHTML=`<div class="result-card"><strong>识别结果：</strong>${escapeHtml(type)}<br>${detail}</div>`;status('identifyStatus','识别完成')}catch(e){status('identifyStatus','识别失败：'+e.message,'error')}finally{busy(false)}}
+$('identifyBtn').addEventListener('click',identify);
+const dz=$('dropzone'),file=$('ascFile');dz.addEventListener('click',()=>file.click());['dragenter','dragover'].forEach(ev=>dz.addEventListener(ev,e=>{e.preventDefault();dz.classList.add('drag')}));['dragleave','drop'].forEach(ev=>dz.addEventListener(ev,e=>{e.preventDefault();dz.classList.remove('drag')}));dz.addEventListener('drop',e=>loadFile(e.dataTransfer.files[0]));file.addEventListener('change',()=>loadFile(file.files[0]));async function loadFile(f){if(!f)return;if(f.size>5*1024*1024){status('identifyStatus','文件过大，本工具主要用于小型 PGP/ASC 文本','error');return}$('identifyInput').value=await f.text();identify()}
+
+$('encryptBtn').addEventListener('click',async()=>{busy(true);status('encryptStatus','正在处理…','warning');try{const pub=await openpgp.readKey({armoredKey:$('encryptPublicKey').value.trim()});const opts={message:await openpgp.createMessage({text:$('encryptText').value}),encryptionKeys:pub,format:'armored'};if($('encryptPrivateKey').value.trim())opts.signingKeys=await unlockedPrivate($('encryptPrivateKey').value,$('encryptPassphrase').value);$('encryptOutput').value=await openpgp.encrypt(opts);status('encryptStatus',opts.signingKeys?'加密并签名成功':'加密成功')}catch(e){status('encryptStatus','失败：'+e.message,'error')}finally{busy(false)}});
+
+$('decryptBtn').addEventListener('click',async()=>{busy(true);status('decryptStatus','正在处理…','warning');try{const priv=await unlockedPrivate($('decryptPrivateKey').value,$('decryptPassphrase').value);const msg=await openpgp.readMessage({armoredMessage:$('decryptMessage').value.trim()});const opts={message:msg,decryptionKeys:priv,format:'utf8'};if($('decryptVerifyKey').value.trim())opts.verificationKeys=await openpgp.readKey({armoredKey:$('decryptVerifyKey').value.trim()});const res=await openpgp.decrypt(opts);$('decryptOutput').value=res.data;let text='解密成功';if(opts.verificationKeys){if(!res.signatures?.length)text+='；消息中未发现可验证签名';else{await Promise.all(res.signatures.map(s=>s.verified));text+='；签名验证通过'}}status('decryptStatus',text)}catch(e){$('decryptOutput').value='';status('decryptStatus','失败：'+e.message,'error')}finally{busy(false)}});
+
+$('signBtn').addEventListener('click',async()=>{busy(true);status('signStatus','正在处理…','warning');try{const priv=await unlockedPrivate($('signPrivateKey').value,$('signPassphrase').value);$('signOutput').value=await openpgp.sign({message:await openpgp.createMessage({text:$('signText').value}),signingKeys:priv,detached:true,format:'armored'});status('signStatus','分离签名生成成功')}catch(e){status('signStatus','失败：'+e.message,'error')}finally{busy(false)}});
+
+$('verifyBtn').addEventListener('click',async()=>{busy(true);status('verifyStatus','正在验证…','warning');try{const pub=await openpgp.readKey({armoredKey:$('verifyPublicKey').value.trim()});const sig=await openpgp.readSignature({armoredSignature:$('verifySignature').value.trim()});const res=await openpgp.verify({message:await openpgp.createMessage({text:$('verifyText').value}),signature:sig,verificationKeys:pub});if(!res.signatures.length)throw new Error('没有发现签名');await Promise.all(res.signatures.map(s=>s.verified));status('verifyStatus','✓ 签名有效：原文与签名匹配，且可由该公钥验证')}catch(e){status('verifyStatus','✗ 签名验证失败：'+e.message,'error')}finally{busy(false)}});
+
+$('generateBtn').addEventListener('click',async()=>{const name=$('genName').value.trim(),email=$('genEmail').value.trim(),passphrase=$('genPassphrase').value;if(!name||!email){status('generateStatus','姓名和邮箱都需要填写','error');return}if(!passphrase){status('generateStatus','建议设置私钥口令；为避免误生成裸私钥，请填写口令','error');return}busy(true);status('generateStatus','正在生成密钥…','warning');try{const r=await openpgp.generateKey({type:'ecc',curve:'curve25519',userIDs:[{name,email}],passphrase,format:'armored'});$('generatedPublic').value=r.publicKey;$('generatedPrivate').value=r.privateKey;const k=await openpgp.readKey({armoredKey:r.publicKey});status('generateStatus','密钥生成成功。Fingerprint：'+fingerprint(k))}catch(e){status('generateStatus','生成失败：'+e.message,'error')}finally{busy(false)}});
+</script>
+</body>
+</html>
