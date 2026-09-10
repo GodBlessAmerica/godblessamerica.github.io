@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Bitcoin Wallet Generator</title>
+<link rel="stylesheet" href="bitcoin.css">
+</head>
+<body>
+<div class="box">
+<h1>₿ Bitcoin Wallet Generator</h1>
+<p class="tip">离线优先：不联网、不上传私钥。真实钱包建议断网运行。</p>
+<select id="type">
+<option>Legacy (P2PKH)</option>
+<option>SegWit (P2SH-P2WPKH)</option>
+<option>Native SegWit (Bech32)</option>
+<option>Taproot</option>
+</select>
+<button onclick="generate()">生成随机私钥</button>
+<h3>Private Key HEX</h3>
+<textarea id="priv" readonly></textarea>
+<h3>Address</h3>
+<textarea id="addr" readonly></textarea>
+<p>完整版将加入 BIP39 / BIP32 / BIP44 / BIP84 / BIP86。</p>
+</div>
+<script src="bitcoin.js"></script>
+</body>
+</html>
