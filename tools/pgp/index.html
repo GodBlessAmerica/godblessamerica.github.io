@@ -2,6 +2,7 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'none'; object-src 'none'; base-uri 'self'; form-action 'none'; frame-ancestors 'none'">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="浏览器本地 PGP 加密、解密、签名、验签、密钥生成与 ASC 文件识别工具">
   <title>PGP 加密工具</title>
@@ -16,7 +17,7 @@
   <section class="box" id="app">
     <h1>PGP 加密工具</h1>
     <p class="tip">生成密钥、识别 ASC、加密 / 解密文本、签名 / 验签。适合处理 Proton Mail、GnuPG、OpenPGP 等兼容数据。</p>
-    <div class="privacy">🔒 <strong>隐私说明：</strong>文本、密钥和口令在当前浏览器内处理，本页面不会主动上传这些内容。私钥默认不会写入 localStorage。使用真实私钥前，请确认浏览器与设备可信。</div>
+    <div class="privacy">🔒 <strong>隐私说明：</strong>文本、密钥和口令只在当前浏览器内处理，本页面不会主动上传这些内容，也不会加载第三方运行脚本。OpenPGP.js 6.3.1 已固定存放在本站目录中；页面同时禁止脚本发起网络连接。私钥默认不会写入 localStorage。使用真实私钥前，请确认浏览器与设备可信。</div>
 
     <nav class="tabs" aria-label="PGP 功能">
       <button class="tab active" data-panel="identify">ASC 识别</button>
@@ -66,7 +67,7 @@
   </section>
 </main>
 <script type="module">
-import * as openpgp from 'https://cdn.jsdelivr.net/npm/openpgp@6.3.1/dist/openpgp.min.mjs';
+import * as openpgp from './lib/openpgp.min.mjs';
 
 const $=id=>document.getElementById(id), app=$('app');
 function status(id,text,type='success'){const el=$(id);el.textContent=text;el.className='status '+type}
