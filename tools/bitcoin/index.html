@@ -3,25 +3,34 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Bitcoin Wallet Generator</title>
+<title>Bitcoin Cold Wallet Generator</title>
 <link rel="stylesheet" href="bitcoin.css">
 </head>
 <body>
 <div class="box">
-<h1>₿ Bitcoin Wallet Generator</h1>
-<p class="tip">离线优先：不联网、不上传私钥。真实钱包建议断网运行。</p>
+<h1>₿ Bitcoin Cold Wallet Generator</h1>
+<p class="tip">离线优先：不联网、不上传、不保存私钥。生成真实资产前请断开网络。</p>
+
+<label>地址类型</label>
 <select id="type">
-<option>Legacy (P2PKH)</option>
-<option>SegWit (P2SH-P2WPKH)</option>
-<option>Native SegWit (Bech32)</option>
-<option>Taproot</option>
+<option value="legacy">Legacy (P2PKH 1...)</option>
+<option value="segwit">SegWit (P2SH-P2WPKH 3...)</option>
+<option value="native">Native SegWit (bc1q...)</option>
+<option value="taproot">Taproot (bc1p...)</option>
 </select>
-<button onclick="generate()">生成随机私钥</button>
+
+<button onclick="generate()">生成钱包熵</button>
+
 <h3>Private Key HEX</h3>
 <textarea id="priv" readonly></textarea>
+
 <h3>Address</h3>
 <textarea id="addr" readonly></textarea>
-<p>完整版将加入 BIP39 / BIP32 / BIP44 / BIP84 / BIP86。</p>
+
+<div class="tip">
+当前版本：离线随机熵模块。<br>
+后续版本加入 secp256k1、Base58Check、Bech32、BIP39、BIP32、BIP84、BIP86。
+</div>
 </div>
 <script src="bitcoin.js"></script>
 </body>
