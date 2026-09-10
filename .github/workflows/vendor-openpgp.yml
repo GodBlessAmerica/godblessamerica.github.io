@@ -38,3 +38,5 @@ jobs:
             git commit -m 'Vendor OpenPGP.js 6.3.1 browser bundle'
             git push
           fi
+
+# One-shot vendoring workflow. Remove after the bundle is committed.
