@@ -47,8 +47,8 @@
     </section>
 
     <section class="panel" id="sign">
-      <div class="grid"><div class="full"><label class="label">要签名的原文</label><textarea id="signText" spellcheck="false"></textarea></div><div><label class="label">你的私钥</label><textarea id="signPrivateKey" spellcheck="false" placeholder="-----BEGIN PGP PRIVATE KEY BLOCK-----"></textarea></div><div><label class="label">私钥口令</label><input type="password" id="signPassphrase" autocomplete="off" placeholder="没有口令可留空"><p class="small">生成 detached signature（分离签名），适合单独作为 .asc 附件发送。</p></div></div>
-      <div class="buttons"><button class="action" id="signBtn">生成签名</button><button class="action secondary" data-copy="signOutput">复制签名</button><button class="action secondary" data-download="signOutput" data-filename="signature.asc">下载 signature.asc</button></div><label class="label">签名结果</label><textarea class="tall" id="signOutput" readonly spellcheck="false" placeholder="-----BEGIN PGP SIGNATURE-----"></textarea><div class="status" id="signStatus"></div>
+      <div class="grid"><div class="full"><label class="label">要签名的原文</label><textarea id="signText" spellcheck="false"></textarea></div><div><label class="label">你的私钥</label><textarea id="signPrivateKey" spellcheck="false" placeholder="-----BEGIN PGP PRIVATE KEY BLOCK-----"></textarea></div><div><label class="label">私钥口令</label><input type="password" id="signPassphrase" autocomplete="off" placeholder="没有口令可留空"><p class="small">生成 detached signature（分离签名）。验签时需要：原始明文 + 分离签名 + 与该私钥对应的发送方公钥。</p></div></div>
+      <div class="buttons"><button class="action" id="signBtn">生成分离签名</button><button class="action secondary" data-copy="signOutput">复制分离签名</button><button class="action secondary" data-download="signOutput" data-filename="signature.asc">下载 signature.asc</button></div><label class="label">分离签名</label><textarea class="tall" id="signOutput" readonly spellcheck="false" placeholder="-----BEGIN PGP SIGNATURE-----"></textarea><div class="status" id="signStatus"></div>
     </section>
 
     <section class="panel" id="verify">
