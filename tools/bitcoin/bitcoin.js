@@ -55,9 +55,10 @@ async function selfTest(){
  const w=await makeWallet(p);
  const okPub=w.pub==='0279be667ef9dcbbac55a06295ce870b07029bfcdb2dce28d959f2815b16f81798';
  const okLegacy=w.legacy==='1BgGZ9tcN4rm9KBzDn7KprQz87SZ26SAMH';
- const okNative=w.native==='bc1qw508d6qejxtdg4y5r3zarvary0c5xw7kygt080';
+ const okNested=w.nested==='3JvL6Ymt8MVWiCNHC7oWU6nLeHNJKLZGLN';
+ const okNative=w.native==='bc1qw508d6qejxtdg4y5r3zarvary0c5xw7kv8f3t4';
  const el=document.getElementById('selftest');
- el.textContent=(okPub&&okLegacy&&okNative)?'✓ 核心自检通过':'✗ 核心自检失败，请勿使用';
- el.className=(okPub&&okLegacy&&okNative)?'ok':'bad';
+ el.textContent=(okPub&&okLegacy&&okNested&&okNative)?'✓ 核心自检通过':'✗ 核心自检失败，请勿使用';
+ el.className=(okPub&&okLegacy&&okNested&&okNative)?'ok':'bad';
 }
 window.addEventListener('DOMContentLoaded',selfTest);
