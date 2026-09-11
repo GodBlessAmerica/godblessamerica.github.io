@@ -1,18 +1,3 @@
-// Base58 alphabet used by Bitcoin
 const BASE58_ALPHABET='123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz';
-
-function base58Encode(bytes){
- let hex='';
- for(const b of bytes) hex+=b.toString(16).padStart(2,'0');
- let num=BigInt('0x'+hex);
- let out='';
- while(num>0n){
-  const r=num%58n;
-  out=BASE58_ALPHABET[Number(r)]+out;
-  num=num/58n;
- }
- for(const b of bytes){
-  if(b===0) out='1'+out; else break;
- }
- return out;
-}
+function base58Encode(bytes){let h='';for(const b of bytes)h+=b.toString(16).padStart(2,'0');let n=h?BigInt('0x'+h):0n,out='';while(n){const r=n%58n;out=BASE58_ALPHABET[Number(r)]+out;n/=58n}for(const b of bytes){if(b===0)out='1'+out;else break}return out}
+async function base58Check(version,payload){const body=new Uint8Array(1+payload.length);body[0]=version;body.set(payload,1);const chk=(await doubleSha256(body)).slice(0,4);const all=new Uint8Array(body.length+4);all.set(body);all.set(chk,body.length);return base58Encode(all)}
