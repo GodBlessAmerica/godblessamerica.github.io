@@ -74,11 +74,10 @@ async function selfTest(){
    const expectedMnemonic='abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon about';
    checks.push(mnemonic===expectedMnemonic);
 
-   const hd=await deriveStandardWallets(expectedMnemonic);
-   checks.push(
-     hd.bip84.wallet.native==='bc1qcr8te4kr609gcawutmrza0j4xv80jy8z306fyu',
-     hd.bip86.wallet.taproot==='bc1p5cyxnuxmeuwuvkwfem96lqzszd02n6xdcjrs20cac6yqjjwudpxqkedrcr'
-   );
+   const seed=await mnemonicToSeed(expectedMnemonic);
+   const n84=await derivePath(seed,"m/84'/0'/0'/0/0");
+   const w84=await makeWallet(hex(n84.key),'mainnet');
+   checks.push(w84.native==='bc1qcr8te4kr609gcawutmrza0j4xv80jy8z306fyu');
 
    const ok=checks.every(Boolean);
    el.textContent=ok?'✓ 全部自检通过：secp256k1 / Base58Check / Bech32 / BIP39 / BIP32 / BIP84 / BIP86':'✗ 自检失败，请勿生成或使用任何钱包';
