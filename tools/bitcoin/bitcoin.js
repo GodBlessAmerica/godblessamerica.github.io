@@ -110,6 +110,42 @@ async function generateAll(){
    document.getElementById('bip49').value=hd.bip49.wallet.nested+"\nPrivate: "+hd.bip49.privateKey;
    document.getElementById('bip84').value=hd.bip84.wallet.native+"\nPrivate: "+hd.bip84.privateKey;
    document.getElementById('bip86').value=hd.bip86.wallet.taproot+"\nPrivate: "+hd.bip86.privateKey;
+   renderAddressCards(w,hd);
  }catch(e){alert('生成失败：'+e.message)}
  finally{btn.disabled=false}
+}
+
+function currentData(){
+ const ids=['mnemonic','priv','wif','pub','legacy','segwit','native','taproot','bip44','bip49','bip84','bip86'];
+ const o={}; for(const id of ids)o[id]=document.getElementById(id)?.value||'';
+ return o;
+}
+async function copyField(id){
+ const el=document.getElementById(id); if(!el||!el.value)return;
+ await navigator.clipboard.writeText(el.value);
+}
+function downloadBlob(name,type,text){
+ const blob=new Blob([text],{type}),url=URL.createObjectURL(blob),a=document.createElement('a');
+ a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
+}
+function downloadJSON(){downloadBlob('bitcoin-wallet-backup.json','application/json',JSON.stringify(currentData(),null,2))}
+function csvEscape(v){return '"'+String(v).replace(/"/g,'""')+'"'}
+function downloadCSV(){
+ const d=currentData(), rows=[['field','value'],...Object.entries(d)];
+ downloadBlob('bitcoin-wallet-backup.csv','text/csv;charset=utf-8',rows.map(r=>r.map(csvEscape).join(',')).join('\n'));
+}
+
+function renderAddressCards(w,hd){
+ const area=document.getElementById('qrArea');
+ area.innerHTML='';
+ const items=[
+  ['Legacy',w.legacy],['Nested SegWit',w.nested],['Native SegWit',w.native],['Taproot',w.taproot],
+  ['BIP44',hd.bip44.wallet.legacy],['BIP49',hd.bip49.wallet.nested],['BIP84',hd.bip84.wallet.native],['BIP86',hd.bip86.wallet.taproot]
+ ];
+ for(const [name,value] of items){
+  const card=document.createElement('div');card.className='addr-card';
+  const t=document.createElement('strong');t.textContent=name;
+  const v=document.createElement('code');v.textContent=value;
+  card.append(t,v);area.appendChild(card);
+ }
 }
