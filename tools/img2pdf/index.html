@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="图片无损合并为 PDF。JPG 原文件直接嵌入，PNG 按原始像素无损写入；所有处理均在浏览器本地完成。">
+<title>图片无损转 PDF</title>
+<style>
+:root{color-scheme:light;--bg:#f4f7fb;--surface:#fff;--text:#172033;--muted:#667085;--primary:#2563eb;--soft:#eff6ff;--border:#e4e9f2;--danger:#dc2626;--shadow:0 16px 45px rgba(31,41,55,.08)}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(circle at top left,#e8f1ff 0,transparent 32%),var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft YaHei",sans-serif}
+.container{width:min(100% - 32px,980px);margin:auto;padding:34px 0 56px}.top{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:24px}.back{color:var(--primary);text-decoration:none;font-weight:600}.badge{font-size:13px;color:#166534;background:#dcfce7;border:1px solid #bbf7d0;padding:7px 10px;border-radius:999px}
+h1{margin:0 0 10px;font-size:clamp(30px,5vw,44px);letter-spacing:-.04em}.lead{margin:0 0 24px;color:var(--muted);line-height:1.8}
+.panel{background:var(--surface);border:1px solid var(--border);border-radius:20px;box-shadow:var(--shadow);padding:22px;margin-top:18px}
+.drop{border:2px dashed #bfd0f5;border-radius:18px;padding:38px 18px;text-align:center;background:#f8fbff;transition:.2s}.drop.drag{border-color:var(--primary);background:var(--soft)}.drop strong{display:block;font-size:18px;margin-bottom:8px}.drop p{margin:0;color:var(--muted);line-height:1.7}
+button,.button{appearance:none;border:0;border-radius:12px;padding:11px 16px;font:inherit;font-weight:700;cursor:pointer}.primary{background:var(--primary);color:white}.secondary{background:#eef2f7;color:var(--text)}.danger{background:#fff1f2;color:var(--danger)}button:disabled{opacity:.5;cursor:not-allowed}
+.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}.list{display:grid;gap:12px;margin-top:18px}.item{display:grid;grid-template-columns:72px 1fr auto;gap:14px;align-items:center;border:1px solid var(--border);border-radius:14px;padding:10px;background:white}.thumb{width:72px;height:72px;object-fit:cover;border-radius:10px;background:#eef2f7}.name{font-weight:700;overflow-wrap:anywhere}.meta{color:var(--muted);font-size:13px;margin-top:5px}.item-actions{display:flex;gap:6px}.mini{padding:8px 10px;border-radius:9px;background:#f3f4f6}.mini.del{color:var(--danger)}.empty{color:var(--muted);text-align:center;padding:16px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.field label{display:block;font-size:13px;color:var(--muted);margin-bottom:7px}.field input,.field select{width:100%;border:1px solid var(--border);border-radius:11px;padding:11px 12px;background:white;color:var(--text);font:inherit}.note{font-size:13px;color:var(--muted);line-height:1.7}.status{margin-top:14px;min-height:22px;font-size:14px}.ok{color:#15803d}.err{color:#b91c1c}
+details{margin-top:18px}.info{color:var(--muted);line-height:1.8;font-size:14px}.info b{color:var(--text)}code{background:#f3f4f6;padding:2px 5px;border-radius:5px}
+@media(max-width:640px){.container{width:min(100% - 24px,980px);padding-top:22px}.top{align-items:flex-start}.grid{grid-template-columns:1fr}.item{grid-template-columns:58px 1fr}.thumb{width:58px;height:58px}.item-actions{grid-column:1/-1;justify-content:flex-end}}
+</style>
+</head>
+<body>
+<main class="container">
+  <div class="top"><a class="back" href="../">← 返回工具箱</a><span class="badge">纯本地处理 · 不上传</span></div>
+  <h1>图片无损转 PDF</h1>
+  <p class="lead">把多张 JPG / PNG 按顺序合并为一个 PDF。默认按 <b>72 DPI</b> 处理，即 1 像素 = 1 PDF 点，与原 Python 脚本 <code>img2pdf.convert(..., dpi=72)</code> 的尺寸逻辑一致。</p>
+
+  <section class="panel">
+    <div id="drop" class="drop">
+      <strong>拖入图片，或点击选择</strong>
+      <p>支持 JPG / JPEG / PNG，可一次选择多张。图片只在当前浏览器内存中处理。</p>
+      <div class="actions" style="justify-content:center"><button id="pick" class="primary" type="button">选择图片</button></div>
+      <input id="fileInput" type="file" accept="image/jpeg,image/png,.jpg,.jpeg,.png" multiple hidden>
+    </div>
+    <div id="list" class="list"><div class="empty">还没有添加图片</div></div>
+  </section>
+
+  <section class="panel">
+    <div class="grid">
+      <div class="field"><label for="filename">PDF 文件名</label><input id="filename" value="images.pdf" spellcheck="false"></div>
+      <div class="field"><label for="dpi">页面尺寸 / DPI</label>
+        <select id="dpi"><option value="72" selected>72 DPI（1 px = 1 pt，与 Python 脚本一致）</option><option value="96">96 DPI</option><option value="150">150 DPI</option><option value="300">300 DPI</option></select>
+      </div>
+    </div>
+    <div class="actions">
+      <button id="make" class="primary" disabled>生成无损 PDF</button>
+      <button id="clear" class="secondary" disabled>清空</button>
+    </div>
+    <div id="status" class="status"></div>
+    <p class="note">“无损”指不降低图片像素尺寸、不使用有损质量参数。JPG 会尽量把原始 JPEG 数据直接嵌入 PDF；PNG 解码后以无损 Flate 数据写入，透明通道会保留为 PDF Soft Mask。PDF 文件不一定比原图片总大小更小。</p>
+  </section>
+
+  <details class="panel">
+    <summary><b>它与原来的 2pdf.py 有什么区别？</b></summary>
+    <div class="info">
+      <p>原脚本需要手工修改图片文件名，然后运行 Python；这个网页版本直接选择或拖入图片即可，还能调整顺序。</p>
+      <p><b>JPG：</b>原 JPEG 字节直接写入 PDF，不重新编码，因此不会再损失一代画质。</p>
+      <p><b>PNG：</b>保持原始分辨率并使用无损压缩写入 PDF；带透明背景的 PNG 也支持。</p>
+      <p><b>隐私：</b>页面没有上传接口，生成过程全部在浏览器本地完成。</p>
+    </div>
+  </details>
+</main>
+<script>
+(() => {
+  const $=s=>document.querySelector(s);
+  const input=$('#fileInput'), pick=$('#pick'), drop=$('#drop'), list=$('#list'), make=$('#make'), clear=$('#clear'), status=$('#status');
+  let files=[];
+
+  const esc=s=>s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const fmt=n=>n<1024?n+' B':n<1048576?(n/1024).toFixed(1)+' KB':(n/1048576).toFixed(2)+' MB';
+  const setStatus=(msg,kind='')=>{status.className='status '+kind;status.textContent=msg};
+
+  pick.onclick=()=>input.click();
+  input.onchange=()=>{addFiles([...input.files]);input.value=''};
+  ['dragenter','dragover'].forEach(e=>drop.addEventListener(e,ev=>{ev.preventDefault();drop.classList.add('drag')}));
+  ['dragleave','drop'].forEach(e=>drop.addEventListener(e,ev=>{ev.preventDefault();drop.classList.remove('drag')}));
+  drop.addEventListener('drop',e=>addFiles([...e.dataTransfer.files]));
+
+  function addFiles(arr){
+    const ok=arr.filter(f=>/image\/(jpeg|png)/i.test(f.type)||/\.(jpe?g|png)$/i.test(f.name));
+    if(!ok.length){setStatus('请选择 JPG / JPEG / PNG 图片。','err');return}
+    files.push(...ok);render();setStatus('已添加 '+ok.length+' 张图片。','ok');
+  }
+  function render(){
+    make.disabled=clear.disabled=!files.length;
+    if(!files.length){list.innerHTML='<div class="empty">还没有添加图片</div>';return}
+    list.innerHTML=files.map((f,i)=>{
+      const u=URL.createObjectURL(f);
+      setTimeout(()=>URL.revokeObjectURL(u),5000);
+      return '<div class="item"><img class="thumb" src="'+u+'" alt=""><div><div class="name">'+esc(f.name)+'</div><div class="meta">'+fmt(f.size)+' · '+(f.type||'image')+'</div></div><div class="item-actions"><button class="mini" data-up="'+i+'" '+(i===0?'disabled':'')+'>↑</button><button class="mini" data-down="'+i+'" '+(i===files.length-1?'disabled':'')+'>↓</button><button class="mini del" data-del="'+i+'">删除</button></div></div>'
+    }).join('');
+    list.querySelectorAll('[data-up]').forEach(b=>b.onclick=()=>move(+b.dataset.up,-1));
+    list.querySelectorAll('[data-down]').forEach(b=>b.onclick=()=>move(+b.dataset.down,1));
+    list.querySelectorAll('[data-del]').forEach(b=>b.onclick=()=>{files.splice(+b.dataset.del,1);render()});
+  }
+  function move(i,d){const j=i+d;if(j<0||j>=files.length)return;[files[i],files[j]]=[files[j],files[i]];render()}
+  clear.onclick=()=>{files=[];render();setStatus('已清空。')};
+
+  const ascii=s=>new TextEncoder().encode(s);
+  const concat=(...arrs)=>{let n=arrs.reduce((a,b)=>a+b.length,0),o=new Uint8Array(n),p=0;for(const a of arrs){o.set(a,p);p+=a.length}return o};
+  async function deflate(data){
+    if(!('CompressionStream' in window)) throw new Error('当前浏览器不支持本地无损压缩，请使用最新版 Chrome / Edge / Firefox / Safari。');
+    const cs=new CompressionStream('deflate');
+    const w=cs.writable.getWriter(); w.write(data); w.close();
+    return new Uint8Array(await new Response(cs.readable).arrayBuffer());
+  }
+
+  function jpegInfo(bytes){
+    if(bytes[0]!==0xFF||bytes[1]!==0xD8) throw new Error('JPEG 文件头无效');
+    let p=2,w=0,h=0,components=3;
+    while(p+4<bytes.length){
+      if(bytes[p]!==0xFF){p++;continue}
+      while(bytes[p]===0xFF)p++;
+      const m=bytes[p++]; if(m===0xD9||m===0xDA)break;
+      const len=(bytes[p]<<8)|bytes[p+1];
+      if([0xC0,0xC1,0xC2,0xC3,0xC5,0xC6,0xC7,0xC9,0xCA,0xCB,0xCD,0xCE,0xCF].includes(m)){
+        h=(bytes[p+3]<<8)|bytes[p+4];w=(bytes[p+5]<<8)|bytes[p+6];components=bytes[p+7];break;
+      }
+      p+=len;
+    }
+    if(!w||!h)throw new Error('无法读取 JPEG 尺寸');
+    return {w,h,components};
+  }
+
+  async function pngToRaw(file){
+    const bmp=await createImageBitmap(file);
+    const c=document.createElement('canvas');c.width=bmp.width;c.height=bmp.height;
+    const ctx=c.getContext('2d',{willReadFrequently:true});ctx.clearRect(0,0,c.width,c.height);ctx.drawImage(bmp,0,0);bmp.close&&bmp.close();
+    const rgba=ctx.getImageData(0,0,c.width,c.height).data, rgb=new Uint8Array(c.width*c.height*3), alpha=new Uint8Array(c.width*c.height);
+    let hasAlpha=false,j=0,k=0;
+    for(let i=0;i<rgba.length;i+=4){rgb[j++]=rgba[i];rgb[j++]=rgba[i+1];rgb[j++]=rgba[i+2];const a=rgba[i+3];alpha[k++]=a;if(a!==255)hasAlpha=true}
+    return {w:c.width,h:c.height,rgb:await deflate(rgb),alpha:hasAlpha?await deflate(alpha):null};
+  }
+
+  async function buildPDF(){
+    const dpi=+$('#dpi').value||72, scale=72/dpi;
+    const objs=[null]; const add=v=>(objs.push(v),objs.length-1);
+    const pagesId=add(null); const catalogId=add(null); const pageIds=[];
+
+    for(let i=0;i<files.length;i++){
+      const f=files[i]; setStatus('正在处理 '+(i+1)+' / '+files.length+'：'+f.name);
+      let w,h,imgId,smaskId=null;
+      if(/jpe?g/i.test(f.type)||/\.jpe?g$/i.test(f.name)){
+        const bytes=new Uint8Array(await f.arrayBuffer()),info=jpegInfo(bytes);w=info.w;h=info.h;
+        const cs=info.components===1?'/DeviceGray':'/DeviceRGB';
+        imgId=add({dict:'<< /Type /XObject /Subtype /Image /Width '+w+' /Height '+h+' /ColorSpace '+cs+' /BitsPerComponent 8 /Filter /DCTDecode /Length '+bytes.length+' >>',stream:bytes});
+      }else{
+        const p=await pngToRaw(f);w=p.w;h=p.h;
+        if(p.alpha)smaskId=add({dict:'<< /Type /XObject /Subtype /Image /Width '+w+' /Height '+h+' /ColorSpace /DeviceGray /BitsPerComponent 8 /Filter /FlateDecode /Length '+p.alpha.length+' >>',stream:p.alpha});
+        imgId=add({dict:'<< /Type /XObject /Subtype /Image /Width '+w+' /Height '+h+' /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /FlateDecode '+(smaskId?'/SMask '+smaskId+' 0 R ':'')+'/Length '+p.rgb.length+' >>',stream:p.rgb});
+      }
+      const pw=w*scale,ph=h*scale, content=ascii('q\n'+pw+' 0 0 '+ph+' 0 0 cm\n/Im0 Do\nQ\n');
+      const contentId=add({dict:'<< /Length '+content.length+' >>',stream:content});
+      const pageId=add('<< /Type /Page /Parent '+pagesId+' 0 R /MediaBox [0 0 '+pw+' '+ph+'] /Resources << /XObject << /Im0 '+imgId+' 0 R >> >> /Contents '+contentId+' 0 R >>');
+      pageIds.push(pageId);
+    }
+    objs[pagesId]='<< /Type /Pages /Count '+pageIds.length+' /Kids ['+pageIds.map(id=>id+' 0 R').join(' ')+'] >>';
+    objs[catalogId]='<< /Type /Catalog /Pages '+pagesId+' 0 R >>';
+
+    const parts=[ascii('%PDF-1.7\n%\xE2\xE3\xCF\xD3\n')], offsets=[0]; let pos=parts[0].length;
+    for(let id=1;id<objs.length;id++){
+      offsets[id]=pos;const o=objs[id];let b;
+      if(typeof o==='string')b=ascii(id+' 0 obj\n'+o+'\nendobj\n');
+      else b=concat(ascii(id+' 0 obj\n'+o.dict+'\nstream\n'),o.stream,ascii('\nendstream\nendobj\n'));
+      parts.push(b);pos+=b.length;
+    }
+    const xref=pos;let x='xref\n0 '+objs.length+'\n0000000000 65535 f \n';
+    for(let i=1;i<objs.length;i++)x+=String(offsets[i]).padStart(10,'0')+' 00000 n \n';
+    x+='trailer\n<< /Size '+objs.length+' /Root '+catalogId+' 0 R >>\nstartxref\n'+xref+'\n%%EOF';
+    parts.push(ascii(x));return new Blob(parts,{type:'application/pdf'});
+  }
+
+  make.onclick=async()=>{
+    if(!files.length)return;
+    make.disabled=clear.disabled=true;
+    try{
+      const blob=await buildPDF();let name=$('#filename').value.trim()||'images.pdf';if(!/\.pdf$/i.test(name))name+='.pdf';
+      const a=document.createElement('a');const u=URL.createObjectURL(blob);a.href=u;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),30000);
+      setStatus('生成完成：'+name+'（'+fmt(blob.size)+'）','ok');
+    }catch(e){console.error(e);setStatus('生成失败：'+(e&&e.message?e.message:e),'err')}
+    finally{make.disabled=clear.disabled=!files.length}
+  };
+})();
+</script>
+</body>
+</html>
