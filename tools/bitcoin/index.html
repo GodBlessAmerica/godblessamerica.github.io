@@ -1,37 +1,37 @@
 <!doctype html>
 <html lang="zh-CN">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Bitcoin Cold Wallet Generator</title>
 <link rel="stylesheet" href="bitcoin.css">
 </head>
 <body>
 <div class="box">
+<a href="../">← 返回工具箱</a>
 <h1>₿ Bitcoin Cold Wallet Generator</h1>
-<p class="tip">离线优先：不联网、不上传、不保存私钥。生成真实资产前请断开网络。</p>
+<p class="tip">纯前端、无 API、无远程资源。真实资产建议把本页面完整下载到可信设备后断网使用。</p>
+<p id="selftest">正在执行核心自检…</p>
 
-<label>地址类型</label>
-<select id="type">
-<option value="legacy">Legacy (P2PKH 1...)</option>
-<option value="segwit">SegWit (P2SH-P2WPKH 3...)</option>
-<option value="native">Native SegWit (bc1q...)</option>
-<option value="taproot">Taproot (bc1p...)</option>
-</select>
+<button id="generateBtn" onclick="generate()">生成新的 Bitcoin 钱包</button>
 
-<button onclick="generate()">生成钱包熵</button>
+<h3>Private Key (HEX)</h3><textarea id="priv" readonly></textarea>
+<h3>Private Key (WIF, compressed)</h3><textarea id="wif" readonly></textarea>
+<h3>Compressed Public Key</h3><textarea id="pub" readonly></textarea>
 
-<h3>Private Key HEX</h3>
-<textarea id="priv" readonly></textarea>
-
-<h3>Address</h3>
-<textarea id="addr" readonly></textarea>
+<h3>Legacy · P2PKH (1...)</h3><textarea id="legacy" readonly></textarea>
+<h3>Nested SegWit · P2SH-P2WPKH (3...)</h3><textarea id="segwit" readonly></textarea>
+<h3>Native SegWit · P2WPKH / Bech32 (bc1q...)</h3><textarea id="native" readonly></textarea>
+<h3>Taproot · P2TR / Bech32m (bc1p...)</h3><textarea id="taproot" readonly></textarea>
 
 <div class="tip">
-当前版本：离线随机熵模块。<br>
-后续版本加入 secp256k1、Base58Check、Bech32、BIP39、BIP32、BIP84、BIP86。
+<strong>安全提醒：</strong>私钥控制资金。不要把生成的私钥、WIF 或助记词上传到任何网站、聊天或云盘。此工具仍属于自制实现，存放大额资产前应与成熟钱包软件交叉验证地址。
 </div>
 </div>
+
+<script src="sha256.js"></script>
+<script src="hash160.js"></script>
+<script src="base58.js"></script>
+<script src="bech32.js"></script>
+<script src="secp256k1.js"></script>
 <script src="bitcoin.js"></script>
-</body>
-</html>
+</body></html>
