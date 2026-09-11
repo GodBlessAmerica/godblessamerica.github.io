@@ -8,14 +8,16 @@ async function taggedHash(tag,msg){
  const t=await sha256(new TextEncoder().encode(tag));
  return sha256(concatBytes(t,t,msg));
 }
-async function makeWallet(privHex){
+async function makeWallet(privHex,network='mainnet'){
  const pub=publicKeyFromPrivateHex(privHex,true);
  const h160=await hash160(pub);
- const legacy=await base58Check(0x00,h160);
+ const test=network==='testnet';
+ const legacy=await base58Check(test?0x6f:0x00,h160);
 
  const redeem=concatBytes(Uint8Array.of(0x00,0x14),h160);
- const nested=await base58Check(0x05,await hash160(redeem));
- const native=bech32Encode('bc',0,h160,false);
+ const nested=await base58Check(test?0xc4:0x05,await hash160(redeem));
+ const hrp=test?'tb':'bc';
+ const native=bech32Encode(hrp,0,h160,false);
 
  const P=pointMul(BigInt('0x'+privHex));
  const internal=(P.y&1n)?{x:P.x,y:mod(-P.y)}:P;
@@ -23,10 +25,10 @@ async function makeWallet(privHex){
  const tweak=BigInt('0x'+hex(tweakBytes));
  if(tweak>=SECP256K1.n) throw Error('Invalid TapTweak');
  const Q=pointAdd(internal,pointMul(tweak));
- const taproot=bech32Encode('bc',1,bigint32(Q.x),true);
+ const taproot=bech32Encode(hrp,1,bigint32(Q.x),true);
 
  const wifPayload=concatBytes(u8hex(privHex),Uint8Array.of(1));
- const wif=await base58Check(0x80,wifPayload);
+ const wif=await base58Check(test?0xef:0x80,wifPayload);
  return {pub:hex(pub),legacy,nested,native,taproot,wif};
 }
 function securePrivateKey(){
@@ -39,7 +41,7 @@ async function generateSingle(){
  const btn=document.getElementById('generateBtn');
  btn.disabled=true;
  try{
-   const priv=securePrivateKey(), w=await makeWallet(priv);
+   const priv=securePrivateKey(), w=await makeWallet(priv,network);
    document.getElementById('priv').value=priv;
    document.getElementById('pub').value=w.pub;
    document.getElementById('wif').value=w.wif;
@@ -93,6 +95,7 @@ async function generateAll(){
  const btn=document.getElementById('generateBtn'); btn.disabled=true;
  try{
    const count=parseInt(document.getElementById('words').value,10);
+   const network=document.getElementById('network').value;
    const mnemonic=await generateMnemonic(count);
    document.getElementById('mnemonic').value=mnemonic;
 
@@ -105,7 +108,7 @@ async function generateAll(){
    document.getElementById('native').value=w.native;
    document.getElementById('taproot').value=w.taproot;
 
-   const hd=await deriveStandardWallets(mnemonic);
+   const hd=await deriveStandardWallets(mnemonic,'',network);
    document.getElementById('bip44').value=hd.bip44.wallet.legacy+"\nPrivate: "+hd.bip44.privateKey;
    document.getElementById('bip49').value=hd.bip49.wallet.nested+"\nPrivate: "+hd.bip49.privateKey;
    document.getElementById('bip84').value=hd.bip84.wallet.native+"\nPrivate: "+hd.bip84.privateKey;
@@ -116,7 +119,7 @@ async function generateAll(){
 }
 
 function currentData(){
- const ids=['mnemonic','priv','wif','pub','legacy','segwit','native','taproot','bip44','bip49','bip84','bip86'];
+ const ids=['network','mnemonic','priv','wif','pub','legacy','segwit','native','taproot','bip44','bip49','bip84','bip86'];
  const o={}; for(const id of ids)o[id]=document.getElementById(id)?.value||'';
  return o;
 }
@@ -158,4 +161,23 @@ function renderAddressCards(w,hd){
   const btn=document.createElement('button');btn.className='small';btn.textContent='复制地址';btn.onclick=()=>navigator.clipboard.writeText(value);
   card.append(t,canvas,v,btn); area.appendChild(card); drawQR(canvas,value);
  }
+}
+
+async function restoreFromMnemonic(){
+ const status=document.getElementById('restoreStatus');
+ const network=document.getElementById('network').value;
+ const mnemonic=document.getElementById('restoreMnemonic').value.trim().toLowerCase().replace(/\s+/g,' ');
+ if(!(await validateMnemonic(mnemonic))){
+   status.textContent='助记词无效：单词、数量或校验和不正确。'; status.className='bad'; return;
+ }
+ try{
+   const hd=await deriveStandardWallets(mnemonic,'',network);
+   document.getElementById('mnemonic').value=mnemonic;
+   document.getElementById('bip44').value=hd.bip44.wallet.legacy+"\nPrivate: "+hd.bip44.privateKey;
+   document.getElementById('bip49').value=hd.bip49.wallet.nested+"\nPrivate: "+hd.bip49.privateKey;
+   document.getElementById('bip84').value=hd.bip84.wallet.native+"\nPrivate: "+hd.bip84.privateKey;
+   document.getElementById('bip86').value=hd.bip86.wallet.taproot+"\nPrivate: "+hd.bip86.privateKey;
+   renderAddressCards({legacy:hd.bip44.wallet.legacy,nested:hd.bip49.wallet.nested,native:hd.bip84.wallet.native,taproot:hd.bip86.wallet.taproot},hd);
+   status.textContent='✓ 助记词有效，HD 地址已重新派生。'; status.className='ok';
+ }catch(e){status.textContent='恢复失败：'+e.message;status.className='bad'}
 }
