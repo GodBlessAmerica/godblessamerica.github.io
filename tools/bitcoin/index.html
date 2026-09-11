@@ -14,9 +14,17 @@
 <p class="tip">纯前端、无 API、无远程资源，并通过 CSP 禁止页面发起网络连接。真实资产建议把整个 bitcoin 目录下载到可信设备后断网打开。</p>
 <p id="selftest">正在执行核心自检…</p>
 
+<label>网络</label>
+<select id="network"><option value="mainnet">Bitcoin Mainnet</option><option value="testnet">Bitcoin Testnet</option></select>
+
 <label>助记词长度</label>
 <select id="words"><option value="12">12 words</option><option value="24">24 words</option></select>
 <button id="generateBtn" onclick="generateAll()" disabled>生成新的 Bitcoin 冷钱包</button>
+<h2>从已有助记词恢复</h2>
+<p class="tip">仅在当前浏览器内校验并派生，不发送到网络。支持标准 BIP39 英文 12/15/18/21/24 词。</p>
+<textarea id="restoreMnemonic" placeholder="在这里粘贴已有 BIP39 英文助记词"></textarea>
+<button onclick="restoreFromMnemonic()">验证并派生地址</button>
+<p id="restoreStatus"></p>
 
 <h3>BIP39 Mnemonic</h3>
 <div class="field-row"><textarea id="mnemonic" readonly></textarea><button class="small" onclick="copyField('mnemonic')">复制</button></div>
