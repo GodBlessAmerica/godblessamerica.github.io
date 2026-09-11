@@ -35,7 +35,7 @@ function securePrivateKey(){
    if(isValidPrivateKeyHex(h)) return h;
  }
 }
-async function generate(){
+async function generateSingle(){
  const btn=document.getElementById('generateBtn');
  btn.disabled=true;
  try{
@@ -62,3 +62,28 @@ async function selfTest(){
  el.className=(okPub&&okLegacy&&okNested&&okNative)?'ok':'bad';
 }
 window.addEventListener('DOMContentLoaded',selfTest);
+
+async function generateAll(){
+ const btn=document.getElementById('generateBtn'); btn.disabled=true;
+ try{
+   const count=parseInt(document.getElementById('words').value,10);
+   const mnemonic=await generateMnemonic(count);
+   document.getElementById('mnemonic').value=mnemonic;
+
+   const priv=securePrivateKey(), w=await makeWallet(priv);
+   document.getElementById('priv').value=priv;
+   document.getElementById('pub').value=w.pub;
+   document.getElementById('wif').value=w.wif;
+   document.getElementById('legacy').value=w.legacy;
+   document.getElementById('segwit').value=w.nested;
+   document.getElementById('native').value=w.native;
+   document.getElementById('taproot').value=w.taproot;
+
+   const hd=await deriveStandardWallets(mnemonic);
+   document.getElementById('bip44').value=hd.bip44.wallet.legacy+"\nPrivate: "+hd.bip44.privateKey;
+   document.getElementById('bip49').value=hd.bip49.wallet.nested+"\nPrivate: "+hd.bip49.privateKey;
+   document.getElementById('bip84').value=hd.bip84.wallet.native+"\nPrivate: "+hd.bip84.privateKey;
+   document.getElementById('bip86').value=hd.bip86.wallet.taproot+"\nPrivate: "+hd.bip86.privateKey;
+ }catch(e){alert('生成失败：'+e.message)}
+ finally{btn.disabled=false}
+}
