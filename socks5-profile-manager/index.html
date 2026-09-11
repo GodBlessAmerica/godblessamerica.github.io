@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="SOCKS5 Profile Manager for Chrome — save, switch, and manage SOCKS5 proxy profiles locally.">
+  <title>SOCKS5 Profile Manager</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+<header>
+  <div class="wrap nav">
+    <div class="brand"><div class="logo">◎</div><span>SOCKS5 Profile Manager</span></div>
+    <nav class="navlinks">
+      <a href="./privacy/">Privacy</a>
+      <a href="./support/">Support</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="hero">
+    <h1>Simple SOCKS5 switching for Chrome.</h1>
+    <p>Save multiple SOCKS5 proxy profiles, switch them with one click, and keep your configuration stored locally on your device.</p>
+    <div class="badges">
+      <span class="badge">Manifest V3</span>
+      <span class="badge">Local-only storage</span>
+      <span class="badge">No analytics</span>
+      <span class="badge">No remote code</span>
+    </div>
+  </section>
+
+  <section class="grid">
+    <article class="card">
+      <h3>Multiple profiles</h3>
+      <p>Store several SOCKS5 host/port profiles and switch between them quickly from the extension popup.</p>
+    </article>
+    <article class="card">
+      <h3>Custom bypass rules</h3>
+      <p>Keep local services and selected destinations outside the proxy using configurable bypass entries.</p>
+    </article>
+    <article class="card">
+      <h3>Privacy first</h3>
+      <p>No analytics, advertisements, remote code, browsing-history collection, or developer-operated backend.</p>
+    </article>
+  </section>
+
+  <section class="content">
+    <h2>About</h2>
+    <p>SOCKS5 Profile Manager uses Chrome's proxy API only to apply the proxy configuration explicitly selected by the user. Proxy profiles and preferences are stored locally with Chrome extension storage.</p>
+
+    <h2>Important limitation</h2>
+    <p>Chromium does not support username/password authentication for SOCKS5 proxies. Use an unauthenticated SOCKS5 endpoint or a trusted local bridge.</p>
+
+    <p>
+      <a class="btn" href="./privacy/">Privacy Policy</a>
+      <a class="btn secondary" href="./support/">Support</a>
+    </p>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">SOCKS5 Profile Manager · Local-first Chrome proxy profile management</div>
+</footer>
+</body>
+</html>
