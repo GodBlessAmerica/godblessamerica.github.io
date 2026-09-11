@@ -135,6 +135,14 @@ function downloadCSV(){
  downloadBlob('bitcoin-wallet-backup.csv','text/csv;charset=utf-8',rows.map(r=>r.map(csvEscape).join(',')).join('\n'));
 }
 
+function drawQR(canvas,text,size=168,margin=4){
+ const qr=qrcode(0,'M'); qr.addData(text,'Byte'); qr.make();
+ const count=qr.getModuleCount(), total=count+margin*2, cell=Math.max(1,Math.floor(size/total)), actual=total*cell;
+ canvas.width=actual; canvas.height=actual;
+ const ctx=canvas.getContext('2d'); ctx.imageSmoothingEnabled=false;
+ ctx.fillStyle='#fff'; ctx.fillRect(0,0,actual,actual); ctx.fillStyle='#000';
+ for(let r=0;r<count;r++)for(let c=0;c<count;c++)if(qr.isDark(r,c))ctx.fillRect((c+margin)*cell,(r+margin)*cell,cell,cell);
+}
 function renderAddressCards(w,hd){
  const area=document.getElementById('qrArea');
  area.innerHTML='';
@@ -145,7 +153,9 @@ function renderAddressCards(w,hd){
  for(const [name,value] of items){
   const card=document.createElement('div');card.className='addr-card';
   const t=document.createElement('strong');t.textContent=name;
+  const canvas=document.createElement('canvas');canvas.className='addr-qr';
   const v=document.createElement('code');v.textContent=value;
-  card.append(t,v);area.appendChild(card);
+  const btn=document.createElement('button');btn.className='small';btn.textContent='复制地址';btn.onclick=()=>navigator.clipboard.writeText(value);
+  card.append(t,canvas,v,btn); area.appendChild(card); drawQR(canvas,value);
  }
 }
