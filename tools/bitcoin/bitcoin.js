@@ -51,15 +51,41 @@ async function generateSingle(){
  finally{btn.disabled=false}
 }
 async function selfTest(){
- const p='0000000000000000000000000000000000000000000000000000000000000001';
- const w=await makeWallet(p);
- const okPub=w.pub==='0279be667ef9dcbbac55a06295ce870b07029bfcdb2dce28d959f2815b16f81798';
- const okLegacy=w.legacy==='1BgGZ9tcN4rm9KBzDn7KprQz87SZ26SAMH';
- const okNested=w.nested==='3JvL6Ymt8MVWiCNHC7oWU6nLeHNJKLZGLN';
- const okNative=w.native==='bc1qw508d6qejxtdg4y5r3zarvary0c5xw7kv8f3t4';
  const el=document.getElementById('selftest');
- el.textContent=(okPub&&okLegacy&&okNested&&okNative)?'✓ 核心自检通过':'✗ 核心自检失败，请勿使用';
- el.className=(okPub&&okLegacy&&okNested&&okNative)?'ok':'bad';
+ const btn=document.getElementById('generateBtn');
+ btn.disabled=true;
+ try{
+   const checks=[];
+
+   const p='0000000000000000000000000000000000000000000000000000000000000001';
+   const w=await makeWallet(p);
+   checks.push(
+     w.pub==='0279be667ef9dcbbac55a06295ce870b07029bfcdb2dce28d959f2815b16f81798',
+     w.legacy==='1BgGZ9tcN4rm9KBzDn7KprQz87SZ26SAMH',
+     w.nested==='3JvL6Ymt8MVWiCNHC7oWU6nLeHNJKLZGLN',
+     w.native==='bc1qw508d6qejxtdg4y5r3zarvary0c5xw7kv8f3t4'
+   );
+
+   const zeroEntropy=new Uint8Array(16);
+   const mnemonic=await entropyToMnemonic(zeroEntropy);
+   const expectedMnemonic='abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon about';
+   checks.push(mnemonic===expectedMnemonic);
+
+   const hd=await deriveStandardWallets(expectedMnemonic);
+   checks.push(
+     hd.bip84.wallet.native==='bc1qcr8te4kr609gcawutmrza0j4xv80jy8z306fyu',
+     hd.bip86.wallet.taproot==='bc1p5cyxnuxmeuwuvkwfem96lqzszd02n6xdcjrs20cac6yqjjwudpxqkedrcr'
+   );
+
+   const ok=checks.every(Boolean);
+   el.textContent=ok?'✓ 全部自检通过：secp256k1 / Base58Check / Bech32 / BIP39 / BIP32 / BIP84 / BIP86':'✗ 自检失败，请勿生成或使用任何钱包';
+   el.className=ok?'ok':'bad';
+   btn.disabled=!ok;
+ }catch(e){
+   el.textContent='✗ 自检异常：'+e.message+'。请勿使用。';
+   el.className='bad';
+   btn.disabled=true;
+ }
 }
 window.addEventListener('DOMContentLoaded',selfTest);
 
