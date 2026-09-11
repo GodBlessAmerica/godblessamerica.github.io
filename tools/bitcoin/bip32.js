@@ -29,18 +29,19 @@ async function derivePath(seed,path){
  }
  return node;
 }
-async function deriveStandardWallets(mnemonic,passphrase=''){
+async function deriveStandardWallets(mnemonic,passphrase='',network='mainnet'){
  const seed=await mnemonicToSeed(mnemonic,passphrase);
+ const coin=network==='testnet'?1:0;
  const paths={
-   bip44:"m/44'/0'/0'/0/0",
-   bip49:"m/49'/0'/0'/0/0",
-   bip84:"m/84'/0'/0'/0/0",
-   bip86:"m/86'/0'/0'/0/0"
+   bip44:`m/44'/${coin}'/0'/0/0`,
+   bip49:`m/49'/${coin}'/0'/0/0`,
+   bip84:`m/84'/${coin}'/0'/0/0`,
+   bip86:`m/86'/${coin}'/0'/0/0`
  };
  const out={};
  for(const [name,path] of Object.entries(paths)){
    const node=await derivePath(seed,path);
-   const w=await makeWallet(hex(node.key));
+   const w=await makeWallet(hex(node.key),network);
    out[name]={path,privateKey:hex(node.key),wallet:w};
  }
  return out;
