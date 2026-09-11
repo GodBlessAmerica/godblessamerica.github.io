@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Support for SOCKS5 Profile Manager.">
+  <title>Support — SOCKS5 Profile Manager</title>
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+<header>
+  <div class="wrap nav">
+    <div class="brand"><div class="logo">◎</div><span>SOCKS5 Profile Manager</span></div>
+    <nav class="navlinks">
+      <a href="../">Home</a>
+      <a href="../privacy/">Privacy</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="content">
+    <h1>Support</h1>
+    <p>If you need help with SOCKS5 Profile Manager, the steps below cover the most common questions.</p>
+
+    <h2>How to add a proxy profile</h2>
+    <ol>
+      <li>Open the extension options page.</li>
+      <li>Enter a profile name, SOCKS5 host, and port.</li>
+      <li>Optionally edit the bypass rules.</li>
+      <li>Save the profile.</li>
+      <li>Open the extension popup and select “Enable SOCKS5”.</li>
+    </ol>
+
+    <h2>SOCKS5 authentication</h2>
+    <p>Chromium does not support username/password authentication for SOCKS5 proxies. The extension therefore supports unauthenticated SOCKS5 endpoints only.</p>
+
+    <h2>Proxy does not connect</h2>
+    <ul>
+      <li>Confirm the SOCKS5 host and port are correct.</li>
+      <li>Confirm the SOCKS5 service is reachable from your computer.</li>
+      <li>Confirm the proxy does not require username/password authentication.</li>
+      <li>Temporarily test without custom bypass rules.</li>
+    </ul>
+
+    <h2>Disable the proxy</h2>
+    <p>Open the extension popup and choose “Disable Proxy”. Depending on your saved preference, Chrome will return to the system proxy configuration or direct mode.</p>
+
+    <h2>Privacy</h2>
+    <p>Configuration is stored locally on your device. See the <a href="../privacy/">Privacy Policy</a> for details.</p>
+
+    <h2>Developer contact</h2>
+    <p>You can contact the developer through the public GitHub profile below.</p>
+    <p><a class="btn" href="https://github.com/GodBlessAmerica" rel="noopener noreferrer">Open GitHub profile</a></p>
+
+    <div class="note">
+      When reporting an issue, do not post private proxy credentials, passwords, access tokens, or other secrets.
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">SOCKS5 Profile Manager</div>
+</footer>
+</body>
+</html>
