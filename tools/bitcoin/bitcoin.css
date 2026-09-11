@@ -20,3 +20,6 @@ button:disabled{opacity:.55;cursor:wait}.tip{color:#bbb;line-height:1.7}.ok{colo
 
 .addr-qr{width:168px;height:168px;max-width:100%;align-self:center;background:#fff;padding:6px;border-radius:8px}
 @media print{.addr-qr{width:140px!important;height:140px!important}}
+
+#network,#words{width:100%;padding:12px;margin:6px 0 14px;background:#0d0d0d;color:#eee;border:1px solid #444;border-radius:8px}
+#restoreMnemonic{min-height:96px}
