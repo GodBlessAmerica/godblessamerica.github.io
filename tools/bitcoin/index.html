@@ -18,23 +18,30 @@
 <select id="words"><option value="12">12 words</option><option value="24">24 words</option></select>
 <button id="generateBtn" onclick="generateAll()" disabled>生成新的 Bitcoin 冷钱包</button>
 
-<h3>BIP39 Mnemonic</h3><textarea id="mnemonic" readonly></textarea>
+<h3>BIP39 Mnemonic</h3>
+<div class="field-row"><textarea id="mnemonic" readonly></textarea><button class="small" onclick="copyField('mnemonic')">复制</button></div>
 
 <h2>单私钥对应地址</h2>
-<h3>Private Key (HEX)</h3><textarea id="priv" readonly></textarea>
-<h3>Private Key (WIF, compressed)</h3><textarea id="wif" readonly></textarea>
-<h3>Compressed Public Key</h3><textarea id="pub" readonly></textarea>
-<h3>Legacy · P2PKH (1...)</h3><textarea id="legacy" readonly></textarea>
-<h3>Nested SegWit · P2SH-P2WPKH (3...)</h3><textarea id="segwit" readonly></textarea>
-<h3>Native SegWit · P2WPKH / Bech32 (bc1q...)</h3><textarea id="native" readonly></textarea>
-<h3>Taproot · P2TR / Bech32m (bc1p...)</h3><textarea id="taproot" readonly></textarea>
+<h3>Private Key (HEX)</h3><div class="field-row"><textarea id="priv" readonly></textarea><button class="small" onclick="copyField('priv')">复制</button></div>
+<h3>Private Key (WIF, compressed)</h3><div class="field-row"><textarea id="wif" readonly></textarea><button class="small" onclick="copyField('wif')">复制</button></div>
+<h3>Compressed Public Key</h3><div class="field-row"><textarea id="pub" readonly></textarea><button class="small" onclick="copyField('pub')">复制</button></div>
+<h3>Legacy · P2PKH (1...)</h3><div class="field-row"><textarea id="legacy" readonly></textarea><button class="small" onclick="copyField('legacy')">复制</button></div>
+<h3>Nested SegWit · P2SH-P2WPKH (3...)</h3><div class="field-row"><textarea id="segwit" readonly></textarea><button class="small" onclick="copyField('segwit')">复制</button></div>
+<h3>Native SegWit · P2WPKH / Bech32 (bc1q...)</h3><div class="field-row"><textarea id="native" readonly></textarea><button class="small" onclick="copyField('native')">复制</button></div>
+<h3>Taproot · P2TR / Bech32m (bc1p...)</h3><div class="field-row"><textarea id="taproot" readonly></textarea><button class="small" onclick="copyField('taproot')">复制</button></div>
 
 <h2>HD Wallet 标准路径</h2>
-<h3>BIP44 · m/44'/0'/0'/0/0</h3><textarea id="bip44" readonly></textarea>
-<h3>BIP49 · m/49'/0'/0'/0/0</h3><textarea id="bip49" readonly></textarea>
-<h3>BIP84 · m/84'/0'/0'/0/0</h3><textarea id="bip84" readonly></textarea>
-<h3>BIP86 · m/86'/0'/0'/0/0</h3><textarea id="bip86" readonly></textarea>
+<h3>BIP44 · m/44'/0'/0'/0/0</h3><div class="field-row"><textarea id="bip44" readonly></textarea><button class="small" onclick="copyField('bip44')">复制</button></div>
+<h3>BIP49 · m/49'/0'/0'/0/0</h3><div class="field-row"><textarea id="bip49" readonly></textarea><button class="small" onclick="copyField('bip49')">复制</button></div>
+<h3>BIP84 · m/84'/0'/0'/0/0</h3><div class="field-row"><textarea id="bip84" readonly></textarea><button class="small" onclick="copyField('bip84')">复制</button></div>
+<h3>BIP86 · m/86'/0'/0'/0/0</h3><div class="field-row"><textarea id="bip86" readonly></textarea><button class="small" onclick="copyField('bip86')">复制</button></div>
 
+<div class="actions">
+<button onclick="downloadJSON()">导出 JSON</button>
+<button onclick="downloadCSV()">导出 CSV</button>
+<button onclick="window.print()">打印纸钱包</button>
+</div>
+<div id="qrArea" class="qr-area"></div>
 <div class="tip">
 <strong>安全提醒：</strong>私钥和助记词都能控制资金。不要上传、截图或云同步。此工具属于自制实现；大额资产使用前，请先用成熟钱包软件交叉验证助记词派生结果，并先进行小额测试。
 </div>
