@@ -1,0 +1,5 @@
+const BECH32_CHARSET='qpzry9x8gf2tvdw0s3jn54khce6mua7l';
+function bechPolymod(v){let c=1;for(const d of v){const t=c>>>25;c=((c&0x1ffffff)<<5)^d;for(let i=0;i<5;i++)if((t>>>i)&1)c^=[0x3b6a57b2,0x26508e6d,0x1ea119fa,0x3d4233dd,0x2a1462b3][i]}return c>>>0}
+function hrpExpand(h){return [...h].map(c=>c.charCodeAt(0)>>5).concat([0],[...h].map(c=>c.charCodeAt(0)&31))}
+function convertBits(data,from,to,pad=true){let acc=0,bits=0,out=[],maxv=(1<<to)-1;for(const value of data){if(value<0||(value>>from)!==0)throw Error('convertbits');acc=(acc<<from)|value;bits+=from;while(bits>=to){bits-=to;out.push((acc>>bits)&maxv)}}if(pad&&bits)out.push((acc<<(to-bits))&maxv);else if(!pad&&(bits>=from||((acc<<(to-bits))&maxv)))throw Error('padding');return out}
+function bech32Encode(hrp,ver,program,bech32m=false){const data=[ver].concat(convertBits(program,8,5,true));const pm=bechPolymod(hrpExpand(hrp).concat(data).concat([0,0,0,0,0,0]))^(bech32m?0x2bc830a3:1);const chk=[];for(let i=0;i<6;i++)chk.push((pm>>>(5*(5-i)))&31);return hrp+'1'+data.concat(chk).map(x=>BECH32_CHARSET[x]).join('')}
