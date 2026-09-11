@@ -17,3 +17,6 @@ button:disabled{opacity:.55;cursor:wait}.tip{color:#bbb;line-height:1.7}.ok{colo
  body{background:white;color:black}.box{max-width:none;margin:0;background:white;color:black}.tip,a,button,#selftest,#words,label{display:none!important}
  textarea{border:1px solid #bbb;background:white;color:black;min-height:48px}.addr-card{border:1px solid #bbb;background:white;color:black}.addr-card code{color:black}
 }
+
+.addr-qr{width:168px;height:168px;max-width:100%;align-self:center;background:#fff;padding:6px;border-radius:8px}
+@media print{.addr-qr{width:140px!important;height:140px!important}}
