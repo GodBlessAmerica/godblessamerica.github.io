@@ -1,3 +1,5 @@
+let SELF_TEST_OK=false;
+let SELF_TEST_ERROR='自检尚未完成';
 function randomBytes(length=32){
  const a=new Uint8Array(length); crypto.getRandomValues(a); return a;
 }
@@ -80,13 +82,17 @@ async function selfTest(){
    checks.push(w84.native==='bc1qcr8te4kr609gcawutmrza0j4xv80jy8z306fyu');
 
    const ok=checks.every(Boolean);
-   el.textContent=ok?'✓ 全部自检通过：secp256k1 / Base58Check / Bech32 / BIP39 / BIP32 / BIP84 / BIP86':'✗ 自检失败，请勿生成或使用任何钱包';
+   SELF_TEST_OK=ok;
+   SELF_TEST_ERROR=ok?'':('测试结果：'+checks.map((v,i)=>'#'+(i+1)+'='+v).join(', '));
+   el.textContent=ok?'✓ 核心自检通过：secp256k1 / Base58Check / Bech32 / BIP39 / BIP32 / BIP84':'✗ 自检失败：'+SELF_TEST_ERROR;
    el.className=ok?'ok':'bad';
-   btn.disabled=!ok;
+   btn.disabled=false;
  }catch(e){
-   el.textContent='✗ 自检异常：'+e.message+'。请勿使用。';
+   SELF_TEST_OK=false;
+   SELF_TEST_ERROR=e&&e.message?e.message:String(e);
+   el.textContent='✗ 自检异常：'+SELF_TEST_ERROR+'。请勿使用。';
    el.className='bad';
-   btn.disabled=true;
+   btn.disabled=false;
  }
 }
 window.addEventListener('DOMContentLoaded',async()=>{
@@ -102,7 +108,9 @@ window.addEventListener('DOMContentLoaded',async()=>{
 });
 
 async function generateAll(){
- const btn=document.getElementById('generateBtn'); btn.disabled=true;
+ const btn=document.getElementById('generateBtn');
+ if(!SELF_TEST_OK){alert('当前不能生成钱包：'+SELF_TEST_ERROR);return;}
+ btn.disabled=true;
  try{
    const count=parseInt(document.getElementById('words').value,10);
    const network=document.getElementById('network').value;
