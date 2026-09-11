@@ -41,6 +41,7 @@ async function generateSingle(){
  const btn=document.getElementById('generateBtn');
  btn.disabled=true;
  try{
+   const network=document.getElementById('network')?.value||'mainnet';
    const priv=securePrivateKey(), w=await makeWallet(priv,network);
    document.getElementById('priv').value=priv;
    document.getElementById('pub').value=w.pub;
@@ -89,7 +90,17 @@ async function selfTest(){
    btn.disabled=true;
  }
 }
-window.addEventListener('DOMContentLoaded',selfTest);
+window.addEventListener('DOMContentLoaded',async()=>{
+ document.getElementById('generateBtn')?.addEventListener('click',generateAll);
+ document.getElementById('restoreBtn')?.addEventListener('click',restoreFromMnemonic);
+ document.getElementById('jsonBtn')?.addEventListener('click',downloadJSON);
+ document.getElementById('csvBtn')?.addEventListener('click',downloadCSV);
+ document.getElementById('printBtn')?.addEventListener('click',()=>window.print());
+ document.querySelectorAll('.copy-btn').forEach(btn=>{
+   btn.addEventListener('click',()=>copyField(btn.dataset.copy));
+ });
+ await selfTest();
+});
 
 async function generateAll(){
  const btn=document.getElementById('generateBtn'); btn.disabled=true;
@@ -99,7 +110,7 @@ async function generateAll(){
    const mnemonic=await generateMnemonic(count);
    document.getElementById('mnemonic').value=mnemonic;
 
-   const priv=securePrivateKey(), w=await makeWallet(priv);
+   const priv=securePrivateKey(), w=await makeWallet(priv,network);
    document.getElementById('priv').value=priv;
    document.getElementById('pub').value=w.pub;
    document.getElementById('wif').value=w.wif;
@@ -158,7 +169,7 @@ function renderAddressCards(w,hd){
   const t=document.createElement('strong');t.textContent=name;
   const canvas=document.createElement('canvas');canvas.className='addr-qr';
   const v=document.createElement('code');v.textContent=value;
-  const btn=document.createElement('button');btn.className='small';btn.textContent='复制地址';btn.onclick=()=>navigator.clipboard.writeText(value);
+  const btn=document.createElement('button');btn.className='small';btn.textContent='复制地址';btn.addEventListener('click',()=>navigator.clipboard.writeText(value));
   card.append(t,canvas,v,btn); area.appendChild(card); drawQR(canvas,value);
  }
 }
