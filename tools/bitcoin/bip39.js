@@ -21,3 +21,17 @@ async function mnemonicToSeed(mnemonic,passphrase=''){
  const bits=await crypto.subtle.deriveBits({name:'PBKDF2',hash:'SHA-512',salt,iterations:2048},key,512);
  return new Uint8Array(bits);
 }
+
+async function validateMnemonic(mnemonic){
+ const words=mnemonic.trim().toLowerCase().split(/\s+/);
+ if(![12,15,18,21,24].includes(words.length))return false;
+ const idx=[];
+ for(const w of words){const i=BIP39_ENGLISH.indexOf(w);if(i<0)return false;idx.push(i)}
+ const bits=idx.map(i=>i.toString(2).padStart(11,'0')).join('');
+ const entLen=Math.floor(bits.length*32/33), csLen=bits.length-entLen;
+ const entBits=bits.slice(0,entLen), cs=bits.slice(entLen);
+ const bytes=new Uint8Array(entLen/8);
+ for(let i=0;i<bytes.length;i++)bytes[i]=parseInt(entBits.slice(i*8,i*8+8),2);
+ const hash=await sha256(bytes);
+ return bytesToBits(hash).slice(0,csLen)===cs;
+}
