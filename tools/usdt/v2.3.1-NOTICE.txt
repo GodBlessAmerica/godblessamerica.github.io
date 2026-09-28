@@ -1,1 +1,0 @@
-v2.3.1 is being prepared as the corrected offline release. Do not use the old v2.3 ZIP checksum. The verified wallet source SHA-256 is 24be97bcc1c34dd0afbe56153dd851ca2e36a304f01edaf456014c4b74eb7239.
