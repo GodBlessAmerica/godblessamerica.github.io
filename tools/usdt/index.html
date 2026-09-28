@@ -1,0 +1,585 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; connect-src https: http://127.0.0.1:* http://localhost:*; img-src data:; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; object-src 'none'">
+<title>USDT Wallet — Arbitrum One · Self-Custody</title>
+<style>
+:root{color-scheme:dark;--bg:#0b0d10;--card:#12161b;--line:#28303a;--text:#f1f4f7;--muted:#9da8b5;--ok:#62d98b;--warn:#ffcc66;--bad:#ff7070;--accent:#80aaff;--mono:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono",monospace}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:15px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}.wrap{max-width:980px;margin:0 auto;padding:28px 16px 80px}h1{font-size:28px;margin:0 0 4px}h2{font-size:18px;margin:0 0 14px}.sub,.muted{color:var(--muted)}.top{display:flex;gap:16px;justify-content:space-between;align-items:flex-start;margin-bottom:20px}.badge{border:1px solid var(--line);border-radius:999px;padding:6px 10px;color:var(--muted);font-size:12px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;margin:14px 0}.full{grid-column:1/-1}.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.space{justify-content:space-between}.field{margin:12px 0}.field label{display:block;font-size:12px;color:var(--muted);margin-bottom:5px}input,textarea,select{width:100%;background:#090b0e;color:var(--text);border:1px solid var(--line);border-radius:9px;padding:11px 12px;font:14px var(--mono);outline:none}input:focus,textarea:focus{border-color:var(--accent)}textarea{min-height:78px;resize:vertical}.mono{font-family:var(--mono);word-break:break-all}.secret{filter:blur(6px);user-select:none}.secret.reveal{filter:none;user-select:text}.btn{appearance:none;border:1px solid var(--line);background:#1a2027;color:var(--text);padding:10px 14px;border-radius:9px;cursor:pointer;font-weight:650}.btn:hover{border-color:#4c5d70}.btn.primary{background:#1d4ed8;border-color:#3569e8}.btn.danger{background:#3b1717;border-color:#7d3030}.btn:disabled{opacity:.45;cursor:not-allowed}.status{padding:10px 12px;border-radius:9px;border:1px solid var(--line);background:#0c1014;font-size:13px}.status.ok{border-color:#285b3a;color:var(--ok)}.status.warn{border-color:#6c5622;color:var(--warn)}.status.bad{border-color:#6c2929;color:var(--bad)}.kpi{font:26px var(--mono);margin-top:3px}.small{font-size:12px}.hr{height:1px;background:var(--line);margin:16px 0}.review{background:#090b0e;border:1px solid var(--line);border-radius:10px;padding:12px}.review div{display:grid;grid-template-columns:120px 1fr;gap:8px;padding:5px 0}.review span:first-child{color:var(--muted)}code{font-family:var(--mono)}.warning{border-left:4px solid var(--warn);padding:10px 12px;background:#221c0e;border-radius:6px}.hidden{display:none!important}@media(max-width:720px){.grid{grid-template-columns:1fr}.top{display:block}.badge{display:inline-block;margin-top:10px}.review div{grid-template-columns:1fr}}
+.qrbox{display:flex;justify-content:center;align-items:center;min-height:250px;background:#fff;border-radius:12px;padding:12px;overflow:auto}.qrbox canvas{max-width:100%;height:auto}.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}.pill{font:12px var(--mono);border:1px solid var(--line);border-radius:999px;padding:5px 9px;color:var(--muted)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <div><h1>USDT / USD₮0 Wallet</h1><div class="sub">Arbitrum One · self-custody · local signing · air-gap capable</div></div>
+    <div class="badge">v2.3 Final · BIP39 HD · Single HTML · no CDN · no storage</div>
+  </div>
+
+  <div id="selftest" class="status warn">Running cryptographic self-test…</div>
+
+  <div class="card">
+    <h2>Security model</h2>
+    <div class="grid">
+      <div><b>Private material</b><div class="muted small">Generated and used only in this page. Never included in RPC requests. Not stored in LocalStorage, IndexedDB or cookies.</div></div>
+      <div><b>Network access</b><div class="muted small">No request is made until you explicitly connect an RPC. For strict cold-wallet use, open this file on a machine with networking disabled.</div></div>
+    </div>
+    <div class="warning small" style="margin-top:14px"><b>Self-custody warning.</b> Verify this file yourself and test with a tiny amount first. The private key or BIP39 recovery phrase controls the wallet: anyone who gets either can spend the funds, and losing all backups permanently loses access. JavaScript cannot guarantee erased secrets are physically removed from memory until the browser process exits.</div>
+  </div>
+
+  <div class="grid">
+    <section class="card full">
+      <h2>1 · Wallet</h2>
+      <div class="tabs"><span class="pill">Recommended: BIP39 HD</span><span class="pill">Advanced: raw private key</span><span class="pill">Derivation: m/44'/60'/0'/0/index</span></div>
+      <div class="grid">
+        <div>
+          <h2 style="font-size:15px">24-word BIP39 HD wallet</h2>
+          <div class="row"><button class="btn primary" id="genMnemonic">Generate 24-word wallet</button><button class="btn" id="clear">Clear wallet</button></div>
+          <div class="field"><label>Restore 24-word recovery phrase</label><textarea id="mnemonicImport" class="secret" autocomplete="off" spellcheck="false" placeholder="24 BIP39 English words"></textarea></div>
+          <div class="grid">
+            <div class="field"><label>BIP39 passphrase (advanced, optional)</label><input id="mnemonicPass" type="password" autocomplete="new-password" data-lpignore="true" spellcheck="false" placeholder="Leave blank unless you intentionally use one"></div>
+            <div class="field"><label>Address index</label><input id="hdIndex" inputmode="numeric" value="0" placeholder="0"></div>
+          </div>
+          <div class="row"><button class="btn" id="restoreMnemonic">Restore HD wallet</button><button class="btn" id="deriveIndex">Derive selected index</button></div>
+          <div class="muted small" style="margin-top:10px">After generation or recovery, the recovery phrase, derivation path, address and the private key for that exact derived address are shown together below.</div>
+        </div>
+        <div>
+          <h2 style="font-size:15px">Raw private key wallet</h2>
+          <div class="row"><button class="btn" id="gen">Generate raw private key</button></div>
+          <div class="field"><label>Import private key (64 hex characters)</label><div class="row"><input id="importKey" type="password" autocomplete="new-password" data-lpignore="true" spellcheck="false" placeholder="0x…" style="flex:1"><button class="btn" id="importBtn">Import</button></div></div>
+          <div class="muted small">Raw-key mode has no mnemonic backup. Back up the private key itself.</div>
+        </div>
+      </div>
+      <div id="walletPanel" class="hidden">
+        <div class="hr"></div>
+        <div class="row space">
+          <h2 style="margin:0;font-size:17px">Wallet Result · Backup & Keys</h2>
+          <span class="pill">Secrets stay local</span>
+        </div>
+
+        <div id="mnemonicPanel" class="hidden">
+          <div class="warning small" style="margin-top:12px"><b>Recovery phrase = full HD wallet access.</b> It can recreate this private key and all other addresses derived from the same phrase. Keep it offline. If you use a BIP39 passphrase, the phrase alone is not enough to recover the wallet.</div>
+          <div class="field"><label>1 · 24-word recovery phrase — master backup</label><textarea id="mnemonic" class="secret" readonly style="min-height:110px"></textarea></div>
+          <div class="row"><button class="btn danger" id="toggleMnemonic">Reveal recovery phrase</button><button class="btn" data-copy="mnemonic">Copy recovery phrase</button></div>
+          <div class="field"><label>2 · Derivation path — selects the current account key</label><input id="derivationPath" readonly></div>
+        </div>
+
+        <div class="grid">
+          <div>
+            <div class="field"><label>3 · Address — safe to share</label><textarea id="address" readonly></textarea></div>
+            <div class="row"><button class="btn" data-copy="address">Copy address</button></div>
+          </div>
+          <div>
+            <div class="field"><label>4 · Private key — controls this exact address</label><textarea id="privateKey" class="secret" readonly></textarea></div>
+            <div class="row"><button class="btn danger" id="toggleKey">Reveal private key</button><button class="btn" data-copy="privateKey">Copy private key</button></div>
+          </div>
+        </div>
+
+        <div class="warning small" style="margin-top:14px"><b>Backup distinction:</b> the 24-word phrase is the master HD backup and can derive many private keys. The private key shown here is only for the currently selected derivation path/address. Either secret can spend funds for this address.</div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>2 · Receive</h2>
+      <div class="muted small">USD₮0 / USDT0 (the Arbitrum deployment of Tether) on Arbitrum One uses the same EVM account address shown in the wallet section. Only send assets on the intended network.</div>
+      <div class="field"><label>Public receiving address</label><textarea id="receiveAddress" readonly placeholder="Generate or import a wallet first"></textarea></div>
+      <div class="row"><button class="btn" id="copyReceive" disabled>Copy address</button></div>
+      <div class="field"><label>Address QR (plain EVM address; choose Arbitrum One at the sender)</label><div class="qrbox"><canvas id="receiveQr" width="280" height="280"></canvas></div></div>
+      <div class="row"><button class="btn" id="downloadQr" disabled>Download QR PNG</button></div>
+      <div class="hr"></div>
+      <div class="field"><label>Watch-only / address verification</label><input id="watchAddress" placeholder="0x…" spellcheck="false" autocomplete="off"></div>
+      <div class="row"><button class="btn" id="useWatch">Use public address only</button><button class="btn" id="clearWatch">Clear watch-only</button></div>
+      <div id="watchStatus" class="status" style="margin-top:12px">No watch-only address loaded.</div>
+      <div class="warning small" style="margin-top:12px">Network must be <b>Arbitrum One (42161)</b>. Do not assume a deposit platform supports this network just because the address starts with 0x.</div>
+    </section>
+
+    <section class="card">
+      <h2>3 · Offline key verifier</h2>
+      <div class="muted small">Use this with networking disabled to verify that a private key really derives the expected EVM address. Nothing is sent anywhere.</div>
+      <div class="field"><label>Private key to verify</label><input id="verifyKey" type="password" autocomplete="off" spellcheck="false" placeholder="64 hex characters"></div>
+      <div class="field"><label>Expected address (optional)</label><input id="verifyExpected" autocomplete="off" spellcheck="false" placeholder="0x…"></div>
+      <div class="row"><button class="btn" id="verifyBtn">Derive & verify</button><button class="btn" id="clearVerify">Clear</button></div>
+      <div id="verifyStatus" class="status" style="margin-top:12px">Ready. For highest assurance, disconnect networking before using this verifier.</div>
+    </section>
+
+    <section class="card">
+      <h2>4 · RPC / Chain</h2>
+      <div class="field"><label>RPC endpoint</label><input id="rpc" value="https://arb1.arbitrum.io/rpc" placeholder="https://arb1.arbitrum.io/rpc" spellcheck="false" autocomplete="off"></div>
+      <div class="row"><button class="btn primary" id="connect">Connect & verify</button><button class="btn" id="disconnect">Disconnect</button></div>
+      <div id="rpcStatus" class="status" style="margin-top:12px">Disconnected. No RPC request has been sent. Enter an Arbitrum One JSON-RPC endpoint when online access is needed.</div>
+      <div class="hr"></div>
+      <div class="small muted">Expected chain</div><div class="mono">Arbitrum One · 42161 (0xa4b1)</div>
+      <div class="small muted" style="margin-top:8px">Locked token contract</div><div id="tokenContract" class="mono">0xfd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9</div>
+      <div id="tokenMeta" class="small muted" style="margin-top:8px">Token metadata will be read from chain after connection.</div>
+    </section>
+
+    <section class="card full">
+      <div class="row space"><h2 style="margin:0">5 · Balances</h2><button class="btn" id="refresh" disabled>Refresh</button></div>
+      <div class="grid" style="margin-top:12px">
+        <div><div class="muted small">Token balance</div><div id="tokenBal" class="kpi">—</div></div>
+        <div><div class="muted small">ETH gas balance</div><div id="ethBal" class="kpi">—</div></div>
+      </div>
+    </section>
+
+    <section class="card full">
+      <h2>6 · Send token</h2>
+      <div class="grid">
+        <div class="field"><label>Recipient</label><input id="to" placeholder="0x…" spellcheck="false"></div>
+        <div class="field"><label>Amount</label><input id="amount" inputmode="decimal" placeholder="0.000001"></div>
+      </div>
+      <div class="row"><button class="btn primary" id="prepare" disabled>Review transaction</button></div>
+      <div id="reviewBox" class="hidden" style="margin-top:14px">
+        <div class="review" id="review"></div>
+        <div class="warning small" style="margin:12px 0">Verify recipient, amount, chain ID and contract. Signing is local. Broadcasting sends only the signed raw transaction to the selected RPC.</div>
+        <div class="row"><button class="btn primary" id="sign">Sign locally</button><button class="btn" id="cancelReview">Cancel</button></div>
+      </div>
+      <div id="signedBox" class="hidden" style="margin-top:14px">
+        <div class="field"><label>Signed raw transaction</label><textarea id="rawTx" readonly style="min-height:130px"></textarea></div>
+        <div class="row"><button class="btn" data-copy="rawTx">Copy raw transaction</button><button class="btn primary" id="broadcast">Broadcast</button></div>
+        <div id="txStatus" class="status" style="margin-top:12px">Signed locally; not broadcast.</div>
+      </div>
+    </section>
+
+    <section class="card full">
+      <h2>7 · Air-gapped signing</h2>
+      <div class="grid">
+        <div>
+          <div class="muted small">ONLINE COMPUTER</div>
+          <p class="small">Prepare a transaction above, then export a public signing package. The package contains transaction fields but <b>no private key</b>.</p>
+          <button class="btn" id="exportPackage" disabled>Export prepared package</button>
+        </div>
+        <div>
+          <div class="muted small">OFFLINE COMPUTER</div>
+          <p class="small">Paste the package into another copy of this HTML, load the matching private key, verify every field, and sign locally.</p>
+          <button class="btn" id="importPackage">Load package below</button>
+        </div>
+      </div>
+      <div class="field"><label>Unsigned transaction package (JSON)</label><textarea id="packageBox" spellcheck="false" style="min-height:170px" placeholder="Prepared package appears here, or paste one from an online computer"></textarea></div>
+      <div class="row"><button class="btn" data-copy="packageBox">Copy package</button><button class="btn" id="clearPackage">Clear package</button></div>
+      <div class="hr"></div>
+      <div class="muted small">ONLINE BROADCAST ONLY</div>
+      <div class="field"><label>Signed raw transaction</label><textarea id="manualRaw" spellcheck="false" style="min-height:120px" placeholder="0x…"></textarea></div>
+      <div class="row"><button class="btn primary" id="manualBroadcast">Broadcast pasted raw transaction</button></div>
+      <div id="manualStatus" class="status" style="margin-top:12px">Nothing broadcast.</div>
+    </section>
+  </div>
+
+  <div class="card">
+    <h2>Before real funds</h2>
+    <div class="small"><b>Recommended acceptance test:</b> generate a new 24-word wallet while offline → write down the words → clear the page → restore the words and confirm the same address → receive a tiny Arbitrum transfer → add a small amount of ETH for gas → send a tiny token amount back out. Only increase value after the complete recovery and send flow succeeds.</div>
+  </div>
+  <div class="card small muted">
+    <b>Implementation notes.</b> Single-file Arbitrum One self-custody wallet supporting BIP39 24-word recovery phrases, BIP32/BIP44 derivation at <code>m/44'/60'/0'/0/index</code>, explicit display of the private key for the selected derived address, raw private keys, watch-only mode, offline key verification, local QR generation, local transaction signing and air-gapped signing packages. No external JavaScript, CSS, fonts, analytics, wallet extension or backend is used. The only network operation is explicit JSON-RPC <code>fetch()</code> to the endpoint you enter. The Arbitrum One chain ID and USD₮0/USDT0 token contract are locked in source and checked before online sending. The token symbol is informational because branding characters may change; the locked address, chain ID, contract bytecode and 6-decimal metadata are the security checks.
+  </div>
+</div>
+<script>
+'use strict';
+(() => {
+const CHAIN_ID=42161n;
+const TOKEN='0xfd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9';
+const P=0xfffffffffffffffffffffffffffffffffffffffffffffffffffffffefffffc2fn;
+const N=0xfffffffffffffffffffffffffffffffebaaedce6af48a03bbfd25e8cd0364141n;
+const G={x:0x79be667ef9dcbbac55a06295ce870b07029bfcdb2dce28d959f2815b16f81798n,y:0x483ada7726a3c4655da4fbfc0e1108a8fd17b448a68554199c47d08ffb10d4b8n};
+let priv=null, address=null, watchAddress=null, rpcURL=null, tokenSymbol='TOKEN', tokenDecimals=6, pending=null, hdSeed=null, mnemonicWords='';
+const $=id=>document.getElementById(id);
+const enc=new TextEncoder();
+// BIP39 English wordlist: bitcoin/bips bip-0039/english.txt, Git blob 942040ed50f7205cafc465496229128ba4f78e75
+const BIP39_WORDS=`abandon\nability\nable\nabout\nabove\nabsent\nabsorb\nabstract\nabsurd\nabuse\naccess\naccident\naccount\naccuse\nachieve\nacid\nacoustic\nacquire\nacross\nact\naction\nactor\nactress\nactual\nadapt\nadd\naddict\naddress\nadjust\nadmit\nadult\nadvance\nadvice\naerobic\naffair\nafford\nafraid\nagain\nage\nagent\nagree\nahead\naim\nair\nairport\naisle\nalarm\nalbum\nalcohol\nalert\nalien\nall\nalley\nallow\nalmost\nalone\nalpha\nalready\nalso\nalter\nalways\namateur\namazing\namong\namount\namused\nanalyst\nanchor\nancient\nanger\nangle\nangry\nanimal\nankle\nannounce\nannual\nanother\nanswer\nantenna\nantique\nanxiety\nany\napart\napology\nappear\napple\napprove\napril\narch\narctic\narea\narena\nargue\narm\narmed\narmor\narmy\naround\narrange\narrest\narrive\narrow\nart\nartefact\nartist\nartwork\nask\naspect\nassault\nasset\nassist\nassume\nasthma\nathlete\natom\nattack\nattend\nattitude\nattract\nauction\naudit\naugust\naunt\nauthor\nauto\nautumn\naverage\navocado\navoid\nawake\naware\naway\nawesome\nawful\nawkward\naxis\nbaby\nbachelor\nbacon\nbadge\nbag\nbalance\nbalcony\nball\nbamboo\nbanana\nbanner\nbar\nbarely\nbargain\nbarrel\nbase\nbasic\nbasket\nbattle\nbeach\nbean\nbeauty\nbecause\nbecome\nbeef\nbefore\nbegin\nbehave\nbehind\nbelieve\nbelow\nbelt\nbench\nbenefit\nbest\nbetray\nbetter\nbetween\nbeyond\nbicycle\nbid\nbike\nbind\nbiology\nbird\nbirth\nbitter\nblack\nblade\nblame\nblanket\nblast\nbleak\nbless\nblind\nblood\nblossom\nblouse\nblue\nblur\nblush\nboard\nboat\nbody\nboil\nbomb\nbone\nbonus\nbook\nboost\nborder\nboring\nborrow\nboss\nbottom\nbounce\nbox\nboy\nbracket\nbrain\nbrand\nbrass\nbrave\nbread\nbreeze\nbrick\nbridge\nbrief\nbright\nbring\nbrisk\nbroccoli\nbroken\nbronze\nbroom\nbrother\nbrown\nbrush\nbubble\nbuddy\nbudget\nbuffalo\nbuild\nbulb\nbulk\nbullet\nbundle\nbunker\nburden\nburger\nburst\nbus\nbusiness\nbusy\nbutter\nbuyer\nbuzz\ncabbage\ncabin\ncable\ncactus\ncage\ncake\ncall\ncalm\ncamera\ncamp\ncan\ncanal\ncancel\ncandy\ncannon\ncanoe\ncanvas\ncanyon\ncapable\ncapital\ncaptain\ncar\ncarbon\ncard\ncargo\ncarpet\ncarry\ncart\ncase\ncash\ncasino\ncastle\ncasual\ncat\ncatalog\ncatch\ncategory\ncattle\ncaught\ncause\ncaution\ncave\nceiling\ncelery\ncement\ncensus\ncentury\ncereal\ncertain\nchair\nchalk\nchampion\nchange\nchaos\nchapter\ncharge\nchase\nchat\ncheap\ncheck\ncheese\nchef\ncherry\nchest\nchicken\nchief\nchild\nchimney\nchoice\nchoose\nchronic\nchuckle\nchunk\nchurn\ncigar\ncinnamon\ncircle\ncitizen\ncity\ncivil\nclaim\nclap\nclarify\nclaw\nclay\nclean\nclerk\nclever\nclick\nclient\ncliff\nclimb\nclinic\nclip\nclock\nclog\nclose\ncloth\ncloud\nclown\nclub\nclump\ncluster\nclutch\ncoach\ncoast\ncoconut\ncode\ncoffee\ncoil\ncoin\ncollect\ncolor\ncolumn\ncombine\ncome\ncomfort\ncomic\ncommon\ncompany\nconcert\nconduct\nconfirm\ncongress\nconnect\nconsider\ncontrol\nconvince\ncook\ncool\ncopper\ncopy\ncoral\ncore\ncorn\ncorrect\ncost\ncotton\ncouch\ncountry\ncouple\ncourse\ncousin\ncover\ncoyote\ncrack\ncradle\ncraft\ncram\ncrane\ncrash\ncrater\ncrawl\ncrazy\ncream\ncredit\ncreek\ncrew\ncricket\ncrime\ncrisp\ncritic\ncrop\ncross\ncrouch\ncrowd\ncrucial\ncruel\ncruise\ncrumble\ncrunch\ncrush\ncry\ncrystal\ncube\nculture\ncup\ncupboard\ncurious\ncurrent\ncurtain\ncurve\ncushion\ncustom\ncute\ncycle\ndad\ndamage\ndamp\ndance\ndanger\ndaring\ndash\ndaughter\ndawn\nday\ndeal\ndebate\ndebris\ndecade\ndecember\ndecide\ndecline\ndecorate\ndecrease\ndeer\ndefense\ndefine\ndefy\ndegree\ndelay\ndeliver\ndemand\ndemise\ndenial\ndentist\ndeny\ndepart\ndepend\ndeposit\ndepth\ndeputy\nderive\ndescribe\ndesert\ndesign\ndesk\ndespair\ndestroy\ndetail\ndetect\ndevelop\ndevice\ndevote\ndiagram\ndial\ndiamond\ndiary\ndice\ndiesel\ndiet\ndiffer\ndigital\ndignity\ndilemma\ndinner\ndinosaur\ndirect\ndirt\ndisagree\ndiscover\ndisease\ndish\ndismiss\ndisorder\ndisplay\ndistance\ndivert\ndivide\ndivorce\ndizzy\ndoctor\ndocument\ndog\ndoll\ndolphin\ndomain\ndonate\ndonkey\ndonor\ndoor\ndose\ndouble\ndove\ndraft\ndragon\ndrama\ndrastic\ndraw\ndream\ndress\ndrift\ndrill\ndrink\ndrip\ndrive\ndrop\ndrum\ndry\nduck\ndumb\ndune\nduring\ndust\ndutch\nduty\ndwarf\ndynamic\neager\neagle\nearly\nearn\nearth\neasily\neast\neasy\necho\necology\neconomy\nedge\nedit\neducate\neffort\negg\neight\neither\nelbow\nelder\nelectric\nelegant\nelement\nelephant\nelevator\nelite\nelse\nembark\nembody\nembrace\nemerge\nemotion\nemploy\nempower\nempty\nenable\nenact\nend\nendless\nendorse\nenemy\nenergy\nenforce\nengage\nengine\nenhance\nenjoy\nenlist\nenough\nenrich\nenroll\nensure\nenter\nentire\nentry\nenvelope\nepisode\nequal\nequip\nera\nerase\nerode\nerosion\nerror\nerupt\nescape\nessay\nessence\nestate\neternal\nethics\nevidence\nevil\nevoke\nevolve\nexact\nexample\nexcess\nexchange\nexcite\nexclude\nexcuse\nexecute\nexercise\nexhaust\nexhibit\nexile\nexist\nexit\nexotic\nexpand\nexpect\nexpire\nexplain\nexpose\nexpress\nextend\nextra\neye\neyebrow\nfabric\nface\nfaculty\nfade\nfaint\nfaith\nfall\nfalse\nfame\nfamily\nfamous\nfan\nfancy\nfantasy\nfarm\nfashion\nfat\nfatal\nfather\nfatigue\nfault\nfavorite\nfeature\nfebruary\nfederal\nfee\nfeed\nfeel\nfemale\nfence\nfestival\nfetch\nfever\nfew\nfiber\nfiction\nfield\nfigure\nfile\nfilm\nfilter\nfinal\nfind\nfine\nfinger\nfinish\nfire\nfirm\nfirst\nfiscal\nfish\nfit\nfitness\nfix\nflag\nflame\nflash\nflat\nflavor\nflee\nflight\nflip\nfloat\nflock\nfloor\nflower\nfluid\nflush\nfly\nfoam\nfocus\nfog\nfoil\nfold\nfollow\nfood\nfoot\nforce\nforest\nforget\nfork\nfortune\nforum\nforward\nfossil\nfoster\nfound\nfox\nfragile\nframe\nfrequent\nfresh\nfriend\nfringe\nfrog\nfront\nfrost\nfrown\nfrozen\nfruit\nfuel\nfun\nfunny\nfurnace\nfury\nfuture\ngadget\ngain\ngalaxy\ngallery\ngame\ngap\ngarage\ngarbage\ngarden\ngarlic\ngarment\ngas\ngasp\ngate\ngather\ngauge\ngaze\ngeneral\ngenius\ngenre\ngentle\ngenuine\ngesture\nghost\ngiant\ngift\ngiggle\nginger\ngiraffe\ngirl\ngive\nglad\nglance\nglare\nglass\nglide\nglimpse\nglobe\ngloom\nglory\nglove\nglow\nglue\ngoat\ngoddess\ngold\ngood\ngoose\ngorilla\ngospel\ngossip\ngovern\ngown\ngrab\ngrace\ngrain\ngrant\ngrape\ngrass\ngravity\ngreat\ngreen\ngrid\ngrief\ngrit\ngrocery\ngroup\ngrow\ngrunt\nguard\nguess\nguide\nguilt\nguitar\ngun\ngym\nhabit\nhair\nhalf\nhammer\nhamster\nhand\nhappy\nharbor\nhard\nharsh\nharvest\nhat\nhave\nhawk\nhazard\nhead\nhealth\nheart\nheavy\nhedgehog\nheight\nhello\nhelmet\nhelp\nhen\nhero\nhidden\nhigh\nhill\nhint\nhip\nhire\nhistory\nhobby\nhockey\nhold\nhole\nholiday\nhollow\nhome\nhoney\nhood\nhope\nhorn\nhorror\nhorse\nhospital\nhost\nhotel\nhour\nhover\nhub\nhuge\nhuman\nhumble\nhumor\nhundred\nhungry\nhunt\nhurdle\nhurry\nhurt\nhusband\nhybrid\nice\nicon\nidea\nidentify\nidle\nignore\nill\nillegal\nillness\nimage\nimitate\nimmense\nimmune\nimpact\nimpose\nimprove\nimpulse\ninch\ninclude\nincome\nincrease\nindex\nindicate\nindoor\nindustry\ninfant\ninflict\ninform\ninhale\ninherit\ninitial\ninject\ninjury\ninmate\ninner\ninnocent\ninput\ninquiry\ninsane\ninsect\ninside\ninspire\ninstall\nintact\ninterest\ninto\ninvest\ninvite\ninvolve\niron\nisland\nisolate\nissue\nitem\nivory\njacket\njaguar\njar\njazz\njealous\njeans\njelly\njewel\njob\njoin\njoke\njourney\njoy\njudge\njuice\njump\njungle\njunior\njunk\njust\nkangaroo\nkeen\nkeep\nketchup\nkey\nkick\nkid\nkidney\nkind\nkingdom\nkiss\nkit\nkitchen\nkite\nkitten\nkiwi\nknee\nknife\nknock\nknow\nlab\nlabel\nlabor\nladder\nlady\nlake\nlamp\nlanguage\nlaptop\nlarge\nlater\nlatin\nlaugh\nlaundry\nlava\nlaw\nlawn\nlawsuit\nlayer\nlazy\nleader\nleaf\nlearn\nleave\nlecture\nleft\nleg\nlegal\nlegend\nleisure\nlemon\nlend\nlength\nlens\nleopard\nlesson\nletter\nlevel\nliar\nliberty\nlibrary\nlicense\nlife\nlift\nlight\nlike\nlimb\nlimit\nlink\nlion\nliquid\nlist\nlittle\nlive\nlizard\nload\nloan\nlobster\nlocal\nlock\nlogic\nlonely\nlong\nloop\nlottery\nloud\nlounge\nlove\nloyal\nlucky\nluggage\nlumber\nlunar\nlunch\nluxury\nlyrics\nmachine\nmad\nmagic\nmagnet\nmaid\nmail\nmain\nmajor\nmake\nmammal\nman\nmanage\nmandate\nmango\nmansion\nmanual\nmaple\nmarble\nmarch\nmargin\nmarine\nmarket\nmarriage\nmask\nmass\nmaster\nmatch\nmaterial\nmath\nmatrix\nmatter\nmaximum\nmaze\nmeadow\nmean\nmeasure\nmeat\nmechanic\nmedal\nmedia\nmelody\nmelt\nmember\nmemory\nmention\nmenu\nmercy\nmerge\nmerit\nmerry\nmesh\nmessage\nmetal\nmethod\nmiddle\nmidnight\nmilk\nmillion\nmimic\nmind\nminimum\nminor\nminute\nmiracle\nmirror\nmisery\nmiss\nmistake\nmix\nmixed\nmixture\nmobile\nmodel\nmodify\nmom\nmoment\nmonitor\nmonkey\nmonster\nmonth\nmoon\nmoral\nmore\nmorning\nmosquito\nmother\nmotion\nmotor\nmountain\nmouse\nmove\nmovie\nmuch\nmuffin\nmule\nmultiply\nmuscle\nmuseum\nmushroom\nmusic\nmust\nmutual\nmyself\nmystery\nmyth\nnaive\nname\nnapkin\nnarrow\nnasty\nnation\nnature\nnear\nneck\nneed\nnegative\nneglect\nneither\nnephew\nnerve\nnest\nnet\nnetwork\nneutral\nnever\nnews\nnext\nnice\nnight\nnoble\nnoise\nnominee\nnoodle\nnormal\nnorth\nnose\nnotable\nnote\nnothing\nnotice\nnovel\nnow\nnuclear\nnumber\nnurse\nnut\noak\nobey\nobject\noblige\nobscure\nobserve\nobtain\nobvious\noccur\nocean\noctober\nodor\noff\noffer\noffice\noften\noil\nokay\nold\nolive\nolympic\nomit\nonce\none\nonion\nonline\nonly\nopen\nopera\nopinion\noppose\noption\norange\norbit\norchard\norder\nordinary\norgan\norient\noriginal\norphan\nostrich\nother\noutdoor\nouter\noutput\noutside\noval\noven\nover\nown\nowner\noxygen\noyster\nozone\npact\npaddle\npage\npair\npalace\npalm\npanda\npanel\npanic\npanther\npaper\nparade\nparent\npark\nparrot\nparty\npass\npatch\npath\npatient\npatrol\npattern\npause\npave\npayment\npeace\npeanut\npear\npeasant\npelican\npen\npenalty\npencil\npeople\npepper\nperfect\npermit\nperson\npet\nphone\nphoto\nphrase\nphysical\npiano\npicnic\npicture\npiece\npig\npigeon\npill\npilot\npink\npioneer\npipe\npistol\npitch\npizza\nplace\nplanet\nplastic\nplate\nplay\nplease\npledge\npluck\nplug\nplunge\npoem\npoet\npoint\npolar\npole\npolice\npond\npony\npool\npopular\nportion\nposition\npossible\npost\npotato\npottery\npoverty\npowder\npower\npractice\npraise\npredict\nprefer\nprepare\npresent\npretty\nprevent\nprice\npride\nprimary\nprint\npriority\nprison\nprivate\nprize\nproblem\nprocess\nproduce\nprofit\nprogram\nproject\npromote\nproof\nproperty\nprosper\nprotect\nproud\nprovide\npublic\npudding\npull\npulp\npulse\npumpkin\npunch\npupil\npuppy\npurchase\npurity\npurpose\npurse\npush\nput\npuzzle\npyramid\nquality\nquantum\nquarter\nquestion\nquick\nquit\nquiz\nquote\nrabbit\nraccoon\nrace\nrack\nradar\nradio\nrail\nrain\nraise\nrally\nramp\nranch\nrandom\nrange\nrapid\nrare\nrate\nrather\nraven\nraw\nrazor\nready\nreal\nreason\nrebel\nrebuild\nrecall\nreceive\nrecipe\nrecord\nrecycle\nreduce\nreflect\nreform\nrefuse\nregion\nregret\nregular\nreject\nrelax\nrelease\nrelief\nrely\nremain\nremember\nremind\nremove\nrender\nrenew\nrent\nreopen\nrepair\nrepeat\nreplace\nreport\nrequire\nrescue\nresemble\nresist\nresource\nresponse\nresult\nretire\nretreat\nreturn\nreunion\nreveal\nreview\nreward\nrhythm\nrib\nribbon\nrice\nrich\nride\nridge\nrifle\nright\nrigid\nring\nriot\nripple\nrisk\nritual\nrival\nriver\nroad\nroast\nrobot\nrobust\nrocket\nromance\nroof\nrookie\nroom\nrose\nrotate\nrough\nround\nroute\nroyal\nrubber\nrude\nrug\nrule\nrun\nrunway\nrural\nsad\nsaddle\nsadness\nsafe\nsail\nsalad\nsalmon\nsalon\nsalt\nsalute\nsame\nsample\nsand\nsatisfy\nsatoshi\nsauce\nsausage\nsave\nsay\nscale\nscan\nscare\nscatter\nscene\nscheme\nschool\nscience\nscissors\nscorpion\nscout\nscrap\nscreen\nscript\nscrub\nsea\nsearch\nseason\nseat\nsecond\nsecret\nsection\nsecurity\nseed\nseek\nsegment\nselect\nsell\nseminar\nsenior\nsense\nsentence\nseries\nservice\nsession\nsettle\nsetup\nseven\nshadow\nshaft\nshallow\nshare\nshed\nshell\nsheriff\nshield\nshift\nshine\nship\nshiver\nshock\nshoe\nshoot\nshop\nshort\nshoulder\nshove\nshrimp\nshrug\nshuffle\nshy\nsibling\nsick\nside\nsiege\nsight\nsign\nsilent\nsilk\nsilly\nsilver\nsimilar\nsimple\nsince\nsing\nsiren\nsister\nsituate\nsix\nsize\nskate\nsketch\nski\nskill\nskin\nskirt\nskull\nslab\nslam\nsleep\nslender\nslice\nslide\nslight\nslim\nslogan\nslot\nslow\nslush\nsmall\nsmart\nsmile\nsmoke\nsmooth\nsnack\nsnake\nsnap\nsniff\nsnow\nsoap\nsoccer\nsocial\nsock\nsoda\nsoft\nsolar\nsoldier\nsolid\nsolution\nsolve\nsomeone\nsong\nsoon\nsorry\nsort\nsoul\nsound\nsoup\nsource\nsouth\nspace\nspare\nspatial\nspawn\nspeak\nspecial\nspeed\nspell\nspend\nsphere\nspice\nspider\nspike\nspin\nspirit\nsplit\nspoil\nsponsor\nspoon\nsport\nspot\nspray\nspread\nspring\nspy\nsquare\nsqueeze\nsquirrel\nstable\nstadium\nstaff\nstage\nstairs\nstamp\nstand\nstart\nstate\nstay\nsteak\nsteel\nstem\nstep\nstereo\nstick\nstill\nsting\nstock\nstomach\nstone\nstool\nstory\nstove\nstrategy\nstreet\nstrike\nstrong\nstruggle\nstudent\nstuff\nstumble\nstyle\nsubject\nsubmit\nsubway\nsuccess\nsuch\nsudden\nsuffer\nsugar\nsuggest\nsuit\nsummer\nsun\nsunny\nsunset\nsuper\nsupply\nsupreme\nsure\nsurface\nsurge\nsurprise\nsurround\nsurvey\nsuspect\nsustain\nswallow\nswamp\nswap\nswarm\nswear\nsweet\nswift\nswim\nswing\nswitch\nsword\nsymbol\nsymptom\nsyrup\nsystem\ntable\ntackle\ntag\ntail\ntalent\ntalk\ntank\ntape\ntarget\ntask\ntaste\ntattoo\ntaxi\nteach\nteam\ntell\nten\ntenant\ntennis\ntent\nterm\ntest\ntext\nthank\nthat\ntheme\nthen\ntheory\nthere\nthey\nthing\nthis\nthought\nthree\nthrive\nthrow\nthumb\nthunder\nticket\ntide\ntiger\ntilt\ntimber\ntime\ntiny\ntip\ntired\ntissue\ntitle\ntoast\ntobacco\ntoday\ntoddler\ntoe\ntogether\ntoilet\ntoken\ntomato\ntomorrow\ntone\ntongue\ntonight\ntool\ntooth\ntop\ntopic\ntopple\ntorch\ntornado\ntortoise\ntoss\ntotal\ntourist\ntoward\ntower\ntown\ntoy\ntrack\ntrade\ntraffic\ntragic\ntrain\ntransfer\ntrap\ntrash\ntravel\ntray\ntreat\ntree\ntrend\ntrial\ntribe\ntrick\ntrigger\ntrim\ntrip\ntrophy\ntrouble\ntruck\ntrue\ntruly\ntrumpet\ntrust\ntruth\ntry\ntube\ntuition\ntumble\ntuna\ntunnel\nturkey\nturn\nturtle\ntwelve\ntwenty\ntwice\ntwin\ntwist\ntwo\ntype\ntypical\nugly\numbrella\nunable\nunaware\nuncle\nuncover\nunder\nundo\nunfair\nunfold\nunhappy\nuniform\nunique\nunit\nuniverse\nunknown\nunlock\nuntil\nunusual\nunveil\nupdate\nupgrade\nuphold\nupon\nupper\nupset\nurban\nurge\nusage\nuse\nused\nuseful\nuseless\nusual\nutility\nvacant\nvacuum\nvague\nvalid\nvalley\nvalve\nvan\nvanish\nvapor\nvarious\nvast\nvault\nvehicle\nvelvet\nvendor\nventure\nvenue\nverb\nverify\nversion\nvery\nvessel\nveteran\nviable\nvibrant\nvicious\nvictory\nvideo\nview\nvillage\nvintage\nviolin\nvirtual\nvirus\nvisa\nvisit\nvisual\nvital\nvivid\nvocal\nvoice\nvoid\nvolcano\nvolume\nvote\nvoyage\nwage\nwagon\nwait\nwalk\nwall\nwalnut\nwant\nwarfare\nwarm\nwarrior\nwash\nwasp\nwaste\nwater\nwave\nway\nwealth\nweapon\nwear\nweasel\nweather\nweb\nwedding\nweekend\nweird\nwelcome\nwest\nwet\nwhale\nwhat\nwheat\nwheel\nwhen\nwhere\nwhip\nwhisper\nwide\nwidth\nwife\nwild\nwill\nwin\nwindow\nwine\nwing\nwink\nwinner\nwinter\nwire\nwisdom\nwise\nwish\nwitness\nwolf\nwoman\nwonder\nwood\nwool\nword\nwork\nworld\nworry\nworth\nwrap\nwreck\nwrestle\nwrist\nwrite\nwrong\nyard\nyear\nyellow\nyou\nyoung\nyouth\nzebra\nzero\nzone\nzoo`.split('\n');
+const BIP39_INDEX=new Map(BIP39_WORDS.map((w,i)=>[w,i]));
+
+function mod(a,m){const x=a%m;return x>=0n?x:x+m}
+function inv(a,m){let [b,x0,x1]=[m,0n,1n];a=mod(a,m);while(a>1n){const q=a/b;[a,b]=[b,a%b];[x1,x0]=[x0,x1-q*x0]}return mod(x1,m)}
+function add(A,B){if(!A)return B;if(!B)return A;if(A.x===B.x){if(A.y!==B.y||A.y===0n)return null;const s=mod((3n*A.x*A.x)*inv(2n*A.y,P),P);const x=mod(s*s-2n*A.x,P);return{x,y:mod(s*(A.x-x)-A.y,P)}}const s=mod((B.y-A.y)*inv(B.x-A.x,P),P);const x=mod(s*s-A.x-B.x,P);return{x,y:mod(s*(A.x-x)-A.y,P)}}
+function mul(k,A=G){let R=null,Q=A;k=mod(k,N);while(k){if(k&1n)R=add(R,Q);Q=add(Q,Q);k>>=1n}return R}
+function hexToBytes(h){h=h.toLowerCase().replace(/^0x/,'');if(h.length%2)h='0'+h;if(!/^[0-9a-f]*$/.test(h))throw Error('Invalid hex');const a=new Uint8Array(h.length/2);for(let i=0;i<a.length;i++)a[i]=parseInt(h.slice(i*2,i*2+2),16);return a}
+function bytesToHex(b){return Array.from(b,x=>x.toString(16).padStart(2,'0')).join('')}
+function bytesToBig(b){return BigInt('0x'+(bytesToHex(b)||'0'))}
+function bigToBytes(n,len=0){let h=n.toString(16);if(h.length%2)h='0'+h;if(len)h=h.padStart(len*2,'0');return hexToBytes(h)}
+function concat(...xs){let n=0;for(const x of xs)n+=x.length;const o=new Uint8Array(n);let p=0;for(const x of xs){o.set(x,p);p+=x.length}return o}
+
+// Keccak-f[1600], Keccak-256 (Ethereum), not SHA3-256.
+const RC=[1n,0x8082n,0x800000000000808an,0x8000000080008000n,0x808bn,0x80000001n,0x8000000080008081n,0x8000000000008009n,0x8an,0x88n,0x80008009n,0x8000000an,0x8000808bn,0x800000000000008bn,0x8000000000008089n,0x8000000000008003n,0x8000000000008002n,0x8000000000000080n,0x800an,0x800000008000000an,0x8000000080008081n,0x8000000000008080n,0x80000001n,0x8000000080008008n];
+const ROT=[[0,36,3,41,18],[1,44,10,45,2],[62,6,43,15,61],[28,55,25,21,56],[27,20,39,8,14]];const MASK=(1n<<64n)-1n;
+function rol(x,n){n=BigInt(n);return n===0n?x& MASK:((x<<n)|(x>>(64n-n)))&MASK}
+function keccakF(s){for(let rnd=0;rnd<24;rnd++){const C=[];for(let x=0;x<5;x++)C[x]=s[x]^s[x+5]^s[x+10]^s[x+15]^s[x+20];const D=[];for(let x=0;x<5;x++)D[x]=C[(x+4)%5]^rol(C[(x+1)%5],1);for(let x=0;x<5;x++)for(let y=0;y<5;y++)s[x+5*y]^=D[x];const B=new Array(25).fill(0n);for(let x=0;x<5;x++)for(let y=0;y<5;y++)B[y+5*((2*x+3*y)%5)]=rol(s[x+5*y],ROT[x][y]);for(let x=0;x<5;x++)for(let y=0;y<5;y++)s[x+5*y]=B[x+5*y]^((~B[(x+1)%5+5*y])&B[(x+2)%5+5*y]);s[0]^=RC[rnd]}}
+function keccak256(msg){const rate=136;let b=Array.from(msg);b.push(0x01);while((b.length%rate)!==rate-1)b.push(0);b.push(0x80);const s=new Array(25).fill(0n);for(let off=0;off<b.length;off+=rate){for(let i=0;i<rate/8;i++){let v=0n;for(let j=0;j<8;j++)v|=BigInt(b[off+i*8+j])<<(8n*BigInt(j));s[i]^=v}keccakF(s)}const out=new Uint8Array(32);for(let i=0;i<32;i++)out[i]=Number((s[Math.floor(i/8)]>>(8n*BigInt(i%8)))&255n);return out}
+
+function checksumAddress(lower){lower=lower.toLowerCase().replace(/^0x/,'');const h=bytesToHex(keccak256(enc.encode(lower)));let out='0x';for(let i=0;i<40;i++)out+=parseInt(h[i],16)>=8?lower[i].toUpperCase():lower[i];return out}
+function addressFromPriv(d){const Q=mul(d);const pub=concat(bigToBytes(Q.x,32),bigToBytes(Q.y,32));const h=keccak256(pub);return checksumAddress(bytesToHex(h.slice(12)))}
+function validAddress(a){return /^0x[0-9a-fA-F]{40}$/.test(a)}
+function activeAddress(){return address||watchAddress||null}
+function sameAddr(a,b){return !!a&&!!b&&a.toLowerCase()===b.toLowerCase()}
+function wipeInput(el){try{el.value=''}catch{}}
+function setWatch(a){
+  if(a===null){watchAddress=null;wipeInput($('watchAddress'));setStatus($('watchStatus'),'No watch-only address loaded.');showWallet();return}
+  if(!validAddress(a))throw Error('Watch-only address is invalid.');
+  watchAddress=checksumAddress(a);
+  $('watchAddress').value=watchAddress;
+  setStatus($('watchStatus'),'Watch-only address loaded: '+watchAddress,'ok');
+  showWallet();
+}
+function randomPriv(){while(true){const b=crypto.getRandomValues(new Uint8Array(32));const d=bytesToBig(b);if(d>0n&&d<N)return d}}
+function cleanPriv(s){s=s.trim().replace(/^0x/,'');if(!/^[0-9a-fA-F]{64}$/.test(s))throw Error('Private key must be exactly 32 bytes (64 hex characters).');const d=BigInt('0x'+s);if(d<=0n||d>=N)throw Error('Private key is outside secp256k1 range.');return d}
+
+function rlpBytes(data){const b=data instanceof Uint8Array?data:hexToBytes(data);if(b.length===1&&b[0]<0x80)return b;if(b.length<=55)return concat(Uint8Array.of(0x80+b.length),b);const l=bigToBytes(BigInt(b.length));return concat(Uint8Array.of(0xb7+l.length),l,b)}
+function intBytes(n){if(n===0n)return new Uint8Array();return bigToBytes(n)}
+function rlp(x){if(Array.isArray(x)){const p=concat(...x.map(rlp));if(p.length<=55)return concat(Uint8Array.of(0xc0+p.length),p);const l=bigToBytes(BigInt(p.length));return concat(Uint8Array.of(0xf7+l.length),l,p)}return rlpBytes(x)}
+async function hmac(key,data){const k=await crypto.subtle.importKey('raw',key,{name:'HMAC',hash:'SHA-256'},false,['sign']);return new Uint8Array(await crypto.subtle.sign('HMAC',k,data))}
+async function deterministicK(d,hash,extra=0){let x=bigToBytes(d,32),h1=hash;if(extra){h1=await sha256(concat(hash,bigToBytes(BigInt(extra),4)))}let V=new Uint8Array(32).fill(1),K=new Uint8Array(32);K=await hmac(K,concat(V,Uint8Array.of(0),x,h1));V=await hmac(K,V);K=await hmac(K,concat(V,Uint8Array.of(1),x,h1));V=await hmac(K,V);while(true){V=await hmac(K,V);const k=bytesToBig(V);if(k>0n&&k<N)return k;K=await hmac(K,concat(V,Uint8Array.of(0)));V=await hmac(K,V)}}
+async function sha256(b){return new Uint8Array(await crypto.subtle.digest('SHA-256',b))}
+async function hmac512(key,data){const k=await crypto.subtle.importKey('raw',key,{name:'HMAC',hash:'SHA-512'},false,['sign']);return new Uint8Array(await crypto.subtle.sign('HMAC',k,data))}
+function nfkd(s){return String(s).normalize('NFKD')}
+function u32be(i){return new Uint8Array([(i>>>24)&255,(i>>>16)&255,(i>>>8)&255,i&255])}
+function compressedPub(d){const Q=mul(d);return concat(Uint8Array.of(Number(Q.y&1n)?3:2),bigToBytes(Q.x,32))}
+async function entropyToMnemonic(entropy){
+  if(!(entropy instanceof Uint8Array)||entropy.length!==32)throw Error('This build generates 256-bit entropy (24 words) only.');
+  const hash=await sha256(entropy);let bits='';for(const b of entropy)bits+=b.toString(2).padStart(8,'0');bits+=hash[0].toString(2).padStart(8,'0');
+  const out=[];for(let i=0;i<24;i++)out.push(BIP39_WORDS[parseInt(bits.slice(i*11,i*11+11),2)]);return out.join(' ')
+}
+async function validateMnemonic24(m){
+  const ws=nfkd(m).trim().toLowerCase().split(/\s+/).filter(Boolean);if(ws.length!==24)return false;
+  let bits='';for(const w of ws){const n=BIP39_INDEX.get(w);if(n===undefined)return false;bits+=n.toString(2).padStart(11,'0')}
+  const entBits=bits.slice(0,256),cs=bits.slice(256);const ent=new Uint8Array(32);for(let i=0;i<32;i++)ent[i]=parseInt(entBits.slice(i*8,i*8+8),2);
+  const h=await sha256(ent);return cs===h[0].toString(2).padStart(8,'0')
+}
+async function mnemonicToSeed(m,pass=''){
+  const password=enc.encode(nfkd(m));const salt=enc.encode('mnemonic'+nfkd(pass));
+  const key=await crypto.subtle.importKey('raw',password,'PBKDF2',false,['deriveBits']);
+  return new Uint8Array(await crypto.subtle.deriveBits({name:'PBKDF2',hash:'SHA-512',salt,iterations:2048},key,512))
+}
+async function bip32Master(seed){const I=await hmac512(enc.encode('Bitcoin seed'),seed);const k=bytesToBig(I.slice(0,32));if(k===0n||k>=N)throw Error('Invalid BIP32 master key.');return{k,c:I.slice(32)}}
+async function bip32Child(node,index){
+  if(!Number.isInteger(index)||index<0||index>0xffffffff)throw Error('Invalid BIP32 child index.');
+  const hard=index>=0x80000000;const data=hard?concat(Uint8Array.of(0),bigToBytes(node.k,32),u32be(index)):concat(compressedPub(node.k),u32be(index));
+  const I=await hmac512(node.c,data),il=bytesToBig(I.slice(0,32));if(il>=N)throw Error('Invalid BIP32 child (IL >= n).');const k=mod(il+node.k,N);if(k===0n)throw Error('Invalid BIP32 child (zero key).');return{k,c:I.slice(32)}
+}
+function parsePath(path){
+  const parts=String(path).trim().split('/');if(parts.shift()!=='m')throw Error('Derivation path must start with m.');return parts.map(p=>{const hard=/['hH]$/.test(p);const s=hard?p.slice(0,-1):p;if(!/^\d+$/.test(s))throw Error('Invalid derivation path.');const n=Number(s);if(!Number.isSafeInteger(n)||n<0||n>=0x80000000)throw Error('Derivation index out of range.');return n+(hard?0x80000000:0)})
+}
+async function derivePath(seed,path){let node=await bip32Master(seed);for(const i of parsePath(path))node=await bip32Child(node,i);return node.k}
+function hdPathForIndex(i){if(!/^\d+$/.test(String(i).trim()))throw Error('Address index must be a non-negative integer.');const n=Number(i);if(!Number.isSafeInteger(n)||n<0||n>=0x80000000)throw Error('Address index out of range.');return `m/44'/60'/0'/0/${n}`}
+async function generateMnemonicWallet(){
+  const pass=$('mnemonicPass').value;if(pass&&!confirm('A BIP39 passphrase creates a different hidden wallet. If you forget it, the recovery phrase alone will NOT recover the funds. Continue?'))return;
+  const entropy=crypto.getRandomValues(new Uint8Array(32));const m=await entropyToMnemonic(entropy);await loadMnemonicWallet(m,pass)
+}
+async function loadMnemonicWallet(m,pass=''){
+  m=nfkd(m).trim().toLowerCase().replace(/\s+/g,' ');if(!await validateMnemonic24(m))throw Error('Invalid 24-word BIP39 recovery phrase or checksum.');
+  const path=hdPathForIndex($('hdIndex').value);const seed=await mnemonicToSeed(m,pass);const d=await derivePath(seed,path);
+  clearRawState(false);hdSeed=seed;mnemonicWords=m;priv=d;$('mnemonic').value=m;$('derivationPath').value=path;$('mnemonicPanel').classList.remove('hidden');maskSecrets();showWallet()
+}
+async function deriveSelectedIndex(){if(!hdSeed||!mnemonicWords)throw Error('Load or generate a BIP39 wallet first.');const path=hdPathForIndex($('hdIndex').value);priv=await derivePath(hdSeed,path);$('derivationPath').value=path;maskSecrets();showWallet()}
+function clearHdState(){hdSeed=null;mnemonicWords='';wipeInput($('mnemonic'));wipeInput($('mnemonicImport'));wipeInput($('mnemonicPass'));$('derivationPath').value='';$('mnemonicPanel').classList.add('hidden')}
+function maskSecrets(){for(const id of ['privateKey','mnemonic','mnemonicImport']){const e=$(id);if(e){e.classList.add('secret');e.classList.remove('reveal')}}$('toggleKey').textContent='Reveal private key';$('toggleMnemonic').textContent='Reveal recovery phrase'}
+function clearRawState(clearHd=true){priv=null;pending=null;if(clearHd)clearHdState();$('exportPackage').disabled=true;for(const id of ['importKey','privateKey','rawTx','manualRaw','verifyKey']){const e=$(id);if(e)wipeInput(e)}$('reviewBox').classList.add('hidden');$('signedBox').classList.add('hidden')}
+
+// Local QR encoder reused from this site's offline QR tool.
+const QR=(()=>{
+const ECC=[[0,0,0,0],[7,10,13,17],[10,16,22,28],[15,26,18,22],[20,18,26,16],[26,24,18,22],[18,16,24,28],[20,18,18,26],[24,22,22,26],[30,22,20,24],[18,26,24,28],[20,30,28,24],[24,22,26,28],[26,22,24,22],[30,24,20,24],[22,24,30,24],[24,28,24,30],[28,28,28,28],[30,26,28,28],[28,26,26,26],[28,26,30,28],[28,26,28,30],[28,28,30,24],[30,28,30,30],[30,28,30,30],[26,28,30,30],[28,28,28,30],[30,28,30,30],[30,28,30,30],[30,28,30,30],[30,28,30,30],[30,28,30,30],[30,28,30,30],[30,28,30,30],[30,28,30,30],[30,28,30,30],[30,28,30,30],[30,28,30,30],[30,28,30,30],[30,28,30,30],[30,28,30,30]];
+const BLK=[[0,0,0,0],[1,1,1,1],[1,1,1,1],[1,1,2,2],[1,2,2,4],[1,2,4,4],[2,4,4,4],[2,4,6,5],[2,4,6,6],[2,5,8,8],[4,5,8,8],[4,5,8,11],[4,8,10,11],[4,9,12,16],[4,9,16,16],[6,10,12,18],[6,10,17,16],[6,11,16,19],[6,13,18,21],[7,14,21,25],[8,16,20,25],[8,17,23,25],[9,17,23,34],[9,18,25,30],[10,20,27,32],[12,21,29,35],[12,23,34,37],[12,25,34,40],[13,26,35,42],[14,28,38,45],[15,29,40,48],[16,31,43,51],[17,33,45,54],[18,35,48,57],[19,37,51,60],[19,38,53,63],[20,40,56,66],[21,43,59,70],[22,45,62,74],[24,47,65,77],[25,49,68,81]];
+const FB={L:1,M:0,Q:3,H:2}, IDX={L:0,M:1,Q:2,H:3};
+function raw(ver){let r=(16*ver+128)*ver+64;if(ver>=2){let n=Math.floor(ver/7)+2;r-=(25*n-10)*n-55;if(ver>=7)r-=36}return r}
+function dataCw(ver,ecl){let i=IDX[ecl];return Math.floor(raw(ver)/8)-ECC[ver][i]*BLK[ver][i]}
+function bitsPush(a,v,n){for(let i=n-1;i>=0;i--)a.push((v>>>i)&1)}
+function bit(x,i){return ((x>>>i)&1)!==0}
+function mul(x,y){let z=0;for(let i=7;i>=0;i--){z=(z<<1)^((z>>>7)*0x11D);z^=((y>>>i)&1)*x}return z&255}
+function divs(deg){let r=Array(deg).fill(0);r[deg-1]=1;let root=1;for(let i=0;i<deg;i++){for(let j=0;j<r.length;j++){r[j]=mul(r[j],root);if(j+1<r.length)r[j]^=r[j+1]}root=mul(root,2)}return r}
+function rem(data,div){let r=Array(div.length).fill(0);for(const b of data){let f=b^r.shift();r.push(0);for(let i=0;i<r.length;i++)r[i]^=mul(div[i],f)}return r}
+function align(ver){if(ver===1)return[];let n=Math.floor(ver/7)+2,step=ver===32?26:Math.ceil((ver*4+4)/(n*2-2))*2,res=[6];for(let p=ver*4+10;res.length<n;p-=step)res.splice(1,0,p);return res}
+function set(m,f,x,y,d){m[y][x]=d;f[y][x]=true}
+function finder(m,f,x,y){for(let dy=-4;dy<=4;dy++)for(let dx=-4;dx<=4;dx++){let xx=x+dx,yy=y+dy;if(0<=xx&&xx<m.length&&0<=yy&&yy<m.length){let dist=Math.max(Math.abs(dx),Math.abs(dy));set(m,f,xx,yy,dist!==2&&dist!==4)}}}
+function alignPat(m,f,x,y){for(let dy=-2;dy<=2;dy++)for(let dx=-2;dx<=2;dx++)set(m,f,x+dx,y+dy,Math.max(Math.abs(dx),Math.abs(dy))!==1)}
+function format(m,f,ecl,mask){let size=m.length,data=(FB[ecl]<<3)|mask,rr=data;for(let i=0;i<10;i++)rr=(rr<<1)^((rr>>>9)*0x537);let b=((data<<10)|rr)^0x5412;for(let i=0;i<=5;i++)set(m,f,8,i,bit(b,i));set(m,f,8,7,bit(b,6));set(m,f,8,8,bit(b,7));set(m,f,7,8,bit(b,8));for(let i=9;i<15;i++)set(m,f,14-i,8,bit(b,i));for(let i=0;i<8;i++)set(m,f,size-1-i,8,bit(b,i));for(let i=8;i<15;i++)set(m,f,8,size-15+i,bit(b,i));set(m,f,8,size-8,true)}
+function versionBits(m,f,ver){if(ver<7)return;let r=ver;for(let i=0;i<12;i++)r=(r<<1)^((r>>>11)*0x1F25);let b=(ver<<12)|r,size=m.length;for(let i=0;i<18;i++){let d=bit(b,i),a=size-11+i%3,c=Math.floor(i/3);set(m,f,a,c,d);set(m,f,c,a,d)}}
+function mask(mask,x,y){return[ (x+y)%2===0, y%2===0, x%3===0, (x+y)%3===0, (Math.floor(x/3)+Math.floor(y/2))%2===0, (x*y)%2+(x*y)%3===0, ((x*y)%2+(x*y)%3)%2===0, ((x+y)%2+(x*y)%3)%2===0][mask]}
+function penalty(m){let s=m.length,res=0;for(let y=0;y<s;y++){let c=false,n=0;for(let x=0;x<s;x++){if(m[y][x]===c){n++;if(n===5)res+=3;else if(n>5)res++}else{c=m[y][x];n=1}}}for(let x=0;x<s;x++){let c=false,n=0;for(let y=0;y<s;y++){if(m[y][x]===c){n++;if(n===5)res+=3;else if(n>5)res++}else{c=m[y][x];n=1}}}for(let y=0;y<s-1;y++)for(let x=0;x<s-1;x++){let c=m[y][x];if(c===m[y][x+1]&&c===m[y+1][x]&&c===m[y+1][x+1])res+=3}let p1=[1,0,1,1,1,0,1,0,0,0,0],p2=[0,0,0,0,1,0,1,1,1,0,1];for(let y=0;y<s;y++)for(let x=0;x<=s-11;x++){let ok1=true,ok2=true;for(let k=0;k<11;k++){ok1&&=(m[y][x+k]==!!p1[k]);ok2&&=(m[y][x+k]==!!p2[k])}if(ok1||ok2)res+=40}for(let x=0;x<s;x++)for(let y=0;y<=s-11;y++){let ok1=true,ok2=true;for(let k=0;k<11;k++){ok1&&=(m[y+k][x]==!!p1[k]);ok2&&=(m[y+k][x]==!!p2[k])}if(ok1||ok2)res+=40}let dark=0;m.forEach(r=>r.forEach(v=>{if(v)dark++}));res+=(Math.ceil(Math.abs(dark*20-s*s*10)/(s*s))-1)*10;return res}
+function addEcc(data,ver,ecl){let idx=IDX[ecl],nb=BLK[ver][idx],el=ECC[ver][idx],rawcw=Math.floor(raw(ver)/8),short=nb-rawcw%nb,shortLen=Math.floor(rawcw/nb),blocks=[],k=0,div=divs(el);for(let i=0;i<nb;i++){let dl=shortLen-el+(i<short?0:1),dat=data.slice(k,k+dl);k+=dl;let ec=rem(dat,div);if(i<short)dat.push(0);blocks.push(dat.concat(ec))}let out=[];for(let i=0;i<blocks[0].length;i++)blocks.forEach((b,j)=>{if(i!==shortLen-el||j>=short)out.push(b[i])});return out}
+function encode(text,ecl){let bytes=Array.from(new TextEncoder().encode(text)),ver;for(ver=1;ver<=40;ver++){let c=dataCw(ver,ecl)*8,cc=ver<=9?8:16;if(4+cc+bytes.length*8<=c)break}if(ver>40)throw Error('内容太长，超过二维码容量');let cc=ver<=9?8:16,bits=[];bitsPush(bits,4,4);bitsPush(bits,bytes.length,cc);bytes.forEach(v=>bitsPush(bits,v,8));let cap=dataCw(ver,ecl)*8;bitsPush(bits,0,Math.min(4,cap-bits.length));while(bits.length%8)bits.push(0);for(let pads=[0xEC,0x11],i=0;bits.length<cap;i++)bitsPush(bits,pads[i%2],8);let data=[];for(let i=0;i<bits.length;i+=8){let v=0;for(let j=0;j<8;j++)v=(v<<1)|bits[i+j];data.push(v)}let code=addEcc(data,ver,ecl),size=ver*4+17,m=Array.from({length:size},()=>Array(size).fill(false)),f=Array.from({length:size},()=>Array(size).fill(false));finder(m,f,3,3);finder(m,f,size-4,3);finder(m,f,3,size-4);for(let i=0;i<size;i++){set(m,f,6,i,i%2===0);set(m,f,i,6,i%2===0)}let ap=align(ver);for(const y of ap)for(const x of ap)if(!f[y][x])alignPat(m,f,x,y);versionBits(m,f,ver);format(m,f,ecl,0);let i=0;for(let right=size-1;right>=1;right-=2){if(right===6)right--;for(let vert=0;vert<size;vert++)for(let j=0;j<2;j++){let x=right-j,up=((right+1)&2)===0,y=up?size-1-vert:vert;if(!f[y][x]&&i<code.length*8){m[y][x]=bit(code[Math.floor(i/8)],7-i%8);i++}}}let best=null,score=1e9;for(let ms=0;ms<8;ms++){let t=m.map(r=>r.slice()),ff=f.map(r=>r.slice());for(let y=0;y<size;y++)for(let x=0;x<size;x++)if(!ff[y][x]&&mask(ms,x,y))t[y][x]=!t[y][x];format(t,ff,ecl,ms);let sc=penalty(t);if(sc<score){score=sc;best=t}}return best}
+function draw(canvas,text,opt){let m=encode(text,opt.ecl||'M'),count=m.length,margin=opt.margin||4,size=opt.size||480,scale=Math.max(1,Math.floor(size/(count+margin*2))),real=(count+margin*2)*scale;canvas.width=real;canvas.height=real;let ctx=canvas.getContext('2d');ctx.fillStyle='#fff';ctx.fillRect(0,0,real,real);ctx.fillStyle='#000';for(let y=0;y<count;y++)for(let x=0;x<count;x++)if(m[y][x])ctx.fillRect((x+margin)*scale,(y+margin)*scale,scale,scale)}
+return{draw,encode};})();
+async function signHash(hash,d){const z=bytesToBig(hash);for(let c=0;;c++){const k=await deterministicK(d,hash,c);const R=mul(k);if(R.x>=N)continue;let r=R.x;if(r===0n)continue;let s=mod(inv(k,N)*(z+r*d),N);if(s===0n)continue;let rec=Number(R.y&1n);if(s>N/2n){s=N-s;rec^=1}return{r,s,rec}}}
+function verifySig(hash,sig,Q){if(sig.r<=0n||sig.r>=N||sig.s<=0n||sig.s>=N)return false;const z=bytesToBig(hash),w=inv(sig.s,N),u1=mod(z*w,N),u2=mod(sig.r*w,N),R=add(mul(u1),mul(u2,Q));return !!R&&mod(R.x,N)===sig.r}
+function encodeTransfer(to,amountUnits){return hexToBytes('a9059cbb'+to.toLowerCase().replace(/^0x/,'').padStart(64,'0')+amountUnits.toString(16).padStart(64,'0'))}
+function decodeTransferData(data){const b=data instanceof Uint8Array?data:hexToBytes(data);if(b.length!==68||bytesToHex(b.slice(0,4))!=='a9059cbb')throw Error('Transaction data is not an exact ERC-20 transfer call.');const recipient=checksumAddress(bytesToHex(b.slice(16,36))),units=bytesToBig(b.slice(36,68));return{recipient,units}}
+function verifyPendingIntegrity(){if(!pending)throw Error('No transaction prepared.');if(String(pending.to).toLowerCase()!==TOKEN.toLowerCase()||pending.value!==0n)throw Error('Prepared transaction target/value changed.');const d=decodeTransferData(pending.data);if(!sameAddr(d.recipient,pending.recipient)||d.units!==pending.units)throw Error('Prepared transaction data does not match the review fields.');if(pending.gasLimit<=0n||pending.maxFeePerGas<=0n||pending.maxPriorityFeePerGas<0n||pending.maxPriorityFeePerGas>pending.maxFeePerGas||pending.nonce<0n)throw Error('Prepared transaction numeric fields are invalid.');return d}
+
+async function signLegacyTx(tx,d){const unsigned=[intBytes(tx.nonce),intBytes(tx.gasPrice),intBytes(tx.gasLimit),hexToBytes(tx.to),intBytes(tx.value),tx.data,intBytes(CHAIN_ID),new Uint8Array(),new Uint8Array()];const hash=keccak256(rlp(unsigned));const sig=await signHash(hash,d);const v=CHAIN_ID*2n+35n+BigInt(sig.rec);const signed=[intBytes(tx.nonce),intBytes(tx.gasPrice),intBytes(tx.gasLimit),hexToBytes(tx.to),intBytes(tx.value),tx.data,intBytes(v),intBytes(sig.r),intBytes(sig.s)];const raw=rlp(signed);return{raw:'0x'+bytesToHex(raw),hash:'0x'+bytesToHex(keccak256(raw)),sig}}
+async function signType2Tx(tx,d){
+  const accessList=[];
+  const unsigned=[
+    intBytes(CHAIN_ID),
+    intBytes(tx.nonce),
+    intBytes(tx.maxPriorityFeePerGas),
+    intBytes(tx.maxFeePerGas),
+    intBytes(tx.gasLimit),
+    hexToBytes(tx.to),
+    intBytes(tx.value),
+    tx.data,
+    accessList
+  ];
+  const signingPayload=concat(Uint8Array.of(0x02),rlp(unsigned));
+  const hash=keccak256(signingPayload);
+  const sig=await signHash(hash,d);
+  const signed=[
+    ...unsigned,
+    intBytes(BigInt(sig.rec)),
+    intBytes(sig.r),
+    intBytes(sig.s)
+  ];
+  const rawBytes=concat(Uint8Array.of(0x02),rlp(signed));
+  return{raw:'0x'+bytesToHex(rawBytes),hash:'0x'+bytesToHex(keccak256(rawBytes)),sig};
+}
+
+
+function qty(n){return '0x'+BigInt(n).toString(16)}
+async function rpc(method,params=[]){if(!rpcURL)throw Error('RPC is not connected.');const res=await fetch(rpcURL,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({jsonrpc:'2.0',id:Date.now(),method,params}),cache:'no-store',referrerPolicy:'no-referrer'});if(!res.ok)throw Error('RPC HTTP '+res.status);const j=await res.json();if(j.error)throw Error(j.error.message||JSON.stringify(j.error));return j.result}
+function rpcData(selector,argAddr){return selector+argAddr.toLowerCase().replace(/^0x/,'').padStart(64,'0')}
+function decodeString(hex){const b=hexToBytes(hex);if(b.length<64)return '';const off=Number(bytesToBig(b.slice(0,32)));const len=Number(bytesToBig(b.slice(off,off+32)));return new TextDecoder().decode(b.slice(off+32,off+32+len)).replace(/\0/g,'')}
+function formatUnits(n,d,max=8){n=BigInt(n);const base=10n**BigInt(d);const a=n/base,b=(n%base).toString().padStart(d,'0').replace(/0+$/,'').slice(0,max);return a.toString()+(b?'.'+b:'')}
+function parseUnits(s,d){s=s.trim();if(!/^\d+(\.\d+)?$/.test(s))throw Error('Invalid amount.');let [a,b='']=s.split('.');if(b.length>d)throw Error('Too many decimal places; token uses '+d+'.');b=b.padEnd(d,'0');return BigInt(a)*10n**BigInt(d)+BigInt(b||'0')}
+function setStatus(el,msg,kind=''){el.textContent=msg;el.className='status'+(kind?' '+kind:'')}
+
+function renderReceiveQr(){const a=activeAddress(),c=$('receiveQr');if(!c)return;const ctx=c.getContext('2d');if(!a){c.width=280;c.height=280;ctx.fillStyle='#fff';ctx.fillRect(0,0,c.width,c.height);$('downloadQr').disabled=true;return}try{QR.draw(c,a,{size:280,margin:4,ecl:'M'});$('downloadQr').disabled=false}catch(e){$('downloadQr').disabled=true}}
+function downloadReceiveQr(){const a=activeAddress();if(!a)return;renderReceiveQr();const link=document.createElement('a');link.href=$('receiveQr').toDataURL('image/png');link.download='arbitrum-address-'+a+'.png';link.click()}
+
+function showWallet(){
+  if(priv){
+    address=addressFromPriv(priv);
+    $('address').value=address;
+    $('privateKey').value='0x'+priv.toString(16).padStart(64,'0');
+    $('walletPanel').classList.remove('hidden');
+  }else{
+    $('walletPanel').classList.add('hidden');
+    $('address').value='';
+    $('privateKey').value='';
+    address=null;
+  }
+  const pub=activeAddress();
+  $('receiveAddress').value=pub||'';
+  $('copyReceive').disabled=!pub;
+  $('prepare').disabled=!(priv&&rpcURL);
+  $('refresh').disabled=!(pub&&rpcURL);
+  renderReceiveQr();
+}
+async function loadMeta(){try{
+  const [sym,dec,code]=await Promise.all([
+    rpc('eth_call',[{to:TOKEN,data:'0x95d89b41'},'latest']),
+    rpc('eth_call',[{to:TOKEN,data:'0x313ce567'},'latest']),
+    rpc('eth_getCode',[TOKEN,'latest'])
+  ]);
+  if(typeof code!=='string'||!/^0x[0-9a-f]+$/i.test(code)||code.length<=2)throw Error('Locked token address has no contract code.');
+  const ds=Number(BigInt(dec));
+  if(Number.isInteger(ds)&&ds>=0&&ds<=36)tokenDecimals=ds;
+  const decoded=decodeString(sym);
+  if(decoded)tokenSymbol=decoded;
+  if(tokenDecimals!==6)throw Error('Unexpected token decimals: '+tokenDecimals+' (expected 6).');
+  const normalizedSymbol=tokenSymbol.replace(/₮/g,'T').replace(/\s+/g,'').toUpperCase();
+  const familiar=['USDT','USDT0'].includes(normalizedSymbol);
+  $('tokenMeta').textContent='Verified locked contract on Arbitrum One: symbol '+tokenSymbol+' · decimals '+tokenDecimals+(familiar?'':' · note: symbol is informational; contract address is locked');
+}catch(e){
+  $('tokenMeta').textContent='Metadata/contract verification failed; transfer disabled until RPC/contract can be verified.';
+  throw e
+}}
+async function refresh(){const a=activeAddress();if(!a)return;try{const [eth,tok]=await Promise.all([rpc('eth_getBalance',[a,'latest']),rpc('eth_call',[{to:TOKEN,data:rpcData('0x70a08231',a)},'latest'])]);$('ethBal').textContent=formatUnits(BigInt(eth),18,8)+' ETH';$('tokenBal').textContent=formatUnits(BigInt(tok),tokenDecimals,8)+' '+tokenSymbol}catch(e){setStatus($('rpcStatus'),'Balance read failed: '+e.message,'bad')}}
+async function prepare(){try{
+  if(!priv||!rpcURL)throw Error('Wallet and RPC are required.');
+  const to=$('to').value.trim();
+  if(!validAddress(to))throw Error('Recipient address is invalid.');
+  if(/^0x0{40}$/i.test(to))throw Error('Recipient is the zero address.');
+  if(to.toLowerCase()===address.toLowerCase())throw Error('Recipient is the same as sender.');
+  const units=parseUnits($('amount').value,tokenDecimals);
+  if(units<=0n)throw Error('Amount must be greater than zero.');
+  const data=encodeTransfer(to,units);
+
+  const [nonceHex,gasPriceHex,balanceHex,tokenHex,latestBlock]=await Promise.all([
+    rpc('eth_getTransactionCount',[address,'pending']),
+    rpc('eth_gasPrice',[]),
+    rpc('eth_getBalance',[address,'latest']),
+    rpc('eth_call',[{to:TOKEN,data:rpcData('0x70a08231',address)},'latest']),
+    rpc('eth_getBlockByNumber',['latest',false])
+  ]);
+
+  if(BigInt(tokenHex)<units)throw Error('Insufficient '+tokenSymbol+' balance.');
+
+  const call={from:address,to:TOKEN,value:'0x0',data:'0x'+bytesToHex(data)};
+  let gas=BigInt(await rpc('eth_estimateGas',[call]));
+  gas=(gas*120n+99n)/100n;
+
+  const suggested=BigInt(gasPriceHex);
+  const baseFee=latestBlock&&latestBlock.baseFeePerGas?BigInt(latestBlock.baseFeePerGas):suggested;
+  const feeReference=suggested>baseFee?suggested:baseFee;
+
+  // Arbitrum sequencer does not require a priority tip for ordering.
+  // Type-2 maxFee is a cap, not the amount necessarily paid.
+  const maxPriorityFeePerGas=0n;
+  const maxFeePerGas=feeReference*2n;
+
+  // Ethereum-style transaction validity requires enough balance for the maximum authorized gas cost.
+  if(BigInt(balanceHex)<gas*maxFeePerGas)throw Error(
+    'Insufficient ETH for the EIP-1559 fee cap. Need up to '+formatUnits(gas*maxFeePerGas,18,10)+' ETH authorized for gas.'
+  );
+
+  pending={
+    type:2,
+    nonce:BigInt(nonceHex),
+    maxPriorityFeePerGas,
+    maxFeePerGas,
+    baseFeeAtPrepare:baseFee,
+    gasLimit:gas,
+    to:TOKEN,
+    value:0n,
+    data,
+    recipient:checksumAddress(to),
+    units
+  };
+  $('exportPackage').disabled=false;
+  renderPendingReview('Prepared online');
+}catch(e){alert(e.message)}}
+
+
+function makePackage(){
+  if(!pending||!address)throw Error('Prepare a transaction first.');
+  return {
+    format:'gba-usdt-arbitrum-signing-package-v2',
+    chainId:'42161',
+    network:'Arbitrum One',
+    from:address,
+    token:checksumAddress(TOKEN),
+    tokenSymbol:tokenSymbol,
+    tokenDecimals:tokenDecimals,
+    recipient:pending.recipient,
+    amountUnits:pending.units.toString(),
+    nonce:pending.nonce.toString(),
+    txType:'2',
+    maxPriorityFeePerGas:pending.maxPriorityFeePerGas.toString(),
+    maxFeePerGas:pending.maxFeePerGas.toString(),
+    baseFeeAtPrepare:(pending.baseFeeAtPrepare||0n).toString(),
+    gasLimit:pending.gasLimit.toString(),
+    createdAt:new Date().toISOString()
+  };
+}
+function pendingFromPackage(o){
+  if(!o||o.format!=='gba-usdt-arbitrum-signing-package-v2')throw Error('Unsupported signing package format. Create a fresh package with v2.3 or later.');
+  if(String(o.chainId)!=='42161')throw Error('Wrong chain ID in package.');
+  if(String(o.token).toLowerCase()!==TOKEN.toLowerCase())throw Error('Wrong token contract in package.');
+  if(Number(o.tokenDecimals)!==6)throw Error('Unexpected token decimals in package.');
+  if(String(o.txType)!=='2')throw Error('Package must contain an EIP-1559 Type-2 transaction.');
+  if(!validAddress(String(o.from))||!validAddress(String(o.recipient)))throw Error('Invalid address in package.');
+  if(!priv||!address)throw Error('Load the signing wallet private key first.');
+  if(String(o.from).toLowerCase()!==address.toLowerCase())throw Error('Loaded private key does not match package sender.');
+
+  const units=BigInt(o.amountUnits),
+        nonce=BigInt(o.nonce),
+        maxPriorityFeePerGas=BigInt(o.maxPriorityFeePerGas),
+        maxFeePerGas=BigInt(o.maxFeePerGas),
+        baseFeeAtPrepare=BigInt(o.baseFeeAtPrepare||0),
+        gasLimit=BigInt(o.gasLimit);
+
+  if(units<=0n||units>=(1n<<256n)||nonce<0n||maxFeePerGas<=0n||maxPriorityFeePerGas<0n||maxPriorityFeePerGas>maxFeePerGas||gasLimit<=0n)
+    throw Error('Invalid numeric field in package.');
+  if(gasLimit>10000000n)throw Error('Package gas limit is unexpectedly high.');
+
+  const recipient=checksumAddress(String(o.recipient));
+  if(/^0x0{40}$/i.test(recipient)||sameAddr(recipient,address))throw Error('Unsafe recipient in package.');
+
+  return{
+    type:2,nonce,maxPriorityFeePerGas,maxFeePerGas,baseFeeAtPrepare,gasLimit,
+    to:TOKEN,value:0n,data:encodeTransfer(recipient,units),recipient,units
+  };
+}
+function renderPendingReview(sourceLabel='Prepared online'){
+  if(!pending||!address)throw Error('No transaction loaded.');verifyPendingIntegrity();
+  $('review').replaceChildren();
+  const rows=[['Source',sourceLabel],['Transaction','EIP-1559 Type 2'],['Network','Arbitrum One (42161)'],['From',address],['Recipient',pending.recipient],['Contract',checksumAddress(TOKEN)],['Asset',tokenSymbol],['Amount',formatUnits(pending.units,tokenDecimals,tokenDecimals)+' '+tokenSymbol],['Nonce',pending.nonce.toString()],['Gas limit',pending.gasLimit.toString()],['Base fee at prepare',formatUnits(pending.baseFeeAtPrepare||0n,9,9)+' gwei'],['Priority fee',formatUnits(pending.maxPriorityFeePerGas,9,9)+' gwei'],['Max fee cap',formatUnits(pending.maxFeePerGas,9,9)+' gwei'],['Max authorized gas cost',formatUnits(pending.gasLimit*pending.maxFeePerGas,18,10)+' ETH']];
+  for(const [k,v] of rows){const d=document.createElement('div'),a=document.createElement('span'),b=document.createElement('span');a.textContent=k;b.textContent=v;b.className='mono';d.append(a,b);$('review').append(d)}
+  $('reviewBox').classList.remove('hidden');$('signedBox').classList.add('hidden');
+}
+$('genMnemonic').onclick=async()=>{try{await generateMnemonicWallet()}catch(e){alert(e.message)}};
+$('restoreMnemonic').onclick=async()=>{try{const pass=$('mnemonicPass').value;if(pass&&!confirm('You entered a BIP39 passphrase. A wrong passphrase still creates a valid but different wallet. Continue?'))return;await loadMnemonicWallet($('mnemonicImport').value,pass);wipeInput($('mnemonicImport'))}catch(e){alert(e.message)}};
+$('deriveIndex').onclick=async()=>{try{await deriveSelectedIndex()}catch(e){alert(e.message)}};
+$('toggleMnemonic').onclick=()=>{const x=$('mnemonic');x.classList.toggle('reveal');x.classList.toggle('secret');$('toggleMnemonic').textContent=x.classList.contains('reveal')?'Hide recovery phrase':'Reveal recovery phrase'};
+$('gen').onclick=()=>{clearHdState();priv=randomPriv();maskSecrets();showWallet()};
+$('clear').onclick=()=>{clearRawState(true);showWallet();$('tokenBal').textContent='—';$('ethBal').textContent='—'};
+$('importBtn').onclick=()=>{try{clearHdState();priv=cleanPriv($('importKey').value);wipeInput($('importKey'));maskSecrets();showWallet()}catch(e){alert(e.message)}};
+$('useWatch').onclick=()=>{try{setWatch($('watchAddress').value.trim());if(rpcURL)refresh()}catch(e){setStatus($('watchStatus'),e.message,'bad')}};
+$('clearWatch').onclick=()=>{setWatch(null);$('tokenBal').textContent='—';$('ethBal').textContent='—'};
+$('verifyBtn').onclick=()=>{try{
+  const d=cleanPriv($('verifyKey').value);
+  const derived=addressFromPriv(d);
+  const exp=$('verifyExpected').value.trim();
+  if(exp){
+    if(!validAddress(exp))throw Error('Expected address format is invalid.');
+    if(!sameAddr(exp,derived))throw Error('MISMATCH — derived '+derived+' but expected '+exp);
+    setStatus($('verifyStatus'),'MATCH — private key derives '+derived,'ok');
+  }else{
+    setStatus($('verifyStatus'),'Derived address: '+derived,'ok');
+  }
+}catch(e){setStatus($('verifyStatus'),e.message,'bad')}};
+$('clearVerify').onclick=()=>{wipeInput($('verifyKey'));wipeInput($('verifyExpected'));setStatus($('verifyStatus'),'Verifier cleared.');};
+$('downloadQr').onclick=downloadReceiveQr;
+
+$('toggleKey').onclick=()=>{const x=$('privateKey');x.classList.toggle('reveal');x.classList.toggle('secret');$('toggleKey').textContent=x.classList.contains('reveal')?'Hide private key':'Reveal private key'};
+$('connect').onclick=async()=>{try{
+  const u=$('rpc').value.trim();
+  const url=new URL(u);
+  const local=['127.0.0.1','localhost','::1'].includes(url.hostname);
+  if(url.protocol!=='https:' && !(local&&url.protocol==='http:'))throw Error('Use HTTPS RPC; plain HTTP is allowed only for localhost.');
+  if(url.username||url.password)throw Error('RPC URL must not contain embedded credentials.');
+  rpcURL=u;setStatus($('rpcStatus'),'Connecting…','warn');
+  const cid=BigInt(await rpc('eth_chainId',[]));
+  if(cid!==CHAIN_ID){rpcURL=null;throw Error('Wrong network: RPC returned chain ID '+cid+', expected 42161.')}
+  await loadMeta();
+  setStatus($('rpcStatus'),'Connected and verified: Arbitrum One (42161).','ok');
+  showWallet();if(activeAddress())await refresh()
+}catch(e){rpcURL=null;setStatus($('rpcStatus'),'Connection rejected: '+e.message,'bad');showWallet()}};
+$('disconnect').onclick=()=>{rpcURL=null;setStatus($('rpcStatus'),'Disconnected. No further RPC requests will be sent.');showWallet()};
+$('refresh').onclick=refresh;$('prepare').onclick=prepare;
+$('cancelReview').onclick=()=>{pending=null;$('exportPackage').disabled=true;$('reviewBox').classList.add('hidden')};
+$('sign').onclick=async()=>{try{if(!pending||!priv)throw Error('Nothing to sign.');verifyPendingIntegrity();const signed=await signType2Tx(pending,priv);$('rawTx').value=signed.raw;$('manualRaw').value=signed.raw;$('reviewBox').classList.add('hidden');$('signedBox').classList.remove('hidden');setStatus($('txStatus'),'Signed locally as EIP-1559 Type-2. Transaction hash: '+signed.hash,'ok')}catch(e){setStatus($('txStatus'),'Signing failed: '+e.message,'bad')}};
+$('broadcast').onclick=async()=>{try{
+  if(!rpcURL)throw Error('RPC is disconnected.');
+  const raw=$('rawTx').value.trim();
+  if(!/^0x02[0-9a-f]+$/i.test(raw))throw Error('Signed Type-2 transaction is invalid.');
+  if(pending&&pending.maxFeePerGas){
+    const b=await rpc('eth_getBlockByNumber',['latest',false]);
+    if(b&&b.baseFeePerGas&&BigInt(b.baseFeePerGas)>pending.maxFeePerGas)
+      throw Error('Network base fee has risen above this signed transaction fee cap. Click Review transaction again, re-sign, then broadcast.');
+  }
+  const h=await rpc('eth_sendRawTransaction',[raw]);
+  setStatus($('txStatus'),'Broadcast accepted. Transaction hash: '+h,'ok');
+  await refresh();
+}catch(e){setStatus($('txStatus'),'Broadcast failed: '+e.message,'bad')}};
+
+$('copyReceive').onclick=async()=>{const a=activeAddress();if(!a)return;try{await navigator.clipboard.writeText(a);const old=$('copyReceive').textContent;$('copyReceive').textContent='Copied';setTimeout(()=>$('copyReceive').textContent=old,900)}catch{alert('Clipboard permission denied. Select and copy manually.')}};
+$('exportPackage').onclick=()=>{try{$('packageBox').value=JSON.stringify(makePackage(),null,2)}catch(e){alert(e.message)}};
+$('importPackage').onclick=()=>{try{const o=JSON.parse($('packageBox').value);tokenSymbol='USD₮0';tokenDecimals=6;pending=pendingFromPackage(o);$('exportPackage').disabled=false;renderPendingReview('Imported air-gap package')}catch(e){alert('Package rejected: '+e.message)}};
+$('clearPackage').onclick=()=>{$('packageBox').value=''};
+$('manualBroadcast').onclick=async()=>{try{if(!rpcURL)throw Error('Connect and verify an Arbitrum One RPC first.');const raw=$('manualRaw').value.trim();if(!/^0x[0-9a-f]+$/i.test(raw)||raw.length<100)throw Error('Signed transaction is invalid.');const h=await rpc('eth_sendRawTransaction',[raw]);setStatus($('manualStatus'),'Broadcast accepted. Transaction hash: '+h,'ok')}catch(e){setStatus($('manualStatus'),'Broadcast failed: '+e.message,'bad')}};
+document.querySelectorAll('[data-copy]').forEach(b=>b.onclick=async()=>{const v=$(b.dataset.copy).value||$(b.dataset.copy).textContent;try{await navigator.clipboard.writeText(v);const old=b.textContent;b.textContent='Copied';setTimeout(()=>b.textContent=old,900)}catch{alert('Clipboard permission denied. Select and copy manually.')}});
+
+window.addEventListener('pagehide',()=>{
+  priv=null;pending=null;hdSeed=null;mnemonicWords='';
+  for(const id of ['importKey','privateKey','verifyKey','rawTx','manualRaw','packageBox','mnemonic','mnemonicImport','mnemonicPass']){const el=$(id);if(el)wipeInput(el)}
+});
+document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden')maskSecrets()});
+
+async function selfTest(){try{
+  if(BIP39_WORDS.length!==2048||BIP39_WORDS[0]!=='abandon'||BIP39_WORDS[2047]!=='zoo')throw Error('BIP39 English wordlist mismatch');
+  const empty=bytesToHex(keccak256(new Uint8Array()));if(empty!=='c5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470')throw Error('Keccak-256 vector mismatch');
+  const a=addressFromPriv(1n);if(a!=='0x7E5F4552091A69125d5DfCb7b8C2659029395Bdf')throw Error('secp256k1/address vector mismatch: '+a);if(cleanPriv('0'.repeat(63)+'1')!==1n)throw Error('private-key parser vector mismatch');
+  const zeroEntropy=new Uint8Array(32),mn=await entropyToMnemonic(zeroEntropy),expectedMn='abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon abandon art';if(mn!==expectedMn)throw Error('BIP39 entropy/mnemonic vector mismatch');if(!await validateMnemonic24(mn))throw Error('BIP39 checksum validation failed');
+  const seed=await mnemonicToSeed(mn,'TREZOR');if(bytesToHex(seed)!=='bda85446c68413707090a52022edd26a1c9462295029f2e60cd7c4f2bbd3097170af7a4d73245cafa9c3cca8d561a7c3de6f5d4a10be8ed2a5e608d68f92fcc8')throw Error('BIP39 PBKDF2 seed vector mismatch');
+  const dk=await derivePath(seed,"m/44'/60'/0'/0/0");if(dk.toString(16).padStart(64,'0')!=='f9399e5d4ddb63856a95268e2806def3ea55c1fcac22f90a5de3a72667a9408c')throw Error('BIP32/BIP44 derivation vector mismatch');
+  const testUnsigned=[intBytes(0n),intBytes(1n),intBytes(21000n),hexToBytes('0x0000000000000000000000000000000000000001'),intBytes(0n),new Uint8Array(),intBytes(CHAIN_ID),new Uint8Array(),new Uint8Array()];const testHash=keccak256(rlp(testUnsigned));const testSig=await signHash(testHash,1n);if(!verifySig(testHash,testSig,mul(1n)))throw Error('ECDSA sign/verify mismatch');
+  const signed=await signLegacyTx({nonce:0n,gasPrice:1n,gasLimit:21000n,to:'0x0000000000000000000000000000000000000001',value:0n,data:new Uint8Array()},1n);if(!/^0x[0-9a-f]+$/i.test(signed.raw)||signed.raw.length<100)throw Error('transaction signer vector failed');const signed2=await signType2Tx({nonce:0n,maxPriorityFeePerGas:0n,maxFeePerGas:40000000n,gasLimit:21000n,to:'0x0000000000000000000000000000000000000001',value:0n,data:new Uint8Array()},1n);if(!/^0x02[0-9a-f]+$/i.test(signed2.raw)||signed2.raw.length<100)throw Error('EIP-1559 Type-2 signer vector failed');
+  const q=QR.encode('0x7E5F4552091A69125d5DfCb7b8C2659029395Bdf','M');if(!Array.isArray(q)||q.length<21||q.length!==q[0].length)throw Error('QR encoder self-test failed');
+  setStatus($('selftest'),'Self-test passed: BIP39 (24 words), PBKDF2-SHA512, BIP32/BIP44, Keccak-256, secp256k1, EIP-55, QR, ECDSA and EIP-155 legacy + EIP-1559 Type-2 transaction serialization.','ok');
+  renderReceiveQr();
+}catch(e){setStatus($('selftest'),'SELF-TEST FAILED — do not use this page: '+e.message,'bad');document.querySelectorAll('button').forEach(b=>b.disabled=true)}}
+selfTest();
+})();
+</script>
+</body>
+</html>
