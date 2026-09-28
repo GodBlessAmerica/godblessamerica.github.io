@@ -1,0 +1,2 @@
+9276a34ee9883f8711efae9470c6b7ad6067a3690453d3e2e6691c8a7179a82b  usdt-wallet-arbitrum-v2.3-offline.zip
+24be97bcc1c34dd0afbe56153dd851ca2e36a304f01edaf456014c4b74eb7239  index.html (inside ZIP)
