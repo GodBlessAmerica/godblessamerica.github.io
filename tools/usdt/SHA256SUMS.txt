@@ -1,2 +1,10 @@
-9276a34ee9883f8711efae9470c6b7ad6067a3690453d3e2e6691c8a7179a82b  usdt-wallet-arbitrum-v2.3-offline.zip
+CHECKSUM NOTICE — 2026-09-28
+
+The previously published ZIP checksum was incorrect because it was calculated from a locally re-packed archive rather than the exact ZIP bytes already stored on GitHub.
+
+Do NOT use the old ZIP SHA-256 value as an integrity check.
+
+Verified payload checksum:
 24be97bcc1c34dd0afbe56153dd851ca2e36a304f01edaf456014c4b74eb7239  index.html (inside ZIP)
+
+The ZIP-level checksum will be republished only after it is calculated from the exact downloadable GitHub artifact bytes.
