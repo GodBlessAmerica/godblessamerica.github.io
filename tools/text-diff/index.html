@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="无需上传文件，离线比较两段文本或两个 TXT 文件的差异。">
+<title>文本差异对比 - 在线工具箱</title>
+<script>try{document.documentElement.dataset.theme=localStorage.getItem('text-diff-theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light')}catch(e){document.documentElement.dataset.theme='light'}</script>
+<style>
+:root{color-scheme:light;--bg:#f4f7fb;--glow:#e8f1ff;--surface:#fff;--editor:#fbfcfe;--text:#172033;--muted:#667085;--primary:#2563eb;--hover:#1d4ed8;--border:#dce3ee;--shadow:rgba(31,41,55,.09);--add:#e9f8ef;--del:#ffebeb;--addword:#a7e9bc;--delword:#ffb3b3;--line:#edf2f8}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#050914;--glow:#102544;--surface:#0b1220;--editor:#0f172a;--text:#d8e3f0;--muted:#8393aa;--primary:#22b8cf;--hover:#0891b2;--border:#263449;--shadow:rgba(0,0,0,.4);--add:#12382c;--del:#4a222b;--addword:#267b56;--delword:#9c4252;--line:#152136}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;padding:32px 18px 60px;background:radial-gradient(circle at top left,var(--glow),transparent 35%),var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft YaHei",sans-serif}
+main{max-width:1280px;margin:auto}nav{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:26px}a{color:var(--primary);text-decoration:none;font-weight:650}a:hover{text-decoration:underline}
+h1{font-size:clamp(29px,4.5vw,42px);letter-spacing:-.035em;margin:0 0 10px}p{color:var(--muted);line-height:1.7}.hero{margin-bottom:22px}.hero p{margin:0}.box{background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:22px;box-shadow:0 16px 45px var(--shadow);margin-bottom:18px}
+.toolbar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:16px 0 0}button,.filebtn,select{font:inherit;min-height:40px;border-radius:10px}button,.filebtn{padding:9px 15px;border:0;background:var(--primary);color:#fff;cursor:pointer;font-weight:650}button:hover,.filebtn:hover{background:var(--hover)}button.secondary,.filebtn.secondary{background:var(--editor);border:1px solid var(--border);color:var(--text)}button.secondary:hover,.filebtn.secondary:hover{border-color:var(--primary)}button:disabled{opacity:.5;cursor:not-allowed}select{background:var(--editor);color:var(--text);border:1px solid var(--border);padding:0 10px}label{cursor:pointer}
+.editors,.diff-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px}.pane{min-width:0}.panehead{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-bottom:9px}.panehead strong{font-size:15px}.hint{color:var(--muted);font-size:12px}.fileinput{display:none}textarea{display:block;width:100%;min-height:235px;resize:vertical;background:var(--editor);border:1px solid var(--border);border-radius:12px;padding:13px;color:var(--text);outline:none;font:13px/1.6 ui-monospace,SFMono-Regular,Consolas,monospace;tab-size:4}textarea:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(37,99,235,.13)}
+.options{display:flex;flex-wrap:wrap;gap:12px 20px;margin:15px 0 0;font-size:13px}.options label{display:flex;gap:6px;align-items:center}.options input{accent-color:var(--primary)}
+.status{margin-top:14px;min-height:22px;font-size:13px;color:var(--muted)}.stats{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px}.stat{border:1px solid var(--border);border-radius:999px;padding:6px 11px;font-size:13px;background:var(--editor)}.stat b{color:var(--text)}
+.result-head{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:13px}.result-head h2{margin:0;font-size:20px}.result-head .toolbar{margin:0}.diff-grid{gap:0;border:1px solid var(--border);border-radius:12px;overflow:hidden}.diff-column{min-width:0;overflow:auto;max-height:600px;background:var(--editor)}.diff-column+.diff-column{border-left:1px solid var(--border)}.diff-title{position:sticky;top:0;z-index:2;padding:10px 12px;border-bottom:1px solid var(--border);font-weight:700;background:var(--surface);font-size:13px}
+.drow{display:flex;min-height:25px;border-bottom:1px solid var(--line);font:12.5px/1.8 ui-monospace,SFMono-Regular,Consolas,monospace}.ln{width:50px;flex:none;text-align:right;padding:2px 9px 2px 2px;color:var(--muted);user-select:none;border-right:1px solid var(--border)}.dtext{min-width:0;flex:1;padding:2px 10px;white-space:pre-wrap;overflow-wrap:anywhere;tab-size:4}.drow.add{background:var(--add)}.drow.del{background:var(--del)}.drow.empty{background:var(--surface);opacity:.5}.wordadd{background:var(--addword);border-radius:2px}.worddel{background:var(--delword);border-radius:2px}
+.unified{display:none;max-height:650px;overflow:auto;background:var(--editor);border:1px solid var(--border);border-radius:12px}.unified .drow .ln{width:85px}.emptyview{padding:36px 16px;text-align:center;color:var(--muted)}.note{font-size:12px;margin:13px 0 0}
+@media(max-width:740px){body{padding:20px 11px 45px}.box{padding:16px}.editors{grid-template-columns:1fr}.diff-grid{grid-template-columns:1fr}.diff-column+.diff-column{border-left:0;border-top:1px solid var(--border)}.diff-column{max-height:380px}.toolbar>*{flex-grow:1}nav{flex-wrap:wrap}}
+</style>
+</head>
+<body>
+<main>
+<nav><a href="../">← 返回工具箱</a><button id="theme" class="secondary" type="button">切换深浅色</button></nav>
+<header class="hero"><h1>文本差异对比</h1><p>粘贴两段文字，或选择两个文本文件，快速定位新增、删除和修改。完全在浏览器本地运行，断网可用，不上传内容。</p></header>
+<section class="box" aria-label="输入文本">
+<div class="editors">
+<div class="pane"><div class="panehead"><strong>原始文本 · A</strong><span class="hint" id="countA">0 字符</span></div><textarea id="a" spellcheck="false" placeholder="粘贴原始文本，或从本地导入 .txt / .md / .json / .csv / .log 等纯文本文件"></textarea><div class="toolbar"><label class="filebtn secondary" for="fileA">打开文件 A</label><input class="fileinput" type="file" id="fileA" accept=".txt,.text,.md,.csv,.json,.xml,.html,.css,.js,.ts,.py,.java,.c,.cpp,.h,.sh,.log,.sql,.yaml,.yml,.ini,.conf,.bat,.ps1,text/*"><button type="button" class="secondary" id="clearA">清空 A</button><span class="hint" id="nameA">未选择文件</span></div></div>
+<div class="pane"><div class="panehead"><strong>新文本 · B</strong><span class="hint" id="countB">0 字符</span></div><textarea id="b" spellcheck="false" placeholder="粘贴修改后的文本，或从本地导入另一个纯文本文件"></textarea><div class="toolbar"><label class="filebtn secondary" for="fileB">打开文件 B</label><input class="fileinput" type="file" id="fileB" accept=".txt,.text,.md,.csv,.json,.xml,.html,.css,.js,.ts,.py,.java,.c,.cpp,.h,.sh,.log,.sql,.yaml,.yml,.ini,.conf,.bat,.ps1,text/*"><button type="button" class="secondary" id="clearB">清空 B</button><span class="hint" id="nameB">未选择文件</span></div></div>
+</div>
+<div class="options"><label><input type="checkbox" id="ignoreSpace">忽略行首尾空格</label><label><input type="checkbox" id="ignoreCase">忽略大小写</label><label><input type="checkbox" id="hideSame">隐藏相同行</label></div>
+<div class="toolbar"><button id="compare" type="button">开始对比</button><button class="secondary" id="swap" type="button">交换 A / B</button><button class="secondary" id="example" type="button">载入示例</button><button class="secondary" id="reset" type="button">全部清空</button></div>
+<div id="status" class="status" role="status" aria-live="polite">支持 UTF-8 文本；也可直接粘贴任意 Unicode 文字。暂不支持 Word / PDF 等二进制格式。</div>
+</section>
+<section class="box" aria-label="差异结果">
+<div class="result-head"><h2>差异结果</h2><div class="toolbar"><select id="view" aria-label="结果视图"><option value="side">左右对照</option><option value="unified">统一视图</option></select><button id="export" class="secondary" type="button" disabled>下载差异 .txt</button></div></div>
+<div class="stats" id="stats"><span class="stat">尚未对比</span></div>
+<div class="diff-grid" id="side"><div class="diff-column"><div class="diff-title">A · 原始</div><div class="emptyview">对比结果将在这里显示</div></div><div class="diff-column"><div class="diff-title">B · 修改后</div><div class="emptyview">对比结果将在这里显示</div></div></div>
+<div class="unified" id="unified"></div>
+<p class="note">绿色代表新增，红色代表删除；相邻修改行会高亮变化的文字。逐行比较会保留行号；超长文件可能较慢，建议先截取需要检查的段落。</p>
+</section>
+</main>
+<script>
+(function(){
+'use strict';
+const $=id=>document.getElementById(id),A=$('a'),B=$('b');
+let rows=[],lastSummary=null;
+function theme(t){document.documentElement.dataset.theme=t;$('theme').textContent=t==='dark'?'☀ 日间模式':'☾ 夜间模式'}
+theme(document.documentElement.dataset.theme||'light');
+$('theme').onclick=()=>{const t=document.documentElement.dataset.theme==='dark'?'light':'dark';theme(t);try{localStorage.setItem('text-diff-theme',t)}catch(e){}};
+function counts(){$('countA').textContent=A.value.length.toLocaleString()+' 字符';$('countB').textContent=B.value.length.toLocaleString()+' 字符'}
+[A,B].forEach(el=>el.addEventListener('input',counts));
+function status(t,error){$('status').textContent=t;$('status').style.color=error?'#e35b64':'var(--muted)'}
+async function load(input,target,name){const f=input.files&&input.files[0];if(!f)return;input.value='';if(/\.(docx?|pdf|rtf|odt|zip)$/i.test(f.name)){status('不支持 Word / PDF 等二进制文件；请先导出为 TXT。',true);return}if(f.size>8*1024*1024){status('文件超过 8 MB，为避免浏览器卡顿，请截取内容后比较。',true);return}try{let text=await f.text();if(text.includes('\u0000'))throw Error('文件可能为二进制格式或 UTF-16，请另存为 UTF-8');target.value=text;$(name).textContent=f.name;counts();status('已在本地读取 '+f.name+'，点击“开始对比”。')}catch(e){status('读取失败：'+e.message,true)}}
+$('fileA').onchange=e=>load(e.target,A,'nameA');$('fileB').onchange=e=>load(e.target,B,'nameB');
+function clear(el,name){el.value='';$(name).textContent='未选择文件';counts()}
+$('clearA').onclick=()=>clear(A,'nameA');$('clearB').onclick=()=>clear(B,'nameB');
+$('reset').onclick=()=>{clear(A,'nameA');clear(B,'nameB');rows=[];lastSummary=null;render();status('已清空所有输入。')};
+$('swap').onclick=()=>{const t=A.value;A.value=B.value;B.value=t;const n=$('nameA').textContent;$('nameA').textContent=$('nameB').textContent;$('nameB').textContent=n;counts();status('已交换 A / B，点击开始对比。')};
+$('example').onclick=()=>{A.value='第一行：你好\n第二行：旧版本\n第三行：保持不变\n第四行：准备删除';B.value='第一行：你好\n第二行：新版本\n第三行：保持不变\n第五行：新增内容';counts();compare()};
+function split(s){return s.replace(/\r\n?/g,'\n').split('\n')}
+function normalize(s){if($('ignoreSpace').checked)s=s.trim();if($('ignoreCase').checked)s=s.toLocaleLowerCase();return s}
+function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
+function myers(x,y,limit){
+const n=x.length,m=y.length,max=n+m,trace=[],v=new Map([[1,0]]);
+for(let d=0;d<=max;d++){
+if(d>limit)throw Error('diff-limit');
+trace.push(new Map(v));
+for(let k=-d;k<=d;k+=2){
+let xx;if(k===-d||(k!==d&&(v.get(k-1)??-1)<(v.get(k+1)??-1)))xx=v.get(k+1)??0;else xx=(v.get(k-1)??0)+1;
+let yy=xx-k;while(xx<n&&yy<m&&x[xx]===y[yy]){xx++;yy++}
+v.set(k,xx);
+if(xx>=n&&yy>=m){let ops=[],cx=n,cy=m;
+for(let dd=d;dd>=0;dd--){const prev=trace[dd],kk=cx-cy;let pk;
+if(kk===-dd||(kk!==dd&&(prev.get(kk-1)??-1)<(prev.get(kk+1)??-1)))pk=kk+1;else pk=kk-1;
+const px=prev.get(pk)??0,py=px-pk;
+while(cx>px&&cy>py){ops.push({t:'same',a:cx-1,b:cy-1});cx--;cy--}
+if(dd){if(cx===px){ops.push({t:'add',b:cy-1});cy--}else{ops.push({t:'del',a:cx-1});cx--}}
+}return ops.reverse()}
+}
+}return []}
+function fallback(x,y){let p=0;while(p<x.length&&p<y.length&&x[p]===y[p])p++;let i=x.length-1,j=y.length-1;while(i>=p&&j>=p&&x[i]===y[j]){i--;j--}const ops=[];for(let k=0;k<p;k++)ops.push({t:'same',a:k,b:k});for(let k=p;k<=i;k++)ops.push({t:'del',a:k});for(let k=p;k<=j;k++)ops.push({t:'add',b:k});for(let k=i+1;k<x.length;k++)ops.push({t:'same',a:k,b:y.length-(x.length-k)});return ops}
+function charDiff(a,b){
+const ac=Array.from(a),bc=Array.from(b);
+if(ac.length+bc.length>600)return [esc(a),esc(b)];
+let ops;try{ops=myers(ac,bc,250)}catch(e){return [esc(a),esc(b)]}
+let left='',right='';
+for(const o of ops){if(o.t==='same'){const z=esc(ac[o.a]);left+=z;right+=z}else if(o.t==='del'){left+='<span class="worddel">'+esc(ac[o.a])+'</span>'}else{right+='<span class="wordadd">'+esc(bc[o.b])+'</span>'}}
+return [left,right]
+}
+function compare(){
+const aa=split(A.value),bb=split(B.value),x=aa.map(normalize),y=bb.map(normalize);
+if(aa.length+bb.length>16000){status('行数过多（超过 16000 行），请先截取需要比较的部分。',true);return}
+status('正在对比…');$('compare').disabled=true;
+setTimeout(()=>{
+try{
+let ops,approx=false;try{ops=myers(x,y,2800)}catch(e){ops=fallback(x,y);approx=true}
+rows=[];let adds=0,dels=0,same=0;
+let i=0;while(i<ops.length){
+if(ops[i].t==='same'){const o=ops[i++];rows.push({a:aa[o.a],b:bb[o.b],ai:o.a+1,bi:o.b+1,t:'same'});same++;continue}
+const ds=[],as=[];while(i<ops.length&&ops[i].t!=='same'){const o=ops[i++];if(o.t==='del')ds.push(o);else as.push(o)}
+dels+=ds.length;adds+=as.length;for(let k=0;k<Math.max(ds.length,as.length);k++){const l=ds[k],r=as[k];rows.push({a:l?aa[l.a]:null,b:r?bb[r.b]:null,ai:l?l.a+1:null,bi:r?r.b+1:null,t:l&&r?'change':l?'del':'add'})}
+}
+lastSummary={adds,dels,same,approx};render();status(approx?'对比完成。差异过于复杂，已采用快速近似比较；可能把部分移动的行标成删除和新增。':'对比完成。所有处理均在本地浏览器进行。')
+}catch(e){status('比较失败：'+e.message,true)}finally{$('compare').disabled=false}
+},0)
+}
+function line(no,s,t,marked){const cls=t==='add'?'add':t==='del'?'del':t==='empty'?'empty':'';return '<div class="drow '+cls+'"><span class="ln">'+(no??'')+'</span><span class="dtext">'+(marked!==undefined?marked:(s===null?' ':esc(s)||' '))+'</span></div>'}
+function render(){
+const hide=$('hideSame').checked;
+$('stats').innerHTML=lastSummary?'<span class="stat">新增 <b>'+lastSummary.adds+'</b> 行</span><span class="stat">删除 <b>'+lastSummary.dels+'</b> 行</span><span class="stat">相同 <b>'+lastSummary.same+'</b> 行</span><span class="stat">变化块 <b>'+rows.filter(r=>r.t!=='same'&&(r.t!=='add'||true)).length+'</b></span>':'<span class="stat">尚未对比</span>';
+$('export').disabled=!lastSummary;
+if(!lastSummary){$('side').innerHTML='<div class="diff-column"><div class="diff-title">A · 原始</div><div class="emptyview">对比结果将在这里显示</div></div><div class="diff-column"><div class="diff-title">B · 修改后</div><div class="emptyview">对比结果将在这里显示</div></div>';$('unified').innerHTML='';return}
+let l='',r='',u='';
+for(const row of rows){if(hide&&row.t==='same')continue;let lh,rh;
+if(row.t==='change'){[lh,rh]=charDiff(row.a,row.b)}
+const lt=row.a===null?'empty':row.t==='change'?'del':row.t==='del'?'del':'same';
+const rt=row.b===null?'empty':row.t==='change'?'add':row.t==='add'?'add':'same';
+l+=line(row.ai,row.a,lt,lh);r+=line(row.bi,row.b,rt,rh);
+if(row.t==='same')u+=line(row.ai+' / '+row.bi,'  '+row.a,'same');
+else {if(row.a!==null)u+=line(row.ai+' / -','- '+row.a,'del');if(row.b!==null)u+=line('- / '+row.bi,'+ '+row.b,'add')}
+}
+$('side').innerHTML='<div class="diff-column"><div class="diff-title">A · 原始</div>'+(l||'<div class="emptyview">没有需要显示的行</div>')+'</div><div class="diff-column"><div class="diff-title">B · 修改后</div>'+(r||'<div class="emptyview">没有需要显示的行</div>')+'</div>';
+$('unified').innerHTML=u||'<div class="emptyview">没有需要显示的行</div>';
+}
+$('compare').onclick=compare;$('hideSame').onchange=render;
+$('view').onchange=()=>{const uni=$('view').value==='unified';$('side').style.display=uni?'none':'grid';$('unified').style.display=uni?'block':'none'};
+$('export').onclick=()=>{if(!lastSummary)return;let out=['--- 原始文本 A','+++ 新文本 B'];for(const r of rows){if(r.t==='same')out.push('  '+r.a);else{if(r.a!==null)out.push('- '+r.a);if(r.b!==null)out.push('+ '+r.b)}}const blob=new Blob([out.join('\n')],{type:'text/plain;charset=utf-8'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='text-diff.txt';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);status('已生成差异 TXT 文件。')};
+counts()
+})();
+</script>
+</body></html>
