@@ -23,6 +23,16 @@ button.primary{background:#2563eb;border-color:#3b82f6}button:hover{filter:brigh
 <p class="translation">我搞不明白——我真的很好奇，飞机的残骸到底在哪里。那看起来就只是一个巨大的空坑。</p>
 <div class="controls"><button class="primary" id="play">▶ 正常朗读</button><button id="slow">◷ 慢速朗读</button><button id="stop">■ 停止</button></div>
 <div class="status" id="status" role="status" aria-live="polite">点击按钮，听美式英语发音。</div></section>
+
+<section class="card" style="margin-top:22px" id="lesson-2">
+<div style="color:#93c5fd;font-size:.82rem;font-weight:700;margin-bottom:14px">LESSON 02 · QUESTIONS & RELATIVE CLAUSES</div>
+<div class="english" id="english2" lang="en-US">Is the woman Jensen Huang had an affair with actually a Chinese Communist Party spy?</div>
+<p class="translation">那个与黄仁勋有过婚外情的女人，实际上是中国共产党的一名间谍吗？</p>
+<p style="color:#fbbf24;font-size:.9rem">语言学习示例：这是疑问句，不表示其中的婚外情或间谍指控已经得到证实。</p>
+<div style="color:#cbd5e1;font-size:.96rem;margin-top:20px"><strong>Key expressions · 重点表达</strong><p><b>have an affair with someone</b> — 与某人有婚外情或秘密恋情</p><p><b>actually</b> — 真的；实际上</p><p><b>spy</b> — 间谍</p><p><b>the woman (whom/that) … with</b> — 定语从句中省略宾语关系代词</p><p><b>had an affair</b> — 一般过去时，不是过去完成时</p></div>
+<div class="controls"><button class="primary" id="play2">▶ 正常朗读</button><button id="slow2">◷ 慢速朗读</button><button id="stop2">■ 停止</button></div>
+<div class="status" id="status2" role="status" aria-live="polite">点击按钮，听美式英语发音。</div>
+</section>
 <p class="note">语音由浏览器或设备的英文语音引擎实时生成，不是 ChatGPT 对话录音。建议使用 Safari 或 Chrome，并打开设备的英文（美国）语音支持。</p></main>
 <script>
 (()=>{'use strict';
@@ -30,16 +40,20 @@ const text=document.getElementById('english').textContent.trim();
 const status=document.getElementById('status');
 const synth=window.speechSynthesis;
 function pickVoice(){const v=synth.getVoices();return v.find(x=>x.lang.toLowerCase()==='en-us'&&/enhanced|premium|natural/i.test(x.name))||v.find(x=>x.lang.toLowerCase()==='en-us')||v.find(x=>x.lang.toLowerCase().startsWith('en'))||null}
-function speak(rate){if(!synth||!window.SpeechSynthesisUtterance){status.textContent='当前浏览器不支持语音朗读。';return}
-synth.cancel();const u=new SpeechSynthesisUtterance(text);u.lang='en-US';u.rate=rate;u.pitch=1;
+function speak(rate, targetText=text, targetStatus=status){if(!synth||!window.SpeechSynthesisUtterance){targetStatus.textContent='当前浏览器不支持语音朗读。';return}
+synth.cancel();const u=new SpeechSynthesisUtterance(targetText);u.lang='en-US';u.rate=rate;u.pitch=1;
 const v=pickVoice();if(v)u.voice=v;
-u.onstart=()=>status.textContent=rate<1?'正在慢速朗读…':'正在朗读…';
-u.onend=()=>status.textContent='朗读结束，可再次点击播放。';
+u.onstart=()=>targetStatus.textContent=rate<1?'正在慢速朗读…':'正在朗读…';
+u.onend=()=>targetStatus.textContent='朗读结束，可再次点击播放。';
 u.onerror=e=>{if(e.error!=='canceled'&&e.error!=='interrupted')status.textContent='无法播放：请检查浏览器语音功能或换用 Safari / Chrome。'};
 setTimeout(()=>synth.speak(u),60);
 }
 document.getElementById('play').addEventListener('click',()=>speak(1));
 document.getElementById('slow').addEventListener('click',()=>speak(.75));
 document.getElementById('stop').addEventListener('click',()=>{if(synth)synth.cancel();status.textContent='已停止。'});
+const text2=document.getElementById('english2').textContent.trim();const status2=document.getElementById('status2');
+document.getElementById('play2').addEventListener('click',()=>speak(1,text2,status2));
+document.getElementById('slow2').addEventListener('click',()=>speak(.75,text2,status2));
+document.getElementById('stop2').addEventListener('click',()=>{if(synth)synth.cancel();status2.textContent='已停止。'});
 })();
 </script></body></html>
